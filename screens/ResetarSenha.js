@@ -10,7 +10,9 @@ import {
 
 class ResetarSenha extends Component {
     state = {
-        email: ''
+        senhaAtual: '',
+        novaSenha: '',
+        confirmarSenha: ''
     };
     
     render() {
@@ -19,52 +21,49 @@ class ResetarSenha extends Component {
                 
                 <View style={styles.texto}>
                     <Text>
-                        Esqueceu como se entra?
+                        Reset sua senha
                     </Text>     
-                    <Text>
-                        Calma! Te dou mais uma chance, na verdade quantas necessitar ;)
-                    </Text> 
-                </View>
-                          
-                <Text style={{justifyContent: 'center', textAlign: 'center'}}>
-                    Digite seu e-mail que enviaremos uma senha para recuperação.
-                </Text>                
+                </View>             
 
                 <KeyboardAvoidingView behavior="padding" enabled>
                     <TextInput
                         style={styles.textoInput}
-                        value={this.state.email}
-                        onChangeText={email => this.setState({ email })}
-                        placeholder='E-mail'
+                        value={this.state.senhaAtual}
+                        onChangeText={senhaAtual => this.setState({ senhaAtual })}
+                        placeholder='Senha atual'
+                    />
+                    <TextInput
+                        style={styles.textoInput}
+                        value={this.state.novaSenha}
+                        onChangeText={novaSenha => this.setState({ novaSenha })}
+                        placeholder='Nova senha'
+                    />
+                    <TextInput
+                        style={styles.textoInput}
+                        value={this.state.confirmarSenha}
+                        onChangeText={confirmarSenha => this.setState({ confirmarSenha })}
+                        placeholder='confirme a nova senha'
                     />
                 </KeyboardAvoidingView>
                 
                 <TouchableOpacity style={styles.botaoEnviar} 
-                  onPress={() => this.props.navigation.navigate("ResetarSenha")}
+                  onPress={() => this.props.navigation.navigate("NovaSenha")}
                 >
                     <Text style={styles.botaoTextoEnviar}>Enviar</Text>                  
                 </TouchableOpacity>
                 
                 
                 <View style={styles.frases}>
-                    <Text >
-                        Se me esqueceres, só uma coisa,
+                    <Text>
+                        É tão delicada a linha entre lembrar e esquecer 
                     </Text>
                     <Text>
-                      esquece-me bem devagarinho.
+                        que muitas vezes pra te apagar sem querer te trago de volta a vida
                     </Text>               
                     <Text style={{textAlign: 'right', color: 'red'}}>
-                        Mario Quintana
+                        Tudo Nela Brilha e Queima 
                     </Text>
                 </View>
-              
-                <TouchableOpacity 
-                    style={{position: 'absolute', bottom: 5}}
-                    buttonStyle={styles.botaoVoltarLogin}
-                    onPress={() => this.props.navigation.navigate("Login")}
-                >
-                    <Text style={{color: '#3897f1', fontSize: 20}}>Voltar para o login</Text>
-                </TouchableOpacity>
             </View>
         )
     }
@@ -80,17 +79,11 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 5,
         paddingVertical: 5,      
-        width: 350
+        width: 200
     },
     botaoTextoEnviar: {
         color: '#fff',
         fontSize: 15,
-    },
-    botaoVoltarLogin: {
-        backgroundColor: 'transparent',
-        height: 45,
-        marginBottom: 100,
-        marginTop: 100       
     },
     container: {
         alignItems: 'center',
@@ -120,8 +113,8 @@ const styles = StyleSheet.create({
         padding: 10,
         textAlign: 'center',
         textTransform: 'lowercase',
-        width: 400  
-    }   
+        width: 200  
+    }
 })
 
 export default ResetarSenha;

@@ -61,7 +61,7 @@ class LoginSocial extends Component {
                 <TouchableOpacity 
                   style={{position: 'absolute', bottom: 5}}
                   buttonStyle={styles.botaoVoltarLogin}
-                  onPress={() => this.props.navigation.navigate("Login")}>
+                  onPress={() => this.props.navigation.navigate('HomeLogin')}>
                     <Text style={{color: '#3897f1', fontSize: 15}}>Voltar para o login</Text>
                 </TouchableOpacity>
             </View>
