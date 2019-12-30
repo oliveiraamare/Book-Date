@@ -5,14 +5,12 @@ const BackPress = {
         BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
       },
     componentWillUnmount(){
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+      BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
     },
     onBackPress = () => {
-
-    this.props.navigation.navigate('HomeLogin');
-    
-    // Return true to enable back button over ride.
-    return true;
+      this.props.navigation.navigate('HomeLogin');    
+      // Return true to enable back button over ride.
+      return true;
     }
 }
 

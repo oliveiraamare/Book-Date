@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { 
   BackHandler,
   KeyboardAvoidingView,
@@ -7,17 +7,40 @@ import {
   TextInput,  
   TouchableOpacity, 
   View    
-} from "react-native";
+} from 'react-native';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { 
+  getUser,
+  login,
+  updateEmail, 
+  updatePassword
+} from '../actions/usuario';
+import Firebase from '../Firebase';
 
 class Login extends Component {
-  state = {
-    email: '',
-    password: ''
-  };
 
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  handleLogin = () => {
+    this.props.login()
+    this.props.navigation.navigate('Perfil')
   }
+
+  componentDidMount = () => {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+    Firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.getUser(user.uid)
+        if (this.props.user != null) {
+            this.props.navigation.navigate('Perfil')
+        } else {
+          this.props.navigation.navigate('Cadastro')
+        }
+      }
+    })
+  }
+
+  //colocar em um arquivo a parte
   componentWillUnmount(){
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
@@ -38,22 +61,23 @@ class Login extends Component {
         <KeyboardAvoidingView behavior="padding" enabled>
         <TextInput
           style={styles.textoInput}
-          value={this.state.email}
-          onChangeText={email => this.setState({ email })}
-          placeholder='E-mail'
+          value={this.props.user.email}
+          onChangeText={email => this.props.updateEmail(email)}
+          placeholder='Email'
           autoCapitalize='none'
         />
         <TextInput
           style={styles.textoInput}
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
-          placeholder='Senha'
+          value={this.props.user.password}
+          onChangeText={password => this.props.updatePassword(password)}
+          placeholder='Password'
           secureTextEntry={true}
         />
         </KeyboardAvoidingView>
         
-        <TouchableOpacity style={styles.botaoLogin} 
-          onPress={() => this.props.navigation.navigate('')}>
+        <TouchableOpacity 
+          style={styles.botaoLogin} 
+          onPress={() => this.props.login()}>
             <Text style={styles.botaoTextoLogin}>Login</Text>                  
         </TouchableOpacity>
         <TouchableOpacity 
@@ -130,4 +154,14 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ updateEmail, updatePassword, login, getUser }, dispatch)
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

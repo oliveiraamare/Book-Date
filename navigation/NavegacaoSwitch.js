@@ -1,25 +1,30 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
-import HomeLogin from "../screens/HomeLogin";
-import Login from "../screens/Login";
-import LoginSocial from "../screens/LoginSocial";
-import ReenviarSenha from "../screens/ReenviarSenha";
-import ResetarSenha from "../screens/ResetarSenha";
-import TermoPrivacidade from "../termos/TermoPrivacidade"
-import TermoUso from "../termos/TermoUso"
+import Cadastro from '../screens/Cadastro';
+import HomeLogin from '../screens/HomeLogin';
+import Login from '../screens/Login';
+import LoginSocial from '../screens/LoginSocial';
+import ReenviarSenha from '../screens/ReenviarSenha';
+import ResetarSenha from '../screens/ResetarSenha';
+import TermoPrivacidade from '../termos/TermoPrivacidade'
+import TermoUso from '../termos/TermoUso'
+import Perfil from '../screens/Perfil'
 
 const NavegacaoSwitch = createSwitchNavigator(
     {
+        Cadastro: { screen: Cadastro },
         HomeLogin: { screen: HomeLogin },
         Login: { screen: Login },
         LoginSocial: { screen: LoginSocial },
+        Perfil: { screen: Perfil},
         ReenviarSenha: { screen: ReenviarSenha },
         ResetarSenha: { screen: ResetarSenha },
         TermoPrivacidade: { screen: TermoPrivacidade},
-        TermoUso : { screen: TermoUso}
+        TermoUso : { screen: TermoUso }
     },
     {
-        initialRouteName: 'HomeLogin'
+        initialRouteName: 'HomeLogin',
+        headerMode: 'none'
     }
 )
 
