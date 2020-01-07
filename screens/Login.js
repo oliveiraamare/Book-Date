@@ -5,11 +5,13 @@ import {
   StyleSheet,
   Text, 
   TextInput,  
-  TouchableOpacity, 
+  TouchableOpacity, TouchableHighlight,
   View    
 } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+import { SocialIcon } from 'react-native-elements'
 
 import { 
   getUser,
@@ -58,6 +60,15 @@ class Login extends Component {
           Book Date
         </Text>
 
+        
+<TouchableHighlight          
+          onPress={() => this.props.navigation.navigate('Cadastro')}>
+          <SocialIcon
+  type='twitter'
+/>
+            
+        </TouchableHighlight>
+        
         <KeyboardAvoidingView behavior="padding" enabled>
         <TextInput
           style={styles.textoInput}
