@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import NavegacaoSwitch from "./navigation/NavegacaoSwitch";
-import reducer from './reducers';
+import NavegacaoSwitch from "./src/navigation/NavegacaoSwitch";
+import reducer from './src/reducers';
 
 const middleware = applyMiddleware(thunkMiddleware);
 const store = createStore(reducer, middleware);

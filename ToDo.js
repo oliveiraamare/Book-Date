@@ -1,3 +1,5 @@
+O ARQUIVO QUE NÃO FOR CLASSE, TEM QUE SER NOMEADO COM A PRIMEIRA LETRA MINÚSCULA
+
 -> TODO implementar tratamento decodeURI erros das telas
 -> ajeitar App.js e colocar os códigos em seus devidos lugares
 -> TODO estudar redux e firebase
