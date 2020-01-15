@@ -10,7 +10,7 @@ const TextoInputEmail = () => {
       placeholder='Email'
       autoCapitalize='none'
       style={styles.textInput}
-      keyboardAppearance = 'purple'
+      keyboardAppearance = 'light'
       underlineColorAndroid= 'white'
       placeholderTextColor= 'green'
     />
