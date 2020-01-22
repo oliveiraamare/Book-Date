@@ -78,7 +78,7 @@ class TermoPrivacidade extends Component{
             'Não tens a obrigação de entender e/ou aceitar meu mundo; peço-te apenas que o compreenda. - Jardson Araújo',
             [ 
               {text: '', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () => this.props.navigation.navigate('HomeLogin') }
+              {text: 'OK', onPress: () => this.props.navigation.navigate('Home') }
             ],
             { cancelable: false }
           )}

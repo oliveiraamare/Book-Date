@@ -1,7 +1,9 @@
 import * as React from "react";
 import { 
+  KeyboardAvoidingView,
   StyleSheet, 
   TextInput, 
+  View
 } from "react-native";
 
 const PURPLE = "#9900cc";
@@ -10,13 +12,6 @@ const PINK = "#ff33cc";
 class TextoInputSenha extends React.Component {
   state = {
     isFocused: false
-  };
-
-  handleFocusEmail = event => {
-    this.setState({ isFocused: true });
-    if (this.props.onFocus) {
-      this.props.onFocus(event);
-    }
   };
 
   handleFocusPassword = event => {
@@ -37,31 +32,39 @@ class TextoInputSenha extends React.Component {
     const { isFocused } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
     return (
-        <TextInput
-          placeholder='Password'
-          secureTextEntry={true}
-          selectionColor={PURPLE}
-          underlineColorAndroid={
-            isFocused ? PURPLE : PINK
-          }
-          onFocus={this.handleFocusPassword}
-          onBlur={this.handleBlur}
-          style={styles.textInput}
-          {...otherProps}
-          placeholderTextColor= 'white'
-        />      
+      <View>
+        <KeyboardAvoidingView behavior="padding" enabled>
+          <TextInput
+            placeholder='Password'
+            secureTextEntry={true}
+            selectionColor={PURPLE}
+            underlineColorAndroid={
+              isFocused ? PURPLE : PINK
+            }
+            onFocus={this.handleFocusPassword}
+            onBlur={this.handleBlur}
+            style={styles.textInput}
+            {...otherProps}
+            placeholderTextColor= 'white'
+          />      
+        </KeyboardAvoidingView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   textInput: {
-    width: '100%',
-    height: 50,
-    backgroundColor: 'skyblue',
-    alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5,
+    alignContent: 'center',
+    color:'white',
+    flex: 2,
+    height: 70,
+    justifyContent: 'center',
+    marginBottom: 100, 
+    marginTop: -150,
+    paddingLeft: 10,
+    paddingRight: 10,
+    top: 0
   }
 });
 

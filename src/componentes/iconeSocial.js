@@ -4,7 +4,6 @@ import {
   TouchableHighlight, 
   View
 } from 'react-native';
-
 import { SocialIcon } from 'react-native-elements';
 
 const IconeSocial = () => {
@@ -12,30 +11,32 @@ const IconeSocial = () => {
     <View style={styles.icone}>
       <TouchableHighlight          
       onPress={() => this.props.navigation.navigate('Cadastro')}>
-        <SocialIcon type='google' iconSize={23} raised={false} />
+        <SocialIcon type='google' iconSize={21} raised={false} />
       </TouchableHighlight>
       <TouchableHighlight          
         onPress={() => this.props.navigation.navigate('Cadastro')}>
-          <SocialIcon type='facebook' iconSize={23} raised={false} />
+          <SocialIcon type='facebook' iconSize={21} raised={false} />
       </TouchableHighlight>
       <TouchableHighlight          
         onPress={() => this.props.navigation.navigate('Cadastro')}>
-          <SocialIcon type='instagram' iconSize={23} raised={false} />
+          <SocialIcon type='instagram' iconSize={21} raised={false} />
       </TouchableHighlight>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  icone: {
-    width: '100%',
-    height: 60,
-    flexDirection: 'row', // row
-    backgroundColor: 'skyblue',
+  icone: { 
     alignItems: 'center',
-    justifyContent: 'space-around', // center, space-around
-    marginTop: 5,
-    marginBottom: 5,
+    bottom: 0,
+    flex: 1,
+    flexDirection: 'row', 
+    height: 50, 
+    justifyContent: 'space-around',
+    marginTop: 110,
+    marginBottom: 110, 
+    position: 'absolute',
+    width: '100%'
   },
 });
 

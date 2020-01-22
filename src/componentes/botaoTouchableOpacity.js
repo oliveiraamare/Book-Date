@@ -26,23 +26,23 @@ BotaoTouchableOpacity.propTypes = {
 
 const styles = StyleSheet.create({
   view: {
-    width: '100%',
-    height: 40,
-    backgroundColor: 'skyblue',
     alignItems: 'center',
-    justifyContent: 'center', // center, space-around
-    marginTop: 5,
+    height: 40,
+    justifyContent: 'center',
     marginBottom: 5,
+    marginTop: -70,    
+    width: '100%'
   },
   textStyle: {
-    color: 'white',
-    fontSize: 15,
     alignItems: 'center',
-    justifyContent: 'center', // center, space-around	  
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 15,    
+    justifyContent: 'center', 
   },  
   buttonStyle: {
-    backgroundColor: '#8ae7f7',
-    borderColor: '#8ae7f7',
+    backgroundColor: '#ff33cc',
+    borderColor: '#ff33cc',
     borderRadius: 10,
     borderWidth: 1,
     paddingVertical: 5,      

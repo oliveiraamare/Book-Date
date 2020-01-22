@@ -8,7 +8,7 @@ const BackPress = {
       BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
     },
     onBackPress = () => {
-      this.props.navigation.navigate('HomeLogin');    
+      this.props.navigation.navigate('Home');    
       // Return true to enable back button over ride.
       return true;
     }

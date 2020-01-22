@@ -78,7 +78,7 @@ class TermoUso extends Component{
             'A verdadeira dificuldade não está em aceitar idéias novas, mas escapar das antigas. - John Maynard Keynes',
             [ 
               {text: '', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () => this.props.navigation.navigate('HomeLogin') }
+              {text: 'OK', onPress: () => this.props.navigation.navigate('Home') }
             ],
             { cancelable: false }
           )}

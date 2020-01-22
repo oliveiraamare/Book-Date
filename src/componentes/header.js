@@ -1,17 +1,19 @@
+import Constants from 'expo-constants';
 import React from 'react';
 import {
   StyleSheet,
   Text,
   View
 } from 'react-native';
-import Constants from 'expo-constants';
 
-const Header = ({ title }) => {
+
+const Header = ({ title, subtitle }) => {
   return (
     <View>
       <View style={styles.statusBar} />
         <View style={styles.topbar}>
-        <Text>{title}</Text>
+        <Text style={styles.texto}>{title}</Text>
+        <Text style={styles.texto}>{subtitle}</Text>
       </View>
     </View>
   );
@@ -19,16 +21,18 @@ const Header = ({ title }) => {
 
 const styles = StyleSheet.create({
   statusBar: {
-    backgroundColor: '#C2185B',
+    backgroundColor: '#ff33cc',
     height: Constants.statusBarHeight
+  },
+  texto:{
+    color: 'white',
+    //importar fonte
   },
   topbar: {
     alignSelf: 'stretch',
-    height: 42,
-    flexDirection: 'row', // row
-    backgroundColor: 'yellow',
     alignItems: 'center',
-    justifyContent: 'center', // center, space-around
+    height: 130,    
+    justifyContent: 'center',
     paddingLeft: 10,
     paddingRight: 10
   },  

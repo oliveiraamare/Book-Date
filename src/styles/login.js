@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: 'black'
   },
   frase: {
     flex: 1,
@@ -22,32 +23,46 @@ const styles = StyleSheet.create({
   textoSocial: {
     color: 'white',
     width: '100%',
-    height: 40,
-    backgroundColor: 'skyblue',
+    height: 20,
+    backgroundColor: 'red',
     alignSelf: 'center',
     justifyContent: 'center', 
     alignContent: 'center',
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  iconeSocial: {
-    flex: 1,
-    flexDirection: 'row', // row
-    backgroundColor: 'skyblue',
-  },
-  textInput: {
-    flex: 1,
-    flexDirection: 'row', // row
-    backgroundColor: 'skyblue',
+    marginTop: 40,
+    marginBottom: 40, flex:1, 
   },
   touchableOpacity: {
     flex: 1,
     backgroundColor: 'skyblue',
   },
   botaoEsqueceuLogin: {
-    flex: 1,
-    backgroundColor: 'skyblue',
+    alignContent: 'flex-end',
+    alignItems:'flex-end',
+    alignSelf: 'flex-end',
+    bottom: 0,
+    flex: 1, 
+    height: 50,
+    justifyContent: 'center',     
+    marginTop: 200,
+    marginBottom: 200, 
+    paddingLeft: 10,
+    paddingRight: 10,
+    position: 'absolute',
+    width: '100%'
   },
 })
 
 export default styles;
+
+
+
+
+
+
+
+
+    
+
+
+
+

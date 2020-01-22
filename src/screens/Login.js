@@ -3,7 +3,7 @@ import {
   BackHandler,
   KeyboardAvoidingView,
   Text, 
-  
+  TouchableOpacity,
   View    
 } from "react-native";
 import { bindActionCreators } from "redux"
@@ -15,11 +15,10 @@ import styles from "../styles/login"
 //importando componentes
 import IconeSocial from "../componentes/iconeSocial";
 import Header from "../componentes/header";
-import Frase from "../componentes/frase";
 import TextoInputEmail from "../componentes/textoInputEmail";
 import TextoInputSenha from "../componentes/textoInputSenha";
 import BotaoTouchableOpacity from '../componentes/botaoTouchableOpacity'
-import BotaoTouchableOpacityTransparent from '../componentes/botaoTouchableOpacityTransparent'
+import BotaoCadastro from '../componentes/BotaoCadastro'
 
 // importando ações firebase
 import { 
@@ -57,7 +56,7 @@ class Login extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {
-    this.props.navigation.navigate('HomeLogin');
+    this.props.navigation.navigate('Home');
     // Return true to enable back button over ride.
     return true;
   }
@@ -65,49 +64,37 @@ class Login extends Component {
   render() { 
     return (
       <View style={styles.container}>
-        <Header title={titulo}/>
-        <Frase style={styles.frase} title={frase} subtitle={autor} /> 
-        <Text style={styles.textoSocial}>{social}</Text> 
-        <IconeSocial style={styles.iconeSocial} />
-        <Text style={styles.textoSocial}>ou então...</Text>
-        <KeyboardAvoidingView behavior="padding" enabled >
-          <TextoInputEmail 
-            value={this.props.user.email}
-            onChangeText={email => this.props.updateEmail(email)}
-          />        
-          <TextoInputSenha
-            value={this.props.user.password}
-            onChangeText={password => this.props.updatePassword(password)}
-          />
-        </KeyboardAvoidingView>
+        <Header title={frase} subtitle={autor}/>              
+        <TextoInputEmail 
+          value={this.props.user.email}
+          onChangeText={email => this.props.updateEmail(email)}
+        />            
+        <TextoInputSenha
+          value={this.props.user.password}
+          onChangeText={password => this.props.updatePassword(password)}
+        />         
         <BotaoTouchableOpacity 
           text="Login"
-          buttonStyle={styles.touchableOpacity}  
           onPress={() => this.props.login()}
-		    />
-        <BotaoTouchableOpacityTransparent 
-          text="Esqueceu seu login?"
-          buttonStyle={styles.botaoEsqueceuLogin}
-          onPress={() => this.props.navigation.navigate('ReenviarSenha')}
-		    />
-        <Text style={styles.textoSocial}>
-          Ainda não possui uma conta?
-        </Text>
-        <BotaoTouchableOpacityTransparent 
-          text="Cadastre-se"
-          buttonStyle={styles.botaoEsqueceuLogin}
-          onPress={() => this.props.navigation.navigate('Cadastro')}>
-        </BotaoTouchableOpacityTransparent>
+		    />       
+        <TouchableOpacity 
+          style={styles.botaoEsqueceuLogin}
+          onPress={() => this.props.navigation.navigate('ReenviarSenha')}>
+            <Text style={{color: '#ff33cc'}}>Esqueceu seu login?</Text>
+        </TouchableOpacity>
+        <IconeSocial style={styles.textoSocial} />
+        <BotaoCadastro 
+          text1="Ainda não possui uma conta? "
+          onPress={() => this.props.navigation.navigate('Cadastro')}
+          text2="Cadastre-se">
+        </BotaoCadastro>
       </View>
     )
   }
 }
 
-const titulo='Login';
 const frase='Nosso namoro começou há pouco, mas já sinto que estamos dando o primeiro passo em direção ao nosso "para sempre"'
 const autor='Autor Desconhecido'
-const social = 'Fique à vontade para se conectar com as suas redes sociais!'
-
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ updateEmail, updatePassword, login, getUser }, dispatch)
