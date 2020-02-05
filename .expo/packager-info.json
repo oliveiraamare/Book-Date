@@ -1,10 +1,10 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 10112,
+  "packagerPid": 2788,
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://3a-wqn.anonymous.bookdate.exp.direct",
   "packagerNgrokUrl": "https://packager.3a-wqn.anonymous.bookdate.exp.direct",
-  "ngrokPid": 13516,
+  "ngrokPid": 1532,
   "devToolsPort": 19002,
   "webpackServerPort": 19006
 }

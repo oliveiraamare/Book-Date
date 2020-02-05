@@ -1,121 +1,48 @@
 import React, { Component } from "react";
-import { 
-  Image,
-  StyleSheet,
-  Text, 
-  TouchableOpacity, 
-  View
-} from "react-native";
+import { Image, View } from "react-native";
+
+import BotaoTransparente from '../componentes/BotaoTransparente';
+import BotaoTouchableOpacity from "../componentes/botaoTouchableOpacity";
+import FrasesAleatorias from "../componentes/FrasesAleatorias";
+
+import compartilhado from "../styles/compartilhado";
+import home from "../styles/home";
+
 
 class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Image 
-          style={styles.imagem}
-          source={require('../assets/img-icone.png')}
-        />
+      <View style={compartilhado.container}>
 
-        <TouchableOpacity 
-          style={styles.botaoEntrarCadastrar} 
-          onPress={() => this.props.navigation.navigate('Login')}>
-            <Text style={styles.botaoTextoEntrarCadastrar}>
-              Entrar
-            </Text>                  
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.botaoEntrarCadastrar} 
-          onPress={() => this.props.navigation.navigate('Cadastro')}>
-            <Text style={styles.botaoTextoEntrarCadastrar}>Cadastre-se</Text>     
-        </TouchableOpacity>              
-        
-        <View style={styles.frases}>
-          <Text style={{textAlign: 'right'}}>
-            Cada qual sabe amar a seu modo;  
-          </Text>
-          <Text style={{textAlign: 'right'}}>
-            o modo, pouco importa;
-          </Text>
-          <Text style={{textAlign: 'right'}}>
-            o essencial é que saiba amar
-          </Text>               
-          <Text style={{textAlign: 'right', color: 'red'}}>
-            Machado de Assis
-          </Text>
+        <View style={compartilhado.statusBar} />
+        <Image 
+          style={home.imagem}
+          source={require('../assets/img-icone.png')}
+        />        
+        <View style={home.botoes}>
+          <BotaoTouchableOpacity 
+            buttonStyle={home.botaoLogin}
+            onPress={() => this.props.navigation.navigate('Login')}
+            text="Login" />           
+          <BotaoTouchableOpacity 
+            buttonStyle={home.botaoCadastro}
+            onPress={() => this.props.navigation.navigate('Cadastro')}
+            text="Cadastro" />    
         </View>
-        
-        <TouchableOpacity 
-          style={{position: 'absolute', bottom: 35}}
-          buttonStyle={styles.botaoSocialTermoPrivacidade}
-          onPress={() => this.props.navigation.navigate('LoginSocial')}>
-            <Text style={{color: '#3897f1', fontSize: 20}}>
-              Conexão via rede social
-            </Text>
-        </TouchableOpacity>
-        
-        <View 
-          style={{position: 'absolute', bottom: 10, flexDirection:'row',   
-            justifyContent: 'space-between'}}>
-              <TouchableOpacity 
-                buttonStyle={styles.botaoSocialTermoPrivacidade}
-                onPress={() => this.props.navigation.navigate("TermoUso")}>
-                  <Text style={{color: '#3897f1', fontSize: 13}}>
-                    Temos de uso     -
-                  </Text>
-              </TouchableOpacity>
-              <TouchableOpacity 
-                buttonStyle={styles.botaoSocialTermoPrivacidade}
-                onPress={() => this.props.navigation.navigate("TermoPrivacidade")}>
-                  <Text style={{color: '#3897f1', fontSize: 13}}>     
-                    Privacidade
-                  </Text>
-              </TouchableOpacity>
+        <FrasesAleatorias />
+        <View style={home.botaoTransparente}>
+          <BotaoTransparente 
+              onPress={() => this.props.navigation.navigate('TermoUso')}
+              texto="Termos de Uso ">
+            </BotaoTransparente>
+            <BotaoTransparente 
+              onPress={() => this.props.navigation.navigate('TermoPrivacidade')}
+              texto="  Política de Privacidade">
+            </BotaoTransparente>
         </View>
       </View>
-    )
+    ) 
   }
 }
-
-const styles = StyleSheet.create({
-  botaoEntrarCadastrar: {
-      alignItems: 'center',
-      backgroundColor: '#8ae7f7',
-      borderColor: '#8ae7f7',
-      borderRadius: 10,
-      borderWidth: 1,
-      marginTop: 20,
-      marginBottom: 5,
-      paddingVertical: 5,      
-      width: 250
-  },
-  botaoSocialTermoPrivacidade: {
-      backgroundColor: 'transparent',
-      height: 45,
-      marginBottom: 200,
-      marginTop: 200       
-  },
-  botaoTextoEntrarCadastrar: {
-      color: '#fff',
-      fontSize: 15,
-  },    
-  container: {
-      alignItems: 'center',
-      backgroundColor: '#fff',
-      flex: 1,
-      justifyContent: 'center'        
-  },
-  frases: {
-      justifyContent: 'center',         
-      textAlign: 'center',
-      top: 80,
-      
-  },
-  imagem:{
-    height: 100,
-    position: 'absolute', 
-    top: 100,
-    width: 100            
-  }
-})
 
 export default Home;
