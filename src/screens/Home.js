@@ -1,19 +1,18 @@
-import React, { Component } from "react";
-import { Image, View } from "react-native";
+import React, { Component } from 'react';
+import { Image, View } from 'react-native';
 
-import BotaoTransparente from "../componentes/BotaoTransparente";
-import BotaoTouchableOpacity from "../componentes/botaoTouchableOpacity";
-import FrasesAleatorias from "../componentes/FrasesAleatorias";
+import BotaoTransparente from '../componentes/BotaoTransparente';
+import BotaoTouchableOpacity from '../componentes/botaoTouchableOpacity';
+import FrasesAleatorias from '../componentes/FrasesAleatorias';
 
-import compartilhado from "../styles/compartilhado";
-import home from "../styles/home";
+import compartilhado from '../styles/compartilhado';
+import home from '../styles/home';
 
 
 class Home extends Component {
   render() {
     return (
       <View style={compartilhado.container}>
-
         <View style={compartilhado.statusBar} />
         <Image 
           style={home.imagem}

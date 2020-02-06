@@ -1,13 +1,13 @@
-import React , {Component} from "react";
+import React , {Component} from 'react';
 import { 
   Dimensions,
   ScrollView,
   Text,
   TouchableOpacity,
   View 
-} from "react-native";
+} from 'react-native';
 
-import compartilhado from "../../styles/compartilhado";
+import compartilhado from '../../styles/compartilhado';
 
 class TermoUso extends Component {
 

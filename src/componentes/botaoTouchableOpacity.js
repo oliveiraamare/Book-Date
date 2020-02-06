@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-import compartilhado from "../styles/compartilhado";
+import compartilhado from '../styles/compartilhado';
 
 class BotaoTouchableOpacity extends Component {
 	render() {
@@ -38,13 +38,7 @@ const styles = StyleSheet.create({
     color: compartilhado.corTexto.color,
     fontSize: 15,    
     justifyContent: 'center', 
-  },  
-  view: {
-    alignItems: 'center',
-    height: 40,
-    justifyContent: 'center',  
-    width: '100%',     
-  },
+  }
 });
 
 export default BotaoTouchableOpacity;

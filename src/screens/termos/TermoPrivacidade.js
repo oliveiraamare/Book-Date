@@ -1,13 +1,13 @@
-import React , {Component} from "react";
+import React , {Component} from 'react';
 import { 
   Dimensions,
   ScrollView,
   Text,
   TouchableOpacity,
   View 
-} from "react-native";
+} from 'react-native';
 
-import compartilhado from "../../styles/compartilhado";
+import compartilhado from '../../styles/compartilhado';
 
 class TermoUso extends Component {
 
@@ -20,7 +20,7 @@ class TermoUso extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <Text style={styles.titulo}>
-          Termos de Uso
+          Políticas de Privacidade
         </Text>            
         <ScrollView 
          style={styles.scrollView}

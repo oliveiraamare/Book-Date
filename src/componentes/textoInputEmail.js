@@ -1,13 +1,16 @@
-import * as React from "react";
+import * as React from 'react';
 import { 
   KeyboardAvoidingView,
   StyleSheet, 
   TextInput, 
-} from "react-native";
-import { View } from "native-base";
+} from 'react-native';
+import { View } from 'native-base';
 
-const YELLOW = "#FFFF00";
-const PINK = "#ff33cc";
+import compartilhado from '../styles/compartilhado';
+
+
+const YELLOW = '#FFFF00';
+const PINK = '#ff33cc';
 
 class TextoInputEmail extends React.Component {
   state = {
@@ -30,20 +33,17 @@ class TextoInputEmail extends React.Component {
 
   render() {
     const { isFocused } = this.state;
-    const { onFocus, onBlur, ...otherProps } = this.props;
+    const { inputStyle, onBlur, onFocus,...otherProps } = this.props;
     return (
       <View>
         <KeyboardAvoidingView behavior="padding" enabled>
           <TextInput
-            autoCapitalize='characters'
-            clearButtonMode='always'
-            keyboardAppearance='dark'
+            style={[inputStyle, styles.textInput]}
             onBlur={this.handleBlur}
             onFocus={this.handleFocusEmail}
             placeholder='Email'
             placeholderTextColor= 'white'
             selectionColor={YELLOW}
-            style={styles.textInput}
             underlineColorAndroid={
               isFocused ? YELLOW : PINK
             }
@@ -59,15 +59,9 @@ const styles = StyleSheet.create({
   textInput: {   
     alignContent: 'center',
     borderWidth: 20,
-    color:'white',
-    flex: 2,
-    height: 70,
-    justifyContent: 'center', 
-    marginBottom: 160,
-    marginTop: 50,
-    paddingLeft: 10,
-    paddingRight: 10,
-    top: 0
+    color: compartilhado.corTexto.color,
+    flex: 1,
+    height: 70   
   }
 });
 

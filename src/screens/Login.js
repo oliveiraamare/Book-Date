@@ -1,22 +1,23 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { 
   BackHandler,
-  KeyboardAvoidingView,
+  //KeyboardAvoidingView,
   Text, 
   TouchableOpacity,
   View    
-} from "react-native";
-import { bindActionCreators } from "redux"
-import { connect } from "react-redux"
+} from 'react-native';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 //importando estilos
-import styles from "../styles/login"
+import styles from '../styles/login';
+import compartilhado from '../styles/compartilhado';
+
 
 //importando componentes
-import IconeSocial from "../componentes/iconeSocial";
-import Header from "../componentes/header";
-import TextoInputEmail from "../componentes/textoInputEmail";
-import TextoInputSenha from "../componentes/textoInputSenha";
+import Header from '../componentes/header';
+import TextoInputEmail from '../componentes/textoInputEmail';
+import TextoInputSenha from '../componentes/textoInputSenha';
 import BotaoTouchableOpacity from '../componentes/botaoTouchableOpacity'
 import BotaoCadastro from '../componentes/BotaoCadastro'
 
@@ -26,9 +27,8 @@ import {
   login,
   updateEmail, 
   updatePassword
-} from "../actions/usuario";
-import Firebase from "../../Firebase";
-
+} from '../actions/usuario';
+import Firebase from '../../Firebase';
 
 class Login extends Component {
 
@@ -63,26 +63,28 @@ class Login extends Component {
 
   render() { 
     return (
-      <View style={styles.container}>
+      <View style={compartilhado.container}>
         <Header title={frase} subtitle={autor}/>              
         <TextoInputEmail 
+          inputStyle={styles.inputEmail}        
           value={this.props.user.email}
           onChangeText={email => this.props.updateEmail(email)}
         />            
         <TextoInputSenha
+          inputStyle={styles.inputSenha}        
           value={this.props.user.password}
           onChangeText={password => this.props.updatePassword(password)}
-        />         
+        />      
         <BotaoTouchableOpacity 
-          text="Login"
+          buttonStyle={styles.botaoLogin}
           onPress={() => this.props.login()}
-		    />       
+          text="Login" 
+        />      
         <TouchableOpacity 
           style={styles.botaoEsqueceuLogin}
           onPress={() => this.props.navigation.navigate('ReenviarSenha')}>
             <Text style={{color: '#ff33cc'}}>Esqueceu seu login?</Text>
-        </TouchableOpacity>
-        <IconeSocial style={styles.textoSocial} />
+        </TouchableOpacity>        
         <BotaoCadastro 
           text1="Ainda não possui uma conta? "
           onPress={() => this.props.navigation.navigate('Cadastro')}

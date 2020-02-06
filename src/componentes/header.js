@@ -6,6 +6,9 @@ import {
   View
 } from 'react-native';
 
+import compartilhado from '../styles/compartilhado';
+
+
 
 const Header = ({ title, subtitle }) => {
   return (
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
     height: Constants.statusBarHeight
   },
   texto:{
-    color: 'white',
+    color: compartilhado.corTexto.color,
     //importar fonte
   },
   topbar: {

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   botaoLogin: {
     marginBottom: 5,
-    marginTop: 5,
+    marginTop: 50,
     top: 10
   },
   botaoCadastro: {  

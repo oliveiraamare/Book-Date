@@ -4,10 +4,12 @@ import {
   StyleSheet, 
   TextInput, 
   View
-} from "react-native";
+} from 'react-native';
 
-const PURPLE = "#9900cc";
-const PINK = "#ff33cc";
+import compartilhado from '../styles/compartilhado';
+
+const PURPLE = '#9900cc';
+const PINK = '#ff33cc';
 
 class TextoInputSenha extends React.Component {
   state = {
@@ -30,22 +32,22 @@ class TextoInputSenha extends React.Component {
 
   render() {
     const { isFocused } = this.state;
-    const { onFocus, onBlur, ...otherProps } = this.props;
+    const { inputStyle, onBlur, onFocus, ...otherProps } = this.props;
     return (
       <View>
         <KeyboardAvoidingView behavior="padding" enabled>
           <TextInput
+            style={[inputStyle, styles.textInput]}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocusPassword}
             placeholder='Password'
+            placeholderTextColor= 'white'
             secureTextEntry={true}
             selectionColor={PURPLE}
             underlineColorAndroid={
               isFocused ? PURPLE : PINK
             }
-            onFocus={this.handleFocusPassword}
-            onBlur={this.handleBlur}
-            style={styles.textInput}
             {...otherProps}
-            placeholderTextColor= 'white'
           />      
         </KeyboardAvoidingView>
       </View>
@@ -56,15 +58,10 @@ class TextoInputSenha extends React.Component {
 const styles = StyleSheet.create({
   textInput: {
     alignContent: 'center',
-    color:'white',
-    flex: 2,
-    height: 70,
-    justifyContent: 'center',
-    marginBottom: 100, 
-    marginTop: -150,
-    paddingLeft: 10,
-    paddingRight: 10,
-    top: 0
+    borderWidth: 20,
+    color: compartilhado.corTexto.color,
+    flex: 1,
+    height: 70
   }
 });
 
