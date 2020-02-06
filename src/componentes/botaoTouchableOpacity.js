@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+
+import compartilhado from "../styles/compartilhado";
 
 class BotaoTouchableOpacity extends Component {
 	render() {
 		const {buttonStyle, onPress, text } = this.props;
 		return (
       <TouchableOpacity 
-       style={[buttonStyle, styles.botoes]}
+       style={[buttonStyle, styles.botao]}
        onPress={() => onPress()}>
-        <Text style={styles.textStyle}>{text}</Text>
+        <Text style={styles.texto}>{text}</Text>
       </TouchableOpacity>
 		);
 	}
@@ -21,7 +23,7 @@ BotaoTouchableOpacity.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  botoes: {
+  botao: {
     alignItems: 'center',
     backgroundColor: '#ff33cc',
     borderColor: '#ff33cc',
@@ -30,10 +32,10 @@ const styles = StyleSheet.create({
     paddingVertical: 5,      
     width: 200, 
   },
-  textStyle: {
+  texto: {
     alignItems: 'center',
     alignSelf: 'center',
-    color: 'white',
+    color: compartilhado.corTexto.color,
     fontSize: 15,    
     justifyContent: 'center', 
   },  

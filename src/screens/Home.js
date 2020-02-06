@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
 
-import BotaoTransparente from '../componentes/BotaoTransparente';
+import BotaoTransparente from "../componentes/BotaoTransparente";
 import BotaoTouchableOpacity from "../componentes/botaoTouchableOpacity";
 import FrasesAleatorias from "../componentes/FrasesAleatorias";
 

@@ -16,6 +16,9 @@ const compartilhado = StyleSheet.create({
     backgroundColor: 'black',
     flex: 1
   },
+  corTexto: {
+    color: 'white'
+  },
   statusBar: {
     backgroundColor: '#ff33cc',
     height: Constants.statusBarHeight
