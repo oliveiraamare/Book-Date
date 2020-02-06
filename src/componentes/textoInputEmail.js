@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     borderWidth: 20,
     color: compartilhado.corTexto.color,
     flex: 1,
-    height: 70   
+    height: 70,
+    textTransform: 'lowercase'
   }
 });
 

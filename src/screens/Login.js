@@ -95,17 +95,17 @@ class Login extends Component {
   }
 }
 
-const frase='Nosso namoro começou há pouco, mas já sinto que estamos dando o primeiro passo em direção ao nosso "para sempre"'
-const autor='Autor Desconhecido'
+const frase='Nosso namoro começou há pouco, mas já sinto que estamos dando o primeiro passo em direção ao nosso "para sempre"';
+const autor='Autor Desconhecido';
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ updateEmail, updatePassword, login, getUser }, dispatch)
-}
+};
 
 const mapStateToProps = state => {
   return {
     user: state.user
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

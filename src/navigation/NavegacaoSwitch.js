@@ -21,7 +21,7 @@ const NavegacaoSwitch = createSwitchNavigator(
         TermoUso : { screen: TermoUso }
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'ReenviarSenha',
         headerMode: 'none'
     }
 )

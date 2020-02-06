@@ -4,11 +4,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 class BotaoTransparente extends Component {
 	render() {
-		const { onPress, texto } = this.props;
+		const { buttonStyle, onPress, texto } = this.props;
 		return (
-      <View style={styles.botaoTransparente}>
+      <View style={[styles.botaoTransparente, buttonStyle]}>
         <TouchableOpacity 
-          style={{backgroundColor: 'transparent'}}
+          style={{backgroundColor:'transparent'}}
 			    onPress={() => onPress()}>
             <Text style={styles.textStyle}>{texto}</Text>
 		    </TouchableOpacity>

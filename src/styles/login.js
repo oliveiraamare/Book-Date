@@ -1,5 +1,4 @@
 import { StyleSheet,Platform } from 'react-native';
-import compartilhado from './compartilhado';
 
 const styles = StyleSheet.create({
   botaoEsqueceuLogin: {
