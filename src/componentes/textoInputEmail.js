@@ -38,7 +38,7 @@ class TextoInputEmail extends React.Component {
       <View>
         <KeyboardAvoidingView behavior="padding" enabled>
           <TextInput
-            style={[inputStyle, styles.textInput]}
+            style={[styles.textInput, inputStyle]}
             onBlur={this.handleBlur}
             onFocus={this.handleFocusEmail}
             placeholder='Email'

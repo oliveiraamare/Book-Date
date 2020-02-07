@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { 
   KeyboardAvoidingView,
-  StyleSheet,
   Text, 
-  TextInput,  
-  TouchableOpacity, 
   View    
 } from 'react-native';
 
@@ -12,9 +9,6 @@ import Header from '../componentes/header';
 import TextoInputEmail from '../componentes/textoInputEmail';
 import BotaoTouchableOpacity from '../componentes/botaoTouchableOpacity';
 import BotaoTransparente from '../componentes/BotaoTransparente';
-
-
-
 
 import compartilhado from '../styles/compartilhado';
 import reenviarSenha from '../styles/reenviarSenha';
@@ -27,6 +21,7 @@ class ReenviarSenha extends Component {
   render() {
     return (
       <View style={compartilhado.container}>
+        <View style={compartilhado.statusBar} />
         <Header subtitleStyle={{color:'#ff33cc'}} title={frase} subtitle={autor}/>
         <Text style={reenviarSenha.texto}>
           Escreva seu e-mail que iremos enviar-te um link para que resetes a sua senha

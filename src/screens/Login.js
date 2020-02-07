@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View    
 } from 'react-native';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 //importando estilos
 import styles from '../styles/login';
@@ -18,8 +18,8 @@ import compartilhado from '../styles/compartilhado';
 import Header from '../componentes/header';
 import TextoInputEmail from '../componentes/textoInputEmail';
 import TextoInputSenha from '../componentes/textoInputSenha';
-import BotaoTouchableOpacity from '../componentes/botaoTouchableOpacity'
-import BotaoCadastro from '../componentes/BotaoCadastro'
+import BotaoTouchableOpacity from '../componentes/botaoTouchableOpacity';
+import BotaoCadastro from '../componentes/BotaoCadastro';
 
 // importando ações firebase
 import { 
@@ -64,7 +64,8 @@ class Login extends Component {
   render() { 
     return (
       <View style={compartilhado.container}>
-        <Header title={frase} subtitle={autor}/>              
+        <View style={compartilhado.statusBar} />
+        <Header title={frase} subtitle={autor} />              
         <TextoInputEmail 
           inputStyle={styles.inputEmail}        
           value={this.props.user.email}
