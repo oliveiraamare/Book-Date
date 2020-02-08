@@ -5,6 +5,7 @@ import Home from '../screens/Home';
 //import InformacaoPessoal from '../screens/cadastro/InfomacaoPessoal';
 import Login from '../screens/Login';
 import ReenviarSenha from '../screens/ReenviarSenha';
+import Regras from '../screens/cadastro/Regras';
 import ResetarSenha from '../screens/ResetarSenha';
 import TermoPrivacidade from '../screens/termos/TermoPrivacidade'
 import TermoUso from '../screens/termos/TermoUso'
@@ -16,14 +17,15 @@ const NavegacaoSwitch = createSwitchNavigator(
         Home: { screen: Home },
        // InformacaoPessoal: { screen: InformacaoPessoal },
         Login: { screen: Login },
-        Perfil: { screen: Perfil},
+        Perfil: { screen: Perfil },
+        Regras: { screen: Regras },
         ReenviarSenha: { screen: ReenviarSenha },
         ResetarSenha: { screen: ResetarSenha },
-        TermoPrivacidade: { screen: TermoPrivacidade},
+        TermoPrivacidade: { screen: TermoPrivacidade },
         TermoUso : { screen: TermoUso }
     },
     {
-        initialRouteName: 'Cadastro',
+        initialRouteName: 'Home',
         headerMode: 'none'
     }
 )

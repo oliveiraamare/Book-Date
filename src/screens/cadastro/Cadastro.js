@@ -41,7 +41,7 @@ class Cadastro extends React.Component {
 
   handleLogin = () => {
     this.props.cadastro()
-    this.props.navigation.navigate('Perfil')
+    this.props.navigation.navigate('Regras')
   }
 
   render() {
@@ -49,6 +49,7 @@ class Cadastro extends React.Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <HeaderBackButton
+          text='' 
           onPress={() => this.props.navigation.navigate('Home')}
         />        
         <Header subtitleStyle={styles.header} title={frase} subtitle={autor} />  
@@ -81,8 +82,8 @@ class Cadastro extends React.Component {
   }
 }
 
-const frase='Seja bem vindo a minha vida, está meio desarrumada, mas se você quiser ficar mais um pouco arrumamos juntos (..) é você quem eu tanto esperei!'
-const autor='Vilma Galvão'
+const frase='Seja bem vindo a minha vida, está meio desarrumada, mas se você quiser ficar mais um pouco arrumamos juntos (..) é você quem eu tanto esperei!';
+const autor='Vilma Galvão';
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ updateEmail, updatePassword, cadastro }, dispatch)
