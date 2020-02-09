@@ -41,7 +41,7 @@ class Cadastro extends React.Component {
 
   handleLogin = () => {
     this.props.cadastro()
-    this.props.navigation.navigate('Regras')
+    this.props.navigation.navigate('Sobre')
   }
 
   render() {

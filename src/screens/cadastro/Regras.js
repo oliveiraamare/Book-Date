@@ -15,7 +15,7 @@ class TermoUso extends Component {
         <View style={compartilhado.statusBar} />
         <HeaderBackButton
           text='' 
-          onPress={() => this.props.navigation.navigate('Home')}
+          onPress={() => this.props.navigation.navigate('Sobre')}
         />  
         <Header titleStyle={regras.titleStyle} subtitleStyle={regras.subtitleStyle} title={frase} subtitle={autor} />           
         <View style={regras.texto}>

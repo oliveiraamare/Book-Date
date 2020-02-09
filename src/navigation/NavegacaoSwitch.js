@@ -2,7 +2,7 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
 import Cadastro from '../screens/cadastro/Cadastro';
 import Home from '../screens/Home';
-//import InformacaoPessoal from '../screens/cadastro/InfomacaoPessoal';
+import Sobre from '../screens/cadastro/Sobre';
 import Login from '../screens/Login';
 import ReenviarSenha from '../screens/ReenviarSenha';
 import Regras from '../screens/cadastro/Regras';
@@ -15,7 +15,7 @@ const NavegacaoSwitch = createSwitchNavigator(
     {
         Cadastro: { screen: Cadastro },
         Home: { screen: Home },
-       // InformacaoPessoal: { screen: InformacaoPessoal },
+        Sobre: { screen: Sobre },
         Login: { screen: Login },
         Perfil: { screen: Perfil },
         Regras: { screen: Regras },
@@ -25,7 +25,7 @@ const NavegacaoSwitch = createSwitchNavigator(
         TermoUso : { screen: TermoUso }
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Sobre',
         headerMode: 'none'
     }
 )
