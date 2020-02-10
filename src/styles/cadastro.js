@@ -23,8 +23,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderBottomWidth: 1,
-    borderColor: '#CCCCCC',
-    borderTopWidth: 1,
+    borderColor: 'transparent',
     color: compartilhado.corTexto.color,
     height: 50,
     marginBottom: 5, 

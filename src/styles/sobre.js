@@ -11,12 +11,9 @@ const sobre = StyleSheet.create({
   },
   cidade:{
     borderBottomWidth: 1,
-    borderColor: '#CCCCCC',
-    borderTopWidth: 1,
-    color: compartilhado.corTexto.color,
-    height: 60,
-    marginBottom: 130, 
-    marginTop: 10, 
+    borderColor: 'transparent',
+    marginBottom: 10, 
+    marginTop: 5, 
     paddingLeft: 20,
     paddingRight: 20
   },
@@ -25,10 +22,7 @@ const sobre = StyleSheet.create({
   },
   nome:{
     borderBottomWidth: 1,
-    borderColor: '#CCCCCC',
-    borderTopWidth: 1,
-    color: compartilhado.corTexto.color,
-    height: 50,
+    borderColor: 'transparent',
     marginBottom: 10, 
     marginTop: 5, 
     paddingLeft: 20,

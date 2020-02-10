@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   BackHandler,
   Text,
-  TextInput,  
   View , 
 } from 'react-native';
 
-import styles from '../../styles/cadastro';
 import sobre from '../../styles/sobre';
 import compartilhado from '../../styles/compartilhado';
 
 import HeaderBackButton from '../../componentes/headerBackButton';
 import Header from '../../componentes/header';
 import BotaoTouchableOpacity from '../../componentes/botaoTouchableOpacity';
-import SelectUnico from '../../componentes/SelectUnico'
+import SelectUnico from '../../componentes/SelectUnico';
 import Calendario from '../../componentes/DatePicker';
+import TextoInput from '../../componentes/TextInput';
 
 // TODO ajeitar KeyboardAvoidingView
 // cadastro no banco
 
-class Sobre extends React.Component {
+class Sobre extends Component {
   
 
   componentDidMount() {
@@ -55,26 +54,24 @@ class Sobre extends React.Component {
           Fale um pouco sobre você
         </Text>
         <View style={{flex:1}}>
-          <TextInput
-            style={sobre.nome}
+          <TextoInput
+            inputStyle={sobre.nome}
             onChangeText={nome => this.setState({ nome })}
-            placeholder='Como se chama?'
-            autoCapitalize='none'
-          />
-          <Calendario/>
-          <TextInput
-            style={sobre.cidade}
-            onChangeText={cidade => this.setState({ cidade })}
-            placeholder='Cidade Natal'
-            autoCapitalize='none'
+            placeHolder='Como se chama?'    
           />
           <SelectUnico />
-          </View>
-          <BotaoTouchableOpacity 
-            buttonStyle={sobre.botao}
-            onPress={() => this.props.navigation.navigate('Regras')}
-            text="Continuar" 
-          />
+          <TextoInput
+            inputStyle={sobre.cidade}
+            onChangeText={cidade => this.setState({ cidade })}
+            placeHolder='Cidade Natal'
+          />   
+          <Calendario/>          
+        </View>
+        <BotaoTouchableOpacity 
+          buttonStyle={sobre.botao}
+          onPress={() => this.props.navigation.navigate('Regras')}
+          text="Continuar" 
+        />
       </View>
     )
   }

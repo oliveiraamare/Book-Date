@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const home = StyleSheet.create({
   botaoLogin: {
     marginBottom: 5,
     marginTop: 50,
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default styles;
+export default home;

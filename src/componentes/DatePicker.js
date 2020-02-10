@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {View, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-datepicker';
+
+//https://www.npmjs.com/package/react-native-datepicker
  
 export default class Calendario extends Component {
   constructor(props){
@@ -25,24 +27,25 @@ export default class Calendario extends Component {
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
-            dateTouchBody: {
-             // backgroundColor:'green', 
+            dateInput: {
+              alignItems: 'flex-start',
+              alignSelf: 'center',
+              borderTopColor: 'transparent',
+              borderBottomWidth: 1, 
+              borderColor: 'white', 
+              justifyContent:'center',   
+              height: 50,  
+              paddingLeft: 40,
+              paddingRight: 20 ,   
             },
             dateText: {
               color:'white', 
             },
-            dateInput: {
-              alignItems: 'flex-start',
-              alignSelf: 'center',
-              borderBottomWidth: 1, 
-              borderColor: '#CCCCCC', 
-              borderLeftWidth: 0,  
-              borderRightWidth: 0,
-              borderTopWidth: 1, 
-              justifyContent:'center',   
-              height: 60,  
-              paddingLeft: 40,
-              paddingRight: 20 ,  
+            dateTouchBody: {
+             // backgroundColor:'green', 
+            },
+            placeholderText:{
+              color:'white'
             }
           }}
           onDateChange={(date) => {this.setState({date: date})}}
@@ -55,9 +58,8 @@ const styles = StyleSheet.create ({
  container: {  
     alignItems: 'flex-start',
     alignSelf: 'center', 
-    flex: 1,    
     justifyContent:'flex-start', 
-    marginBottom: 20, 
-    marginTop: 10
+    marginBottom: 10, 
+    marginTop: 5
   }
 })

@@ -1,8 +1,8 @@
 {
+  "urlRandomness": "s2-ikq",
   "hostType": "tunnel",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "3a-wqn",
   "https": false
 }

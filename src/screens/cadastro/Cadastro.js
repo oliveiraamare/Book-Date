@@ -2,8 +2,7 @@ import React from 'react';
 import { 
   BackHandler,
   KeyboardAvoidingView,
-  Text,
-  TextInput,  
+  Text,  
   View 
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -21,6 +20,7 @@ import compartilhado from '../../styles/compartilhado';
 import HeaderBackButton from '../../componentes/headerBackButton';
 import Header from '../../componentes/header';
 import BotaoTouchableOpacity from '../../componentes/botaoTouchableOpacity';
+import TextoInput from '../../componentes/TextInput';
 
 // TODO ajeitar KeyboardAvoidingView
 // cadastro no banco
@@ -57,18 +57,17 @@ class Cadastro extends React.Component {
           Para começarmos, digite um e-mail e senha de preferência.
         </Text>
         <KeyboardAvoidingView style={{justifyContent: "flex-end"}} behavior = 'padding' enabled>
-          <TextInput
-            style={styles.textInput}
+          <TextoInput
+            inputStyle={styles.textInput}
             value={this.props.user.email}
             onChangeText={email => this.props.updateEmail(email)}
-            placeholder='Email'
-            autoCapitalize='none'
+            placeHolder='Email'
           />
-          <TextInput
-            style={styles.textInput}
+          <TextoInput
+            inputStyle={styles.textInput}
             value={this.props.user.password}
             onChangeText={password => this.props.updatePassword(password)}
-            placeholder='Password'
+            placeHolder='Password'
             secureTextEntry={true}
           />     
         </KeyboardAvoidingView>
