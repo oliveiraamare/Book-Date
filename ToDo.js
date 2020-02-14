@@ -4,9 +4,7 @@ O ARQUIVO QUE NÃO FOR CLASSE, TEM QUE SER NOMEADO COM A PRIMEIRA LETRA MINÚSCU
 -> ajeitar App.js e colocar os códigos em seus devidos lugares
 -> TODO estudar redux e firebase
 -> TODO mover o evento de BackHandler para o arquivo BackPress e ajeitar as outras telas com ele
-->  TODO criar termos de uso e privacidade
--> TODO procurar como ter um array aleatório de frases vinda do firebase
-->  TODO criar telas de cadastro e usuário
+->  TODO criar tela de usuário
 -> TODO colocar o seguinte código após o usuário já estar logado, ele mostra um alerta caso o usuário pressiona o voltar do andorid
     import { 
         Alert,

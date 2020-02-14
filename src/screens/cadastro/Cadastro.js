@@ -67,7 +67,7 @@ class Cadastro extends React.Component {
             inputStyle={styles.textInput}
             value={this.props.user.password}
             onChangeText={password => this.props.updatePassword(password)}
-            placeHolder='Password'
+            placeHolder='Senha'
             secureTextEntry={true}
           />     
         </KeyboardAvoidingView>

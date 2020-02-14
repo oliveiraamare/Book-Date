@@ -63,13 +63,13 @@ class Sobre extends Component {
           <TextoInput
             inputStyle={sobre.cidade}
             onChangeText={cidade => this.setState({ cidade })}
-            placeHolder='Cidade Natal'
+            placeHolder='Qual é a sua cidade natal'
           />   
           <Calendario/>          
         </View>
         <BotaoTouchableOpacity 
           buttonStyle={sobre.botao}
-          onPress={() => this.props.navigation.navigate('Regras')}
+          onPress={() => this.props.navigation.navigate('Preferencias')}
           text="Continuar" 
         />
       </View>

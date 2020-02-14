@@ -22,10 +22,6 @@ const Header = ({ titleStyle, subtitleStyle, title, subtitle }) => {
 }
 
 const styles = StyleSheet.create({
-  statusBar: {
-    backgroundColor: '#ff33cc',
-    height: Constants.statusBarHeight
-  },
   texto:{
     color: compartilhado.corTexto.color,
     //importar fonte
