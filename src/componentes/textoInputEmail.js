@@ -8,8 +8,7 @@ import { View } from 'native-base';
 
 import compartilhado from '../styles/compartilhado';
 
-
-const YELLOW = '#FFFF00';
+const WHITE = '#ffffff';
 const PINK = '#ff33cc';
 
 class TextoInputEmail extends React.Component {
@@ -42,10 +41,10 @@ class TextoInputEmail extends React.Component {
             onBlur={this.handleBlur}
             onFocus={this.handleFocusEmail}
             placeholder='Email'
-            placeholderTextColor= 'white'
-            selectionColor={YELLOW}
+            placeholderTextColor={WHITE}
+            selectionColor={WHITE}
             underlineColorAndroid={
-              isFocused ? YELLOW : PINK
+              isFocused ? PINK : WHITE
             }
             {...otherProps}
           />      

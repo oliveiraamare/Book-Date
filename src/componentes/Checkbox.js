@@ -43,9 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,   
     height: 40, 
     marginBottom: 10,
-    marginTop: 0,
-    paddingLeft: 5,
-    paddingRight: 5
+    marginTop: 0
   }
 });
 

@@ -27,7 +27,7 @@ const NavegacaoSwitch = createSwitchNavigator(
         TermoUso : { screen: TermoUso }
     },
     {
-        initialRouteName: 'Preferencias',
+        initialRouteName: 'Perfil',
         headerMode: 'none'
     }
 )

@@ -8,7 +8,7 @@ import {
 
 import compartilhado from '../styles/compartilhado';
 
-const PURPLE = '#9900cc';
+const WHITE = '#ffffff';
 const PINK = '#ff33cc';
 
 class TextoInputSenha extends React.Component {
@@ -41,11 +41,11 @@ class TextoInputSenha extends React.Component {
             onBlur={this.handleBlur}
             onFocus={this.handleFocusPassword}
             placeholder='Password'
-            placeholderTextColor= 'white'
+            placeholderTextColor={WHITE}
             secureTextEntry={true}
-            selectionColor={PURPLE}
+            selectionColor={WHITE}
             underlineColorAndroid={
-              isFocused ? PURPLE : PINK
+              isFocused ? PINK : WHITE
             }
             {...otherProps}
           />      

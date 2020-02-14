@@ -58,16 +58,16 @@ class Sobre extends Component {
           <Text style={preferencias.texto1}>
             Quais encantamentos buscas no Book Date?
           </Text>
-          <View style={{flexDirection: 'row'}}>
-            <Checkbox center title='Aventura' />
-            <Checkbox center title='Conto de Fadas' />
+          <View style={{flexDirection: 'row', marginTop: 5}}>
+            <Checkbox title='Aventura' />
+            <Checkbox title='Prosa' />
           </View>
           <View style={{flexDirection: 'row', marginBottom: 30}}>
-            <Checkbox center title='Mistério' />
-            <Checkbox center title='Prosa' />
+            <Checkbox title='Mistério' />
+            <Checkbox title='Conto de Fadas' />
           </View>
           <Text style={preferencias.texto2}>
-          Fale um pouco sobre as suas preferências
+            Fale um pouco sobre as suas preferências
           </Text>
           <TextoInput
             inputStyle={preferencias.citacao}
