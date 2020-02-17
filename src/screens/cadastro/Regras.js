@@ -58,7 +58,7 @@ class TermoUso extends Component {
         </View>
         <BotaoTouchableOpacity 
           buttonStyle={regras.botao}
-          onPress={() => this.props.navigation.navigate('Perfil')}
+          onPress={() => this.props.navigation.navigate('NavegacaoInterna')}
           text="Concordar e Continuar" 
         />
       </View>
