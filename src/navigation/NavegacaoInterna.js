@@ -8,7 +8,7 @@ import { createSwitchNavigator } from 'react-navigation';
 import PerfilMatch from '../screens/PerfilMatch';
 import Notificacao from '../screens/Notificacao';
 import Mensagem from '../screens/Mensagem';
-import Perfil from '../screens/perfilUsuario/Perfil';
+import Perfil from '../screens/conta/Conta';
 
 const NavegacaoSwitch = createSwitchNavigator(
   {
@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <Tab.Navigator
-      initialRouteName="PerfilMatch"
+      initialRouteName="Perfil"
       tabBarOptions={{
         //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
         activeTintColor: '#ff33cc',
@@ -43,7 +43,7 @@ function Tabs() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Bookshop"
         component={PerfilMatch}
         options={{
           //tabBarLabel: 'Home',
@@ -53,7 +53,7 @@ function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Notificacao"
+        name="Notificações"
         component={Notificacao}
         options={{
           //tabBarLabel: 'Updates',
