@@ -8,14 +8,14 @@ import { createSwitchNavigator } from 'react-navigation';
 import PerfilMatch from '../screens/PerfilMatch';
 import Notificacao from '../screens/Notificacao';
 import Mensagem from '../screens/Mensagem';
-import Perfil from '../screens/conta/Conta';
+import Conta from '../screens/conta/Conta';
 
 const NavegacaoSwitch = createSwitchNavigator(
   {
-    screen: PerfilMatch,
-    screen: Notificacao,
+    screen: Conta,
     screen: Mensagem,
-    screen: Perfil
+    screen: Notificacao,
+    screen: PerfilMatch
   },
 )
 
@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Perfil"
+      initialRouteName="Conta"
       tabBarOptions={{
         //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
         activeTintColor: '#ff33cc',
@@ -73,8 +73,8 @@ function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Perfil"
-        component={Perfil}
+        name="Conta"
+        component={Conta}
         options={{
           //tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (

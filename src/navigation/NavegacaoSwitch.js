@@ -2,12 +2,11 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
 import Cadastro from '../screens/cadastro/Cadastro';
 import Configuracao from '../screens/conta/Configuracao';
-import EditarPerfil from '../screens/conta/EditarPerfil';
 import Home from '../screens/Home';
 import Sobre from '../screens/cadastro/Sobre';
 import Login from '../screens/Login';
 import NavegacaoInterna from '../navigation/NavegacaoInterna';
-import Perfil from '../screens/conta/Conta';
+import Perfil from '../screens/conta/perfil/Perfil';
 import Preferencias from '../screens/cadastro/Preferencias';
 import ReenviarSenha from '../screens/ReenviarSenha';
 import Regras from '../screens/cadastro/Regras';
@@ -20,7 +19,6 @@ const NavegacaoSwitch = createSwitchNavigator(
     {
         Cadastro: { screen: Cadastro },
         Configuracao: { screen: Configuracao },
-        EditarPerfil: { screen: EditarPerfil },
         Home: { screen: Home },
         Sobre: { screen: Sobre },
         Login: { screen: Login },
@@ -34,7 +32,7 @@ const NavegacaoSwitch = createSwitchNavigator(
         TermoUso : { screen: TermoUso }
     },
     {
-        initialRouteName: 'Preferencias',
+        initialRouteName: 'Perfil',
         headerMode: 'none'
     }
 )

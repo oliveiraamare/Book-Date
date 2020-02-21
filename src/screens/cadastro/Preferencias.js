@@ -4,7 +4,7 @@ import {
   Text,
   View , 
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 import sobre from '../../styles/sobre';
 import preferencias from '../../styles/preferencias';

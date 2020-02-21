@@ -6,10 +6,10 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import compartilhado from '../../styles/compartilhado';
 import conta from '../../styles/conta';
 
-import cor from '../../constantes/cores';
+import cor from '../../styles/cores';
 
 onPressOptions = () => {
-  this.props.navigation.navigate('options')
+  this.props.navigation.navigate('Perfil')
 }
 
 onChangePushNotifications = () => {
@@ -76,59 +76,58 @@ class Conta extends Component {
               textInputSelectTextOnFocus='true'
             />
             <ListItem
-              // chevron
+              containerStyle={conta.listItem}
               title="Meu Perfil"
               titleStyle={{color:cor.branco}}
-              rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
-              }
-              onPress={() => this.onPressOptions()}
-              containerStyle={conta.listItem}
               leftIcon={
                 <MaterialCommunityIcons name="account-edit" color={cor.rosa} size={20} />
               }
+              rightElement={
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} onPress={() => this.props.navigation.navigate('Regras')}              />
+              }
+              
               underlaycolor={cor.rosa}          
               textInputSelectTextOnFocus='true'
             />
             <ListItem
+              containerStyle={conta.listItem}
               title="Localização"
               titleStyle={{color:cor.branco}}
-              rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
-              }
-              onPress={() => this.onPressOptions()}
-              containerStyle={conta.listItem}
               leftIcon={
                 <MaterialCommunityIcons name="map-marker-distance" color={cor.rosa} size={20} />
               }
-              underlaycolor={cor.rosa}          
-              textInputSelectTextOnFocus='true'
-            />
-            <ListItem
-              title="Configurações"
-              titleStyle={{color:cor.branco}}
               rightElement={
                 <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
               }
               onPress={() => this.onPressOptions()}
+              underlaycolor={cor.rosa}          
+              textInputSelectTextOnFocus='true'
+            />
+            <ListItem
               containerStyle={conta.listItem}
+              title="Configurações"
+              titleStyle={{color:cor.branco}}
               leftIcon={
                 <MaterialCommunityIcons name="cogs" color={cor.rosa} size={20} />
-              }    
+              } 
+              rightElement={
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
+              }
+              onPress={() => this.onPressOptions()}                 
               underlaycolor={cor.rosa}          
               textInputSelectTextOnFocus='true'        
             />
             <ListItem
+              containerStyle={conta.listItem}
               title="Sobre Nós"
               titleStyle={{color:cor.branco}}
-              rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
-              }
-              onPress={() => this.onPressOptions()}
-              containerStyle={conta.listItem}
               leftIcon={
                 <MaterialCommunityIcons name="face-agent" color={cor.rosa} size={20} />
               } 
+              rightElement={
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
+              }
+              onPress={() => this.onPressOptions()}              
               underlaycolor={cor.rosa}          
               textInputSelectTextOnFocus='true'
             />

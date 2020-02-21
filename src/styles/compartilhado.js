@@ -16,16 +16,3 @@ const compartilhado = StyleSheet.create({
 })
 
 export default compartilhado;
-
-
-
-
-
-
-
-
-    
-
-
-
-
