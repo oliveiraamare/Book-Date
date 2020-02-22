@@ -107,6 +107,14 @@ class Perfil extends Component {
                 /> 
               </View>          
             </View>
+            <View style={perfil.containerBotao}>
+              <TouchableOpacity style={perfil.botao}>
+                <Text style={perfil.iconeBotao}>
+                  <MaterialCommunityIcons name='chat-processing' color='black' size={20} />
+                </Text>
+                <Text style={perfil.textoBotao}>Conversar</Text>
+              </TouchableOpacity>
+            </View>
           </ScrollView>
         </ImageBackground>
       </View>

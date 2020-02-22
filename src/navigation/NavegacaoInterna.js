@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { createSwitchNavigator } from 'react-navigation';
 
 import PerfilMatch from '../screens/PerfilMatch';
-import Notificacao from '../screens/Notificacao';
+import Notificacao from '../screens/conta/Notificacao';
 import Mensagem from '../screens/Mensagem';
 import Conta from '../screens/conta/Conta';
 
@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Conta"
+      initialRouteName="PerfilMatch"
       tabBarOptions={{
         //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
         activeTintColor: '#ff33cc',
