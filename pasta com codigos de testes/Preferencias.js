@@ -6,15 +6,15 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 
-import sobre from '../../styles/sobre';
-import compartilhado from '../../styles/compartilhado';
+import sobre from '../../estilos/sobre';
+import compartilhado from '../../estilos/compartilhado';
 
-import HeaderBackButton from '../../componentes/headerBackButton';
-import Header from '../../componentes/header';
-import BotaoTouchableOpacity from '../../componentes/botaoTouchableOpacity';
+import HeaderBackButton from '../../../componentes/header/headerBackButton';
+import Header from '../../../componentes/header/header';
+import BotaoTouchableOpacity from '../../../componentes/botoes/botaoTouchableOpacity';
 
-import TextoInput from '../../componentes/TextInput';
-import Tag from '../../componentes/Tag';
+import TextoInput from '../../../componentes/textInput/TextInput';
+import Tag from '../../../componentes/Tag';
 
 // TODO ajeitar KeyboardAvoidingView
 // cadastro no banco

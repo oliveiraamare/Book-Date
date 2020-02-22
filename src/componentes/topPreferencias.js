@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
-import cor from '../styles/cores';
+import cor from '../estilos/cores';
 
 export const Preferencias = ({ tituloStyle, titulo, opcao1, opcao2, opcao3 }) => (
   <View>

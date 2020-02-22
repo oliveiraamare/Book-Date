@@ -1,18 +1,19 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
-import Cadastro from '../screens/cadastro/Cadastro';
-import Configuracao from '../screens/conta/Configuracao';
-import Home from '../screens/Home';
-import Sobre from '../screens/cadastro/Sobre';
-import Login from '../screens/Login';
+import Cadastro from '../telas/cadastro/Cadastro';
+import Configuracao from '../telas/menuInterno/conta/configuracoes/Configuracao';
+import Home from '../telas/home/Home';
+import Sobre from '../telas/cadastro/Sobre';
+import Login from '../telas/home/Login';
 import NavegacaoInterna from '../navigation/NavegacaoInterna';
-import Perfil from '../screens/conta/perfil/Perfil';
-import Preferencias from '../screens/cadastro/Preferencias';
-import ReenviarSenha from '../screens/ReenviarSenha';
-import Regras from '../screens/cadastro/Regras';
-import ResetarSenha from '../screens/ResetarSenha';
-import TermoPrivacidade from '../screens/termos/TermoPrivacidade';
-import TermoUso from '../screens/termos/TermoUso';
+import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
+import Preferencias from '../telas/cadastro/Preferencias';
+import ReenviarSenha from '../telas/home/ReenviarSenha';
+import Regras from '../telas/cadastro/Regras';
+import ResetarSenha from '../telas/home/ResetarSenha';
+import SobreNos from '../telas/menuInterno/conta/SobreNos';
+import TermoPrivacidade from '../telas/termos/TermoPrivacidade';
+import TermoUso from '../telas/termos/TermoUso';
 
 
 const NavegacaoSwitch = createSwitchNavigator(
@@ -28,11 +29,12 @@ const NavegacaoSwitch = createSwitchNavigator(
         Regras: { screen: Regras },
         ReenviarSenha: { screen: ReenviarSenha },
         ResetarSenha: { screen: ResetarSenha },
+        SobreNos: { screen: SobreNos },
         TermoPrivacidade: { screen: TermoPrivacidade },
         TermoUso : { screen: TermoUso }
     },
     {
-        initialRouteName: 'Perfil',
+        initialRouteName: 'Home',
         headerMode: 'none'
     }
 )

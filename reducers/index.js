@@ -4,7 +4,7 @@ import {
   LOGIN, 
   UPDATE_EMAIL, 
   UPDATE_PASSWORD 
-} from '../actions/usuario';
+} from '../acoes/usuario';
 
 const user = (state = {}, action) => {
   switch (action.type) {

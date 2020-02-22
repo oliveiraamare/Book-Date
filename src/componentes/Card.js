@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View} from 'react-native';
 import { Card, Paragraph } from 'react-native-paper';
 
-import cor from '../styles/cores';
+import cor from '../estilos/cores';
 
 export const CardComTitulo = ({ styleCard, titulo, paragrafo, autor, left}) => (
   <Card style={styleCard}>          

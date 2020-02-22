@@ -1,14 +1,14 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { CheckBox } from 'react-native-elements'
 
-import compartilhado from '../styles/compartilhado';
+import compartilhado from '../estilos/compartilhado';
 
 
 const WHITE = '#ffffff';
 const PINK = '#ff33cc';
 
-class Checkbox extends React.Component {
+class Checkbox extends Component {
   state = {
     checked: false
   };

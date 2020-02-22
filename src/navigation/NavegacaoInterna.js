@@ -1,21 +1,20 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { createSwitchNavigator } from 'react-navigation';
 
-import PerfilMatch from '../screens/PerfilMatch';
-import Notificacao from '../screens/conta/Notificacao';
-import Mensagem from '../screens/Mensagem';
-import Conta from '../screens/conta/Conta';
+import Match from '../telas/menuInterno/match/Match';
+import Notificacao from '../telas/menuInterno/Notificacao';
+import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
+import Conta from '../telas/menuInterno/conta/Conta';
 
 const NavegacaoSwitch = createSwitchNavigator(
   {
     screen: Conta,
     screen: Mensagem,
     screen: Notificacao,
-    screen: PerfilMatch
+    screen: Match
   },
 )
 
@@ -24,7 +23,7 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <Tab.Navigator
-      initialRouteName="PerfilMatch"
+      initialRouteName="Match"
       tabBarOptions={{
         //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
         activeTintColor: '#ff33cc',
@@ -44,7 +43,7 @@ function Tabs() {
     >
       <Tab.Screen
         name="Bookshop"
-        component={PerfilMatch}
+        component={Match}
         options={{
           //tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (

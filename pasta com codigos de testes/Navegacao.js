@@ -5,7 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Constants from 'expo-constants';
 
-import Perfil from '../screens/Perfil';
+import Perfil from '../telas/Perfil';
 
 function Feed() {
   return (
@@ -96,10 +96,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
-import compartilhado from '../styles/compartilhado';
+import compartilhado from '../estilos/compartilhado';
 
 
-import Perfil from '../screens/Perfil';
+import Perfil from '../telas/Perfil';
 
 function DetailsScreen() {
     return (
