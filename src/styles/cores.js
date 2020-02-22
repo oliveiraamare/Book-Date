@@ -4,6 +4,7 @@ const cor = {
   azul: '#007AFF',
   branco: '#FFFFFF',
   cinza: '#CCCCCC',
+  cinzaEscuro: '#585958',
   laranja: '#FF9500',
   preto: '#000000',
   pretoTransparente: 'rgba(0, 0, 0, 0.8)', 
