@@ -10,16 +10,6 @@ import compartilhado from '../../../estilos/compartilhado';
 import conta from '../../../estilos/conta';
 import cor from '../../../estilos/cores';
 
-onPressOptions = () => {
-  this.props.navigation.navigate('Perfil')
-}
-
-onChangePushNotifications = () => {
-  this.setState(state => ({
-    pushNotifications: !state.pushNotifications,
-  }))
-}
-
 class Conta extends Component {
   constructor(props) {
     super(props);
@@ -74,9 +64,9 @@ class Conta extends Component {
                 <MaterialCommunityIcons name="account-edit" color={cor.rosa} size={20} />
               }
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} onPress={() => this.props.navigation.navigate('Regras')}              />
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
               }
-              onPress={() => this.onPressOptions()}
+              onPress={() => this.props.navigation.navigate('Perfil')}
               underlaycolor={cor.rosa}          
               textInputSelectTextOnFocus='true'
             />
@@ -90,7 +80,7 @@ class Conta extends Component {
               rightElement={
                 <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
               }
-              onPress={() => this.onPressOptions()}                 
+              onPress={() => this.props.navigation.navigate('Configuracao')}              
               underlaycolor={cor.rosa}          
               textInputSelectTextOnFocus='true'        
             />
@@ -104,7 +94,7 @@ class Conta extends Component {
               rightElement={
                 <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
               }
-              onPress={() => this.onPressOptions()}              
+              onPress={() => this.props.navigation.navigate('SobreNos')}   
               underlaycolor={cor.rosa}          
               textInputSelectTextOnFocus='true'
             />

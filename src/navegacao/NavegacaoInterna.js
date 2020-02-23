@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import { createSwitchNavigator } from 'react-navigation';
 import { Button, View, Text } from 'react-native';
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Match from '../telas/menuInterno/match/Match';
@@ -11,24 +10,18 @@ import Notificacao from '../telas/menuInterno/Notificacao';
 import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
 import Conta from '../telas/menuInterno/conta/Conta';
 
-import cor from '../estilos/cores';
+import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
+import Configuracao from '../telas/menuInterno/conta/configuracoes/Configuracao';
+import SobreNos from '../telas/menuInterno/conta/SobreNos';
 
-const NavegacaoSwitch = createSwitchNavigator(
-  {
-    screen: Conta,
-    screen: Mensagem,
-    screen: Notificacao,
-    screen: Match
-  },
-)
+import cor from '../estilos/cores';
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+    <View >
       <Button
         title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
+        onPress={() => navigation.push('Details')}
       />
     </View>
   );
@@ -62,17 +55,9 @@ export default function NavegacaoInterna() {
           //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
           activeTintColor: cor.rosa,
           inactiveTintColor: cor.cinza,
-          labelStyle: {
-          // fontSize: 5,
-            padding: 3
-          },
-          //showLabel:false, 
-          style:{
-            backgroundColor:'black'
-          },
-          tabStyle:{
-            backgroundColor: 'transparent'
-          }
+          labelStyle: { padding: 3 },
+          style:{ backgroundColor:'black' },
+          tabStyle:{ backgroundColor: 'transparent' }
         }}  
       >
         <Tab.Screen name="Second">
@@ -94,7 +79,6 @@ export default function NavegacaoInterna() {
           {() => (
             <MatchStack.Navigator headerMode="none">
               <MatchStack.Screen name="Bookshop" component={Match} />
-              <MatchStack.Screen name="Details" component={DetailsScreen} />
             </MatchStack.Navigator>
           )}
         </Tab.Screen>   
@@ -122,8 +106,7 @@ export default function NavegacaoInterna() {
         >
           {() => (
             <MensagemStack.Navigator headerMode="none">
-              <MensagemStack.Screen name="Mensagem" component={Mensagem} />
-              <MensagemStack.Screen name="Details" component={DetailsScreen} />
+              <MensagemStack.Screen name="Mensagem" component={Mensagem} />      
             </MensagemStack.Navigator>
           )}
         </Tab.Screen>       
@@ -139,6 +122,9 @@ export default function NavegacaoInterna() {
             <ContaStack.Navigator headerMode="none">
               <ContaStack.Screen name="Conta" component={Conta} />
               <ContaStack.Screen name="Details" component={DetailsScreen} />
+              <ContaStack.Screen name="Perfil" component={Perfil} />
+              <ContaStack.Screen name="Configuracao" component={Configuracao} />
+              <ContaStack.Screen name="SobreNos" component={SobreNos} />           
             </ContaStack.Navigator>
           )}
         </Tab.Screen>        
@@ -146,3 +132,7 @@ export default function NavegacaoInterna() {
     </NavigationContainer>
   );
 }
+
+//https://reactnavigation.org/docs/en/stack-navigator.html#navigationoptions-used-by-stacknavigator
+//https://snack.expo.io/@oliveiraamare/5fcd36?platform=android&name=createStackNavigator%20%C2%B7%20React%20Navigation&dependencies=%40react-native-community%2Fmasked-view%40%5E0.1.1%2C%40react-navigation%2Fnative%405.0.4%2C%40react-navigation%2Fbottom-tabs%405.0.4%2C%40react-navigation%2Fdrawer%405.0.4%2C%40react-navigation%2Fmaterial-bottom-tabs%405.0.4%2C%40react-navigation%2Fmaterial-top-tabs%405.0.4%2C%40react-navigation%2Fnative-stack%405.0.4%2C%40react-navigation%2Fstack%405.0.4%2Creact-native-gesture-handler%401.5.2%2Creact-native-reanimated%401.4.0%2Creact-native-safe-area-context%400.6.0%2Creact-native-screens%402.0.0-alpha.12&sourceUrl=https%3A%2F%2Freactnavigation.org%2Fexamples%2F5.x%2Fsimple-stack.js
+//https://snack.expo.io/@oliveiraamare/c813ca
