@@ -1,29 +1,26 @@
 import React , { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { Appbar } from 'react-native-paper';
 
+import { AppBarHeader } from '../../../componentes/tabBar/AppBarHeader';
 import compartilhado from '../../../estilos/compartilhado';
 import sobre from '../../../estilos/sobre';
 import cor from '../../../estilos/cores';
 
 class SobreNos extends Component {
-  _goBack = () => this.props.navigation.navigate('Conta');     
-
   render(){
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <Appbar.Header 
-          statusBarHeight={0} 
-          style={{backgroundColor:cor.preto, borderBottomWidth:0.2, borderBottomColor:cor.branco}}>
-          <Appbar.BackAction
-            onPress={this._goBack}
-          />
-        <Appbar.Content
-          title="Sobre Nós"
-          titleStyle={{color:cor.branco}}
+        <AppBarHeader 
+          headerStyle={{
+            backgroundColor:cor.preto, 
+            borderBottomColor:cor.branco,
+            borderBottomWidth:0.18
+          }} 
+          onPress={() => this.props.navigation.navigate('Conta')} 
+          title={"Sobre Nós"} 
+          style={{color:cor.branco}} 
         />
-        </Appbar.Header>         
         <ScrollView>
           <Text style={sobre.paragrafo}>
             Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.

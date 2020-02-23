@@ -9,10 +9,10 @@ import compartilhado from '../../estilos/compartilhado';
 
 
 
-const Header = ({ titleStyle, subtitleStyle, title, subtitle }) => {
+const Header = ({ topbarStyle, titleStyle, subtitleStyle, title, subtitle }) => {
   return (
     <View>
-        <View style={styles.topbar}>
+        <View style={[styles.topbar, topbarStyle]}>
         <Text style={[styles.texto, titleStyle]}>{title}</Text>
         <Text style={[styles.texto, subtitleStyle]}>{subtitle}</Text>
       </View>

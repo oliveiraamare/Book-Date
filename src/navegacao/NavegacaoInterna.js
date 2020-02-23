@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -11,40 +10,20 @@ import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
 import Conta from '../telas/menuInterno/conta/Conta';
 
 import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
-import Configuracao from '../telas/menuInterno/conta/configuracoes/Configuracao';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 
+import TermoPrivacidade from '../telas/termos/TermoPrivacidade';
+import TermoUso from '../telas/termos/TermoUso';
+
+import DeletarConta from '../telas/menuInterno/conta/DeletarConta';
+
 import cor from '../estilos/cores';
-
-function HomeScreen({ navigation }) {
-  return (
-    <View >
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.push('Details')}
-      />
-    </View>
-  );
-}
-
-function DetailsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-    </View>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 const ContaStack = createStackNavigator();
 const MatchStack = createStackNavigator();
 const MensagemStack = createStackNavigator();
 const NotificacaoStack = createStackNavigator();
-const HomeStack = createStackNavigator();
 
 export default function NavegacaoInterna() {  
   return (
@@ -60,14 +39,6 @@ export default function NavegacaoInterna() {
           tabStyle:{ backgroundColor: 'transparent' }
         }}  
       >
-        <Tab.Screen name="Second">
-          {() => (
-            <HomeStack.Navigator>
-              <HomeStack.Screen name="Home" component={HomeScreen} />
-              <HomeStack.Screen name="Details" component={DetailsScreen} />
-            </HomeStack.Navigator>
-          )}
-        </Tab.Screen>
         <Tab.Screen 
           name="Bookshop" 
           options={{
@@ -121,13 +92,14 @@ export default function NavegacaoInterna() {
           {() => (
             <ContaStack.Navigator headerMode="none">
               <ContaStack.Screen name="Conta" component={Conta} />
-              <ContaStack.Screen name="Details" component={DetailsScreen} />
               <ContaStack.Screen name="Perfil" component={Perfil} />
-              <ContaStack.Screen name="Configuracao" component={Configuracao} />
               <ContaStack.Screen name="SobreNos" component={SobreNos} />           
+              <ContaStack.Screen name="TermoPrivacidade" component={TermoPrivacidade} />
+              <ContaStack.Screen name="TermoUso" component={TermoUso} />
+              <ContaStack.Screen name="DeletarConta" component={DeletarConta} />
             </ContaStack.Navigator>
           )}
-        </Tab.Screen>        
+        </Tab.Screen>         
       </Tab.Navigator>
     </NavigationContainer>
   );

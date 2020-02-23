@@ -4,6 +4,7 @@ import { ListItem } from 'react-native-elements'
 import { Avatar } from 'react-native-paper';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
+import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
 import FrasesPerfil from '../../../componentes/fraseAleatoria/frasesPerfil'
 
 import compartilhado from '../../../estilos/compartilhado';
@@ -14,7 +15,6 @@ class Conta extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pushNotifications: true,
       isSwitchOn: false,
     };
   }
@@ -36,7 +36,6 @@ class Conta extends Component {
           </View>
           <View>
             <ListItem
-              hideChevron
               title="Notificação Push"
               titleStyle={{color:cor.branco}}
               containerStyle={conta.listItem}
@@ -51,54 +50,75 @@ class Conta extends Component {
                 />
               }
               leftIcon={
-                <MaterialCommunityIcons name="bell-ring" color={cor.rosa} size={20} />
-              }
-              underlaycolor={cor.rosa}          
-              textInputSelectTextOnFocus='true'
+                <MaterialCommunityIcons name="bell-ring" color={cor.rosaClaro} size={20} />
+              }               
             />
             <ListItem
               containerStyle={conta.listItem}
               title="Meu Perfil"
               titleStyle={{color:cor.branco}}
               leftIcon={
-                <MaterialCommunityIcons name="account-edit" color={cor.rosa} size={20} />
+                <MaterialCommunityIcons name="account-edit" color={cor.rosaClaro} size={20} />
               }
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
               }
-              onPress={() => this.props.navigation.navigate('Perfil')}
-              underlaycolor={cor.rosa}          
-              textInputSelectTextOnFocus='true'
+              onPress={() => this.props.navigation.navigate('Perfil') }
             />
             <ListItem
               containerStyle={conta.listItem}
-              title="Configurações"
+              title="Termos de Privacidade"
               titleStyle={{color:cor.branco}}
               leftIcon={
-                <MaterialCommunityIcons name="cogs" color={cor.rosa} size={20} />
+                <MaterialCommunityIcons name="sort-variant-lock" color={cor.rosaClaro} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
               }
-              onPress={() => this.props.navigation.navigate('Configuracao')}              
-              underlaycolor={cor.rosa}          
-              textInputSelectTextOnFocus='true'        
+              onPress={() => this.props.navigation.navigate('TermoPrivacidade')}                  
+            />
+            <ListItem
+              containerStyle={conta.listItem}
+              title="Termos de Uso"
+              titleStyle={{color:cor.branco}}
+              leftIcon={
+                <MaterialCommunityIcons name="locker-multiple" color={cor.rosaClaro} size={20} />
+              } 
+              rightElement={
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
+              }
+              onPress={() => this.props.navigation.navigate('TermoUso')}                  
             />
             <ListItem
               containerStyle={conta.listItem}
               title="Sobre Nós"
               titleStyle={{color:cor.branco}}
               leftIcon={
-                <MaterialCommunityIcons name="face-agent" color={cor.rosa} size={20} />
+                <MaterialCommunityIcons name="face-agent" color={cor.rosaClaro} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosa} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
               }
               onPress={() => this.props.navigation.navigate('SobreNos')}   
-              underlaycolor={cor.rosa}          
-              textInputSelectTextOnFocus='true'
+            />
+            <ListItem
+              containerStyle={conta.listItem}
+              title="Sair"
+              titleStyle={{color:cor.branco}}
+              leftIcon={
+                <MaterialCommunityIcons name="account-arrow-right-outline" color={cor.rosaClaro} size={20} />
+              } 
+              rightElement={
+                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
+              }
+              onPress={() => this.props.navigation.navigate('Sair')}   
             />
           </View>     
+          <BotaoTransparente
+            onPress={() => this.props.navigation.navigate('DeletarConta')}
+            texto="Deletar Conta"
+            buttonStyle={{marginTop:50}}
+          />
         </ScrollView>
       </View>
     )
