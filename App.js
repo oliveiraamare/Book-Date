@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import NavegacaoSwitch from "./src/navigation/NavegacaoSwitch";
+import NavegacaoSwitch from './src/navegacao/NavegacaoSwitch';
 import reducer from './src/reducers';
 
 const middleware = applyMiddleware(thunkMiddleware);
@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 20,
-    textAlign: "center",
+    textAlign: 'center',
     margin: 10,
-    fontWeight: "bold"
+    fontWeight: 'bold'
   },
 });

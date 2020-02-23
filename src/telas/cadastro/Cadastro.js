@@ -1,0 +1,97 @@
+import React, {Component} from 'react';
+import { 
+  BackHandler,
+  KeyboardAvoidingView,
+  Text,  
+  View 
+} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { 
+  cadastro,
+  updateEmail, 
+  updatePassword
+} from '../../acoes/usuario';
+
+import styles from '../../estilos/cadastro';
+import compartilhado from '../../estilos/compartilhado';
+
+import HeaderBackButton from '../../componentes/header/headerBackButton';
+import Header from '../../componentes/header/header';
+import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import TextoInput from '../../componentes/textInput/TextInput';
+
+// TODO ajeitar KeyboardAvoidingView
+// cadastro no banco
+
+class Cadastro extends Component {
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+  componentWillUnmount(){
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+  onBackPress = () => {
+    this.props.navigation.navigate('Home');
+    // Return true to enable back button over ride.
+    return true;
+  }
+
+  handleLogin = () => {
+    this.props.cadastro()
+    this.props.navigation.navigate('Sobre')
+  }
+
+  render() {
+    return (
+      <View style={compartilhado.container}>
+        <View style={compartilhado.statusBar} />
+        <HeaderBackButton
+          text='' 
+          onPress={() => this.props.navigation.navigate('Home')}
+        />        
+        <Header subtitleStyle={styles.header} title={frase} subtitle={autor} />  
+        <Text style={styles.texto}>
+          Para começarmos, digite um e-mail e senha de preferência.
+        </Text>
+        <KeyboardAvoidingView style={{justifyContent: "flex-end"}} behavior = 'padding' enabled>
+          <TextoInput
+            inputStyle={styles.textInput}
+            value={this.props.user.email}
+            onChangeText={email => this.props.updateEmail(email)}
+            placeHolder='Email'
+          />
+          <TextoInput
+            inputStyle={styles.textInput}
+            value={this.props.user.password}
+            onChangeText={password => this.props.updatePassword(password)}
+            placeHolder='Senha'
+            secureTextEntry={true}
+          />     
+        </KeyboardAvoidingView>
+        <BotaoTouchableOpacity 
+          buttonStyle={styles.botao}
+          onPress={this.handleLogin}
+          text="Continuar" 
+        />
+      </View>
+    )
+  }
+}
+
+const frase='Seja bem vindo a minha vida, está meio desarrumada, mas se você quiser ficar mais um pouco arrumamos juntos (..) é você quem eu tanto esperei!';
+const autor='Vilma Galvão';
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ updateEmail, updatePassword, cadastro }, dispatch)
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cadastro)
