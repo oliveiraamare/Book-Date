@@ -1,40 +1,28 @@
 import { StyleSheet } from 'react-native';
-import compartilhado from '../estilos/compartilhado';
+
+import cor from '../estilos/cores';
 
 const sobre = StyleSheet.create({
-  botao: {
+  paragrafo:{      
+    color: cor.branco,
+    fontSize: 13,
+    marginTop: 25,  
+    marginLeft: 10,
+    marginRight: 10,
+    textAlign:'justify'     
+  },
+  textoBotao:{
+    alignItems: 'center',
     alignSelf: 'center',
-    bottom: 0,
-    marginBottom: 30, 
-    marginTop: 30,
-    position: 'absolute'
+    color: cor.branco,
+    fontSize: 15, 
+    justifyContent: 'center', 
   },
-  cidade:{
-    borderBottomWidth: 1,
-    borderColor: 'transparent',
-    marginBottom: 10, 
-    marginTop: 5, 
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-  header: {
-    alignSelf: 'flex-end'
-  },
-  nome:{
-    borderBottomWidth: 1,
-    borderColor: 'transparent',
-    marginBottom: 10, 
-    marginTop: 5, 
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-  texto1: {
-    color:'#ff33cc',  
-    fontSize: 15 ,  
-    marginBottom: 40,
-    paddingLeft: 10,
-    paddingRight: 10,
-    textAlign: 'justify'
+  titulo: {
+    alignSelf: 'center',      
+    color: cor.branco,
+    fontSize: 23,
+    marginTop: 20,
   }
 })
 
