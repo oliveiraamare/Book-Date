@@ -3,10 +3,12 @@ import { View } from 'react-native';
 import { Paragraph } from 'react-native-paper';
 
 import compartilhado from '../../../estilos/compartilhado';
+import deletarConta from '../../../estilos/deletarConta';
 import cor from '../../../estilos/cores';
 
 import { AppBarHeader } from '../../../componentes/tabBar/AppBarHeader';
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
+import Header from '../../../componentes/header/header';
 
 class DeletarConta extends Component {
   render() {      
@@ -21,21 +23,24 @@ class DeletarConta extends Component {
           }} 
           onPress={() => this.props.navigation.navigate('')} 
           title={"Apagar Conta"} 
-          style={{color:cor.branco}} 
+          style={{color:cor.branco, fontSize:18}} 
         />
-        <Header topbarStyle={{}} subtitleStyle={{alignSelf: 'flex-end'}} title={frase} subtitle={autor} />
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Paragraph style={{color:cor.branco, textAlign:'justify'}}>
-            Você é um membro valiona da comunidade do Book Date. Se você conheceu alguém, nós te desejamos os melhor! Você sempre será bem-vindo no futuro.
+        <Header subtitleStyle={deletarConta.headerSubtitleStyle} title={frase} subtitle={autor} />
+        <View style={deletarConta.containerView}>
+          <Paragraph style={deletarConta.paragrafoPrincipal}>
+            Você é um membro valioso do Book Date. 
           </Paragraph>
-          <Paragraph style={{color:cor.branco, textAlign:'justify'}}>
-          Você pode excluir sua conta a qualquer momento. Ao deletá-la, você perderá todos os dados e conteúdos contidos nela. 
+          <Paragraph style={deletarConta.paragrafo}>
+            Se você conheceu alguém, nós te desejamos os melhor! Você sempre será bem-vindo no futuro.
           </Paragraph>
-        </View>
+          <Paragraph style={deletarConta.paragrafo}>
+            Você pode excluir sua conta a qualquer momento. Ao deletá-la, você perderá todos os dados e conteúdos contidos nela. 
+          </Paragraph>
+        </View>        
         <BotaoTransparente
-          onPress={() => this.props.navigation.navigate('DeletarConta')}
+          onPress={() => this.props.navigation.navigate('')}
           texto="Deletar minha Conta"
-          buttonStyle={{marginTop:50}}
+          buttonStyle={{marginTop:80}}
         />
       </View>
     )

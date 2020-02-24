@@ -7,8 +7,6 @@ import {
 
 import compartilhado from '../../estilos/compartilhado';
 
-
-
 const Header = ({ topbarStyle, titleStyle, subtitleStyle, title, subtitle }) => {
   return (
     <View>

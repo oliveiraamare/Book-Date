@@ -19,7 +19,7 @@ class SobreNos extends Component {
           }} 
           onPress={() => this.props.navigation.navigate('Conta')} 
           title={"Sobre Nós"} 
-          style={{color:cor.branco}} 
+          style={{color:cor.branco, fontSize:18}} 
         />
         <ScrollView>
           <Text style={sobre.paragrafo}>
