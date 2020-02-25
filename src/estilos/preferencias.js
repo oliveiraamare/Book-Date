@@ -1,6 +1,13 @@
 import { StyleSheet,Platform } from 'react-native';
 
 const styles = StyleSheet.create({
+  botao: {
+    alignSelf: 'center',
+    bottom: 0,
+    marginBottom: 30, 
+    marginTop: 30,
+    position: 'absolute'
+  },
   citacao: {
     borderBottomWidth: 1,
     marginTop: 5, 

@@ -17,7 +17,7 @@ const deletarConta = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 17,
     marginRight: 15,  
-    textAlign: 'justify'
+    textAlign: 'center'
   },
   paragrafoPrincipal: {
     color: cor.branco, 

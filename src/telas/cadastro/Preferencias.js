@@ -6,11 +6,11 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import sobre from '../../estilos/sobre';
+import cor from '../../estilos/cores';
 import preferencias from '../../estilos/preferencias';
 import compartilhado from '../../estilos/compartilhado';
 
-import HeaderBackButton from '../../componentes/header/headerBackButton';
+import { AppBarHeader } from '../../componentes/tabBar/AppBarHeader';
 import Header from '../../componentes/header/header';
 import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
 import TextoInput from '../../componentes/textInput/TextInput';
@@ -48,10 +48,16 @@ class Sobre extends Component {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <HeaderBackButton
-          text='' 
-          onPress={() => this.props.navigation.navigate('Sobre')}
-        />        
+        <AppBarHeader 
+          headerStyle={{
+            backgroundColor:cor.preto, 
+            borderBottomColor:cor.branco,
+            borderBottomWidth:0.18
+          }} 
+          onPress={() => this.props.navigation.navigate('Sobre')} 
+          title={"Preferências"} 
+          style={{color:cor.branco, fontSize:18}} 
+        />      
         <Header subtitleStyle={{alignSelf: 'flex-end'}} title={frase} subtitle={autor} />
         <View style={{flex:1}}>
           <Text style={preferencias.texto1}>
@@ -87,8 +93,8 @@ class Sobre extends Component {
           />                
         </View>
         <BotaoTouchableOpacity 
-          buttonStyle={sobre.botao}
-          onPress={() => this.props.navigation.navigate('Regras')}
+          buttonStyle={preferencias.botao}
+          onPress={() => this.props.navigation.navigate('UploadImagem')}
           text="Continuar" 
         />
       </View>

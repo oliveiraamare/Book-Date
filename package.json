@@ -46,12 +46,49 @@
     "react-select": "^3.0.8",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "save": "^2.4.0"
+    "save": "^2.4.0",
+    "expo-image-picker": "~7.0.0",
+    "expo-permissions": "~7.0.0",
+    "expo-media-library": "~7.0.0",
+    "expo-location": "~7.0.0",
+    "expo-camera": "~7.0.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^7.1.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "metro-react-native-babel-preset": "^0.57.0"
   },
-  "private": true
+  "private": true,
+  "android": {
+    "permissions": [
+      "ACCESS_COARSE_LOCATION",
+      "ACCESS_FINE_LOCATION",
+      "CAMERA",
+      "MANAGE_DOCUMENTS",
+      "READ_CONTACTS",
+      "READ_CALENDAR",
+      "WRITE_CALENDAR",
+      "READ_EXTERNAL_STORAGE",
+      "READ_PHONE_STATE",
+      "RECORD_AUDIO",
+      "USE_FINGERPRINT",
+      "VIBRATE",
+      "WAKE_LOCK",
+      "WRITE_EXTERNAL_STORAGE",
+      "com.anddoes.launcher.permission.UPDATE_COUNT",
+      "com.android.launcher.permission.INSTALL_SHORTCUT",
+      "com.google.android.c2dm.permission.RECEIVE",
+      "com.google.android.gms.permission.ACTIVITY_RECOGNITION",
+      "com.google.android.providers.gsf.permission.READ_GSERVICES",
+      "com.htc.launcher.permission.READ_SETTINGS",
+      "com.htc.launcher.permission.UPDATE_SHORTCUT",
+      "com.majeur.launcher.permission.UPDATE_BADGE",
+      "com.sec.android.provider.badge.permission.READ",
+      "com.sec.android.provider.badge.permission.WRITE",
+      "com.sonyericsson.home.permission.BROADCAST_BADGE"
+    ],
+    "infoPlist": {
+      "NSLocationWhenInUseUsageDescription": "Some permission description text."
+    }
+  }
 }

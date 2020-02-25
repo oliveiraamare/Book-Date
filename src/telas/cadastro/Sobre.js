@@ -7,8 +7,9 @@ import {
 
 import sobre from '../../estilos/sobre';
 import compartilhado from '../../estilos/compartilhado';
+import cor from '../../estilos/cores';
 
-import HeaderBackButton from '../../componentes/header/headerBackButton';
+import { AppBarHeader } from '../../componentes/tabBar/AppBarHeader';
 import Header from '../../componentes/header/header';
 import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
 import SelectUnico from '../../componentes/SelectUnico';
@@ -45,9 +46,15 @@ class Sobre extends Component {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <HeaderBackButton
-          text='' 
-          onPress={() => this.props.navigation.navigate('Cadastro')}
+        <AppBarHeader 
+          headerStyle={{
+            backgroundColor:cor.preto, 
+            borderBottomColor:cor.branco,
+            borderBottomWidth:0.18
+          }} 
+          onPress={() => this.props.navigation.navigate('Cadastro')} 
+          title={"Sobre Você"} 
+          style={{color:cor.branco, fontSize:18}} 
         />        
         <Header subtitleStyle={sobre.header} title={frase} subtitle={autor} />  
         <Text style={sobre.texto1}>
@@ -55,13 +62,13 @@ class Sobre extends Component {
         </Text>
         <View style={{flex:1}}>
           <TextoInput
-            inputStyle={sobre.nome}
+            inputStyle={sobre.textInput}
             onChangeText={nome => this.setState({ nome })}
             placeHolder='Como se chama?'    
           />
           <SelectUnico />
           <TextoInput
-            inputStyle={sobre.cidade}
+            inputStyle={sobre.textInput}
             onChangeText={cidade => this.setState({ cidade })}
             placeHolder='Qual é a sua cidade natal'
           />   

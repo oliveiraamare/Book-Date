@@ -9,7 +9,7 @@ class BotaoTouchableOpacity extends Component {
 		const {buttonStyle, onPress, text } = this.props;
 		return (
       <TouchableOpacity 
-       style={[buttonStyle, styles.botao]}
+       style={[styles.botao, buttonStyle]}
        onPress={() => onPress()}>
         <Text style={styles.texto}>{text}</Text>
       </TouchableOpacity>

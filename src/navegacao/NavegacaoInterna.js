@@ -12,8 +12,8 @@ import Conta from '../telas/menuInterno/conta/Conta';
 import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 
-import TermoPrivacidade from '../telas/termos/TermoPrivacidade';
-import TermoUso from '../telas/termos/TermoUso';
+import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
+import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
 
 import DeletarConta from '../telas/menuInterno/conta/DeletarConta';
 
@@ -40,7 +40,7 @@ export default function NavegacaoInterna() {
         }}  
       >
         <Tab.Screen 
-          name="Bookshop" 
+          name="BookLovers" 
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="account-heart" color={color} size={size} />
