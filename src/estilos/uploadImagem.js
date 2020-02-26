@@ -10,7 +10,7 @@ const uploadImagem = StyleSheet.create({
   },
   botao: {
     alignSelf: 'center',
-    bottom: 0,
+    bottom: 0, 
     marginBottom: 30, 
     marginTop: 30,
     position: 'absolute'

@@ -1,36 +1,41 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
 import Cadastro from '../telas/cadastro/Cadastro';
+import Geolocalizacao from '../telas/cadastro/Geolocalizacao';
 import Home from '../telas/home/Home';
-import Sobre from '../telas/cadastro/Sobre';
 import Login from '../telas/home/Login';
 import NavegacaoInterna from '../navegacao/NavegacaoInterna';
+import PermissaoGeo from '../telas/cadastro/PermissaoGeo';
 import Preferencias from '../telas/cadastro/Preferencias';
-import UploadImagem from '../telas/cadastro/UploadImagem';
 import ReenviarSenha from '../telas/home/ReenviarSenha';
 import Regras from '../telas/cadastro/Regras';
-import ResetarSenha from '../telas/home/ResetarSenha';;
+import ResetarSenha from '../telas/home/ResetarSenha';
+import Sobre from '../telas/cadastro/Sobre';
 import TermoPrivacidade from '../telas/termos/TermoPrivacidade';
 import TermoUso from '../telas/termos/TermoUso';
+import UploadImagem from '../telas/cadastro/UploadImagem';
 
 
 const NavegacaoSwitch = createSwitchNavigator(
     {
         Cadastro: { screen: Cadastro },
-        UploadImagem: { screen: UploadImagem },
+        Geolocalizacao: { screen: Geolocalizacao },
         Home: { screen: Home },
-        Sobre: { screen: Sobre },
         Login: { screen: Login },
         NavegacaoInterna: { screen: NavegacaoInterna },
+        PermissaoGeo: { screen: PermissaoGeo },
         Preferencias: { screen: Preferencias },
         Regras: { screen: Regras },
         ReenviarSenha: { screen: ReenviarSenha },
         ResetarSenha: { screen: ResetarSenha },
+        Sobre: { screen: Sobre },
         TermoPrivacidade: { screen: TermoPrivacidade },
-        TermoUso : { screen: TermoUso }
+        TermoUso : { screen: TermoUso },
+        UploadImagem: { screen: UploadImagem },
+
     },
     {
-        initialRouteName: 'UploadImagem',
+        initialRouteName: 'Geolocalizacao',
         headerMode: 'none'
     }
 )

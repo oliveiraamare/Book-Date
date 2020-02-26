@@ -43,7 +43,7 @@ class UploadImagem extends Component {
             borderBottomWidth:0.18
           }} 
           onPress={() => this.props.navigation.navigate('Preferencias')} 
-          title={"Adicione uma foto"} 
+          title={"Adicione sua foto"} 
           style={{color:cor.branco, fontSize:18}} 
         />
         <Header 
@@ -69,7 +69,7 @@ class UploadImagem extends Component {
         </View>
         <BotaoTouchableOpacity 
           buttonStyle={uploadImagem.botao}
-          onPress={() => this.props.navigation.navigate('Regras')} 
+          onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
           text="Continuar" 
         />
         {this._renderizarImagem()}

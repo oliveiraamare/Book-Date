@@ -20,7 +20,7 @@ class TermoUso extends Component {
             borderBottomColor:cor.branco,
             borderBottomWidth:0.18
           }} 
-          onPress={() => this.props.navigation.navigate('UploadImagem')} 
+          onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
           title={"Regras"} 
           style={{color:cor.branco, fontSize:18}} 
         />    
