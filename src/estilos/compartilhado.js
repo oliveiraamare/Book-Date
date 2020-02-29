@@ -1,16 +1,18 @@
 import Constants from 'expo-constants';
-import { StyleSheet,Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import cor from '../estilos/cores'
 
 const compartilhado = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: cor.preto,
     flex: 1
   },
   corTexto: {
     color: 'white'
   },
   statusBar: {
-    backgroundColor: '#ff33cc',
+    backgroundColor: cor.rosa,
     height: Constants.statusBarHeight
   },
 })

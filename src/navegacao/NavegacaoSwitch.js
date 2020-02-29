@@ -35,7 +35,7 @@ const NavegacaoSwitch = createSwitchNavigator(
 
     },
     {
-        initialRouteName: 'Geolocalizacao',
+        initialRouteName: 'NavegacaoInterna',
         headerMode: 'none'
     }
 )

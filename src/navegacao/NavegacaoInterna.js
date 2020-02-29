@@ -4,18 +4,18 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Match from '../telas/menuInterno/match/Match';
-import Notificacao from '../telas/menuInterno/Notificacao';
-import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
 import Conta from '../telas/menuInterno/conta/Conta';
+import Match from '../telas/menuInterno/match/Match';
+import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
+import Notificacao from '../telas/menuInterno/Notificacao';
 
-import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
-import SobreNos from '../telas/menuInterno/conta/SobreNos';
-
-import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
-import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
+import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
 
 import DeletarConta from '../telas/menuInterno/conta/DeletarConta';
+import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
+import SobreNos from '../telas/menuInterno/conta/SobreNos';
+import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
+import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
 
 import cor from '../estilos/cores';
 
@@ -50,6 +50,7 @@ export default function NavegacaoInterna() {
           {() => (
             <MatchStack.Navigator headerMode="none">
               <MatchStack.Screen name="Bookshop" component={Match} />
+              <MatchStack.Screen name="PerfilMatch" component={PerfilMatch} />
             </MatchStack.Navigator>
           )}
         </Tab.Screen>   
@@ -99,7 +100,7 @@ export default function NavegacaoInterna() {
               <ContaStack.Screen name="DeletarConta" component={DeletarConta} />
             </ContaStack.Navigator>
           )}
-        </Tab.Screen>         
+        </Tab.Screen>     
       </Tab.Navigator>
     </NavigationContainer>
   );

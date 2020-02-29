@@ -108,7 +108,10 @@ class Perfil extends Component {
               </View>          
             </View>
             <View style={perfil.containerBotao}>
-              <TouchableOpacity style={perfil.botao}>
+              <TouchableOpacity 
+                style={perfil.botao} 
+                onPress={() => this.props.navigation.navigate('Mensagem')}
+              >
                 <Text style={perfil.iconeBotao}>
                   <MaterialCommunityIcons name='chat-processing' color='black' size={20} />
                 </Text>
