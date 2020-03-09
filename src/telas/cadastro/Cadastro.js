@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 import { TagSelect } from 'react-native-tag-select-max';
 
-
 import { AppBarHeader } from '../../componentes/header';
 import { BotaoTouchableOpacity }from '../../componentes/botao';
 import { FraseTop } from '../../componentes/frase';

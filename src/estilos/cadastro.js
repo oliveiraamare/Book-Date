@@ -44,7 +44,8 @@ const cadastro = StyleSheet.create({
     width: 90
   },
   tagItemSelecionado: {
-    backgroundColor: cor.rosa
+    backgroundColor: cor.rosa,
+    borderColor: cor.rosa
   },
   tagLabel: {
     color: cor.branco

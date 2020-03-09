@@ -11,8 +11,12 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   citacao: {
+    borderBottomColor: cor.cinza,
     borderBottomWidth: 1,
-    marginTop: 5, 
+    borderTopColor: cor.cinza,
+    borderTopWidth: 1,
+    height: 65,
+    marginTop: 10, 
     paddingLeft: 20,
     paddingRight: 20
   },
@@ -23,14 +27,13 @@ const styles = StyleSheet.create({
     borderRadius: 100, 
     borderWidth: 1,
     justifyContent:'center',
-    margin: 5,
     marginTop: 20, 
-    marginLeft: 50,
-    marginRight: 30,
+    marginLeft: 5,
     width: 90
   },
   tagItemSelecionado: {
-    backgroundColor: cor.rosa
+    backgroundColor: cor.rosa,
+    borderColor: cor.rosa    
   },
   tagLabel: {
     color: cor.branco

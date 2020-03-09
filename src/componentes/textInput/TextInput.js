@@ -24,7 +24,9 @@ class TextoInput extends Component {
 
   render() {
     const { isFocused } = this.state;
-    const { inputStyle, onBlur, onFocus, placeHolder, ...otherProps } = this.props;
+    const { 
+      inputStyle, onBlur, onFocus, multiline, maxLength, numberOfLines, placeHolder, ...otherProps 
+    } = this.props;
     return (
       <View>
           <TextInput
@@ -38,6 +40,9 @@ class TextoInput extends Component {
             underlineColorAndroid={
               isFocused ? cor.rosa : cor.branco
             }
+            multiline={multiline}
+            maxLength={maxLength}
+            numberOfLines={numberOfLines} 
             {...otherProps}
           />      
       </View>

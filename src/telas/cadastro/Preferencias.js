@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { 
+  Alert,
   AsyncStorage,
   KeyboardAvoidingView,
   ScrollView,
@@ -14,7 +15,7 @@ import { AppBarHeader } from '../../componentes/header';
 import { BotaoTouchableOpacity }from '../../componentes/botao';
 import { FraseTop } from '../../componentes/frase';
 
-import TextoInput from '../../componentes/textInput/TextInput';
+import TextoMultilinha from '../../componentes/textInput/TextMultiline'
 import { TagSelect } from 'react-native-tag-select-max';
 import Checkbox from '../../componentes/Checkbox';
 
@@ -28,21 +29,18 @@ class Preferencias extends Component {
     super(props);
     this.state = {
       citacao: '',
+      singularidade: '',
+      sinopse: '',
       generoLiterario: [
-        'Acadêmico',
         'Aventura',
         'Biografia',
         'Drama',
-        'Espírita',
-        'Evangélico',
         'Fantasia',
-        'Ficção Científica',
+        'Ficção',
         'Infantil',
         'Mistério',
         'Policial',
         'Romance',
-        'Sobrenatural',
-        'Teórico',
         'Terror'
       ],    
       aventura: false,
@@ -58,11 +56,13 @@ class Preferencias extends Component {
   }
  
   salvarPreferencias = () => {
-    const { aventura, prosa, misterio, contoFadas, citacao } = this.state;
+    const { citacao, singularidade, sinopse, aventura, prosa, misterio, contoFadas } = this.state;
     const generoLiterario = this.tag.itemsSelected;    
     let preferencias = {
       citacao: citacao,
-      generoLiterario: generoLiterario ,
+      singularidade: singularidade,
+      sinopse: sinopse,
+      generoLiterario: generoLiterario,
       aventura: aventura,
       prosa: prosa,
       misterio: misterio,
@@ -70,7 +70,7 @@ class Preferencias extends Component {
     }
     AsyncStorage.setItem('preferencias', JSON.stringify(preferencias)).then(
       ()=>{
-        alert('Itens salvos: ' + citacao + ' ' + generoLiterario + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas);//colocar console.log depois
+        alert('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario);//colocar console.log depois
       }).catch( ()=>{
        alert('Itens não salvos')
       }
@@ -82,41 +82,47 @@ class Preferencias extends Component {
       <View style={compartilhado.container}>
        <AppBarHeader 
           onPress={() => this.props.navigation.navigate('Cadastro')} 
-          title={"Preferências"} 
+          title={"Peculiariedades"} 
         />  
         <ScrollView>
           <KeyboardAvoidingView 
             style={{justifyContent: "flex-end", flex: 1 }} 
-            behavior='height' 
+            behavior='padding' 
             enabled 
+            disableIntervalMomentum={true}
           >
             <FraseTop 
               subtitleStyle={{alignSelf: 'flex-end'}} title={frase} subtitle={autor}
             />            
             <Text style={preferencias.texto}>
-              Fale um pouco sobre as suas preferências
+              Fale um pouco sobre as suas peculiaridades
             </Text>
-            <TextoInput
+            <TextoMultilinha
               inputStyle={preferencias.citacao}
-              placeHolder='Qual a sua citação favorita?'    
+              placeHolder='Qual a sua citação favorita?'   
+              multiline={true}
+              maxLength={180}
+              numberOfLines={4}  
               value={this.state.citacao}
               onChangeText={citacao => this.setState({ citacao })}
             />
-            <Text style={preferencias.texto}>
-              Escolha até três genêros literários
-            </Text>
-            <TagSelect
-              data={this.state.generoLiterario}
-              ref={(tag) => {
-                this.tag = tag;
-              }}
-              onMaxError={() => {
-                Alert.alert('Ops', 'Max reached' + JSON.stringify(this.tag.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
-              }}
-              itemStyle={preferencias.tagItem}
-              itemLabelStyle={preferencias.tagLabel}
-              itemStyleSelected={preferencias.tagItemSelecionado}
-              itemLabelStyleSelected={preferencias.tagLabelSelecionado}
+            <TextoMultilinha
+              inputStyle={preferencias.citacao}
+              placeHolder='Quais são as suas singularidades?' 
+              multiline={true}
+              maxLength={140}
+              numberOfLines={4}     
+              value={this.state.singularidade}
+              onChangeText={singularidade => this.setState({ singularidade })}
+            />
+            <TextoMultilinha
+              inputStyle={preferencias.citacao}
+              placeHolder='Se a sua vida fosse um livro, qual seria a sinopse?' 
+              multiline={true}
+              maxLength={200}
+              numberOfLines={4}     
+              value={this.state.sinopse}
+              onChangeText={sinopse => this.setState({ sinopse })}
             />
             <Text style={preferencias.texto}>
               Quais encantamentos buscas no Book Date?
@@ -142,7 +148,30 @@ class Preferencias extends Component {
                 checked={this.state.contoFadas}
                 onPress={checked => this.setState({ contoFadas: !this.state.contoFadas })}                  
               />
-            </View>            
+            </View>         
+            <Text style={preferencias.texto}>
+              Quais genêros literários você mais gosta? Escolha até três tipos
+            </Text>
+            <ScrollView
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={true}
+            >
+              <TagSelect
+                data={this.state.generoLiterario}
+                max={3}
+                ref={(tag) => {
+                  this.tag = tag;
+                }}
+                onMaxError={() => {
+                  Alert.alert('Ops', 'Max reached' + JSON.stringify(this.tag.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
+                }}
+                itemStyle={preferencias.tagItem}
+                itemLabelStyle={preferencias.tagLabel}
+                itemStyleSelected={preferencias.tagItemSelecionado}
+                itemLabelStyleSelected={preferencias.tagLabelSelecionado}
+              />
+            </ScrollView>   
             <View style={{marginTop: 100}}>
               <BotaoTouchableOpacity 
                 buttonStyle={preferencias.botao}

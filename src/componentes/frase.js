@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   topbar: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    height: 130,    
+    //height: 130,    
     justifyContent: 'center',
     padding: 10
   },  
