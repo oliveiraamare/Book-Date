@@ -55,7 +55,7 @@ class Cadastro extends Component {
   }
 
   salvarCadastro = () => {
-    const { email, senha, nome, cidade} = this.state;
+    const { email, senha, nome, cidade } = this.state;
     const genero = this.tag.itemsSelected;    
     const dtNasc = this.state.data;
     let cadastro = {

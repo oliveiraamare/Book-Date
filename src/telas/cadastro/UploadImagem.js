@@ -7,8 +7,8 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
+  AsyncStorage,
   Clipboard,
-  StyleSheet,
   Text,
   View,
 } from 'react-native';
@@ -17,9 +17,9 @@ import * as ImagePicker from 'expo-image-picker';
 import { Avatar } from 'react-native-paper';
 
 import BotaoTransparente from '../../componentes/botoes/BotaoTransparente';
-import { BotaoTouchableOpacity  }from '../../componentes/botao';
+import { BotaoTouchableOpacity }from '../../componentes/botao';
 
-import { AppBarHeader } from '../../componentes/tabBar/AppBarHeader';
+import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 
 import compartilhado from '../../estilos/compartilhado';
@@ -27,32 +27,43 @@ import uploadImagem from '../../estilos/uploadImagem';
 import cor from '../../estilos/cores';
 
 class UploadImagem extends Component {
-  state = {
-    image: null,
-    uploading: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null,
+      uploading: false,
+    };
+  }
+
+  handleImagem = () => {
+    this.salvarCadastro()
+    this.props.navigation.navigate('PermissaoGeo')
+  }
+
+  salvarCadastro = () => {
+    const { image } = this.state;
+    let imagem = {
+      image: image
+    }
+    AsyncStorage.setItem('imagem', JSON.stringify(imagem)).then(
+      ()=>{
+        alert('Item salvo: ' + image);//colocar console.log depois
+      }).catch( ()=>{
+       alert('Item não salvo')
+      }
+    );
+  }
 
   render() {
     let { image } = this.state;
-    var sobre = this.props.navigation.state.params.sobre;
-    var cadastro = this.props.navigation.state.params.cadastro;
-    var preferencias = this.props.navigation.state.params.preferencias;
-
     return (
       <View style={compartilhado.container}>
-        <View style={compartilhado.statusBar} />
         <AppBarHeader 
-          headerStyle={{
-            backgroundColor:cor.preto, 
-            borderBottomColor:cor.branco,
-            borderBottomWidth:0.18
-          }} 
           onPress={() => this.props.navigation.navigate('Preferencias')} 
           title={"Adicione sua foto"} 
-          style={{color:cor.branco, fontSize:18}} 
-        />
+        /> 
         <FraseTop 
-          subtitleStyle={{alignSelf:'flex-end', color: cor.rosa}} 
+          subtitleStyle={uploadImagem.header} 
           title={frase} 
           subtitle={autor} 
         />
@@ -68,22 +79,15 @@ class UploadImagem extends Component {
           />
             <Text style={{color:cor.branco, marginTop:20}}>ou então</Text>
           <BotaoTransparente        
-            onPress={this._takePhoto} 
-            texto="Tirar foto agora" 
+            onPress={this._tirarFoto} 
+            texto="Tirar foto" 
           />
         </View>
         <BotaoTouchableOpacity 
           buttonStyle={uploadImagem.botao}
-          onPress={() =>  this.props.navigation.navigate('PermissaoGeo', 
-            {
-              imagem: {image},
-              preferencias,
-              sobre,
-              cadastro
-            })}
+          onPress={() => this.handleImagem()}
           text="Continuar" 
         />
-        {this._renderizarImagem()}
         {this._renderizarUploadingOverlay()}
       </View>
     );
@@ -92,29 +96,11 @@ class UploadImagem extends Component {
   _renderizarUploadingOverlay = () => {
     if (this.state.uploading) {
       return (
-        <View style={[StyleSheet.absoluteFill, uploadImagem.renderizandoUploading]}>
+        <View style={uploadImagem.renderizandoUpload}>
           <ActivityIndicator size="large" color={cor.rosa} />
         </View>
       );
     }
-  };
-
-  _renderizarImagem = () => {
-    let { image } = this.state;
-
-    if (!image) {
-      return;
-    }
-
-    return (
-      <View style={uploadImagem.maybeRenderContainerApagar}>
-        <Text
-          onPress={this._copyToClipboard}
-          style={uploadImagem.maybeRenderImageTextApagar}>
-          {image}
-        </Text>
-      </View>
-    );
   };
 
   _copyToClipboard = () => {
@@ -122,7 +108,7 @@ class UploadImagem extends Component {
     alert('Copied image URL to clipboard');
   };
 
-  _takePhoto = async () => {
+  _tirarFoto = async () => {
     const {
       status: cameraPerm
     } = await Permissions.askAsync(Permissions.CAMERA);
@@ -176,6 +162,12 @@ class UploadImagem extends Component {
       type: 'image/jpg'
     })
 
+    let filename = pictureuri.split('/').pop();
+    let match = /\.(\w+)$/.exec(filename);
+    let type = match ? `image/${match[1]}` : `image`;
+    let formData = new FormData();
+    formData.append('photo', { uri: localUri, name: filename, type });
+
     fetch(apiUrl, {  
       headers: {
         'Accept': 'application/json',
@@ -193,6 +185,7 @@ class UploadImagem extends Component {
       })
   }
 }
+
 
 const frase='Se uma imagem vale mais do que mil palavras, então diga isto com uma imagem.';
 const autor='Millôr Fernandes';

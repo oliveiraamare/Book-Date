@@ -15,7 +15,7 @@ import { AppBarHeader } from '../../componentes/header';
 import { BotaoTouchableOpacity }from '../../componentes/botao';
 import { FraseTop } from '../../componentes/frase';
 
-import TextoMultilinha from '../../componentes/textInput/TextMultiline'
+import TextoMultilinha from '../../componentes/textInput/TextMultiline';
 import { TagSelect } from 'react-native-tag-select-max';
 import Checkbox from '../../componentes/Checkbox';
 
@@ -51,8 +51,8 @@ class Preferencias extends Component {
   }
 
   handleLogin = () => {
-    this.salvarPreferencias()
-   // this.props.navigation.navigate('Cadastro')
+    this.salvarPreferencias();
+    this.props.navigation.navigate('UploadImagem');
   }
  
   salvarPreferencias = () => {

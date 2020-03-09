@@ -3,10 +3,10 @@ import cor from '../estilos/cores';
 
 const uploadImagem = StyleSheet.create({
   avatar: {
-    alignSelf:'center', 
-    backgroundColor:cor.cinza, 
-    marginBottom:20,
-    marginTop:40
+    alignSelf: 'center', 
+    backgroundColor: cor.cinza, 
+    marginBottom: 10,
+    marginTop: 40
   },
   botao: {
     alignSelf: 'center',
@@ -16,32 +16,17 @@ const uploadImagem = StyleSheet.create({
     position: 'absolute'
   },
   botaoTransparente: {
-    flexDirection:'row', 
-    justifyContent:'space-around'
+    flexDirection: 'row', 
+    justifyContent: 'space-around',
+    margin: 30
   },
-  renderizandoUploading: {
+  header: {
+    alignSelf: 'flex-end'
+  },
+  renderizandoUpload: {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0.4)',
     justifyContent: 'center'
-  },
-  maybeRenderContainerApagar: {
-    backgroundColor:'pink',
-    borderRadius: 3,
-    elevation: 2,
-    marginTop: 30,
-    shadowColor: 'rgba(0,0,0,1)',
-    shadowOpacity: 0.2,
-    shadowOffset: {
-      height: 4,
-      width: 4,
-    },
-    shadowRadius: 5,
-    width: 250,
-  },
-  maybeRenderImageTextApagar: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    backgroundColor:'white',
   }
 })
 
