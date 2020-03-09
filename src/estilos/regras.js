@@ -10,7 +10,7 @@ const regras = StyleSheet.create({
     position: 'absolute'
   },
   paragrafo: {
-    color: compartilhado.corTexto.color,
+    color: 'white',
     fontSize: 13,
     fontWeight: 'bold',
     marginTop: 5,  

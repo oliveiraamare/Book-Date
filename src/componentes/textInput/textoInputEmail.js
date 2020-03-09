@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   textInput: {   
     alignContent: 'center',
     borderWidth: 20,
-    color: compartilhado.corTexto.color,
+    color: 'white',
     flex: 1,
     height: 70,
     textTransform: 'lowercase'

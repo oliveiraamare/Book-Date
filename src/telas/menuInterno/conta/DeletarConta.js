@@ -8,7 +8,7 @@ import cor from '../../../estilos/cores';
 
 import { AppBarHeader } from '../../../componentes/tabBar/AppBarHeader';
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
-import Header from '../../../componentes/header/header';
+import FraseTop from '../../../componentes/frase';
 
 class DeletarConta extends Component {
   render() {      
@@ -25,7 +25,7 @@ class DeletarConta extends Component {
           title={"Apagar Conta"} 
           style={{color:cor.branco, fontSize:18}} 
         />
-        <Header subtitleStyle={deletarConta.headerSubtitleStyle} title={frase} subtitle={autor} />
+        <FraseTop subtitleStyle={deletarConta.headerSubtitleStyle} title={frase} subtitle={autor} />
         <View style={deletarConta.containerView}>
           <Paragraph style={deletarConta.paragrafoPrincipal}>
             Você é um membro valioso do Book Date. 

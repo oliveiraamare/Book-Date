@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
-import { 
-  KeyboardAvoidingView,
-  StyleSheet, 
-  TextInput, 
-} from 'react-native';
-import { View } from 'native-base';
+import { StyleSheet, TextInput, View } from 'react-native';
 
-import compartilhado from '../../estilos/compartilhado';
-
-
-const WHITE = '#ffffff';
-const PINK = '#ff33cc';
+import cor from '../../estilos/cores';
 
 class TextoInput extends Component {
   state = {
@@ -36,21 +27,19 @@ class TextoInput extends Component {
     const { inputStyle, onBlur, onFocus, placeHolder, ...otherProps } = this.props;
     return (
       <View>
-        <KeyboardAvoidingView behavior="padding" enabled>
           <TextInput
             autoCapitalize='none'
             style={[styles.textInput, inputStyle]}
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
             placeholder={placeHolder}
-            placeholderTextColor= 'white'
-            selectionColor={WHITE}
+            placeholderTextColor= {cor.branco}
+            selectionColor={cor.branco}
             underlineColorAndroid={
-              isFocused ? PINK : WHITE
+              isFocused ? cor.rosa : cor.branco
             }
             {...otherProps}
           />      
-        </KeyboardAvoidingView>
       </View>
     );
   }
@@ -60,7 +49,7 @@ const styles = StyleSheet.create({
   textInput: {   
     alignContent: 'center',
     borderWidth: 20,
-    color: compartilhado.corTexto.color,
+    color: cor.branco,
     height: 50,
   }
 });

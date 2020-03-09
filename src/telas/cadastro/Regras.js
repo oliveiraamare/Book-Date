@@ -6,11 +6,18 @@ import cor from '../../estilos/cores';
 import regras from '../../estilos/regras';
 
 import { AppBarHeader } from '../../componentes/tabBar/AppBarHeader';
-import Header from '../../componentes/header/header';
-import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import { FraseTop } from '../../componentes/frase';
+import { BotaoTouchableOpacity  }from '../../componentes/botao';
+
 
 class TermoUso extends Component {
   render(){
+    var sobre = this.props.navigation.state.params.sobre;
+    var cadastro = this.props.navigation.state.params.cadastro;
+    var preferencias = this.props.navigation.state.params.preferencias;
+    var imagem = this.props.navigation.state.params.imagem;
+    var local = this.props.navigation.state.params.local;
+    
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
@@ -24,7 +31,7 @@ class TermoUso extends Component {
           title={"Regras"} 
           style={{color:cor.branco, fontSize:18}} 
         />    
-        <Header titleStyle={regras.titleStyle} subtitleStyle={regras.subtitleStyle} title={frase} subtitle={autor} />           
+        <FraseTop titleStyle={regras.titleStyle} subtitleStyle={regras.subtitleStyle} title={frase} subtitle={autor} />           
         <View style={regras.texto}>
           <Text style={regras.paragrafo}> 
             Eu quero muito fazer isso dar certo. 
@@ -61,11 +68,23 @@ class TermoUso extends Component {
           </Text>
           <Text style={regras.subparagrafo}> 
             Estamos felizes por ver você aqui. Nosso objetivo é satisfazer.
+            {local.pais},
+              {imagem.image},
+              {preferencias.citacao},
+              
           </Text>
         </View>
         <BotaoTouchableOpacity 
           buttonStyle={regras.botao}
-          onPress={() => this.props.navigation.navigate('NavegacaoInterna')}
+          onPress={() =>  this.props.navigation.navigate('NavegacaoInterna', 
+            {
+              localizacao,
+              imagem,
+              preferencias,
+              sobre,
+              cadastro,
+              local
+            })}
           text="Concordar e Continuar" 
         />
       </View>

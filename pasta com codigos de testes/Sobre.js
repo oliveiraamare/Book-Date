@@ -10,8 +10,8 @@ import compartilhado from '../../estilos/compartilhado';
 import cor from '../../estilos/cores';
 
 import { AppBarHeader } from '../../componentes/tabBar/AppBarHeader';
-import Header from '../../componentes/header/header';
-import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import FraseTop from '../../componentes/header/header';
+import { BotaoTouchableOpacity  } from '../../componentes/botao';
 import SelectUnico from '../../componentes/SelectUnico';
 import Calendario from '../../componentes/DatePicker';
 import TextoInput from '../../componentes/textInput/TextInput';
@@ -42,7 +42,11 @@ class Sobre extends Component {
     };
   }
 
+
   render() {    
+
+    var cadastro = this.props.navigation.state.params.cadastro;
+
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
@@ -56,8 +60,8 @@ class Sobre extends Component {
           title={"Sobre Você"} 
           style={{color:cor.branco, fontSize:18}} 
         />        
-        <Header subtitleStyle={sobre.header} title={frase} subtitle={autor} />  
-        <Text style={sobre.texto1}>
+        <FraseTop subtitleStyle={sobre.header} title={frase} subtitle={autor} />  
+        <Text style={{color:cor.rosa}}>
           Fale um pouco sobre você
         </Text>
         <View style={{flex:1}}>
@@ -76,7 +80,11 @@ class Sobre extends Component {
         </View>
         <BotaoTouchableOpacity 
           buttonStyle={sobre.botao}
-          onPress={() => this.props.navigation.navigate('Preferencias')}
+          onPress={() =>  this.props.navigation.navigate('Preferencias', 
+            {
+              sobre: {nome: this.state.nome, cidade: this.state.cidade},
+              cadastro
+            })}
           text="Continuar" 
         />
       </View>

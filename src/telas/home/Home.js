@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 
 import BotaoTransparente from '../../componentes/botoes/BotaoTransparente';
-import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import { BotaoTouchableOpacity  } from '../../componentes/botao';
 import FrasesAleatorias from '../../componentes/fraseAleatoria/FrasesAleatorias';
 
 import compartilhado from '../../estilos/compartilhado';

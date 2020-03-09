@@ -101,7 +101,7 @@ const styles = {
     padding: 10
   },
   paragrafo:{      
-    color: compartilhado.corTexto.color,
+    color: 'white',
     fontSize: 13,
     marginTop: 5,  
     marginLeft: 10,
@@ -117,13 +117,13 @@ const styles = {
   textoBotao:{
     alignItems: 'center',
     alignSelf: 'center',
-    color: compartilhado.corTexto.color,
+    color: 'white',
     fontSize: 15, 
     justifyContent: 'center', 
   },
   titulo: {
     alignSelf: 'center',      
-    color: compartilhado.corTexto.color,
+    color: 'white',
     fontSize: 23,
     marginTop: 20,
   }

@@ -1,22 +1,19 @@
+//https://www.npmjs.com/package/react-native-datepicker
+
 import React, { Component } from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
-//https://www.npmjs.com/package/react-native-datepicker
- 
+import cor from '../estilos/cores'; 
 export default class Calendario extends Component {
-  constructor(props){
-    super(props)
-    //set value in state for initial date
-    this.state = {date:''}
-  }
- 
   render(){
+    const { date, onDateChange } = this.props
     return (
       <View style={styles.container}>
         <DatePicker
           style={{width: 400 }}
-          date={'Quando você nasceu?', this.state.date}
+          date={date}
+          onDateChange={onDateChange}
           mode="date"
           androidMode="spinner"
           showIcon= {false}
@@ -27,28 +24,17 @@ export default class Calendario extends Component {
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
-            dateInput: {
-              alignItems: 'flex-start',
-              alignSelf: 'center',
-              borderTopColor: 'transparent',
-              borderBottomWidth: 1, 
-              borderColor: 'white', 
-              justifyContent:'center',   
-              height: 50,  
-              paddingLeft: 40,
-              paddingRight: 20 ,   
-            },
+            dateInput: styles.dateInput,
             dateText: {
-              color:'white', 
+              color: cor.branco 
             },
             dateTouchBody: {
              // backgroundColor:'green', 
             },
-            placeholderText:{
-              color:'white'
+            placeholderText: {
+              color: cor.branco
             }
           }}
-          onDateChange={(date) => {this.setState({date: date})}}
         />
       </View>
     )
@@ -61,5 +47,16 @@ const styles = StyleSheet.create ({
     justifyContent:'flex-start', 
     marginBottom: 10, 
     marginTop: 5
+  },
+  dateInput: {
+    alignItems: 'flex-start',
+    alignSelf: 'center',
+    borderTopColor: 'transparent',
+    borderBottomWidth: 1, 
+    borderColor: cor.branco, 
+    justifyContent:'center',   
+    height: 50,  
+    paddingLeft: 40,
+    paddingRight: 20  
   }
 })

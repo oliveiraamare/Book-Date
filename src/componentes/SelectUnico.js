@@ -3,18 +3,20 @@ import { StyleSheet, View } from 'react-native';
 import { Chevron } from 'react-native-shapes';
 import RNPickerSelect from 'react-native-picker-select';
 
+import cor from '../estilos/cores';
+
 //https://www.npmjs.com/package/react-native-picker-select
 
 const genero = [
   {
     label: 'Leitor',
-    value: 'Leitor', 
-    color: '#ff33cc'
+    value: 'leitor', 
+    color: cor.rosa
   },
   {
     label: 'Leitora',
-    value: 'Leitora', 
-    color: '#ff33cc'
+    value: 'leitora', 
+    color: cor.rosa
   }
 ];
 export default class SelectUnico extends Component {
@@ -25,53 +27,43 @@ export default class SelectUnico extends Component {
       escolha: undefined,
     };    
   }
- 
+
   render() {
-    
+
     const placeholder = {
       label: 'Como se identifica?',
       value: null,
       color: 'transparent',       
     };
+    const { value, onValueChange, ...otherProps } = this.props;
 
     return (
       <View style={styles.container}>     
         <RNPickerSelect
           Icon={() => {
-            return <Chevron size={1.5} color="white" />;
+            return <Chevron size={1.5} color="white" />
           }}
           items={genero}
           onValueChange={value => {
             this.setState({
-              escolha: value,
+              escolha: {onValueChange},
             });
+              //alert(value)
           }}
           placeholder={placeholder}
-          placeholderTextColor= 'white'
+          placeholderTextColor={cor.branco}
           style={{
-            inputAndroid: {
-              backgroundColor: 'transparent', 
-              color: 'white', 
-              height: 50,               
-              paddingLeft: 20,
-              paddingRight: 20, 
-            },
-            iconContainer: {
-              alignSelf: 'flex-end',
-              backgroundColor: 'transparent', 
-              height: 20,
-              width: 20,
-              top: 15,
-              right: 10,
-            },
+            inputAndroid: styles.inputAndroid,
+            iconContainer: styles.iconContainer,
           }}
           textInputProps={{ 
             borderBottomWidth: 1,
             borderTopWidth: 1,
-            underlineColorAndroid: '#CCCCCC'
+            underlineColorAndroid: cor.cinza
           }}
           useNativeAndroidPickerStyle={false}
-          value={this.state.escolha}
+          value={value}
+          {...otherProps}
         />        
       </View>
     );
@@ -81,6 +73,21 @@ export default class SelectUnico extends Component {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 5, 
-    marginTop: 5, 
+    marginTop: 5
+  },
+  iconContainer: {
+    alignSelf: 'flex-end',
+    backgroundColor: 'transparent', 
+    height: 20,
+    width: 20,
+    top: 15,
+    right: 10
+  },
+  inputAndroid: {
+    backgroundColor: 'transparent', 
+    color: cor.branco, 
+    height: 50,               
+    paddingLeft: 20,
+    paddingRight: 20 
   }
 });

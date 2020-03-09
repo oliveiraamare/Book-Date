@@ -1,88 +1,158 @@
-import React, {Component} from 'react';
+//https://www.youtube.com/watch?v=sUlKjXi-zxk
+//https://stackoverflow.com/questions/53651505/pushing-text-input-data-in-json-format-through-asyncstorage-in-react-native
+//https://itqna.net/questions/8717/how-save-data-asyncstorage
+//https://www.npmjs.com/package/react-native-tag-select-max
+//https://reactnativeexample.com/text-and-textinput-with-mask-for-react-native-applications/
+//https://stackoverflow.com/questions/53090059/automatic-backslash-for-date-text-input-react-native 
+//https://github.com/benhurott/react-native-masked-text-> mask
+import React, { Component } from 'react';
 import { 
-  BackHandler,
+  Alert,
+  AsyncStorage,
   KeyboardAvoidingView,
+  ScrollView,
   Text,  
-  View 
+  View ,
+  Keyboard
 } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { TagSelect } from 'react-native-tag-select-max';
 
-import { 
-  cadastro,
-  updateEmail, 
-  updatePassword
-} from '../../acoes/usuario';
 
-import styles from '../../estilos/cadastro';
-import cor from '../../estilos/cores';
-import compartilhado from '../../estilos/compartilhado';
+import { AppBarHeader } from '../../componentes/header';
+import { BotaoTouchableOpacity }from '../../componentes/botao';
+import { FraseTop } from '../../componentes/frase';
 
-import { AppBarHeader } from '../../componentes/tabBar/AppBarHeader';
-import Header from '../../componentes/header/header';
-import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import Calendario from '../../componentes/DatePicker';
 import TextoInput from '../../componentes/textInput/TextInput';
+
+import cadastro from '../../estilos/cadastro';
+import compartilhado from '../../estilos/compartilhado';
 
 // TODO ajeitar KeyboardAvoidingView
 // cadastro no banco
+//BackHandler
 
 class Cadastro extends Component {
 
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
-  }
-  componentWillUnmount(){
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
-  }
-  onBackPress = () => {
-    this.props.navigation.navigate('Home');
-    // Return true to enable back button over ride.
-    return true;
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      senha: '',
+      nome: '',
+      data: '',
+      cidade: '',
+      genero: [
+        'Leitor',
+        'Leitora'
+      ]
+    };
   }
 
-  handleLogin = () => {
-    this.props.cadastro()
-    this.props.navigation.navigate('Sobre')
+  handleCadastro = () => {
+    Keyboard.dismiss,
+    this.salvarCadastro()
+    this.props.navigation.navigate('Preferencias')
+  }
+
+  salvarCadastro = () => {
+    const { email, senha, nome, cidade} = this.state;
+    const genero = this.tag.itemsSelected;    
+    const dtNasc = this.state.data;
+    let cadastro = {
+      email: email,
+      senha: senha,
+      nome: nome,
+      dtNasc: dtNasc,
+      cidade: cidade,
+      genero: genero 
+    }
+    AsyncStorage.setItem('cadastro', JSON.stringify(cadastro)).then(
+      ()=>{
+        alert('Itens salvos: ' + email + ' ' + senha + ' ' + nome + ' '  + ' ' + dtNasc + ' ' + cidade + ' ' + genero);//colocar console.log depois
+      }).catch( ()=>{
+       alert('Itens não salvos')
+      }
+    );
   }
 
   render() {
     return (
       <View style={compartilhado.container}>
-        <View style={compartilhado.statusBar} />
         <AppBarHeader 
-          headerStyle={{
-            backgroundColor:cor.preto, 
-            borderBottomColor:cor.branco,
-            borderBottomWidth:0.18
-          }} 
           onPress={() => this.props.navigation.navigate('Login')} 
           title={"Cadastro"} 
-          style={{color:cor.branco, fontSize:18}} 
         />              
-        <Header subtitleStyle={styles.header} title={frase} subtitle={autor} />  
-        <Text style={styles.texto}>
-          Para começarmos, digite um e-mail e senha de preferência.
-        </Text>
-        <KeyboardAvoidingView style={{justifyContent: "flex-end"}} behavior = 'padding' enabled>
-          <TextoInput
-            inputStyle={styles.textInput}
-            value={this.props.user.email}
-            onChangeText={email => this.props.updateEmail(email)}
-            placeHolder='Email'
-          />
-          <TextoInput
-            inputStyle={styles.textInput}
-            value={this.props.user.password}
-            onChangeText={password => this.props.updatePassword(password)}
-            placeHolder='Senha'
-            secureTextEntry={true}
-          />     
-        </KeyboardAvoidingView>
-        <BotaoTouchableOpacity 
-          buttonStyle={styles.botao}
-          onPress={this.handleLogin}
-          text="Continuar" 
-        />
+        <ScrollView>
+          <KeyboardAvoidingView 
+            style={{justifyContent: "flex-end", flex: 1 }} 
+            behavior='padding' 
+            enabled 
+          >
+            <FraseTop 
+              subtitleStyle={cadastro.header} title={frase} subtitle={autor} 
+            />  
+            <Text style={cadastro.texto}>
+              Para começarmos, digite um e-mail e senha
+            </Text>
+            <TextoInput
+              inputStyle={cadastro.textInput}
+              placeHolder='E-mail'
+              value={this.state.email}
+              onChangeText={email => this.setState({ email })}
+            />
+            <TextoInput
+              inputStyle={cadastro.textInput}
+              placeHolder='Senha'
+              secureTextEntry={true}
+              value={this.state.senha}
+              onChangeText={senha => this.setState({ senha })}
+            />     
+            <Text style={cadastro.texto}>
+              Fale um pouco sobre você
+            </Text>
+            <TextoInput
+              inputStyle={cadastro.textInput}
+              placeHolder='Como se chama?'   
+              value={this.state.nome}
+              onChangeText={nome => this.setState({ nome })}
+            />
+            <Calendario
+              date={ this.state.data}
+              onDateChange={data => this.setState({ data })}
+            />     
+            <TextoInput
+              inputStyle={cadastro.textInput}
+              placeHolder='Qual é a sua cidade natal?'
+              value={this.state.cidade}
+              onChangeText={cidade => this.setState({ cidade })}
+            />               
+            <Text style={cadastro.texto}>
+              Como se identifica?
+            </Text>
+            <TagSelect
+              data={this.state.genero}
+              max={1}
+              ref={(tag) => {
+                this.tag = tag;
+              }}
+              onMaxError={() => {
+                Alert.alert('Ops', 'Max reached' + JSON.stringify(this.tag.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
+              }}
+              itemStyle={cadastro.tagItem}
+              itemLabelStyle={cadastro.tagLabel}
+              itemStyleSelected={cadastro.tagItemSelecionado}
+              itemLabelStyleSelected={cadastro.tagLabelSelecionado}
+            />
+            <View style={{marginTop: 100}}>
+              <BotaoTouchableOpacity 
+                buttonStyle={cadastro.botao}
+                text="Continuar" 
+                onPress={() => this.handleCadastro()}
+              />
+            </View>
+          </KeyboardAvoidingView> 
+        </ScrollView>
       </View>
     )
   }
@@ -91,14 +161,4 @@ class Cadastro extends Component {
 const frase='Seja bem vindo a minha vida, está meio desarrumada, mas se você quiser ficar mais um pouco arrumamos juntos (..) é você quem eu tanto esperei!';
 const autor='Vilma Galvão';
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ updateEmail, updatePassword, cadastro }, dispatch)
-}
-
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cadastro)
+export default Cadastro;

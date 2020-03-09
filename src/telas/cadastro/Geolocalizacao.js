@@ -6,13 +6,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 
-import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import { BotaoTouchableOpacity  } from '../../componentes/botao';
 import { AppBarHeader } from '../../componentes/tabBar/AppBarHeader';
-import Header from '../../componentes/header/header';
+import { FraseTop } from '../../componentes/frase';
 
 import compartilhado from '../../estilos/compartilhado';
 import geolocalizacao from '../../estilos/geolocalizacao';
 import cor from '../../estilos/cores';
+
 
 class Geolocalizacao extends Component {
   state= {
@@ -32,7 +33,7 @@ class Geolocalizacao extends Component {
       });
     }
     if (status == 'granted') {
-      this.props.navigation.navigate('Regras');
+      this.props.navigation.navigate('Regras', {geocode});
     }
 
     let location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.BestForNavigation});
@@ -61,7 +62,7 @@ class Geolocalizacao extends Component {
           title={"Queremos te Encontrar"} 
           style={{color:cor.branco, fontSize:18}} 
         />
-        <Header 
+        <FraseTop 
           subtitleStyle={{alignSelf:'flex-end', color: cor.rosa}} 
           title={frase} 
           subtitle={autor} 

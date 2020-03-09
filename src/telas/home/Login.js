@@ -15,10 +15,10 @@ import compartilhado from '../../estilos/compartilhado';
 
 
 //importando componentes
-import Header from '../../componentes/header/header';
+import { FraseTop } from '../../componentes/frase';
 import TextoInputEmail from '../../componentes/textInput/textoInputEmail';
 import TextoInputSenha from '../../componentes/textInput/textoInputSenha';
-import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import { BotaoTouchableOpacity } from '../../componentes/botao';
 import BotaoCadastro from '../../componentes/botoes/BotaoCadastro';
 
 // importando ações firebase
@@ -65,7 +65,7 @@ class Login extends Component {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <Header title={frase} subtitle={autor} />              
+        <FraseTop title={frase} subtitle={autor} />              
         <TextoInputEmail 
           inputStyle={styles.inputEmail}        
           value={this.props.user.email}

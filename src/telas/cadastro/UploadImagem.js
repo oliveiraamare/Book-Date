@@ -17,9 +17,10 @@ import * as ImagePicker from 'expo-image-picker';
 import { Avatar } from 'react-native-paper';
 
 import BotaoTransparente from '../../componentes/botoes/BotaoTransparente';
-import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import { BotaoTouchableOpacity  }from '../../componentes/botao';
+
 import { AppBarHeader } from '../../componentes/tabBar/AppBarHeader';
-import Header from '../../componentes/header/header';
+import { FraseTop } from '../../componentes/frase';
 
 import compartilhado from '../../estilos/compartilhado';
 import uploadImagem from '../../estilos/uploadImagem';
@@ -33,6 +34,10 @@ class UploadImagem extends Component {
 
   render() {
     let { image } = this.state;
+    var sobre = this.props.navigation.state.params.sobre;
+    var cadastro = this.props.navigation.state.params.cadastro;
+    var preferencias = this.props.navigation.state.params.preferencias;
+
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
@@ -46,7 +51,7 @@ class UploadImagem extends Component {
           title={"Adicione sua foto"} 
           style={{color:cor.branco, fontSize:18}} 
         />
-        <Header 
+        <FraseTop 
           subtitleStyle={{alignSelf:'flex-end', color: cor.rosa}} 
           title={frase} 
           subtitle={autor} 
@@ -69,7 +74,13 @@ class UploadImagem extends Component {
         </View>
         <BotaoTouchableOpacity 
           buttonStyle={uploadImagem.botao}
-          onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
+          onPress={() =>  this.props.navigation.navigate('PermissaoGeo', 
+            {
+              imagem: {image},
+              preferencias,
+              sobre,
+              cadastro
+            })}
           text="Continuar" 
         />
         {this._renderizarImagem()}

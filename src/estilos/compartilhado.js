@@ -8,9 +8,6 @@ const compartilhado = StyleSheet.create({
     backgroundColor: cor.preto,
     flex: 1
   },
-  corTexto: {
-    color: 'white'
-  },
   statusBar: {
     backgroundColor: cor.rosa,
     height: Constants.statusBarHeight

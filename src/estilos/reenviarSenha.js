@@ -12,7 +12,7 @@ const reenviarSenha = StyleSheet.create({
     position: 'absolute'
   },
   texto: {
-    color: compartilhado.corTexto.color, 
+    color: 'white', 
     marginBottom: 30,
     marginLeft: 20, 
     marginRight: 20, 

@@ -10,7 +10,6 @@ import Preferencias from '../telas/cadastro/Preferencias';
 import ReenviarSenha from '../telas/home/ReenviarSenha';
 import Regras from '../telas/cadastro/Regras';
 import ResetarSenha from '../telas/home/ResetarSenha';
-import Sobre from '../telas/cadastro/Sobre';
 import TermoPrivacidade from '../telas/termos/TermoPrivacidade';
 import TermoUso from '../telas/termos/TermoUso';
 import UploadImagem from '../telas/cadastro/UploadImagem';
@@ -28,14 +27,13 @@ const NavegacaoSwitch = createSwitchNavigator(
         Regras: { screen: Regras },
         ReenviarSenha: { screen: ReenviarSenha },
         ResetarSenha: { screen: ResetarSenha },
-        Sobre: { screen: Sobre },
         TermoPrivacidade: { screen: TermoPrivacidade },
         TermoUso : { screen: TermoUso },
         UploadImagem: { screen: UploadImagem },
 
     },
     {
-        initialRouteName: 'NavegacaoInterna',
+        initialRouteName: 'Preferencias',
         headerMode: 'none'
     }
 )

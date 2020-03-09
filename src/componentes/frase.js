@@ -2,32 +2,35 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
-  View,
+  View
 } from 'react-native';
 
-const Frase = ({ title, subtitle }) => (
-  <View style={styles.container} >
-    <Text style={[ {flexBasis: 90}, styles.text]}>{title}</Text>
-    <Text style={[ {flexBasis: 10}, styles.text]}>{subtitle}</Text>
-  </View>
-);
+import cor from '../estilos/cores';
+
+export const FraseTop = ({ topbarStyle, titleStyle, subtitleStyle, title, subtitle }) => {
+  return (
+    <View>
+      <View style={[styles.topbar, topbarStyle]}>
+        <Text style={[styles.titulo, titleStyle]}>{title}</Text>
+        <Text style={[styles.subtitulo, subtitleStyle]}>{subtitle}</Text>
+      </View>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
-  text: {
-    color: 'white', 
-    flex: 1
-  }, 
-  container: {
-    alignItems: 'center',
-    width: '100%',
-    height: 80,
-    flexDirection: 'row', // row
-    backgroundColor: 'skyblue',
-   
-    
-    marginTop: 20,
-    marginBottom: 5,
+  titulo:{
+    color: cor.branco,
+    textAlign: "justify"
   },
+  topbar: {
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    height: 130,    
+    justifyContent: 'center',
+    padding: 10
+  },  
+  subtitulo: {
+    color: cor.rosa
+  }
 });
-
-export default Frase;

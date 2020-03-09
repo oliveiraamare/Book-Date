@@ -2,33 +2,23 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { CheckBox } from 'react-native-elements'
 
-import compartilhado from '../estilos/compartilhado';
-
-
-const WHITE = '#ffffff';
-const PINK = '#ff33cc';
-
+import cor from '../estilos/cores';
 class Checkbox extends Component {
-  state = {
-    checked: false
-  };
-
   render() {
-    const { checked } = this.state;
-    const { title, ...otherProps } = this.props;
+    const { checked, title, onPress, ...otherProps } = this.props;
     return (
       <View style={styles.container}>
         <CheckBox
+          checked={checked}
+          onPress={() => onPress()}
           title={title}
           checkedIcon='user-circle' 
           uncheckedIcon='circle-o'
-          uncheckedColor='#ff33cc'
-          checked={checked}
-          checkedColor='#ff33cc'
+          uncheckedColor={cor.rosa}
+          checkedColor={cor.rosa}
           size={20}
-          onPress={() => this.setState({ checked: !checked })}
-          containerStyle={{ backgroundColor: 'black', borderColor: 'transparent' }}
-          textStyle={{fontSize: 14, paddingLeft: 10, color:'white' }}
+          containerStyle={{ backgroundColor: cor.preto, borderColor: 'transparent' }}
+          textStyle={{fontSize: 14, paddingLeft: 10, color:cor.branco }}
           {...otherProps}
         />          
       </View>
@@ -39,7 +29,7 @@ class Checkbox extends Component {
 const styles = StyleSheet.create({
   container: {   
     borderWidth: 20,
-    color: compartilhado.corTexto.color,
+    color: cor.branco,
     flex: 1,   
     height: 40, 
     marginBottom: 10,

@@ -1,5 +1,5 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
+import  * as firebase from 'firebase';
+import '@firebase/firestore';
 import {
   API_KEY,
   AUTH_DOMAIN,
@@ -33,4 +33,4 @@ export const passwordReset = {
     return firebase.auth().sendPasswordResetEmail(email)
 }}
 
-export default Firebase
+export default Firebase;

@@ -5,9 +5,9 @@ import {
   View    
 } from 'react-native';
 
-import Header from '../../componentes/header/header';
+import { FraseTop } from '../../componentes/frase';
 import TextoInputEmail from '../../componentes/textInput/textoInputEmail';
-import BotaoTouchableOpacity from '../../componentes/botoes/botaoTouchableOpacity';
+import { BotaoTouchableOpacity  } from '../../componentes/botao';
 import BotaoTransparente from '../../componentes/botoes/BotaoTransparente';
 
 import compartilhado from '../../estilos/compartilhado';
@@ -22,7 +22,7 @@ class ReenviarSenha extends Component {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <Header subtitleStyle={{color:'#ff33cc'}} title={frase} subtitle={autor}/>
+        <FraseTop subtitleStyle={{color:'#ff33cc'}} title={frase} subtitle={autor}/>
         <Text style={reenviarSenha.texto}>
           Escreva seu e-mail que iremos enviar-te um link para que resetes a sua senha
         </Text>              

@@ -38,7 +38,7 @@ const conta = StyleSheet.create({
   textInput: {
     borderBottomWidth: 1,
     borderColor: 'transparent',
-    color: compartilhado.corTexto.color,
+    color: 'white',
     height: 50,
     marginBottom: 5, 
     marginTop: 20, 

@@ -10,7 +10,7 @@ import sobre from '../../estilos/sobre';
 import compartilhado from '../../estilos/compartilhado';
 
 import HeaderBackButton from '../../../componentes/header/headerBackButton';
-import Header from '../../../componentes/header/header';
+import FraseTop from '../../../componentes/header/header';
 import BotaoTouchableOpacity from '../../../componentes/botoes/botaoTouchableOpacity';
 
 import TextoInput from '../../../componentes/textInput/TextInput';
@@ -50,7 +50,7 @@ class Sobre extends Component {
           text='' 
           onPress={() => this.props.navigation.navigate('Cadastro')}
         />        
-        <Header subtitleStyle={{alignSelf: 'flex-end'}} title={frase} subtitle={autor} />  
+        <FraseTop subtitleStyle={{alignSelf: 'flex-end'}} title={frase} subtitle={autor} />  
         <Text style={{color:'#ff33cc',  
     fontSize: 15 ,  
     marginBottom: 10,
