@@ -31,13 +31,13 @@ class UploadImagem extends Component {
     super(props);
     this.state = {
       image: null,
-      uploading: false,
+      uploading: false
     };
   }
 
   handleImagem = () => {
-    this.salvarCadastro()
-    this.props.navigation.navigate('PermissaoGeo')
+    this.salvarCadastro();
+    this.props.navigation.navigate('PermissaoGeo');
   }
 
   salvarCadastro = () => {
@@ -49,7 +49,7 @@ class UploadImagem extends Component {
       ()=>{
         alert('Item salvo: ' + image);//colocar console.log depois
       }).catch( ()=>{
-       alert('Item não salvo')
+       alert('Item não salvo');
       }
     );
   }

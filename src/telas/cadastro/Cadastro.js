@@ -12,7 +12,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Text,  
-  View ,
+  View,
   Keyboard
 } from 'react-native';
 import { TagSelect } from 'react-native-tag-select-max';
@@ -49,9 +49,9 @@ class Cadastro extends Component {
   }
 
   handleCadastro = () => {
-    Keyboard.dismiss,
-    this.salvarCadastro()
-    this.props.navigation.navigate('Preferencias')
+    Keyboard.dismiss;
+    this.salvarCadastro();
+    this.props.navigation.navigate('Preferencias');
   }
 
   salvarCadastro = () => {

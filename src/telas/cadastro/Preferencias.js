@@ -72,7 +72,7 @@ class Preferencias extends Component {
       ()=>{
         alert('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario);//colocar console.log depois
       }).catch( ()=>{
-       alert('Itens não salvos')
+       alert('Itens não salvos');
       }
     );
   }

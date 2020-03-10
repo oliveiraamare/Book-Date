@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import cor from './cores';
 
-const geolocalizacao = StyleSheet.create({
+const geo = StyleSheet.create({
   botao: {
     alignSelf: 'center',
     bottom: 0, 
@@ -9,11 +9,9 @@ const geolocalizacao = StyleSheet.create({
     marginTop: 30,
     position: 'absolute'
   },
-  texto: {
-    color:cor.branco,
-    fontWeight:"bold",
-    
-    margin:5
+  header: {
+    alignSelf: 'flex-end', 
+    color: cor.rosa
   },
   permissaoNegada: {
     color: cor.vermelho,
@@ -21,6 +19,11 @@ const geolocalizacao = StyleSheet.create({
     margin: 20,
     textAlign: "center",
     bottom: 100
+  },
+  texto: {
+    color:cor.branco,
+    fontWeight:"bold",
+    margin:5
   },
   titulo: {
     color: cor.rosaClaro, 
@@ -38,4 +41,4 @@ const geolocalizacao = StyleSheet.create({
   }
 })
 
-export default geolocalizacao;
+export default geo;
