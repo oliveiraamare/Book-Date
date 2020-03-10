@@ -11,6 +11,9 @@ const reenviarSenha = StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute'
   },
+  header: {
+    alignSelf: 'flex-end'
+  },
   texto: {
     color: 'white', 
     marginBottom: 30,

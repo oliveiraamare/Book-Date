@@ -6,13 +6,12 @@ import {
 } from 'react-native';
 
 import { FraseTop } from '../../componentes/frase';
-import TextoInputEmail from '../../componentes/textInput/textoInputEmail';
+import TextoInput from '../../componentes/textInput/TextInput';
 import { BotaoTouchableOpacity  } from '../../componentes/botao';
 import BotaoTransparente from '../../componentes/botoes/BotaoTransparente';
 
 import compartilhado from '../../estilos/compartilhado';
 import reenviarSenha from '../../estilos/reenviarSenha';
-
 class ReenviarSenha extends Component {
   state = {
       email: ''
@@ -22,16 +21,17 @@ class ReenviarSenha extends Component {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <FraseTop subtitleStyle={{color:'#ff33cc'}} title={frase} subtitle={autor}/>
+        <FraseTop subtitleStyle={reenviarSenha.header} title={frase} subtitle={autor}/>
         <Text style={reenviarSenha.texto}>
           Escreva seu e-mail que iremos enviar-te um link para que resetes a sua senha
         </Text>              
         <KeyboardAvoidingView behavior="padding" enabled>   
-          <TextoInputEmail 
+          <TextoInput
             inputStyle={reenviarSenha.textoInput}        
+            placeHolder='E-mail'
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
-          />       
+          />     
         </KeyboardAvoidingView>
         <BotaoTouchableOpacity 
           buttonStyle={reenviarSenha.botaoEnviar}

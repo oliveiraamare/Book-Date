@@ -13,14 +13,14 @@ const home = StyleSheet.create({
   },
   botaoTransparente: {
     flexDirection: 'row', 
-    justifyContent: 'center',  
-    width: '100%',
+    justifyContent: 'space-around',
+    margin: 30
   },
   botoes: {
     alignItems: 'center',
     flex:1, 
     height: 40,
-    justifyContent: 'center',  
+    justifyContent: 'center', 
     width: '100%', 
   },
   imagem: {

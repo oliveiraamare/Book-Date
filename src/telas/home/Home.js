@@ -31,11 +31,11 @@ class Home extends Component {
         <View style={home.botaoTransparente}>
           <BotaoTransparente 
               onPress={() => this.props.navigation.navigate('TermoUso')}
-              texto="Termos de Uso ">
+              texto="Termos de Uso">
             </BotaoTransparente>
             <BotaoTransparente 
               onPress={() => this.props.navigation.navigate('TermoPrivacidade')}
-              texto="  Política de Privacidade">
+              texto="Política de Privacidade">
             </BotaoTransparente>
         </View>
       </View>

@@ -58,11 +58,13 @@ class TermoUso extends Component {
               Estamos felizes por ver você aqui. Nosso objetivo é satisfazer.     
             </Text>
           </View>
-          <BotaoTouchableOpacity 
-            buttonStyle={regras.botao}
-            onPress={() =>  this.props.navigation.navigate('NavegacaoInterna')}
-            text="Concordar e Continuar" 
-          />
+          <View style={{marginTop: 100}}>
+            <BotaoTouchableOpacity 
+              buttonStyle={regras.botao}
+              onPress={() =>  this.props.navigation.navigate('NavegacaoInterna')}
+              text="Concordar e Continuar" 
+            />
+          </View>
         </ScrollView>
       </View>
     );

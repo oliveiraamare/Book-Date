@@ -16,8 +16,7 @@ import compartilhado from '../../estilos/compartilhado';
 
 //importando componentes
 import { FraseTop } from '../../componentes/frase';
-import TextoInputEmail from '../../componentes/textInput/textoInputEmail';
-import TextoInputSenha from '../../componentes/textInput/textoInputSenha';
+import TextoInput from '../../componentes/textInput/TextInput';
 import { BotaoTouchableOpacity } from '../../componentes/botao';
 import BotaoCadastro from '../../componentes/botoes/BotaoCadastro';
 
@@ -65,27 +64,30 @@ class Login extends Component {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <FraseTop title={frase} subtitle={autor} />              
-        <TextoInputEmail 
-          inputStyle={styles.inputEmail}        
+        <FraseTop subtitleStyle={styles.header} title={frase} subtitle={autor} />              
+        <TextoInput
+          inputStyle={styles.inputEmail} 
+          placeHolder='E-mail'
           value={this.props.user.email}
           onChangeText={email => this.props.updateEmail(email)}
-        />            
-        <TextoInputSenha
+        />           
+        <TextoInput
           inputStyle={styles.inputSenha}        
+          placeHolder='Senha'
           value={this.props.user.password}
           onChangeText={password => this.props.updatePassword(password)}
-        />      
+        />   
+        <TouchableOpacity 
+          style={styles.botaoEsqueceuLogin}
+          onPress={() => this.props.navigation.navigate('ReenviarSenha')}>
+            <Text style={{color: '#ff33cc'}}>Esqueceu seu login?</Text>
+        </TouchableOpacity>   
         <BotaoTouchableOpacity 
           buttonStyle={styles.botaoLogin}
           onPress={() => this.props.login()}
           text="Login" 
         />      
-        <TouchableOpacity 
-          style={styles.botaoEsqueceuLogin}
-          onPress={() => this.props.navigation.navigate('ReenviarSenha')}>
-            <Text style={{color: '#ff33cc'}}>Esqueceu seu login?</Text>
-        </TouchableOpacity>        
+             
         <BotaoCadastro 
           text1="Ainda não possui uma conta? "
           onPress={() => this.props.navigation.navigate('Cadastro')}

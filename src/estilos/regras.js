@@ -13,21 +13,21 @@ const regras = StyleSheet.create({
     color: 'white',
     fontSize: 13,
     fontWeight: 'bold',
-    //marginTop: 5,  
+    marginTop: 5,  
     marginLeft: 10,
     marginRight: 10,
     textAlign:'justify'
   },
   texto: {
     marginBottom: 20,
-    marginTop: 150,
+    marginTop: 70,
    // position:'absolute',
     top: 0
   },
   titleStyle: {
     fontSize: 21,
     marginBottom: 5,
-    marginTop: 5,  
+    marginTop: 10,  
     position:'absolute',
     top: 5
   },
@@ -44,8 +44,8 @@ const regras = StyleSheet.create({
     alignSelf: 'center', 
     color: '#ff33cc',
     fontSize: 14, 
-    marginBottom: 5,
-    marginTop: 5,   
+    //marginBottom: 5,
+    marginTop: 10,   
     position:'absolute',
     top: 33
   }

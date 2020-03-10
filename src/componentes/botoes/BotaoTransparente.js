@@ -1,6 +1,12 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  View 
+} from 'react-native';
+
+import cor from '../../estilos/cores'
 
 class BotaoTransparente extends Component {
 	render() {
@@ -17,15 +23,9 @@ class BotaoTransparente extends Component {
 	}
 }
 
-BotaoTransparente.propTypes = {
-  //text1: PropTypes.string.isRequired,
-  //text2: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired
-};
-
 const styles = StyleSheet.create({
   textStyle: {
-    color: '#ff33cc', 
+    color: cor.rosaClaro, 
     fontSize: 15, 
     textAlign: 'center'
   },  
