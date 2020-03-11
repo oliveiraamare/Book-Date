@@ -166,7 +166,7 @@ class UploadImagem extends Component {
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
     let formData = new FormData();
-    formData.append('photo', { uri: localUri, name: filename, type });
+    formData.append('photo', { uri: apiUrl, name: filename, type });
 
     fetch(apiUrl, {  
       headers: {

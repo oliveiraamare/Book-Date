@@ -9,7 +9,6 @@ import PermissaoGeo from '../telas/cadastro/PermissaoGeo';
 import Preferencias from '../telas/cadastro/Preferencias';
 import ReenviarSenha from '../telas/home/ReenviarSenha';
 import Regras from '../telas/cadastro/Regras';
-import ResetarSenha from '../telas/home/ResetarSenha';
 import TermoPrivacidade from '../telas/termos/TermoPrivacidade';
 import TermoUso from '../telas/termos/TermoUso';
 import UploadImagem from '../telas/cadastro/UploadImagem';
@@ -26,14 +25,13 @@ const NavegacaoSwitch = createSwitchNavigator(
         Preferencias: { screen: Preferencias },
         Regras: { screen: Regras },
         ReenviarSenha: { screen: ReenviarSenha },
-        ResetarSenha: { screen: ResetarSenha },
         TermoPrivacidade: { screen: TermoPrivacidade },
         TermoUso : { screen: TermoUso },
         UploadImagem: { screen: UploadImagem },
 
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Cadastro',
         headerMode: 'none'
     }
 )

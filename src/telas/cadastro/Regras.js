@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+import React , { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import compartilhado from '../../estilos/compartilhado';
@@ -7,7 +7,16 @@ import regras from '../../estilos/regras';
 import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 import { BotaoTouchableOpacity  }from '../../componentes/botao';
-class TermoUso extends Component {
+
+import {recuperarDados} from './RecuperarDados';
+
+class Regras extends Component {
+
+  handleCadastroBanco = () => {
+    recuperarDados();
+    this.props.navigation.navigate('NavegacaoInterna')
+  }
+        
   render(){
     return (
       <View style={compartilhado.container}>
@@ -61,7 +70,7 @@ class TermoUso extends Component {
           <View style={{marginTop: 100}}>
             <BotaoTouchableOpacity 
               buttonStyle={regras.botao}
-              onPress={() =>  this.props.navigation.navigate('NavegacaoInterna')}
+              onPress={() => this.handleCadastroBanco()}
               text="Concordar e Continuar" 
             />
           </View>
@@ -74,4 +83,4 @@ class TermoUso extends Component {
 const frase='Regras da Comunidade';
 const autor='baseadas em 50 Tons de Cinza';
 
-export default TermoUso;
+export default Regras;

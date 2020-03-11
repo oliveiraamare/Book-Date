@@ -49,7 +49,6 @@ class Geolocalizacao extends Component {
     const { location, geocode } = this.state
     const pais = geocode  ? `${geocode[0].isoCountryCode}` : '';
     const estado = geocode ? `${geocode[0].region}` : '';
-    const cidade = geocode ? geocode[0].street : '';
     const rua = geocode ? geocode[0].street : '';
     const latitude = location ? `${location.latitude}` : '';
     const longitude = location ? `${location.longitude}` : '';
@@ -57,14 +56,13 @@ class Geolocalizacao extends Component {
     let geolocalizacao = {
       pais: pais,
       estado: estado,
-      cidade: cidade,
       rua: rua,
       latitude: latitude,
       longitude: longitude
     }
     AsyncStorage.setItem('geolocalizacao', JSON.stringify(geolocalizacao)).then(
       ()=>{
-        alert('Itens salvos: ' + pais + ' ' + estado + ' ' + cidade + ' ' + rua + ' ' + latitude + ' ' + longitude);//colocar console.log depois
+        alert('Itens salvos: ' + pais + ' ' + estado + ' ' + rua + ' ' + latitude + ' ' + longitude);//colocar console.log depois
       }).catch( ()=>{
        alert('Itens não salvos')
       }
