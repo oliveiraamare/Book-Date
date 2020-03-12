@@ -15,10 +15,10 @@ const permissaoGeo = StyleSheet.create({
   },
   header: {
     alignSelf:'flex-end', 
-    color: cor.rosa
+    color: cor.amarelo
   },
   texto: {
-    color:cor.rosaClaro, 
+    color:cor.amarelo, 
     textAlign:'center'
   }
 })

@@ -17,8 +17,8 @@ export const BotaoTouchableOpacity = ({ buttonStyle, text, onPress }) => {
 const styles = StyleSheet.create({
   botaoTouchableOpacity: {
     alignItems: 'center',
-    backgroundColor: cor.rosa,
-    borderColor: cor.rosa,
+    backgroundColor: cor.amarelo,
+    borderColor: cor.amarelo,
     borderRadius: 10,
     borderWidth: 1,
     paddingVertical: 5,      

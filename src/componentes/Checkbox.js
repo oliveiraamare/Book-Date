@@ -14,11 +14,11 @@ class Checkbox extends Component {
           title={title}
           checkedIcon='user-circle' 
           uncheckedIcon='circle-o'
-          uncheckedColor={cor.rosa}
-          checkedColor={cor.rosa}
+          uncheckedColor={cor.amarelo}
+          checkedColor={cor.amarelo}
           size={20}
-          containerStyle={{ backgroundColor: cor.preto, borderColor: 'transparent' }}
-          textStyle={{fontSize: 14, paddingLeft: 10, color:cor.branco }}
+          containerStyle={{ backgroundColor: 'transparent', borderColor: 'transparent' }}
+          textStyle={{fontSize: 14, paddingLeft: 10, color: cor.branco }}
           {...otherProps}
         />          
       </View>
@@ -28,6 +28,8 @@ class Checkbox extends Component {
 
 const styles = StyleSheet.create({
   container: {   
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
     borderWidth: 20,
     color: cor.branco,
     flex: 1,   

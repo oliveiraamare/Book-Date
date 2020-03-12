@@ -11,7 +11,7 @@ const geo = StyleSheet.create({
   },
   header: {
     alignSelf: 'flex-end', 
-    color: cor.rosa
+    color: cor.amarelo
   },
   permissaoNegada: {
     color: cor.vermelho,
@@ -26,7 +26,7 @@ const geo = StyleSheet.create({
     margin:5
   },
   titulo: {
-    color: cor.rosaClaro, 
+    color: cor.amarelo, 
     fontSize: 16,
     marginBottom: 20,
     marginTop: 30,

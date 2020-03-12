@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 
-class BotaoCadastro extends Component {
+class BotaoComTexto extends Component {
 	render() {
 		const { text1, text2, onPress} = this.props;
 		return (
@@ -11,18 +11,12 @@ class BotaoCadastro extends Component {
         <TouchableOpacity 
           style={styles.buttonStyle}
 			    onPress={() => onPress()}>
-            <Text style={{color: '#ff33cc', fontSize: 15}}>{text2}</Text>
+            <Text style={{color: '#FFCC00', fontSize: 15}}>{text2}</Text>
 		    </TouchableOpacity>
       </View>		  
 		);
 	}
 }
-
-BotaoCadastro.propTypes = {
-  //text1: PropTypes.string.isRequired,
-  //text2: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired
-};
 
 const styles = StyleSheet.create({
   view: {
@@ -48,4 +42,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default BotaoCadastro;
+export default BotaoComTexto;

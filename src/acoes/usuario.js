@@ -23,18 +23,6 @@ export const updatePassword = senha => {
   }
 }
 
-export const login = () => {
-  return async (dispatch, getState) => {
-    try {
-      const { email, password } = getState().user;
-      const response = await Firebase.auth().signInWithEmailAndPassword(email, password);
-      dispatch(getUser(response.user.uid));
-    } catch (e) {
-      alert(e);
-    }
-  }
-}
-
 export const getUser = uid => {
   return async (dispatch, getState) => {
     try {
@@ -45,6 +33,18 @@ export const getUser = uid => {
       dispatch({ type: LOGIN, payload: user.data() })
     } catch (e) {
       alert(e)
+    }
+  }
+}
+
+export const auth = () => {
+  return async (dispatch, getState) => {
+    try {
+      firebase.auth().onAuthStateChanged(user => {
+        this.props.navigation.navigate(user ? 'Main' : 'SignUp')
+      })
+    } catch (e) {
+      alert(e);
     }
   }
 }
@@ -70,38 +70,20 @@ export const cadastro = () => {
   }
 }
 
-/*export const cadastrar = () => {
+export const passwordReset = {
+  passwordReset: email => { 
+    return firebase.auth().sendPasswordResetEmail(email)
+}}
+
+
+export const login = () => {
   return async (dispatch, getState) => {
     try {
       const { email, password } = getState().user;
-      const response = await Firebase.auth().createUserWithEmailAndPassword(email, password);
-      if (response.user.uid) {
-        const user = {
-          uid: response.user.uid,
-          email: email,
-          //nome: nome,
-        }
-        db.collection('users')
-          .doc(response.user.uid)
-          .set(user)
-        dispatch({ type: CADASTRO, payload: response.user });
-      }
+      const response = await Firebase.auth().signInWithEmailAndPassword(email, password);
+      dispatch(getUser(response.user.uid));
     } catch (e) {
       alert(e);
     }
   }
 }
-/*export function createAccount(data, picture) {
-  const { fname, lname, email, password, image } = data;
-  return dispatch => auth.createUserWithEmailAndPassword(email, password).then((user) => {
-    if (user !== null) {
-      storage.child(`profile/${picture.name}/${new Date().getTime()}`).put(image[0]).then((snapshot) => {
-        database.ref('users').child(user.uid).set({
-          fname,
-          lname,
-          picture: snapshot.metadata.downloadURLs[0]
-        });
-      });
-    }
-  });
-}*/

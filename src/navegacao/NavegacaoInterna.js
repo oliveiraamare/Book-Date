@@ -12,10 +12,12 @@ import Notificacao from '../telas/menuInterno/Notificacao';
 import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
 
 import DeletarConta from '../telas/menuInterno/conta/DeletarConta';
-import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
+
+import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
+import Login from '../telas/home/Login'
 
 import cor from '../estilos/cores';
 
@@ -93,11 +95,14 @@ export default function NavegacaoInterna() {
           {() => (
             <ContaStack.Navigator headerMode="none">
               <ContaStack.Screen name="Conta" component={Conta} />
-              <ContaStack.Screen name="Perfil" component={Perfil} />
               <ContaStack.Screen name="SobreNos" component={SobreNos} />           
               <ContaStack.Screen name="TermoPrivacidade" component={TermoPrivacidade} />
               <ContaStack.Screen name="TermoUso" component={TermoUso} />
               <ContaStack.Screen name="DeletarConta" component={DeletarConta} />
+
+              <ContaStack.Screen name="Login" component={Login} />
+              <ContaStack.Screen name="Perfil" component={Perfil} />
+
             </ContaStack.Navigator>
           )}
         </Tab.Screen>     

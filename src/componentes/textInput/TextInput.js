@@ -38,7 +38,7 @@ class TextoInput extends Component {
             placeholderTextColor= {cor.branco}
             selectionColor={cor.branco}
             underlineColorAndroid={
-              isFocused ? cor.rosa : cor.branco
+              isFocused ? cor.amarelo : cor.branco
             }
             multiline={multiline}
             maxLength={maxLength}

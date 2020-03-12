@@ -40,7 +40,7 @@ class FrasesAleatorias extends Component {
         <Text style={{color: cor.branco, textAlign: 'right'}}>
           {q.texto}
         </Text>
-        <Text style={{color: cor.rosa, textAlign: 'right'}}>
+        <Text style={{color: cor.amarelo, textAlign: 'right'}}>
           {q.autor}
         </Text>
       </View>      

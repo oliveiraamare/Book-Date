@@ -11,13 +11,25 @@ import compartilhado from '../../../estilos/compartilhado';
 import conta from '../../../estilos/conta';
 import cor from '../../../estilos/cores';
 
+import Firebase from '../../../../Firebase';
+
 class Conta extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       isSwitchOn: false,
     };
   }
+
+  handleLogout = () => {
+    Firebase
+      .auth()
+      .signOut()
+      .then(() => this.props.navigation.navigate('Login'))
+      .catch(error => alert(error))
+  }
+
   render() {
     return (
       <View style={compartilhado.container}>
@@ -111,7 +123,7 @@ class Conta extends Component {
               rightElement={
                 <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
               }
-              onPress={() => this.props.navigation.navigate('Sair')}   
+              onPress={() => this.handleLogout()} 
             />
           </View>     
           <BotaoTransparente

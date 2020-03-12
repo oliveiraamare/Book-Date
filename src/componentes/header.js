@@ -11,7 +11,7 @@ export const AppBarHeader = ({ headerStyle, onPress, style, title }) => (
     <Appbar style={[ styles.header, headerStyle ]}> 
       <Appbar.Action 
         icon='undo' 
-        color={cor.rosa}  
+        color={cor.amarelo}  
         onPress={() => onPress()} 
       />
       <Appbar.Content
@@ -27,7 +27,7 @@ export const AppBarHeader = ({ headerStyle, onPress, style, title }) => (
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: cor.preto, 
+    backgroundColor: 'transparent', 
     borderBottomColor: cor.branco,
     borderBottomWidth: 0.18
   },

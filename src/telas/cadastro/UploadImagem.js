@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import {
   ActivityIndicator,
   AsyncStorage,
+  ImageBackground,
   Clipboard,
   Text,
   View,
@@ -58,37 +59,42 @@ class UploadImagem extends Component {
     let { image } = this.state;
     return (
       <View style={compartilhado.container}>
-        <AppBarHeader 
-          onPress={() => this.props.navigation.navigate('Preferencias')} 
-          title={"Adicione sua foto"} 
-        /> 
-        <FraseTop 
-          subtitleStyle={uploadImagem.header} 
-          title={frase} 
-          subtitle={autor} 
-        />
-        <Avatar.Image 
-          size={250} 
-          source={{uri:image}} 
-          style={uploadImagem.avatar}
-        />
-        <View style={uploadImagem.botaoTransparente}>
-          <BotaoTransparente           
-            onPress={this._pickImage}
-            texto="Escolher foto da galeria"
+        <ImageBackground
+          source={require('../../imagens/black.jpeg')} 
+          style={compartilhado.imagemBackground}
+        >
+          <AppBarHeader 
+            onPress={() => this.props.navigation.navigate('Preferencias')} 
+            title={"Adicione sua foto"} 
+          /> 
+          <FraseTop 
+            subtitleStyle={uploadImagem.header} 
+            title={frase} 
+            subtitle={autor} 
           />
-            <Text style={{color:cor.branco, marginTop:20}}>ou então</Text>
-          <BotaoTransparente        
-            onPress={this._tirarFoto} 
-            texto="Tirar foto" 
+          <Avatar.Image 
+            size={250} 
+            source={{uri:image}} 
+            style={uploadImagem.avatar}
           />
-        </View>
-        <BotaoTouchableOpacity 
-          buttonStyle={uploadImagem.botao}
-          onPress={() => this.handleImagem()}
-          text="Continuar" 
-        />
-        {this._renderizarUploadingOverlay()}
+          <View style={uploadImagem.botaoTransparente}>
+            <BotaoTransparente           
+              onPress={this._pickImage}
+              texto="Escolher foto da galeria"
+            />
+              <Text style={{color:cor.branco, marginTop:20}}>ou então</Text>
+            <BotaoTransparente        
+              onPress={this._tirarFoto} 
+              texto="Tirar foto" 
+            />
+          </View>
+          <BotaoTouchableOpacity 
+            buttonStyle={uploadImagem.botao}
+            onPress={() => this.handleImagem()}
+            text="Continuar" 
+          />
+          {this._renderizarUploadingOverlay()}
+        </ImageBackground>
       </View>
     );
   }

@@ -1,15 +1,24 @@
 import Constants from 'expo-constants';
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import cor from '../estilos/cores'
 
+const DIMENSION_WIDTH = Dimensions.get('window').width;
+const DIMENSION_HEIGHT = Dimensions.get('window').height;
+
 const compartilhado = StyleSheet.create({
   container: {
-    backgroundColor: cor.preto,
+    backgroundColor: 'transparent',
     flex: 1
   },
+  imagemBackground: {
+    flex:1,
+		height: DIMENSION_HEIGHT + 56,
+		resizeMode: 'cover',
+		width: DIMENSION_WIDTH
+  },
   statusBar: {
-    backgroundColor: cor.rosa,
+    backgroundColor: cor.amarelo,
     height: Constants.statusBarHeight
   },
 })

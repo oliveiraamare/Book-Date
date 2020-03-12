@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import cor from '../estilos/cores';
 
@@ -31,6 +27,6 @@ const styles = StyleSheet.create({
     padding: 10
   },  
   subtitulo: {
-    color: cor.rosa
+    color: cor.amarelo
   }
 });

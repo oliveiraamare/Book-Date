@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import compartilhado from '../estilos/compartilhado';
+import cor from './cores';
 
 const regras = StyleSheet.create({
   botao: {
@@ -10,7 +11,7 @@ const regras = StyleSheet.create({
     position: 'absolute'
   },
   paragrafo: {
-    color: 'white',
+    color: cor.branco,
     fontSize: 13,
     fontWeight: 'bold',
     marginTop: 5,  
@@ -32,7 +33,7 @@ const regras = StyleSheet.create({
     top: 5
   },
   subparagrafo: {
-    color: '#ff33cc',
+    color: cor.amarelo,
     fontSize: 13,
     marginBottom: 10,
     marginLeft: 10,
@@ -42,7 +43,7 @@ const regras = StyleSheet.create({
   },
   subtitleStyle: {
     alignSelf: 'center', 
-    color: '#ff33cc',
+    color: cor.amarelo,
     fontSize: 14, 
     //marginBottom: 5,
     marginTop: 10,   

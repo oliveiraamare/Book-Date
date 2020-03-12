@@ -1,3 +1,7 @@
+//https://stackoverflow.com/questions/37403747/firebase-permission-denied
+//https://github.com/firebase/firebase-js-sdk/issues/97
+
+
 import  * as firebase from 'firebase';
 import '@firebase/firestore';
 import {
@@ -27,10 +31,5 @@ export const db = firebase.firestore();
 console.disableYellowBox = [
   'Setting a timer'
 ];
-
-export const passwordReset = {
-  passwordReset: email => { 
-    return firebase.auth().sendPasswordResetEmail(email)
-}}
 
 export default Firebase;

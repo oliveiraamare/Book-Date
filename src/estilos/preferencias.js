@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   },
   tagItem: {
     alignItems: 'center',
-    backgroundColor: cor.preto,
-    borderColor: cor.rosa,    
+    backgroundColor: 'transparent',
+    borderColor: cor.amarelo,    
     borderRadius: 100, 
     borderWidth: 1,
     justifyContent:'center',
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     width: 90
   },
   tagItemSelecionado: {
-    backgroundColor: cor.rosa,
-    borderColor: cor.rosa    
+    backgroundColor: cor.amarelo,
+    borderColor: cor.amarelo    
   },
   tagLabel: {
     color: cor.branco
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     color: cor.branco
   },
   texto: {
-    color: cor.rosaClaro,  
+    color: cor.amarelo,  
     fontSize: 15 ,  
     marginBottom: 10,
     marginTop: 20,

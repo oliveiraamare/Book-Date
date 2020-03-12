@@ -22,7 +22,7 @@ const cadastro = StyleSheet.create({
     textAlign:'justify'     
   },
   texto: {
-    color: cor.rosaClaro,  
+    color: cor.amarelo,  
     fontSize: 15 ,  
     marginBottom: 10,
     marginTop: 20,
@@ -32,8 +32,8 @@ const cadastro = StyleSheet.create({
   },
   tagItem: {
     alignItems: 'center',
-    backgroundColor: cor.preto,
-    borderColor: cor.rosa,    
+    backgroundColor: 'transparent',
+    borderColor: cor.amarelo,    
     borderRadius: 100, 
     borderWidth: 1,
     justifyContent:'center',
@@ -44,8 +44,8 @@ const cadastro = StyleSheet.create({
     width: 90
   },
   tagItemSelecionado: {
-    backgroundColor: cor.rosa,
-    borderColor: cor.rosa
+    backgroundColor: cor.amarelo,
+    borderColor: cor.amarelo
   },
   tagLabel: {
     color: cor.branco

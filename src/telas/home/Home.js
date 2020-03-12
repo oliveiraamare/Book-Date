@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { ImageBackground, Text, View } from 'react-native';
 
 import BotaoTransparente from '../../componentes/botoes/BotaoTransparente';
 import { BotaoTouchableOpacity  } from '../../componentes/botao';
@@ -13,23 +13,24 @@ class Home extends Component {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <Image 
-          style={home.imagem}
-          source={require('../../imagens/img-icone.png')}
-        />        
-        <View style={home.botoes}>
-          <BotaoTouchableOpacity 
-            buttonStyle={home.botaoLogin}
-            onPress={() => this.props.navigation.navigate('Login')}
-            text="Login" />           
-          <BotaoTouchableOpacity 
-            buttonStyle={home.botaoCadastro}
-            onPress={() => this.props.navigation.navigate('Cadastro')}
-            text="Cadastro" />    
-        </View>
-        <FrasesAleatorias />
-        <View style={home.botaoTransparente}>
-          <BotaoTransparente 
+        <ImageBackground
+          source={require('../../imagens/black.jpeg')} 
+          style={compartilhado.imagemBackground}
+        >        
+          <Text style={home.bookDate}>Book Date</Text>     
+          <View style={home.botoes}>
+            <BotaoTouchableOpacity 
+              buttonStyle={home.botaoLogin}
+              onPress={() => this.props.navigation.navigate('Login')}
+              text="Login" />           
+            <BotaoTouchableOpacity 
+              buttonStyle={home.botaoCadastro}
+              onPress={() => this.props.navigation.navigate('Cadastro')}
+              text="Cadastro" />    
+          </View>
+          <FrasesAleatorias />
+          <View style={home.botaoTransparente}>
+            <BotaoTransparente 
               onPress={() => this.props.navigation.navigate('TermoUso')}
               texto="Termos de Uso">
             </BotaoTransparente>
@@ -37,7 +38,8 @@ class Home extends Component {
               onPress={() => this.props.navigation.navigate('TermoPrivacidade')}
               texto="Política de Privacidade">
             </BotaoTransparente>
-        </View>
+          </View>        
+        </ImageBackground>
       </View>
     ) 
   }

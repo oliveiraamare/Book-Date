@@ -147,18 +147,18 @@ export const recuperarDados = async() => {
 }
 
 export const  handleSignUp = (email, password, usuario) => {
-    Firebase.auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => 
-        writeUserData(usuario)
-      )
-      .catch(error => alert(error))
-  }
+  Firebase.auth()
+  .createUserWithEmailAndPassword(email, password)
+  .then(() => 
+    writeUserData(usuario)
+   )
+  .catch(error => alert(error))
+}
 
 export const idUnico = ()  => {
-    var id = Math.random().toString(36).substring(2) + Date.now().toString(36);
-    return id;
-  }
+  var id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+  return id;
+}
 
 export const writeUserData = (usuario) => {
   Firebase.database().ref('usuarios/' + idUnico()).set(usuario).catch(error => {

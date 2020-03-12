@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Text, View } from 'react-native';
+import { 
+  AsyncStorage, 
+  ImageBackground,
+  Text, 
+  View 
+} from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 
@@ -78,28 +83,33 @@ class Geolocalizacao extends Component {
     const { location, geocode, errorMessage } = this.state
     return (
       <View style={compartilhado.container}>
-        <AppBarHeader 
-          onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
-          title={"Queremos te Encontrar"} 
-        />  
-        <FraseTop 
-          subtitleStyle={geo.header} 
-          title={frase} 
-          subtitle={autor} 
-        />      
-        <View style={geo.viewContainer}>
-          <Text style={geo.titulo}>Você está aqui!</Text>
-          <Text style={geo.texto}>{geocode ? `${geocode[0].isoCountryCode}`:''}</Text>
-          <Text style={geo.texto}>{geocode ? `${geocode[0].region}`:''}</Text>
-          <Text style={geo.texto}>{geocode ? geocode[0].street :""}</Text>
-          <Text style={geo.texto}>{location ? `${location.latitude}, ${location.longitude}` :""}</Text>
-          <Text style={geo.permissaoNegada}>{errorMessage}</Text>
-        </View>
-        <BotaoTouchableOpacity 
-          buttonStyle={geo.botao}
-          onPress={() => this.handleGeo()}
-          text="Continuar" 
-        />
+        <ImageBackground
+          source={require('../../imagens/black.jpeg')} 
+          style={compartilhado.imagemBackground}
+        >
+          <AppBarHeader 
+            onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
+            title={"Queremos te Encontrar"} 
+          />  
+          <FraseTop 
+            subtitleStyle={geo.header} 
+            title={frase} 
+            subtitle={autor} 
+          />      
+          <View style={geo.viewContainer}>
+            <Text style={geo.titulo}>Você está aqui!</Text>
+            <Text style={geo.texto}>{geocode ? `${geocode[0].isoCountryCode}`:''}</Text>
+            <Text style={geo.texto}>{geocode ? `${geocode[0].region}`:''}</Text>
+            <Text style={geo.texto}>{geocode ? geocode[0].street :""}</Text>
+            <Text style={geo.texto}>{location ? `${location.latitude}, ${location.longitude}` :""}</Text>
+            <Text style={geo.permissaoNegada}>{errorMessage}</Text>
+          </View>
+          <BotaoTouchableOpacity 
+            buttonStyle={geo.botao}
+            onPress={() => this.handleGeo()}
+            text="Continuar" 
+          />
+        </ImageBackground>
       </View> 
     );
   }

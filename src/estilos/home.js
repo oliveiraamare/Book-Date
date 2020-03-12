@@ -1,6 +1,15 @@
 import { StyleSheet } from 'react-native';
+import cor from './cores';
 
 const home = StyleSheet.create({
+  bookDate: {
+    alignSelf: 'center',  
+    color: cor.branco,
+    flex: 1,
+    fontSize: 40,
+    position: 'absolute', 
+    top: 80
+  },
   botaoLogin: {
     marginBottom: 5,
     marginTop: 50,
@@ -22,14 +31,6 @@ const home = StyleSheet.create({
     height: 40,
     justifyContent: 'center', 
     width: '100%', 
-  },
-  imagem: {
-    alignSelf: 'center',  
-    flex: 1,
-    height: 150,
-    position: 'absolute', 
-    top: 80,
-    width: 100
   }
 })
 

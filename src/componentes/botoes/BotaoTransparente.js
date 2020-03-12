@@ -25,7 +25,7 @@ class BotaoTransparente extends Component {
 
 const styles = StyleSheet.create({
   textStyle: {
-    color: cor.rosaClaro, 
+    color: cor.amarelo, 
     fontSize: 15, 
     textAlign: 'center'
   },  
