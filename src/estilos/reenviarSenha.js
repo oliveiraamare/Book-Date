@@ -1,5 +1,7 @@
-import { StyleSheet,Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
+
 import compartilhado from './compartilhado';
+import cor from '../estilos/cores';
 
 const reenviarSenha = StyleSheet.create({
   botaoEnviar: {
@@ -15,7 +17,7 @@ const reenviarSenha = StyleSheet.create({
     alignSelf: 'flex-end'
   },
   texto: {
-    color: 'white', 
+    color: cor.branco, 
     marginBottom: 30,
     marginLeft: 20, 
     marginRight: 20, 
@@ -23,6 +25,10 @@ const reenviarSenha = StyleSheet.create({
     textAlign: 'center'
   },
   textoInput: {
+    borderBottomWidth: 1,
+    borderColor: 'transparent',
+    color: cor.branco,
+    height: 50,
     marginBottom: 30,     
     marginTop: 10,    
     paddingLeft: 10,    
