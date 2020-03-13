@@ -40,7 +40,7 @@ export default class FrasesPerfil extends Component {
         <Text style={{color: cor.branco, textAlign: 'center'}}>
           {q.texto}
         </Text>
-        <Text style={{color: cor.rosa, textAlign: 'center'}}>
+        <Text style={{color: cor.amarelo, textAlign: 'center'}}>
           {q.autor}
         </Text>
       </View>      

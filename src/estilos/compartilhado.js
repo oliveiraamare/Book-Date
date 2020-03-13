@@ -8,7 +8,7 @@ const DIMENSION_HEIGHT = Dimensions.get('window').height;
 
 const compartilhado = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
+    backgroundColor: cor.preto,
     flex: 1
   },
   imagemBackground: {

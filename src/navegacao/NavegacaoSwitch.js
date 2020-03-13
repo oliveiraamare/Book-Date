@@ -35,7 +35,7 @@ const NavegacaoSwitch = createSwitchNavigator(
 
     },
     {
-        initialRouteName: 'Loading',
+        initialRouteName: 'NavegacaoInterna',
         headerMode: 'none'
     }
 )

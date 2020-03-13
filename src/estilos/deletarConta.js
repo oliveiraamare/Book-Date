@@ -10,10 +10,9 @@ const deletarConta = StyleSheet.create({
   },
   headerSubtitleStyle: {
     alignSelf: 'flex-end', 
-    color: cor.rosa
   },
   paragrafo: {
-    color: cor.rosaClaro, 
+    color: cor.branco, 
     marginBottom: 10,
     marginLeft: 17,
     marginRight: 15,  
@@ -22,6 +21,7 @@ const deletarConta = StyleSheet.create({
   paragrafoPrincipal: {
     color: cor.branco, 
     marginBottom: 22,
+    marginTop: 30,
     textAlign:'center'
   }
 })

@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import { ScrollView, Switch, Text, View} from 'react-native'
+import { 
+  ImageBackground,
+  
+  ScrollView, Switch, Text, View} from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { Avatar } from 'react-native-paper';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import RNExitApp from 'react-native-exit-app';
 
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
 import FrasesPerfil from '../../../componentes/fraseAleatoria/frasesPerfil'
@@ -21,12 +25,15 @@ class Conta extends Component {
       isSwitchOn: false,
     };
   }
-
+  
   handleLogout = () => {
     Firebase
       .auth()
       .signOut()
-      .then(() => this.props.navigation.navigate('Login'))
+      .then(() => 
+        alert('Usuário fez logout!'),
+        this.props.navigation.navigate('Login')
+      )//verificar modo de saida
       .catch(error => alert(error))
   }
 
@@ -34,10 +41,16 @@ class Conta extends Component {
     return (
       <View style={compartilhado.container}>
       <View style={compartilhado.statusBar} />
+      <ImageBackground
+          source={require('../../../imagens/black.jpeg')} 
+          style={compartilhado.imagemBackground}
+        >
         <ScrollView >
           <View style={conta.viewAvatar}>
             <View style={{marginRight: 15}}>
-              <Avatar.Image size={200} source={require('../../../imagens/fotoPerfil.jpg')} />
+              <Avatar.Image 
+                size={200} source={require('../../../imagens/fotoPerfil.jpg')} 
+              />
             </View>    
             <View style={conta.viewTexto}>
               <Text style={{color: cor.cinza, fontSize: 20}}>
@@ -58,11 +71,11 @@ class Conta extends Component {
                     { this.setState({ isSwitchOn: !this.state.isSwitchOn }); }
                   }
                   trackColor={{true:cor.branco, false: cor.cinza}}
-                  thumbColor={[this.state.isSwitchOn==true?cor.rosa:cor.branco]}    
+                  thumbColor={[this.state.isSwitchOn==true?cor.amarelo:cor.branco]}    
                 />
               }
               leftIcon={
-                <MaterialCommunityIcons name="bell-ring" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="bell-ring" color={cor.amarelo} size={20} />
               }               
             />
             <ListItem
@@ -70,10 +83,10 @@ class Conta extends Component {
               title="Meu Perfil"
               titleStyle={{color:cor.branco}}
               leftIcon={
-                <MaterialCommunityIcons name="account-edit" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="account-edit" color={cor.amarelo} size={20} />
               }
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
               }
               onPress={() => this.props.navigation.navigate('Perfil') }
             />
@@ -82,10 +95,10 @@ class Conta extends Component {
               title="Termos de Privacidade"
               titleStyle={{color:cor.branco}}
               leftIcon={
-                <MaterialCommunityIcons name="sort-variant-lock" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="sort-variant-lock" color={cor.amarelo} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
               }
               onPress={() => this.props.navigation.navigate('TermoPrivacidade')}                  
             />
@@ -94,10 +107,10 @@ class Conta extends Component {
               title="Termos de Uso"
               titleStyle={{color:cor.branco}}
               leftIcon={
-                <MaterialCommunityIcons name="locker-multiple" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="locker-multiple" color={cor.amarelo} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
               }
               onPress={() => this.props.navigation.navigate('TermoUso')}                  
             />
@@ -106,10 +119,10 @@ class Conta extends Component {
               title="Sobre Nós"
               titleStyle={{color:cor.branco}}
               leftIcon={
-                <MaterialCommunityIcons name="face-agent" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="face-agent" color={cor.amarelo} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
               }
               onPress={() => this.props.navigation.navigate('SobreNos')}   
             />
@@ -118,20 +131,22 @@ class Conta extends Component {
               title="Sair"
               titleStyle={{color:cor.branco}}
               leftIcon={
-                <MaterialCommunityIcons name="account-arrow-right-outline" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="account-arrow-right-outline" color={cor.amarelo} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.rosaClaro} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
               }
               onPress={() => this.handleLogout()} 
             />
           </View>     
           <BotaoTransparente
+            buttonStyle={{marginTop:50}}
             onPress={() => this.props.navigation.navigate('DeletarConta')}
             texto="Deletar Conta"
-            buttonStyle={{marginTop:50}}
+            
           />
         </ScrollView>
+        </ImageBackground>
       </View>
     )
   }

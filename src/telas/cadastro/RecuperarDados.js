@@ -161,7 +161,9 @@ export const idUnico = ()  => {
 }
 
 export const writeUserData = (usuario) => {
-  Firebase.database().ref('usuarios/' + idUnico()).set(usuario).catch(error => {
+  Firebase.database().ref('usuarios/' + idUnico()).set(usuario)
+  .then(() => this.props.navigation.navigate('NavegacaoInterna'))
+  .catch(error => {
       alert(error.message)
   });
 }

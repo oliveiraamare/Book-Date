@@ -1,18 +1,19 @@
 import { StyleSheet } from 'react-native';
-import compartilhado from '../estilos/compartilhado';
+
+import cor from '../estilos/cores';
 
 const conta = StyleSheet.create({
   listItem: {
-    backgroundColor:'transparent',
-    borderBottomStartRadius:50, 
-    borderBottomEndRadius:25, 
-    borderBottomWidth:0.3,
-    borderColor: '#CCCCCC', 
+    backgroundColor: 'transparent',
+    borderBottomStartRadius: 50, 
+    borderBottomEndRadius: 25, 
+    borderBottomWidth: 0.3,
+    borderColor: cor.cinza, 
     height: 55
   },
   viewAvatar: {
     alignItems: 'center',  
-    marginBottom:20,
+    marginBottom: 20,
     marginTop: 20, 
     paddingBottom: 8,
     paddingLeft: 15, 
@@ -27,7 +28,7 @@ const conta = StyleSheet.create({
     paddingRight: 15,
   },
   texto: {
-    color:'#ff33cc',  
+    color: cor.amarelo,  
     fontSize: 15 ,  
     marginBottom: 20,
     marginTop: 30,
@@ -38,7 +39,7 @@ const conta = StyleSheet.create({
   textInput: {
     borderBottomWidth: 1,
     borderColor: 'transparent',
-    color: 'white',
+    color: cor.branco,
     height: 50,
     marginBottom: 5, 
     marginTop: 20, 
