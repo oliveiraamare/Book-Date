@@ -52,13 +52,33 @@ function HomeTabs({ navigation, route }) {
         activeTintColor: cor.amarelo,
         inactiveTintColor: cor.cinza,
         labelStyle: { padding: 3 },
-        style:{ backgroundColor:'black' },
-        tabStyle:{ backgroundColor: 'transparent' }
+        style:{ 
+          backgroundColor: cor.pretoTransparente, 
+          bottom: 0, 
+          height: 55,
+          left: 0,
+          position: 'absolute',
+          right: 0
+        },
       }}  
     >
       <Tab.Screen name="Feed" component={FeedScreen} />
-      <Tab.Screen name="Notificacao" component={Notificacao} />
-      <Tab.Screen name="Account" component={Conta} />
+      <Tab.Screen 
+        name="Notificações" component={Notificacao} 
+        options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="bell-ring" color={color} size={size} />
+            )
+          }}
+      />
+      <Tab.Screen 
+        name="Mensagem" component={Mensagem} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="forum-outline" color={color} size={size} />
+          ),
+        }}
+      />
       <Tab.Screen 
         name="Conta" component={Conta} 
         options=

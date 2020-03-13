@@ -6,7 +6,6 @@ import {
 import { ListItem } from 'react-native-elements'
 import { Avatar } from 'react-native-paper';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import RNExitApp from 'react-native-exit-app';
 
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
 import FrasesPerfil from '../../../componentes/fraseAleatoria/frasesPerfil'
@@ -140,7 +139,7 @@ class Conta extends Component {
             />
           </View>     
           <BotaoTransparente
-            buttonStyle={{marginTop:50}}
+            buttonStyle={{marginTop:50, marginBottom: 60}}
             onPress={() => this.props.navigation.navigate('DeletarConta')}
             texto="Deletar Conta"
             

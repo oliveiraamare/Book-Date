@@ -19,7 +19,6 @@ class Regras extends Component {
 
   handleCadastroBanco = () => {
     recuperarDados();
-    this.props.navigation.navigate('NavegacaoInterna')
   }
         
   render(){

@@ -1,45 +1,43 @@
+//https://medium.com/appdafuer/how-to-create-a-simple-swipeable-list-in-react-native-81b894ea5c4c
+//https://www.kurzor.net/blog/react-native-swipeable-list
 import React, { Component } from 'react';
-import { ScrollView, View} from 'react-native';
-import { Avatar } from 'react-native-paper';
-
-import { CardComTitulo, Cards } from '../../componentes/Card';
+import { ImageBackground, ScrollView, View } from 'react-native';
+import { Appbar, Text } from 'react-native-paper';
 
 import compartilhado from '../../estilos/compartilhado';
-import cor from '../../estilos/cores';
+import notificacao from '../../estilos/notificacao/notificacao';
 
-import notificacao from '../../estilos/notificacao';
+import List from '../../estilos/notificacao/list';
 
-export default class App extends Component {
+const notificacoes = [
+  { id: 1, message: 'Enfim você chegou!' },
+  { id: 2, message:  'Sinta-se em casa!' },
+  { id: 3, message: 'Se estiver gostando do nosso conceito, chame seus amigos!' }
+];
+class Notificacao extends Component {
   render() {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <ScrollView >        
-          <CardComTitulo
-            styleCard={notificacao.cardComTitulo} 
-            titulo="Enfim você chegou!"   
-            left={(props) => 
-              <Avatar.Icon {...props} 
-                icon="heart" color={cor.rosa} style={{backgroundColor:'transparent'}} size={50}
-              />
-            }
-            paragrafo="Respire fundo. Sorria. Deixe as suas preocupações de lado.
-              Receba o melhor que esse mundo tem a lhe oferecer,
-              afinal de contas, você merece. Entre e sinta-se em casa!"
-            autor="Autor desconhecido"
-          />      
-          <Cards 
-            styleCard={notificacao.cards}
-            paragrafo="Você vai ser sempre bem-vinda para ficar um tempo ou para sempre, se quiser."
-            autor="Um Dia - David Nicholls"
-          />       
-          <Cards 
-            styleCard={notificacao.cards}
-            paragrafo="Quando penso em você, não posso deixar de sorrir, sabendo que você me completa. Eu te amo, não só agora, mas sempre."
-            autor="Querido John – Nicholas Sparks"
-          />          
-        </ScrollView>
+        <ImageBackground
+          source={require('../../imagens/black.jpeg')} 
+          style={compartilhado.imagemBackground}
+        >
+          <Appbar style={notificacao.header}> 
+            <Appbar.Content
+              title=
+              {
+                <Text style={notificacao.appBarHeader}>Notificações</Text>
+              }
+            />
+          </Appbar>  
+          <ScrollView >    
+            <List data={notificacoes} />
+          </ScrollView>
+        </ImageBackground>
       </View>
     );
   }
 }
+
+export default Notificacao;
