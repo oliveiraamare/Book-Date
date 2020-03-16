@@ -1,3 +1,5 @@
+//https://reactnavigation.org/docs/screen-options-resolution/
+//https://reactnavigation.org/docs/stack-navigator/
 import * as React from 'react';
 import { View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,35 +14,12 @@ import Match from '../telas/menuInterno/match/Match';
 import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
 import Notificacao from '../telas/menuInterno/Notificacao';
 
-import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
-
 import DeletarConta from '../telas/menuInterno/conta/DeletarConta';
 import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
+import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
-
-
-import Login from '../telas/home/Login';
-
-function FeedScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
-    </View>
-  );
-}
-
-function AccountScreen() {
-  return <View />;
-}
-
-function SettingsScreen() {
-  return <View />;
-}
 
 const Tab = createBottomTabNavigator();
 
@@ -49,6 +28,7 @@ function HomeTabs({ navigation, route }) {
     <Tab.Navigator
       initialRouteName="Feed"
       tabBarOptions={{
+        //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
         activeTintColor: cor.amarelo,
         inactiveTintColor: cor.cinza,
         labelStyle: { padding: 3 },
@@ -62,7 +42,14 @@ function HomeTabs({ navigation, route }) {
         },
       }}  
     >
-      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen
+        name="BookLovers" component={Match} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-heart" color={color} size={size} />
+          ),
+        }}
+      />
       <Tab.Screen 
         name="Notificações" component={Notificacao} 
         options={{
@@ -94,21 +81,17 @@ function HomeTabs({ navigation, route }) {
 
 const Stack = createStackNavigator();
 
-export default function App() {
+export default function NavegacaoInterna() {
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
-        <Stack.Screen name="Home" component={HomeTabs} />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
-        
+        <Stack.Screen name="Home" component={HomeTabs} />   
+        <Stack.Screen name="DeletarConta" component={DeletarConta} />
         <Stack.Screen name="Perfil" component={Perfil} />
+        <Stack.Screen name="PerfilMatch" component={PerfilMatch} />
         <Stack.Screen name="SobreNos" component={SobreNos} />
         <Stack.Screen name="TermoPrivacidade" component={TermoPrivacidade} />
         <Stack.Screen name="TermoUso" component={TermoUso} />
-        <Stack.Screen name="DeletarConta" component={DeletarConta} />
-        <Stack.Screen name="Login" component={Login} />
-
-
       </Stack.Navigator>
     </NavigationContainer>
   );

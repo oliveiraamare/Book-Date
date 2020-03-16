@@ -15,7 +15,6 @@ import TermoPrivacidade from '../telas/termos/TermoPrivacidade';
 import TermoUso from '../telas/termos/TermoUso';
 import UploadImagem from '../telas/cadastro/UploadImagem';
 
-
 const NavegacaoSwitch = createSwitchNavigator(
     {
         Cadastro: { screen: Cadastro },
@@ -35,7 +34,7 @@ const NavegacaoSwitch = createSwitchNavigator(
 
     },
     {
-        initialRouteName: 'NavegacaoInterna',
+        initialRouteName: 'Loading',
         headerMode: 'none'
     }
 )

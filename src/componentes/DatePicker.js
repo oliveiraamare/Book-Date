@@ -42,21 +42,19 @@ export default class Calendario extends Component {
 }
 const styles = StyleSheet.create ({
  container: {  
-    alignItems: 'flex-start',
     alignSelf: 'center', 
-    justifyContent:'flex-start', 
     marginBottom: 10, 
     marginTop: 5
   },
   dateInput: {
     alignItems: 'flex-start',
-    alignSelf: 'center',
-    borderTopColor: 'transparent',
     borderBottomWidth: 1, 
     borderColor: cor.branco, 
-    justifyContent:'center',   
+    borderTopColor: 'transparent',
+    borderLeftWidth: 0,
+    borderRightWidth : 0,
     height: 50,  
-    paddingLeft: 40,
-    paddingRight: 20  
+    margin: 40,
+    paddingLeft: 15
   }
 })

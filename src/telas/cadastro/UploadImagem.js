@@ -17,11 +17,9 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { Avatar } from 'react-native-paper';
 
-import BotaoTransparente from '../../componentes/botoes/BotaoTransparente';
-import { BotaoTouchableOpacity }from '../../componentes/botao';
-
 import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
+import { BotaoTransparente }from '../../componentes/botao';
 
 import compartilhado from '../../estilos/compartilhado';
 import uploadImagem from '../../estilos/uploadImagem';
@@ -60,40 +58,43 @@ class UploadImagem extends Component {
     return (
       <View style={compartilhado.container}>
         <ImageBackground
-          source={require('../../imagens/black.jpeg')} 
+          source={require('../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
-          <AppBarHeader 
-            onPress={() => this.props.navigation.navigate('Preferencias')} 
-            title={"Adicione sua foto"} 
-          /> 
-          <FraseTop 
-            subtitleStyle={uploadImagem.header} 
-            title={frase} 
-            subtitle={autor} 
-          />
-          <Avatar.Image 
-            size={250} 
-            source={{uri:image}} 
-            style={uploadImagem.avatar}
-          />
-          <View style={uploadImagem.botaoTransparente}>
-            <BotaoTransparente           
-              onPress={this._pickImage}
-              texto="Escolher foto da galeria"
+          <View style={compartilhado.imagemTransparente}>
+            <AppBarHeader 
+              onPress={() => this.props.navigation.navigate('Preferencias')} 
+              title={"Adicione sua foto"} 
+            /> 
+            <FraseTop 
+              subtitleStyle={uploadImagem.header} 
+              title={frase} 
+              subtitle={autor} 
             />
-              <Text style={{color:cor.branco, marginTop:20}}>ou então</Text>
-            <BotaoTransparente        
-              onPress={this._tirarFoto} 
-              texto="Tirar foto" 
+            <Avatar.Image 
+              size={200} 
+              source={{uri:image}} 
+              style={uploadImagem.avatar}
             />
+            <View style={uploadImagem.botaoComTexto}>
+              <BotaoTransparente 
+                onPress={this._pickImage}
+                text="Escolher foto da galeria"
+              />
+              <Text style={uploadImagem.ouEntao}>ou então</Text>
+              <BotaoTransparente 
+                onPress={this._tirarFoto} 
+                text="Tirar foto" 
+              />
+            </View>
+            <BotaoTransparente 
+              buttonStyle={uploadImagem.botaoContinuar}
+              onPress={() => this.handleImagem()}
+              text="Continuar" 
+              textStyle={uploadImagem.botaoContinuarTexto}
+            />
+            {this._renderizarUploadingOverlay()}
           </View>
-          <BotaoTouchableOpacity 
-            buttonStyle={uploadImagem.botao}
-            onPress={() => this.handleImagem()}
-            text="Continuar" 
-          />
-          {this._renderizarUploadingOverlay()}
         </ImageBackground>
       </View>
     );
@@ -167,7 +168,7 @@ class UploadImagem extends Component {
       name: 'file',
       type: 'image/jpg'
     })
-
+    
     let filename = pictureuri.split('/').pop();
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
@@ -186,7 +187,7 @@ class UploadImagem extends Component {
         console.log('succ ')
         console.log(response)
       }).catch(error => {
-        console.log('error ')
+        console.log('error no upload' + error)
         alert(error)
       })
   }

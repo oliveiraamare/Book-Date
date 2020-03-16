@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
   },  
   botaoTransparente: {
     bottom: 0, 
-
+    marginBottom: 20,
+    marginTop: 20  
   },
 });
 

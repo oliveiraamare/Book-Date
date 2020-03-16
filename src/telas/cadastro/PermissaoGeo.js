@@ -13,33 +13,36 @@ class PermissaoGeo extends Component {
     return (
       <View style={compartilhado.container}>
         <ImageBackground
-          source={require('../../imagens/black.jpeg')} 
+          source={require('../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
-          <AppBarHeader 
-            onPress={() => this.props.navigation.navigate('UploadImagem')} 
-            title={"Cadê o Wally?"} 
-          />
-          <FraseTop 
-            subtitleStyle={permissaoGeo.header} 
-            title={frase} 
-            subtitle={autor} 
-          />
-          <View style={{margin:10, top:5}}>
-            <Avatar.Icon 
-              size={200} 
-              icon="map-marker-radius"  
-              style={permissaoGeo.avatar}
+          <View style={compartilhado.imagemTransparente}>
+            <AppBarHeader 
+              onPress={() => this.props.navigation.navigate('UploadImagem')} 
+              title={"Cadê o Wally?"} 
             />
-            <Text style={permissaoGeo.texto}>
-              Você precisa autorizar que acessemos sua localização para que possamos encontrar os leitores que cruzam o seu caminho
-            </Text>  
+            <FraseTop 
+              subtitleStyle={permissaoGeo.header} 
+              title={frase} 
+              subtitle={autor} 
+            />
+            <View style={{margin:10, top:5}}>
+              <Avatar.Icon 
+                size={200} 
+                icon="map-marker-radius"  
+                style={permissaoGeo.avatar}
+              />
+              <Text style={permissaoGeo.texto}>
+                Você precisa autorizar que acessemos sua localização para que possamos encontrar os leitores que cruzam o seu caminho
+              </Text>  
+            </View>
+            <BotaoTouchableOpacity 
+              buttonStyle={permissaoGeo.botao}
+              onPress={() =>  this.props.navigation.navigate('Geolocalizacao')}
+              text="Bora lá" 
+              textStyle={permissaoGeo.botaoTexto}
+            />
           </View>
-          <BotaoTouchableOpacity 
-            buttonStyle={permissaoGeo.botao}
-            onPress={() =>  this.props.navigation.navigate('Geolocalizacao')}
-            text="Bora lá" 
-          />
         </ImageBackground>
       </View>
     );

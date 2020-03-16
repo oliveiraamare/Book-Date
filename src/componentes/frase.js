@@ -17,12 +17,13 @@ export const FraseTop = ({ topbarStyle, titleStyle, subtitleStyle, title, subtit
 const styles = StyleSheet.create({
   titulo:{
     color: cor.branco,
+    fontWeight: 'bold',
     textAlign: "justify"
   },
   topbar: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    //height: 130,    
+    height: 100,    
     justifyContent: 'center',
     padding: 10
   },  

@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { PacmanIndicator } from 'react-native-indicators';
+import { BarIndicator } from 'react-native-indicators';
 
 import Firebase from '../../../Firebase';
 
@@ -24,14 +24,14 @@ class Loading extends Component {
     return (      
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-          <PacmanIndicator 
+          <BarIndicator 
             color={cor.amarelo}
-            size={100}
+            count={5}
+            size={70}
             animating={true}
             interaction={true}
           />   
       </View>
-        
     )
   }
 }

@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableOpacity  } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import cor from '../estilos/cores';
 
-export const BotaoTouchableOpacity = ({ buttonStyle, onPress, textStyle, text }) => {
+export const BotaoComTexto = ({ viewStyle, texto1Style, texto1, buttonStyle, onPress, texto2Style, texto2 }) => {
   return (
-    <TouchableOpacity 
-      style={[styles.botaoTouchableOpacity, buttonStyle]}
-      onPress={() => onPress()}>
-      <Text style={[styles.texto, textStyle]}>{text}</Text>
-    </TouchableOpacity>
+    <View style={[styles.view, viewStyle]}>
+        <Text style={texto1Style}>{texto1}</Text>
+      <TouchableOpacity 
+        style={[styles.botaoComTexto, buttonStyle]}
+        onPress={() => onPress()} 
+      >
+        <Text style={texto2Style}>{texto2}</Text>
+      </TouchableOpacity>
+    </View>		 
   );
 }
 
@@ -24,7 +27,21 @@ export const BotaoTransparente = ({ buttonStyle, onPress, textStyle, text }) => 
   );
 }
 
+export const BotaoTouchableOpacity = ({ buttonStyle, onPress, textStyle, text }) => {
+  return (
+    <TouchableOpacity 
+      style={[styles.botaoTouchableOpacity, buttonStyle]}
+      onPress={() => onPress()}>
+      <Text style={[styles.texto, textStyle]}>{text}</Text>
+    </TouchableOpacity>
+  );
+}
+
 const styles = StyleSheet.create({
+  botaoComTexto: {
+    backgroundColor: 'transparent',
+    height: 45
+  },
   botaoTransparente:{
     backgroundColor:'transparent'
   },
@@ -35,14 +52,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     paddingVertical: 5,      
-    width: 200, 
+    width: 200
   },
   texto: {
     alignItems: 'center',
     alignSelf: 'center',
     color: cor.branco,
     fontSize: 15,    
-    justifyContent: 'center', 
+    justifyContent: 'center'
   },
   textoTransparente: {
     color: cor.amarelo, 
@@ -50,6 +67,15 @@ const styles = StyleSheet.create({
     fontSize: 15, 
     textAlign: 'center'
   },  
+  viewStyle: {
+    alignContent: 'space-around',
+    bottom: 0, 
+    flexDirection: "row",
+    height: 30,
+    justifyContent: 'center',
+    position: 'absolute',
+    width: '100%'  
+  }
 });
 
 export default BotaoTouchableOpacity;

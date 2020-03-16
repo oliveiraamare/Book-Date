@@ -24,7 +24,7 @@ class TermoUso extends Component {
     return (
       <View style={compartilhado.container}>
         <ImageBackground
-          source={require('../../../../imagens/black.jpeg')} 
+          source={require('../../../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
           <AppBarHeader 

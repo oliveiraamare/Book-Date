@@ -13,9 +13,13 @@ const compartilhado = StyleSheet.create({
   },
   imagemBackground: {
     flex:1,
-		height: DIMENSION_HEIGHT + 56,
+    height: DIMENSION_HEIGHT + 56,
 		resizeMode: 'cover',
 		width: DIMENSION_WIDTH
+  },
+  imagemTransparente: {
+    backgroundColor: cor.pretoTransparente, 
+    flex: 1
   },
   statusBar: {
     backgroundColor: cor.amarelo,

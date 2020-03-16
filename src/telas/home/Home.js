@@ -17,7 +17,7 @@ class Home extends Component {
           source={require('../../imagens/home.jpg')} 
           style={compartilhado.imagemBackground}
         >        
-          <View style={home.imagemBackground}>
+          <View style={compartilhado.imagemTransparente}>
             <Text style={home.bookDate}>Book Date</Text>  
             <FrasesAleatorias />
             <View style={home.botoesAcao}>

@@ -19,14 +19,14 @@ class DeletarConta extends Component {
       .then(() => 
         alert('Usuário deletado com sucesso!'),
       )
-      .catch(error => alert(error))
+      .catch(error => alert(error.message))
   }
 
   render() {      
     return (
       <View style={compartilhado.container}>
         <ImageBackground
-          source={require('../../../imagens/black.jpeg')} 
+          source={require('../../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
           <AppBarHeader 

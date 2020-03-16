@@ -23,28 +23,33 @@ class TextoInput extends Component {
   };
 
   render() {
+
     const { isFocused } = this.state;
-    const { 
-      inputStyle, onBlur, onFocus, multiline, maxLength, numberOfLines, placeHolder, ...otherProps 
+    const 
+    { 
+      inputStyle, onBlur, onFocus, multiline,
+      maxLength, numberOfLines, placeHolder, ...otherProps 
     } = this.props;
+
     return (
       <View>
-          <TextInput
-            autoCapitalize='none'
-            style={[styles.textInput, inputStyle]}
-            onBlur={this.handleBlur}
-            onFocus={this.handleFocus}
-            placeholder={placeHolder}
-            placeholderTextColor= {cor.branco}
-            selectionColor={cor.branco}
-            underlineColorAndroid={
-              isFocused ? cor.amarelo : cor.branco
-            }
-            multiline={multiline}
-            maxLength={maxLength}
-            numberOfLines={numberOfLines} 
-            {...otherProps}
-          />      
+        <TextInput
+          autoCapitalize='none'
+          style={[styles.textInput, inputStyle]}
+          onBlur={this.handleBlur}
+          onFocus={this.handleFocus}
+          placeholder={placeHolder}
+          placeholderTextColor= {cor.branco}
+          selectionColor={cor.branco}
+          underlineColorAndroid=
+          {
+            isFocused ? cor.amarelo : cor.branco
+          }
+          multiline={multiline}
+          maxLength={maxLength}
+          numberOfLines={numberOfLines} 
+          {...otherProps}
+        />      
       </View>
     );
   }
@@ -56,6 +61,7 @@ const styles = StyleSheet.create({
     borderWidth: 20,
     color: cor.branco,
     height: 50,
+    margin: 15
   }
 });
 

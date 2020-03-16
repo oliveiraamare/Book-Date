@@ -10,7 +10,7 @@ export default class Mensagem extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <ImageBackground
-          source={require('../../../imagens/black.jpeg')} 
+          source={require('../../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         />
       </View>

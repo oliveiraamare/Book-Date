@@ -1,14 +1,30 @@
-import { StyleSheet } from 'react-native';
-import compartilhado from '../estilos/compartilhado';
-import cor from './cores';
+import { Dimensions, StyleSheet } from 'react-native';
+
+import cor from '../estilos/cores';
+
+const DIMENSION_WIDTH = Dimensions.get('window').width;
 
 const regras = StyleSheet.create({
   botao: {
-    alignSelf: 'center',
+    alignSelf: 'center',    
+    backgroundColor: cor.amarelo,        
+    borderColor: cor.amarelo,
+    borderWidth: 1,
     bottom: 0,
-    marginBottom: 30, 
-    marginTop: 30,
-    position: 'absolute'
+    height: 47,
+    justifyContent: 'center',   
+    marginBottom: 0, 
+    marginTop: 20,
+    position: 'absolute',
+    width: DIMENSION_WIDTH + 56
+  },
+  botaoTexto: {
+    color: cor.amareloA, 
+    fontWeight:'bold'
+  },
+  header: {
+    alignSelf: 'flex-end',
+    fontSize: 21
   },
   paragrafo: {
     color: cor.branco,
@@ -18,19 +34,6 @@ const regras = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     textAlign:'justify'
-  },
-  texto: {
-    marginBottom: 20,
-    marginTop: 70,
-   // position:'absolute',
-    top: 0
-  },
-  titleStyle: {
-    fontSize: 21,
-    marginBottom: 5,
-    marginTop: 10,  
-    position:'absolute',
-    top: 5
   },
   subparagrafo: {
     color: cor.amarelo,
@@ -44,12 +47,12 @@ const regras = StyleSheet.create({
   subtitleStyle: {
     alignSelf: 'center', 
     color: cor.amarelo,
-    fontSize: 14, 
-    //marginBottom: 5,
-    marginTop: 10,   
-    position:'absolute',
-    top: 33
-  }
+    fontSize: 14
+  },
+  titleStyle: {
+    fontSize: 21,
+    marginBottom: 5
+  },
 })
 
 export default regras;

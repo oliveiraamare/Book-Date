@@ -19,11 +19,10 @@ import {
 import { TagSelect } from 'react-native-tag-select-max';
 
 import { AppBarHeader } from '../../componentes/header';
-import { BotaoTouchableOpacity }from '../../componentes/botao';
 import { FraseTop } from '../../componentes/frase';
-
-import Calendario from '../../componentes/DatePicker';
 import TextoInput from '../../componentes/textInput/TextInput';
+import Calendario from '../../componentes/DatePicker';
+import { BotaoTransparente }from '../../componentes/botao';
 
 import cadastro from '../../estilos/cadastro';
 import compartilhado from '../../estilos/compartilhado';
@@ -79,83 +78,84 @@ class Cadastro extends Component {
     return (
       <View style={compartilhado.container}>
         <ImageBackground
-          source={require('../../imagens/black.jpeg')} 
+          source={require('../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
-          <AppBarHeader 
-            onPress={() => this.props.navigation.navigate('Login')} 
-            title={"Cadastro"} 
-          />              
-          <ScrollView>
-            <KeyboardAvoidingView 
-              style={{justifyContent: "flex-end", flex: 1 }} 
-              behavior='padding' 
-              enabled 
-            >
-              <FraseTop 
-                subtitleStyle={cadastro.header} title={frase} subtitle={autor} 
-              />  
-              <Text style={cadastro.texto}>
-                Para começarmos, digite um e-mail e senha
-              </Text>
-              <TextoInput
-                inputStyle={cadastro.textInput}
-                placeHolder='E-mail'
-                value={this.state.email}
-                onChangeText={email => this.setState({ email })}
-              />
-              <TextoInput
-                inputStyle={cadastro.textInput}
-                placeHolder='Senha'
-                secureTextEntry={true}
-                value={this.state.senha}
-                onChangeText={senha => this.setState({ senha })}
-              />     
-              <Text style={cadastro.texto}>
-                Fale um pouco sobre você
-              </Text>
-              <TextoInput
-                inputStyle={cadastro.textInput}
-                placeHolder='Como se chama?'   
-                value={this.state.nome}
-                onChangeText={nome => this.setState({ nome })}
-              />
-              <Calendario
-                date={ this.state.data}
-                onDateChange={data => this.setState({ data })}
-              />     
-              <TextoInput
-                inputStyle={cadastro.textInput}
-                placeHolder='Qual é a sua cidade natal?'
-                value={this.state.cidade}
-                onChangeText={cidade => this.setState({ cidade })}
-              />               
-              <Text style={cadastro.texto}>
-                Como se identifica?
-              </Text>
-              <TagSelect
-                data={this.state.genero}
-                max={1}
-                ref={(tag) => {
-                  this.tag = tag;
-                }}
-                onMaxError={() => {
-                  Alert.alert('Ops', 'Max reached' + JSON.stringify(this.tag.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
-                }}
-                itemStyle={cadastro.tagItem}
-                itemLabelStyle={cadastro.tagLabel}
-                itemStyleSelected={cadastro.tagItemSelecionado}
-                itemLabelStyleSelected={cadastro.tagLabelSelecionado}
-              />
-              <View style={{marginTop: 100}}>
-                <BotaoTouchableOpacity 
-                  buttonStyle={cadastro.botao}
-                  text="Continuar" 
-                  onPress={() => this.handleCadastro()}
+          <View style={compartilhado.imagemTransparente}>
+            <AppBarHeader 
+              onPress={() => this.props.navigation.navigate('Login')} 
+              title={"Cadastro"} 
+            />              
+            <ScrollView>
+              <KeyboardAvoidingView 
+                style={{justifyContent: "flex-end", flex: 1 }} 
+                behavior='padding' 
+                enabled 
+              >
+                <FraseTop 
+                  subtitleStyle={cadastro.header} title={frase} subtitle={autor} 
+                />  
+                <Text style={cadastro.texto}>
+                  Para começarmos, digite um e-mail e senha
+                </Text>
+                <TextoInput
+                  inputStyle={cadastro.textInput}
+                  placeHolder='E-mail'
+                  value={this.state.email}
+                  onChangeText={email => this.setState({ email })}
                 />
-              </View>
-            </KeyboardAvoidingView> 
-          </ScrollView>
+                <TextoInput
+                  inputStyle={cadastro.textInput}
+                  placeHolder='Senha'
+                  secureTextEntry={true}
+                  value={this.state.senha}
+                  onChangeText={senha => this.setState({ senha })}
+                />     
+                <Text style={cadastro.texto}>
+                  Fale um pouco sobre você
+                </Text>
+                <TextoInput
+                  inputStyle={cadastro.textInput}
+                  placeHolder='Como se chama?'   
+                  value={this.state.nome}
+                  onChangeText={nome => this.setState({ nome })}
+                />
+                <Calendario
+                  date={ this.state.data}
+                  onDateChange={data => this.setState({ data })}
+                />     
+                <TextoInput
+                  inputStyle={cadastro.textInput}
+                  placeHolder='Qual é a sua cidade natal?'
+                  value={this.state.cidade}
+                  onChangeText={cidade => this.setState({ cidade })}
+                />               
+                <Text style={cadastro.texto}>
+                  Como se identifica?
+                </Text>
+                <TagSelect
+                  data={this.state.genero}
+                  max={1}
+                  ref={(tag) => {
+                    this.tag = tag;
+                  }}
+                  onMaxError={() => {
+                    Alert.alert('Ops', 'Max reached' + JSON.stringify(this.tag.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
+                  }}
+                  itemStyle={cadastro.tagItem}
+                  itemLabelStyle={cadastro.tagLabel}
+                  itemStyleSelected={cadastro.tagItemSelecionado}
+                  itemLabelStyleSelected={cadastro.tagLabelSelecionado}
+                />
+                <BotaoTransparente 
+                  buttonStyle={cadastro.botao}
+                  onPress={() => this.handleCadastro()}
+                  text="Continuar" 
+                  textStyle={cadastro.botaoTexto}
+                />
+              </KeyboardAvoidingView> 
+            </ScrollView>
+          </View>
         </ImageBackground>
       </View>
     )

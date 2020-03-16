@@ -42,7 +42,7 @@ class Conta extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <ImageBackground
-          source={require('../../../imagens/1.jpg')} 
+          source={require('../../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
           <ScrollView >

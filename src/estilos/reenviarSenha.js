@@ -5,13 +5,20 @@ import cor from '../estilos/cores';
 
 const reenviarSenha = StyleSheet.create({
   botaoEnviar: {
-    alignSelf: 'center', 
-    marginBottom: 20,     
-    marginTop: 10
+    alignItems: 'center',            
+    borderColor: cor.amarelo,
+    borderRadius: 100, 
+    borderWidth: 1,
+    bottom: 0,
+    height: 47,
+    justifyContent: 'center',   
+    margin: 30,
+    position: 'absolute',
+    width: 300    
   },
-  botaoVoltar: {
-    alignSelf: 'center',
-    position: 'absolute'
+  botaoEnviarTexto: {
+    color:cor.amareloA, 
+    fontWeight:'bold'
   },
   header: {
     alignSelf: 'flex-end'
@@ -29,10 +36,10 @@ const reenviarSenha = StyleSheet.create({
     borderColor: 'transparent',
     color: cor.branco,
     height: 50,
-    marginBottom: 30,     
-    marginTop: 10,    
-    paddingLeft: 10,    
-    paddingRight: 10
+    marginBottom: 5, 
+    marginTop: 5, 
+    paddingLeft: 20,
+    paddingRight: 20   
   }
 })
 

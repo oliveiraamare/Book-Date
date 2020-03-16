@@ -14,8 +14,9 @@ import compartilhado from '../../estilos/compartilhado';
 
 import { FraseTop } from '../../componentes/frase';
 import TextoInput from '../../componentes/textInput/TextInput';
-import { BotaoTouchableOpacity } from '../../componentes/botao';
-import BotaoComTexto from '../../componentes/botoes/BotaoComTexto';
+import { BotaoTransparente } from '../../componentes/botao';
+import { BotaoComTexto } from '../../componentes/botao';
+
 class Login extends Component {
 
   constructor(props) {
@@ -53,40 +54,48 @@ class Login extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <ImageBackground
-          source={require('../../imagens/black.jpeg')} 
+          source={require('../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
-          <FraseTop 
-            subtitleStyle={login.header} title={frase} subtitle={autor} 
-          />              
-          <TextoInput
-            inputStyle={login.inputEmail} 
-            placeHolder='E-mail'
-            value={this.state.email}
-            onChangeText={email => this.setState({ email })}
-          />           
-          <TextoInput
-            inputStyle={login.inputSenha}        
-            placeHolder='Senha'
-            secureTextEntry={true}
-            value={this.state.senha}
-            onChangeText={senha => this.setState({ senha })}
-          />   
-          <TouchableOpacity 
-            style={login.botaoEsqueceuLogin}
-            onPress={() => this.props.navigation.navigate('ReenviarSenha')}>
-              <Text style={{color: '#FFCC00'}}>Esqueceu seu login?</Text>
-          </TouchableOpacity>   
-          <BotaoTouchableOpacity 
-            buttonStyle={login.botaoLogin}
-            text="Login" 
-            onPress={() => this.handleLogin()}
-          />                   
-          <BotaoComTexto 
-            text1="Ainda não possui uma conta? "
-            onPress={() => this.props.navigation.navigate('Cadastro')}
-            text2="Cadastre-se">
-          </BotaoComTexto>
+          <View style={compartilhado.imagemTransparente}>
+            <FraseTop 
+              subtitleStyle={login.header} title={frase} subtitle={autor} 
+            /> 
+            <View style={{marginTop:80}}>
+              <TextoInput
+                inputStyle={login.textInput} 
+                placeHolder='E-mail'
+                value={this.state.email}
+                onChangeText={email => this.setState({ email })}
+              />           
+              <TextoInput
+                inputStyle={login.textInput}        
+                placeHolder='Senha'
+                secureTextEntry={true}
+                value={this.state.senha}
+                onChangeText={senha => this.setState({ senha })}
+              />   
+            </View>
+            <TouchableOpacity 
+              style={login.botaoEsqueceuLogin}
+              onPress={() => this.props.navigation.navigate('ReenviarSenha')}>
+                <Text style={{color: '#FFCC00'}}>Esqueceu seu login?</Text>
+            </TouchableOpacity>   
+            <BotaoTransparente 
+              buttonStyle={login.botaoLogin}
+              onPress={() => this.handleLogin()}
+              text="Login" 
+              textStyle={login.botaoLoginTexto}
+            />                   
+            <BotaoComTexto 
+              viewStyle={login.botaoComTexto}
+              texto1="Ainda não possui uma conta?"
+              texto1Style={login.styleBotaoComTexto1}
+              onPress={() => this.props.navigation.navigate('Cadastro')}
+              texto2="Cadastre-se"
+              texto2Style={login.styleBotaoComTexto2}
+            />
+          </View>
         </ImageBackground>
       </View>
     )

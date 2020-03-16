@@ -1,7 +1,6 @@
 import React , { Component } from 'react';
 import { 
-  ImageBackground,
-  ScrollView, 
+  ImageBackground, 
   Text, 
   View 
 } from 'react-native';
@@ -25,14 +24,14 @@ class Regras extends Component {
     return (
       <View style={compartilhado.container}>
         <ImageBackground
-          source={require('../../imagens/black.jpeg')} 
+          source={require('../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
-          <AppBarHeader 
-            onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
-            title={"Regras"} 
-          />
-          <ScrollView>
+          <View style={compartilhado.imagemTransparente}>
+            <AppBarHeader 
+              onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
+              title={"Regras"} 
+            />
             <FraseTop 
               titleStyle={regras.titleStyle} subtitleStyle={regras.subtitleStyle} 
               title={frase} subtitle={autor}  
@@ -75,14 +74,13 @@ class Regras extends Component {
                 Estamos felizes por ver você aqui. Nosso objetivo é satisfazer.     
               </Text>
             </View>
-            <View style={{marginTop: 100}}>
-              <BotaoTouchableOpacity 
-                buttonStyle={regras.botao}
-                onPress={() => this.handleCadastroBanco()}
-                text="Concordar e Continuar" 
-              />
-            </View>
-          </ScrollView>
+            <BotaoTouchableOpacity 
+              buttonStyle={regras.botao}
+              onPress={() => this.handleCadastroBanco()}
+              text="Concordar e Continuar" 
+              textStyle={regras.botaoTexto}
+            />
+          </View>
         </ImageBackground>
       </View>
     );

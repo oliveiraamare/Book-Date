@@ -84,31 +84,34 @@ class Geolocalizacao extends Component {
     return (
       <View style={compartilhado.container}>
         <ImageBackground
-          source={require('../../imagens/black.jpeg')} 
+          source={require('../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
-          <AppBarHeader 
-            onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
-            title={"Queremos te Encontrar"} 
-          />  
-          <FraseTop 
-            subtitleStyle={geo.header} 
-            title={frase} 
-            subtitle={autor} 
-          />      
-          <View style={geo.viewContainer}>
-            <Text style={geo.titulo}>Você está aqui!</Text>
-            <Text style={geo.texto}>{geocode ? `${geocode[0].isoCountryCode}`:''}</Text>
-            <Text style={geo.texto}>{geocode ? `${geocode[0].region}`:''}</Text>
-            <Text style={geo.texto}>{geocode ? geocode[0].street :""}</Text>
-            <Text style={geo.texto}>{location ? `${location.latitude}, ${location.longitude}` :""}</Text>
-            <Text style={geo.permissaoNegada}>{errorMessage}</Text>
+          <View style={compartilhado.imagemTransparente}>
+            <AppBarHeader 
+              onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
+              title={"Queremos te Encontrar"} 
+            />  
+            <FraseTop 
+              subtitleStyle={geo.header} 
+              title={frase} 
+              subtitle={autor} 
+            />      
+            <View style={geo.viewContainer}>
+              <Text style={geo.titulo}>Você está aqui!</Text>
+              <Text style={geo.texto}>{geocode ? `${geocode[0].isoCountryCode}`:''}</Text>
+              <Text style={geo.texto}>{geocode ? `${geocode[0].region}`:''}</Text>
+              <Text style={geo.texto}>{geocode ? geocode[0].street :""}</Text>
+              <Text style={geo.texto}>{location ? `${location.latitude}, ${location.longitude}` :""}</Text>
+              <Text style={geo.permissaoNegada}>{errorMessage}</Text>
+            </View>
+            <BotaoTouchableOpacity 
+              buttonStyle={geo.botao}
+              onPress={() => this.handleGeo()}
+              text="Continuar" 
+              textStyle={geo.botaoTexto}
+            />
           </View>
-          <BotaoTouchableOpacity 
-            buttonStyle={geo.botao}
-            onPress={() => this.handleGeo()}
-            text="Continuar" 
-          />
         </ImageBackground>
       </View> 
     );

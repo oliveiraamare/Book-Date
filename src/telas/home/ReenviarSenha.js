@@ -10,8 +10,7 @@ import {
 
 import { FraseTop } from '../../componentes/frase';
 import TextoInput from '../../componentes/textInput/TextInput';
-import { BotaoTouchableOpacity  } from '../../componentes/botao';
-import BotaoTransparente from '../../componentes/botoes/BotaoTransparente';
+import { BotaoTransparente  } from '../../componentes/botao';
 
 import compartilhado from '../../estilos/compartilhado';
 import reenviarSenha from '../../estilos/reenviarSenha';
@@ -31,9 +30,11 @@ class ReenviarSenha extends Component {
     Firebase
       .auth()
       .sendPasswordResetEmail(email)
-      .then((user) => alert('E-mail enviado com sucesso! Por favor verifique sua caixa de entrada e/ou spam!'))
+      .then((user) => 
+        alert('E-mail enviado com sucesso! Por favor verifique sua caixa de entrada e/ou spam!'),
+        this.props.navigation.navigate('Login')
+      )
       .catch(error => alert(error));
-    this.props.navigation.navigate('Login');
   }
     
   render() {
@@ -41,34 +42,31 @@ class ReenviarSenha extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <ImageBackground
-          source={require('../../imagens/black.jpeg')} 
+          source={require('../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
-          <FraseTop 
-            subtitleStyle={reenviarSenha.header} title={frase} subtitle={autor}
-          />
-          <Text style={reenviarSenha.texto}>
-            Escreva seu e-mail que iremos enviar-te um link para que resetes a sua senha
-          </Text>              
-          <KeyboardAvoidingView behavior="padding" enabled>   
-            <TextoInput
-              inputStyle={reenviarSenha.textoInput}        
-              placeHolder='E-mail'
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
-            />     
-          </KeyboardAvoidingView>
-          <BotaoTouchableOpacity 
-            buttonStyle={reenviarSenha.botaoEnviar}
-            text="Enviar" 
-            onPress={() => this.handleSenha()}
-          />      
-          <BotaoTransparente 
-            buttonStyle={reenviarSenha.botaoVoltar}
-            texto="<- Voltar para o login"
-            onPress={() => this.props.navigation.navigate("Login")}
-          >
-          </BotaoTransparente>
+          <View style={compartilhado.imagemTransparente}>
+            <FraseTop 
+              subtitleStyle={reenviarSenha.header} title={frase} subtitle={autor}
+            />
+            <Text style={reenviarSenha.texto}>
+              Escreva seu e-mail que iremos enviar-te um link para que resetes a sua senha
+            </Text>              
+            <KeyboardAvoidingView behavior="padding" enabled>   
+              <TextoInput
+                inputStyle={reenviarSenha.textoInput}        
+                placeHolder='E-mail'
+                value={this.state.email}
+                onChangeText={email => this.setState({ email })}
+              />     
+            </KeyboardAvoidingView>
+            <BotaoTransparente 
+              buttonStyle={reenviarSenha.botaoEnviar}
+              onPress={() => this.handleSenha()}
+              text="Enviar" 
+              textStyle={reenviarSenha.botaoEnviarTexto}
+            />      
+          </View>
         </ImageBackground>
       </View>
     )

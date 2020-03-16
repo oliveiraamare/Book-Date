@@ -15,7 +15,7 @@ class Checkbox extends Component {
           checkedIcon='user-circle' 
           uncheckedIcon='circle-o'
           uncheckedColor={cor.amarelo}
-          checkedColor={cor.amarelo}
+          checkedColor={cor.amareloD}
           size={20}
           containerStyle={{ backgroundColor: 'transparent', borderColor: 'transparent' }}
           textStyle={{fontSize: 14, paddingLeft: 10, color: cor.branco }}

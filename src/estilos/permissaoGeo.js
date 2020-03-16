@@ -1,5 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
 import cor from './cores';
+
+const DIMENSION_WIDTH = Dimensions.get('window').width;
 
 const permissaoGeo = StyleSheet.create({
   avatar: {
@@ -7,11 +10,21 @@ const permissaoGeo = StyleSheet.create({
     backgroundColor:'transparent'
   },
   botao: {
-    alignSelf: 'center',
-    bottom: 0, 
-    marginBottom: 30, 
-    marginTop: 30,
-    position: 'absolute'
+    alignSelf: 'center',    
+    backgroundColor: cor.amarelo,        
+    borderColor: cor.amarelo,
+    borderWidth: 1,
+    bottom: 0,
+    height: 47,
+    justifyContent: 'center',   
+    marginBottom: 0, 
+    marginTop: 20,
+    position: 'absolute',
+    width: DIMENSION_WIDTH + 56
+  },
+  botaoTexto: {
+    color: cor.amareloA, 
+    fontWeight:'bold'
   },
   header: {
     alignSelf:'flex-end', 

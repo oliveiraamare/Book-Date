@@ -46,10 +46,6 @@ const home = StyleSheet.create({
     marginBottom: 10, 
     justifyContent: 'space-between',
     position: 'absolute'
-  },
-  imagemBackground: {
-    backgroundColor: cor.pretoTransparente, 
-    flex: 1
   }
 })
 
