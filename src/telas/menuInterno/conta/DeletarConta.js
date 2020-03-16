@@ -18,7 +18,6 @@ class DeletarConta extends Component {
       user.delete()
       .then(() => 
         alert('Usuário deletado com sucesso!'),
-        this.props.navigation.navigate('Login')
       )
       .catch(error => alert(error))
   }

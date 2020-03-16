@@ -8,7 +8,7 @@ const cadastro = StyleSheet.create({
     bottom: 0,
     marginBottom: 30, 
     marginTop: 10,
-    position: 'absolute'
+//    position: 'absolute'
   },
   header: {
     alignSelf: 'flex-end'

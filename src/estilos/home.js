@@ -1,7 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import cor from './cores';
 
 const home = StyleSheet.create({
+  botoesAcao: {
+    alignSelf:'center',
+    bottom: 0,
+    marginBottom: 70,
+    flexDirection: 'row', 
+    justifyContent: 'space-around',
+    position: 'absolute',
+    width: '100%' 
+  },
+  botoesAcaoTexto: {
+    color:cor.amareloA, 
+    fontWeight:'bold'
+  },
   bookDate: {
     alignSelf: 'center',  
     color: cor.branco,
@@ -10,27 +23,33 @@ const home = StyleSheet.create({
     position: 'absolute', 
     top: 80
   },
-  botaoLogin: {
-    marginBottom: 5,
-    marginTop: 50,
-    top: 10
-  },
   botaoCadastro: {  
-    marginBottom: 5,
-    marginTop: 5,
-    top: 25,
+    borderColor: cor.amarelo,
+    borderRadius: 100, 
+    height: 47,
+    justifyContent: 'center',   
+    marginRight: 30,
+    width: 190
   },
-  botaoTransparente: {
-    flexDirection: 'row', 
-    justifyContent: 'space-around',
-    margin: 30
+  botaoLogin: {
+    borderColor: cor.amarelo,
+    borderRadius: 100, 
+    height: 47,
+    justifyContent: 'center',       
+    marginLeft: 30,
+    width: 190   
   },
-  botoes: {
-    alignItems: 'center',
-    flex:1, 
-    height: 40,
-    justifyContent: 'center', 
-    width: '100%', 
+  botoesTermos: {
+    alignSelf: 'center',
+    bottom: 0, 
+    flexDirection: 'row',
+    marginBottom: 10, 
+    justifyContent: 'space-between',
+    position: 'absolute'
+  },
+  imagemBackground: {
+    backgroundColor: cor.pretoTransparente, 
+    flex: 1
   }
 })
 

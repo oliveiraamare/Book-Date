@@ -186,8 +186,8 @@ class UploadImagem extends Component {
         console.log('succ ')
         console.log(response)
       }).catch(error => {
-      console.log('error ')
-      alert.log(error)
+        console.log('error ')
+        alert(error)
       })
   }
 }

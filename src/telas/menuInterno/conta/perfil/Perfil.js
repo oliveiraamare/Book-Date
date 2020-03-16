@@ -13,6 +13,17 @@ import perfil from '../../../../estilos/perfil';
 import cor from '../../../../estilos/cores';
 
 class Perfil extends Component {
+  
+  handleDelete = () => {
+    var user = Firebase.auth().currentUser;
+    if (user) {
+      console.log(user)
+      alert(user)
+    } else {
+      console.log('deu ruim;')
+    }
+  }
+  
   render() {
     return (    
       <View style={perfil.container}>  

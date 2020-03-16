@@ -1,51 +1,47 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import QUOTES from './frases.json';
+import { StyleSheet, Text, View } from 'react-native';
+import Citacoes from './frases.json';
 
 import cor from '../../estilos/cores';
 
-const defaultStyles = {
-  fraseStyle: {
-    alignItem: 'flex-end',
-    borderRadius: 5,
-    bottom: 100,    
-    fontSize: 14,
-    padding: 8,             
-  },
-};
-
 class FrasesAleatorias extends Component {
-  static defaultProps = {
-    fraseStyle: {},
-  };
 
-  constructor(props) {
-    super(props);
-    this.styles = {
-      fraseStyle: {
-        ...defaultStyles.fraseStyle,
-        ...this.props.fraseStyle,
-      },
-    };
-  }
-
-  getQuote() {
-    return QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  retornaCitacao() {
+    return Citacoes[Math.floor(Math.random()*Citacoes.length)];
   }
 
   render() {
-    const q = this.getQuote();
+    const citacao = this.retornaCitacao();
     return (
-      <View style={this.styles.fraseStyle}>
-        <Text style={{color: cor.branco, textAlign: 'right'}}>
-          {q.texto}
+      <View style={styles.frase}>
+        <Text style={styles.citacao}>
+          {citacao.texto}
         </Text>
-        <Text style={{color: cor.amarelo, textAlign: 'right'}}>
-          {q.autor}
+        <Text style={styles.autor}>
+          {citacao.autor}
         </Text>
       </View>      
     );
   }
 }
+
+const styles = StyleSheet.create({
+  autor: {
+    color: cor.amarelo, 
+    textAlign: 'center'
+  },
+  citacao: {
+    color: cor.branco, 
+    textAlign: 'center',
+  },
+  frase: {
+    alignItems: 'center',
+    fontSize: 14,
+    marginBottom :200,
+    marginTop: 300,
+    padding: 8
+  }
+})
+
 
 export default FrasesAleatorias;

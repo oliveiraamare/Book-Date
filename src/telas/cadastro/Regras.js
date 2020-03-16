@@ -13,7 +13,7 @@ import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 import { BotaoTouchableOpacity  }from '../../componentes/botao';
 
-import {recuperarDados} from './RecuperarDados';
+import { recuperarDados } from './RecuperarDados';
 
 class Regras extends Component {
 
