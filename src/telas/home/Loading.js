@@ -18,8 +18,8 @@ class Loading extends Component {
     .onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? 'NavegacaoInterna' : 'Home')
     })
-  }
-
+  }  
+  
   render() {
     return (      
       <View style={compartilhado.container}>

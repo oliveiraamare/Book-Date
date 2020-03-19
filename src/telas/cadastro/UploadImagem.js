@@ -169,7 +169,7 @@ class UploadImagem extends Component {
       type: 'image/jpg'
     })
     
-    let filename = pictureuri.split('/').pop();
+    let filename = apiUrl.split('/').pop();
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
     let formData = new FormData();

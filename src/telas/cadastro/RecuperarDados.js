@@ -16,87 +16,74 @@ export const recuperarDados = async() => {
     geolocalizacao = JSON.parse(geolocalizacao);
 
     if ((cadastro != null) && (preferencias != null) && (imagem != null) && (geolocalizacao != null)) {
-      var email = cadastro.email;
+      var email= cadastro.email;
       var senha = cadastro.senha;
-      var nome = cadastro.nome;
-      var dtNasc = cadastro.dtNasc;
-      var cidade = cadastro.cidade;
-      var genero = cadastro.genero; 
-
-      var citacao = preferencias.citacao; 
-      var singularidade = preferencias.singularidade; 
-      var sinopse = preferencias.sinopse;
-      var generoLiterario = preferencias.generoLiterario; 
-      var aventura = preferencias.aventura;
-      var prosa = preferencias.prosa; 
-      var misterio = preferencias.misterio; 
-      var contoFadas = preferencias.contoFadas;
-
-      var imagem = imagem.image;
-
-      var pais = geolocalizacao.pais; 
-      var estado = geolocalizacao.estado; 
-      var rua = geolocalizacao.rua;
-      var latitude = geolocalizacao.latitude; 
-      var longitude = geolocalizacao.longitude;
-
       var usuario = {
-        email, senha, nome, dtNasc, cidade, genero,
+        email,
+        senha, 
+        nome: cadastro.nome,
+        dtNasc: cadastro.dtNasc,
+        cidade: cadastro.cidade,
+        genero: cadastro.genero, 
         preferencias: {
-          citacao, singularidade, sinopse, generoLiterario, aventura, prosa, misterio, contoFadas
-        },
-        imagem: {
-          imagem
-        },
-        geolocalizacao: {
-          pais, estado, rua, latitude, longitude
+          citacao: preferencias.citacao,
+          singularidade: preferencias.singularidade,
+          sinopse: preferencias.sinopse,
+          generoLiterario: preferencias.generoLiterario,
+          aventura: preferencias.aventura,
+          prosa: preferencias.prosa,
+          misterio: preferencias.misterio,
+          contoFadas: preferencias.contoFadas
         }
       }
-      alert('meu email: ' + email + ' ' + senha + ' ' + dtNasc + ' ' +cidade + ' ' + genero)  
-      handleSignUp(email, senha, usuario, imagem);
+      var geo = {
+        latitude: geolocalizacao.latitude, 
+        longitude: geolocalizacao.longitude
+      }
+      var imagem = imagem.image;
+      handleSignUp(email, senha, usuario, geo, imagem);
     }
   } catch {
     alert('Não possuimos data')
   }
 }
 
-export const  handleSignUp = (email, password, usuario, imagem) => {
+export const  handleSignUp = (email, password, usuario, geo, imagem) => {
   Firebase.auth()
   .createUserWithEmailAndPassword(email, password)
-  .then(() => writeUserData(usuario, imagem))
+  .then(() => salvarUsuario(usuario, geo, imagem))
   .catch(error => alert('erro no handleSignUp: ' + error.message + ' ' + error))
 }
 
-export const writeUserData = (usuario, imagem) => {
+export const salvarUsuario = (usuario, geo, imagem) => {
   var user = Firebase.auth().currentUser;
-    if (user) {
-      console.log(user.uid)
-      alert(user.uid)
-    } else {
-      console.log('deu ruim')
-    }
+  console.log(user.uid);
   Firebase.database().ref('usuarios/' + user.uid).set(usuario)
-  .then(() => uploadImagem(imagem))
+  .then(() => 
+    salvarGeolocalizacao(user, geo),
+    uploadImagem(user, imagem)
+  )
   .catch(error => {
-    alert('writeUserData: '+ error.message  + ' ' + error)
+    alert('salvarUsuario: '+ error.message  + ' ' + error)
   })
 }
 
-async function uploadImagem(imagem) {
-  var user = Firebase.auth().currentUser;
-  if (user) {
-    console.log(user.uid)
-    alert(user.uid)
-  } else {
-    console.log('deu ruim')
-  }
-    const response = await fetch(imagem);
-    const blob = await response.blob();
-    var ref = Firebase.storage().ref('imagens/' + user.uid)
-    ref.getDownloadURL().then(function(url) {
-      console.log(url);
+export const salvarGeolocalizacao = (user, geo) => {
+  Firebase.database().ref('geolocalizacao/' + user.uid).set(geo)
+  .then(() => alert('Salvei essa bagaça!!!!'))
+  .catch(error => {
+    alert('salvarUsuario: '+ error.message  + ' ' + error)
+  })
+}
+
+async function uploadImagem(user, imagem) {
+  const response = await fetch(imagem);
+  const blob = await response.blob();
+  var ref = Firebase.storage().ref('imagens/' + user.uid)
+  ref.getDownloadURL().then(function(url) {
+    console.log(url);
   }, function(error){
-      console.log(error);
+    console.log(error);
   });
   ref.put(blob).then(function(snapshot) {
     console.log('Uploaded a blob or file!');
