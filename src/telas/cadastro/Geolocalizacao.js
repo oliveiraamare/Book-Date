@@ -20,24 +20,16 @@ class Geolocalizacao extends Component {
     super(props);
     this.state = {
       location: null,
-      geocode: null,
-      errorMessage: ''
+      geocode: null
     };
   }
-
-  componentDidMount() {
-    this.getLocationAsync()
-  }
-
   getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'A permissão para acessar a localização foi negada',
-      });
+      this.props.navigation.navigate('PermissaoGeo');
     }
     if (status == 'granted') {
-      //this.props.navigation.navigate('Regras');
+      this.props.navigation.navigate('Regras');
     }
     let location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.BestForNavigation});
     const { latitude , longitude } = location.coords
@@ -52,22 +44,16 @@ class Geolocalizacao extends Component {
 
   salvarGeo = () => {
     const { location, geocode } = this.state
-    const pais = geocode  ? `${geocode[0].isoCountryCode}` : '';
-    const estado = geocode ? `${geocode[0].region}` : '';
-    const rua = geocode ? geocode[0].street : '';
     const latitude = location ? `${location.latitude}` : '';
     const longitude = location ? `${location.longitude}` : '';
 
     let geolocalizacao = {
-      pais: pais,
-      estado: estado,
-      rua: rua,
       latitude: latitude,
       longitude: longitude
     }
     AsyncStorage.setItem('geolocalizacao', JSON.stringify(geolocalizacao)).then(
       ()=>{
-        alert('Itens salvos: ' + pais + ' ' + estado + ' ' + rua + ' ' + latitude + ' ' + longitude);//colocar console.log depois
+        alert('Itens salvos: ' + latitude + ' ' + longitude);//colocar console.log depois
       }).catch( ()=>{
        alert('Itens não salvos')
       }
@@ -80,7 +66,8 @@ class Geolocalizacao extends Component {
   }
 
   render() {
-    const { location, geocode, errorMessage } = this.state
+    this.getLocationAsync();
+    const { location, geocode } = this.state
     return (
       <View style={compartilhado.container}>
         <ImageBackground
@@ -99,11 +86,7 @@ class Geolocalizacao extends Component {
             />      
             <View style={geo.viewContainer}>
               <Text style={geo.titulo}>Você está aqui!</Text>
-              <Text style={geo.texto}>{geocode ? `${geocode[0].isoCountryCode}`:''}</Text>
-              <Text style={geo.texto}>{geocode ? `${geocode[0].region}`:''}</Text>
-              <Text style={geo.texto}>{geocode ? geocode[0].street :""}</Text>
               <Text style={geo.texto}>{location ? `${location.latitude}, ${location.longitude}` :""}</Text>
-              <Text style={geo.permissaoNegada}>{errorMessage}</Text>
             </View>
             <BotaoTouchableOpacity 
               buttonStyle={geo.botao}

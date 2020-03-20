@@ -12,7 +12,7 @@ const compartilhado = StyleSheet.create({
     flex: 1
   },
   imagemBackground: {
-    flex:1,
+    flex: 1,
     height: DIMENSION_HEIGHT + 56,
 		resizeMode: 'cover',
 		width: DIMENSION_WIDTH

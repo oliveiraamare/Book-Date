@@ -1,48 +1,96 @@
+//https://www.npmjs.com/package/age-calculator      
 import React, { Component } from 'react';
 import {
-  ImageBackground,
+  Image,
+  ImageBackground, 
   ScrollView, 
   Text,
   View
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import Firebase from '../../../../../Firebase';
 
 import { Preferencias } from '../../../../componentes/topPreferencias';
 
 import perfil from '../../../../estilos/perfil';
+import compartilhado from '../../../../estilos/compartilhado';
 import cor from '../../../../estilos/cores';
 
+let { AgeFromDateString } = require('age-calculator');
+
 class Perfil extends Component {
-  
-  handleDelete = () => {
-    var user = Firebase.auth().currentUser;
-    if (user) {
-      console.log(user)
-      alert(user)
-    } else {
-      console.log('deu ruim;')
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      autor: '',
+      generoLiterario: {},
+      livro: '',
+      preferencias: {},
+      url: '',
+      usuario: {}
+    };
   }
-  
+  componentDidMount() {
+    this.getAndLoadHttpUrl()
+  }
+
+  async getAndLoadHttpUrl() {
+     var ref = Firebase.storage().ref('imagens/' + 'TElode8r55OPlcduRoKU1hLuyNE2')
+     var imagem = await ref.getDownloadURL()
+     this.setState({ url: imagem });
+
+    Firebase.database().ref('usuarios/' + 'TElode8r55OPlcduRoKU1hLuyNE2').once('value')
+    .then((snapshot) => {
+      var usuario = snapshot.val();
+      this.setState({usuario});
+      var preferencias = usuario.preferencias;
+      this.setState({preferencias});
+      var autor = usuario.preferencias.autor;
+      this.setState({autor});
+      var generoLiterario = usuario.preferencias.generoLiterario;
+      this.setState({generoLiterario});
+      var livro = usuario.preferencias.livro;
+      this.setState({livro});
+    });
+  }
+
   render() {
+    var dtNasc = this.state.usuario.dtNasc
+    let idade = new AgeFromDateString(dtNasc).age;
+    var x = this.state.url
+    console.log(x)
     return (    
-      <View style={perfil.container}>  
-        <ImageBackground 
-          source={require('../../../../imagens/fotoPerfil.jpg')} 
-          style={perfil.imagemBackground}
-        >      
-          <ScrollView style={perfil.scrollView}>
-            <View style={perfil.containerPerfilComDescricoes}>
+      <View style={compartilhado.container}> 
+        <View style={compartilhado.statusBar}/>
+        <ImageBackground style={compartilhado.imagemBackground}> 
+          <ScrollView style={perfil.scrollView}>        
+            <Image
+              source={require('../../../../imagens/perfil.jpg')} 
+              style={perfil.imagemFrame}
+            /> 
+            <Image
+              source={{uri:x}}
+              style={perfil.imagemPerfil}
+            />            
+            <View style={perfil.containerInfo}>
               <View style={perfil.containerNome}>
-                <Text style={perfil.nome}>
-                  Thellen Santiago
-                </Text>
+              <Icon.Button
+                name='edit'
+                backgroundColor='transparent'
+                onPress={() => this.props.navigation.navigate('EditarPerfil')}
+                style={perfil.botaoEditar}
+              >
+                {this.state.usuario.nome}
+              </Icon.Button>
               </View>
               <Text style={perfil.descricaoIdadeCidade}>
-                26 anos, Rio de Janeiro
+                {idade} anos, {this.state.usuario.cidade}
               </Text>
+              
               <Text style={perfil.citacao}>
-                "Você só vive uma vez. É sua obrigação aproveitar a vida da melhor forma possível."
+                '{this.state.preferencias.citacao}'
               </Text>      
               <View style={perfil.preferencias}>
                 <Text style={perfil.perguntas}>
@@ -53,9 +101,9 @@ class Perfil extends Component {
                     title='Aventura'
                     checkedIcon='user-circle' 
                     uncheckedIcon='circle-o'
-                    uncheckedColor={cor.rosa}
+                    uncheckedColor={cor.amarelo}
                     checked={true}
-                    checkedColor={cor.rosa}
+                    checkedColor={cor.amarelo}
                     size={20}
                     containerStyle={{ backgroundColor: 'transparent', borderColor: 'transparent' }}
                     textStyle={{fontSize: 14, color:cor.branco}}
@@ -64,31 +112,27 @@ class Perfil extends Component {
                     title='Mistério'
                     checkedIcon='user-circle' 
                     uncheckedIcon='circle-o'
-                    uncheckedColor={cor.rosa}
+                    uncheckedColor={cor.amarelo}
                     checked={true}
-                    checkedColor={cor.rosa}
+                    checkedColor={cor.amarelo}
                     size={20}
                     containerStyle={{ backgroundColor: 'transparent', borderColor: 'transparent'}}
                     textStyle={{fontSize: 14, paddingLeft: 10,color:cor.branco}}
                   />  
                 </View>
               </View>
-              <View style={perfil.info}>
-                <Text style={perfil.perguntas}
-                  >Se a sua vida fosse um livro, qual seria a sinopse?
-                </Text>
-                <Text style={perfil.respostas}>
-                  A vida é uma tempestade (...) Um dia você está tomando sol e no dia seguinte o mar te lança contra as rochas. O que faz de você um homem é o que você faz quando a tempestade vem.
-                </Text>     
-              </View>       
-              <View style={perfil.info}>
-                <Text style={perfil.perguntas}>
-                  Peculiariedades
-                </Text>
-                <Text style={perfil.respostas}>
-                  Eu sou muito peculiar, impulsivo. Eu gosto de controlar, a mim mesmo e aqueles ao meu redor.
-                </Text>     
-              </View>        
+              <Text style={perfil.perguntas}>
+                Se a sua vida fosse um livro, qual seria a sinopse?
+              </Text>
+              <Text style={perfil.respostas}>
+                {this.state.preferencias.sinopse}
+              </Text>         
+              <Text style={perfil.perguntas}>
+                Peculiaridades
+              </Text>
+              <Text style={perfil.respostas}>
+                {this.state.preferencias.singularidade}
+              </Text>        
               <View style={perfil.preferenciasLiterarias}>
                 <Text style={perfil.perguntas}>
                   Top 3 de preferências literárias
@@ -96,26 +140,26 @@ class Perfil extends Component {
                 <Preferencias 
                   tituloStyle={perfil.preferenciasLiterariasResposta}
                   titulo="Autor"
-                  opcao1="Carlos Drummond" 
-                  opcao2="Shakspeare"
-                  opcao3="J. K. Rowling"
+                  opcao1={this.state.autor[0]}
+                  opcao2={this.state.autor[1]}
+                  opcao3={this.state.autor[2]}
                 />
                 <Preferencias 
                   tituloStyle={perfil.preferenciasLiterariasResposta}
                   titulo="Gênero"
-                  opcao1="Romance" 
-                  opcao2="Esotérico"
-                  opcao3="J. K. Rowling"
+                  opcao1={this.state.generoLiterario[0]}
+                  opcao2={this.state.generoLiterario[1]}
+                  opcao3={this.state.generoLiterario[2]}
                 />
                 <Preferencias 
                   tituloStyle={perfil.preferenciasLiterariasResposta}
                   titulo="Livro"
-                  opcao1="Harry Potter e a Pedra Filosofal" 
-                  opcao2="Cinquenta Tons de Cinza"
-                  opcao3="O livreiro de Cabul"
+                  opcao1={this.state.livro[0]}
+                  opcao2={this.state.livro[1]}
+                  opcao3={this.state.livro[2]}
                 /> 
               </View>          
-            </View>
+            </View>                                
           </ScrollView>
         </ImageBackground>
       </View>

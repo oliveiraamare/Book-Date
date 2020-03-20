@@ -18,7 +18,7 @@ export default class Calendario extends Component {
           androidMode="spinner"
           showIcon= {false}
           placeholder="Quando você nasceu?"
-          format="DD-MM-YYYY"
+          format="YYYY-MM-DD"
           minDate="01-01-1910"
           maxDate="06-06-2002"
           confirmBtnText="Confirm"

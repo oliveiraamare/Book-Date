@@ -1,28 +1,31 @@
+
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { ImageBackground, View , StyleSheet} from 'react-native';
 
-import compartilhado from '../../../estilos/compartilhado';
-import cor from '../../../estilos/cores';
-
-import { AppBarHeader } from '../../../componentes/tabBar/AppBarHeader';
-class EditarPerfil extends Component {
-  render() {      
+import compartilhado from '../../../../estilos/compartilhado';
+import cor from '../../../../estilos/cores';
+export default class Mensagem extends Component {
+  render() {
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
-        <AppBarHeader 
-          headerStyle={{
-            backgroundColor:cor.preto, 
-            borderBottomColor:cor.branco,
-            borderBottomWidth:0.18
-          }} 
-          onPress={() => this.props.navigation.navigate('')} 
-          title={"Apagar Conta"} 
-          style={{color:cor.branco, fontSize:18}} 
+        <ImageBackground
+          source={require('../../../../imagens/fundo.jpg')} 
+          style={compartilhado.imagemBackground}
         />
       </View>
-    )
+    );
   }
 }
 
-export default EditarPerfil;
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: 'transparent', 
+    borderBottomColor: cor.branco,
+    borderBottomWidth: 0.18
+  },
+  appBarHeader: {
+    color: cor.branco, 
+    fontSize: 18
+  },
+})

@@ -134,8 +134,6 @@ class UploadImagem extends Component {
       if (!pickerResult.cancelled) {
         this.setState({ image: pickerResult.uri });
       }
-
-      this.uploadImageAsync(pickerResult.uri);
     }
   };
 
@@ -155,44 +153,9 @@ class UploadImagem extends Component {
       if (!pickerResult.cancelled) {
         this.setState({ image: pickerResult.uri});
       }
-
-      this.uploadImageAsync(pickerResult.uri);
     }
   };
-
-  uploadImageAsync(pictureuri) {
-    let apiUrl = 'http://123.123.123.123/ABC';
-    var data = new FormData();  
-    data.append('file', {  
-      uri: pictureuri,
-      name: 'file',
-      type: 'image/jpg'
-    })
-    
-    let filename = apiUrl.split('/').pop();
-    let match = /\.(\w+)$/.exec(filename);
-    let type = match ? `image/${match[1]}` : `image`;
-    let formData = new FormData();
-    formData.append('photo', { uri: apiUrl, name: filename, type });
-
-    fetch(apiUrl, {  
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data'
-      },
-      method: 'POST',
-      body: data
-    }).then(
-      response => {
-        console.log('succ ')
-        console.log(response)
-      }).catch(error => {
-        console.log('error no upload' + error)
-        alert(error)
-      })
-  }
 }
-
 
 const frase='Se uma imagem vale mais do que mil palavras, então diga isto com uma imagem.';
 const autor='Millôr Fernandes';

@@ -10,7 +10,7 @@ export const Preferencias = ({ tituloStyle, titulo, opcao1, opcao2, opcao3 }) =>
     <View style={{flexDirection:'row'}}>
       <MaterialCommunityIcons 
         name='numeric-1-box-multiple-outline' 
-        color={cor.rosa} 
+        color={cor.amarelo} 
         size={20} 
       />
       <Text style={styles.opcao}>{opcao1}</Text> 
@@ -18,7 +18,7 @@ export const Preferencias = ({ tituloStyle, titulo, opcao1, opcao2, opcao3 }) =>
     <View style={{flexDirection:'row'}}>
       <MaterialCommunityIcons 
         name='numeric-2-box-multiple-outline' 
-        color={cor.rosa} 
+        color={cor.amarelo} 
         size={20} 
       />
       <Text style={styles.opcao}>{opcao2}</Text> 
@@ -26,7 +26,7 @@ export const Preferencias = ({ tituloStyle, titulo, opcao1, opcao2, opcao3 }) =>
     <View style={{flexDirection:'row'}}>
       <MaterialCommunityIcons 
         name='numeric-3-box-multiple-outline' 
-        color={cor.rosa} 
+        color={cor.amarelo} 
         size={20}       
       />
       <Text style={styles.opcao}>{opcao3}</Text> 
@@ -36,7 +36,7 @@ export const Preferencias = ({ tituloStyle, titulo, opcao1, opcao2, opcao3 }) =>
 
 const styles = StyleSheet.create({
   opcao: {
-    color: cor.rosaClaro,
+    color: cor.amareloA,
 		fontSize: 12,
 		paddingBottom: 5,
 		paddingHorizontal: 5,

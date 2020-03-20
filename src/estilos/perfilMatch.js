@@ -1,10 +1,10 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from 'react-native';
 import cor from './cores';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
 
-const perfil = StyleSheet.create({
+const perfilMatch = StyleSheet.create({
 	botao: {
 		alignContent:'center',
 		alignItems: 'center',
@@ -14,18 +14,6 @@ const perfil = StyleSheet.create({
 		justifyContent: 'center',
 		marginLeft: 10,		
 		paddingHorizontal: 20,
-	},
-	botaoEditar: {
-		alignSelf:'center',
-		color: cor.branco,      
-		backgroundColor: cor.amarelo,
-		borderRadius: 20,
-		fontWeight: 'bold',
- 		justifyContent:'center',
-		paddingHorizontal: 30,
-		paddingVertical: 9,
-		textAlign: 'center',
-		width: 190
 	},
 	citacao: {
 		color: cor.amareloA,
@@ -43,7 +31,13 @@ const perfil = StyleSheet.create({
 	},
 	containerNome: {
 		alignSelf: 'center',   
-		marginTop: -15
+		backgroundColor: cor.amarelo,
+		borderRadius: 20,
+		marginTop: -15,
+		paddingHorizontal: 30,
+		paddingVertical: 9,
+		textAlign: 'center',
+		width: 190
 	},
 	containerInfo: {
 		alignSelf: 'center',
@@ -78,6 +72,11 @@ const perfil = StyleSheet.create({
 		marginLeft: 37,
 		position:'absolute',   
 		width: 280
+	},
+	nome: {
+		alignSelf:'center',
+		color: cor.branco,
+		fontWeight: 'bold'
 	},
 	perguntas: {
 		alignSelf:'flex-start',
@@ -137,4 +136,4 @@ const perfil = StyleSheet.create({
 	},	
 });
 	
-export default perfil;
+export default perfilMatch;

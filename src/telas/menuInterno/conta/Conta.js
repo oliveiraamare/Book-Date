@@ -25,6 +25,7 @@ class Conta extends Component {
     super(props);
     this.state = {
       isSwitchOn: false,
+      url: ''
     };
   }
   
@@ -36,8 +37,19 @@ class Conta extends Component {
         alert('Usuário fez logout!'))
       .catch(error => alert(error))
   }
+  componentDidMount() {
+    this.getAndLoadHttpUrl()
+  }
+
+  async getAndLoadHttpUrl() {
+     var ref = Firebase.storage().ref('imagens/' + 'TElode8r55OPlcduRoKU1hLuyNE2')
+     var imagem = await ref.getDownloadURL()
+     this.setState({ url: imagem });
+}
 
   render() {
+    var x = this.state.url
+    console.log(x)
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
@@ -49,7 +61,7 @@ class Conta extends Component {
             <View style={conta.viewAvatar}>
               <View style={{marginRight: 15}}>
                 <Avatar.Image 
-                  size={200} source={require('../../../imagens/fotoPerfil.jpg')} 
+                  size={200} source={{uri:this.state.url}} 
                 />
               </View>    
               <View style={conta.viewTexto}>

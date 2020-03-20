@@ -12,7 +12,7 @@ import compartilhado from '../../../estilos/compartilhado';
 import Firebase from '../../../../Firebase';
 
 export const salvarUsuario = () => {
-  Firebase.database().ref("geolocalizacao/").limitToLast(20).on('value', (snapshot) => {
+/*  Firebase.database().ref("geolocalizacao/").limitToLast(20).on('value', (snapshot) => {
     var returnArr = [];
     snapshot.forEach(function(childSnapshot) {
         var item = childSnapshot.val();
@@ -34,14 +34,10 @@ export const salvarUsuario = () => {
     console.log('tomara que de certo: ', sortByDistance(origin, points, opts));
   })
 }
-
+salvarUsuario()*/
+}
 class Match extends Component {
-  salvarUsuario()
   render() {
-    var user = Firebase.auth().currentUser;
-    var uid = user.uid;
-    console.log(uid)
-    alert(uid)
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />    
