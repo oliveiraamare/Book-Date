@@ -9,33 +9,87 @@ import CardItem from '../../../componentes/CardItem';
 import Demo from './demo.js';
 
 import compartilhado from '../../../estilos/compartilhado';
-import Firebase from '../../../../Firebase';
+import Firebase from '../../../firebase/Firebase';
 
-export const salvarUsuario = () => {
-/*  Firebase.database().ref("geolocalizacao/").limitToLast(20).on('value', (snapshot) => {
-    var returnArr = [];
-    snapshot.forEach(function(childSnapshot) {
-        var item = childSnapshot.val();
-        item.key = childSnapshot.key;
-        returnArr.push(item)       
-    });
-    const sortByDistance = require('sort-by-distance')
-    const points = [
-      returnArr[0], returnArr[1], returnArr[2], returnArr[3], returnArr[4],
-      returnArr[5], returnArr[6], returnArr[7], returnArr[8], returnArr[9],
-      returnArr[10], returnArr[11], returnArr[12], returnArr[13], returnArr[14],
-      returnArr[15], returnArr[16], returnArr[17], returnArr[18], returnArr[19]
-    ]
-    const opts = {
-      yName: 'latitude',
-      xName: 'longitude'
+import { firestore, usuarioUid } from '../../../firebase/acoes';
+
+import { GeoCollectionReference, GeoFirestore, GeoQuery, GeoQuerySnapshot } from 'geofirestore';
+import * as firebase from 'firebase';
+
+
+export const  getNearestLocations = async () => {
+    try {    
+      // Create a GeoFirestore reference
+      const geofirestore = new GeoFirestore(firestore);
+
+      // Create a GeoCollection reference
+      const geocollection = geofirestore.collection('usuarios');
+
+      // Create a GeoQuery based on a location
+      const query = geocollection.near({
+        center: new firebase.firestore.GeoPoint(-22.753, -43.279),
+        radius: 20000,
+      });
+         // Get query (as Promise)
+         query.get().then((value) => {
+          console.log(value.docs); // All docs returned by GeoQuery
+        });
+  
+        /*
+          var fire = firestore.collection('usuarios');
+          if (buscando ==  'Ambos'){
+            fire.get()
+            .then(function(querySnapshot) {
+              querySnapshot.forEach(function(doc) {
+                console.log(doc.id, " => ", doc.data());
+              });
+            })
+            .catch(function(error) {
+              console.log("Error getting documents: ", error);
+            });
+          } else {
+            fire.where('sexo', 'array-contains', buscando).get()
+            .then(function(querySnapshot) {
+              querySnapshot.forEach(function(doc) {
+                console.log(doc.id, " => ", doc.data());
+              });
+            })
+            .catch(function(error) {
+               console.log("Error getting documents: ", error);
+            });
+          }         
+        */
+
+      var fire = firestore.collection('usuarios');
+
+      fire.where('sexo', 'array-contains', 'Leitor').get()
+      .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+          });
+      })
+      .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+      console.log('\n novo')
+      fire.get().doc('localizacao')
+      .then(function(querySnapshot) {
+          //querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+     //     });
+      })
+      .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+
+
+   
+    }catch (error) {
+      console.log(error);
     }
-    const origin = { longitude: -42.419415, latitude: -22.2752762};
-    console.log('tomara que de certo: ', sortByDistance(origin, points, opts));
-  })
+  
 }
-salvarUsuario()*/
-}
+getNearestLocations()
 class Match extends Component {
   render() {
     return (

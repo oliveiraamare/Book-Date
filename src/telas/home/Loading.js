@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
 
-import Firebase from '../../../Firebase';
+import Firebase from '../../firebase/Firebase';
 
 import cor from '../../estilos/cores';
 import compartilhado from '../../estilos/compartilhado';

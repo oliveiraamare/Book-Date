@@ -10,7 +10,7 @@ import {
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Firebase from '../../../../../Firebase';
+import {storage, database} from '../../../../firebase/acoes';
 
 import { Preferencias } from '../../../../componentes/topPreferencias';
 
@@ -37,12 +37,12 @@ class Perfil extends Component {
   }
 
   async getAndLoadHttpUrl() {
-     var ref = Firebase.storage().ref('imagens/' + 'TElode8r55OPlcduRoKU1hLuyNE2')
-     var imagem = await ref.getDownloadURL()
-     this.setState({ url: imagem });
+    var imagemStorage = storage('imagens/');
+    var imagemUrl = await imagemStorage.getDownloadURL()
+    this.setState({ url: imagemUrl });
 
-    Firebase.database().ref('usuarios/' + 'TElode8r55OPlcduRoKU1hLuyNE2').once('value')
-    .then((snapshot) => {
+    var usuarioDatabase = database('usuarios/');
+    usuarioDatabase.once('value').then((snapshot) => {
       var usuario = snapshot.val();
       this.setState({usuario});
       var preferencias = usuario.preferencias;
@@ -59,8 +59,6 @@ class Perfil extends Component {
   render() {
     var dtNasc = this.state.usuario.dtNasc
     let idade = new AgeFromDateString(dtNasc).age;
-    var x = this.state.url
-    console.log(x)
     return (    
       <View style={compartilhado.container}> 
         <View style={compartilhado.statusBar}/>
@@ -71,7 +69,7 @@ class Perfil extends Component {
               style={perfil.imagemFrame}
             /> 
             <Image
-              source={{uri:x}}
+              source={{uri:this.state.url}}
               style={perfil.imagemPerfil}
             />            
             <View style={perfil.containerInfo}>

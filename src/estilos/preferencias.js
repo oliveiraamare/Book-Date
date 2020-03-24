@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent:'center',
     marginTop: 20, 
-    marginBottom: 80,
+    marginBottom: 10,
     marginLeft: 5,
     width: 90
   },

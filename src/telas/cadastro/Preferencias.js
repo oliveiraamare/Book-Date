@@ -8,20 +8,18 @@ import {
   Text,
   View , 
 } from 'react-native';
+import { TagSelect } from 'react-native-tag-select-max';
 
 import preferencias from '../../estilos/preferencias';
 import compartilhado from '../../estilos/compartilhado';
 
 import { AppBarHeader } from '../../componentes/header';
-import { BotaoTouchableOpacity }from '../../componentes/botao';
 import { FraseTop } from '../../componentes/frase';
-
 import TextoMultilinha from '../../componentes/textInput/TextMultiline';
-import { TagSelect } from 'react-native-tag-select-max';
 import Checkbox from '../../componentes/Checkbox';
+import { BotaoTouchableOpacity }from '../../componentes/botao';
 
 // TODO ajeitar KeyboardAvoidingView
-// cadastro no banco
 
 class Preferencias extends Component {
 
@@ -42,27 +40,39 @@ class Preferencias extends Component {
         'Policial',
         'Romance',
         'Terror'
-      ],    
+      ],  
       aventura: false,
       prosa: false,
       misterio: false,
-      contoFadas: false  
+      contoFadas: false, 
+      genero: [
+        'Leitor',
+        'Leitora',
+        'Ambos'
+      ]
     };
   }
 
-  handleLogin = () => {
+  handlePreferencias = () => {
     this.salvarPreferencias();
     this.props.navigation.navigate('UploadImagem');
   }
  
   salvarPreferencias = () => {
-    const { citacao, singularidade, sinopse, aventura, prosa, misterio, contoFadas } = this.state;
-    const generoLiterario = this.tag.itemsSelected;    
+
+    const citacao = this.state.citacao.length > 0 ? this.state.citacao : 'não informado';
+
+    const singularidade =  this.state.singularidade.length > 0 ? this.state.singularidade : 'não informado';
+
+    const { sinopse, aventura, prosa, misterio, contoFadas } = this.state;
+    const generoLiterario = this.tag.itemsSelected; 
+    const genero = this.genero.itemsSelected;    
     let preferencias = {
       citacao: citacao,
       singularidade: singularidade,
       sinopse: sinopse,
       generoLiterario: generoLiterario,
+      genero: genero,
       aventura: aventura,
       prosa: prosa,
       misterio: misterio,
@@ -70,7 +80,7 @@ class Preferencias extends Component {
     }
     AsyncStorage.setItem('preferencias', JSON.stringify(preferencias)).then(
       ()=>{
-        alert('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario);//colocar console.log depois
+        alert('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + genero);//colocar console.log depois
       }).catch( ()=>{
        alert('Itens não salvos');
       }
@@ -144,7 +154,7 @@ class Preferencias extends Component {
                     onPress={checked => this.setState({ prosa: !this.state.prosa })}                  
                   />
                 </View>
-                <View style={{flexDirection: 'row', marginBottom: 30}}>
+                <View style={{flexDirection: 'row', marginBottom: 15}}>
                   <Checkbox title='Mistério'
                     checked={this.state.misterio}
                     onPress={checked => this.setState({ misterio: !this.state.misterio })}                   
@@ -176,13 +186,35 @@ class Preferencias extends Component {
                     itemStyleSelected={preferencias.tagItemSelecionado}
                     itemLabelStyleSelected={preferencias.tagLabelSelecionado}
                   />
-                </ScrollView>   
-                <BotaoTouchableOpacity 
-                  buttonStyle={preferencias.botao}
-                  onPress={() => this.handleLogin()}
-                  text="Continuar" 
-                  textStyle={preferencias.botaoTexto}
-                />
+                </ScrollView>  
+                
+                <Text style={preferencias.texto}>
+                  Quem você deseja encontrar?
+                </Text> 
+                <View style={{alignItems:'center'}}>
+                  <TagSelect
+                    data={this.state.genero}
+                    max={1}
+                    ref={(genero) => {
+                      this.genero = genero;
+                    }}
+                    onMaxError={() => {
+                      Alert.alert('Ops', 'Max reached' + JSON.stringify(this.genero.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
+                    }}
+                    itemStyle={preferencias.tagItem}
+                    itemLabelStyle={preferencias.tagLabel}
+                    itemStyleSelected={preferencias.tagItemSelecionado}
+                    itemLabelStyleSelected={preferencias.tagLabelSelecionado}
+                  />
+                </View>
+                <View style={{marginTop: 70}}>
+                  <BotaoTouchableOpacity 
+                    buttonStyle={preferencias.botao}
+                    onPress={() => this.handlePreferencias()}
+                    text="Continuar" 
+                    textStyle={preferencias.botaoTexto}
+                  />
+                </View>
               </KeyboardAvoidingView>
             </ScrollView>
           </View>

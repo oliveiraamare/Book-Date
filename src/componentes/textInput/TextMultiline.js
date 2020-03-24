@@ -11,17 +11,17 @@ class TextoMultilinha extends Component {
     } = this.props;
     return (
       <View>
-          <TextInput
-            autoCapitalize='none'
-            style={[styles.textInput, inputStyle]}
-            placeholder={placeHolder}
-            placeholderTextColor= {cor.branco}
-            selectionColor={cor.branco}
-            multiline={multiline}
-            maxLength={maxLength}
-            numberOfLines={numberOfLines} 
-            {...otherProps}
-          />      
+        <TextInput
+          autoCapitalize='none'
+          style={[styles.textInput, inputStyle]}
+          placeholder={placeHolder}
+          placeholderTextColor= {cor.branco}
+          selectionColor={cor.branco}
+          multiline={multiline}
+          maxLength={maxLength}
+          numberOfLines={numberOfLines} 
+          {...otherProps}
+        />      
       </View>
     );
   }

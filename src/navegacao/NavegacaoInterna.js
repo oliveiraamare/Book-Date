@@ -44,7 +44,7 @@ function HomeTabs({ navigation, route }) {
       }}  
     >
       <Tab.Screen
-        name="BookLovers" component={Perfil} 
+        name="BookLovers" component={Match} 
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-heart" color={color} size={size} />

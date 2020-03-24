@@ -20,7 +20,7 @@ class Notificacao extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <ImageBackground
-          source={require('../../imagens/fundo.jpg')} 
+          source={require('../../imagens/40.jpg')} 
           style={compartilhado.imagemBackground}
         >
           <Appbar style={notificacao.header}> 

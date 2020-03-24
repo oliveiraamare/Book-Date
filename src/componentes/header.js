@@ -25,6 +25,12 @@ export const AppBarHeader = ({ headerStyle, onPress, style, title }) => (
   </View>
 )
 
+export const Header = ({ headerStyle, onPress, style, title }) => (
+  <View style={compartilhado.container}>
+    <View style={compartilhado.statusBar} />
+  </View>
+)
+
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'transparent', 

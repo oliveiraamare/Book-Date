@@ -9,7 +9,7 @@ import { AppBarHeader } from '../../../componentes/header';
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
 import { FraseTop } from '../../../componentes/frase';
 
-import Firebase from '../../../../Firebase';
+import Firebase from '../../../firebase/Firebase';
 
 class DeletarConta extends Component {
 

@@ -9,9 +9,8 @@ import {
   ActivityIndicator,
   AsyncStorage,
   ImageBackground,
-  Clipboard,
   Text,
-  View,
+  View
 } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -35,16 +34,13 @@ class UploadImagem extends Component {
   }
 
   handleImagem = () => {
-    this.salvarCadastro();
+    this.salvarImagem();
     this.props.navigation.navigate('PermissaoGeo');
   }
 
-  salvarCadastro = () => {
+  salvarImagem = () => {
     const { image } = this.state;
-    let imagem = {
-      image: image
-    }
-    AsyncStorage.setItem('imagem', JSON.stringify(imagem)).then(
+    AsyncStorage.setItem('imagem', JSON.stringify(image)).then(
       ()=>{
         alert('Item salvo: ' + image);//colocar console.log depois
       }).catch( ()=>{
@@ -108,11 +104,6 @@ class UploadImagem extends Component {
         </View>
       );
     }
-  };
-
-  _copyToClipboard = () => {
-    Clipboard.setString(this.state.image);
-    alert('Copied image URL to clipboard');
   };
 
   _tirarFoto = async () => {

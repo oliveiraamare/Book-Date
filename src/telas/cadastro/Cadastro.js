@@ -40,7 +40,7 @@ class Cadastro extends Component {
       nome: '',
       data: '',
       cidade: '',
-      genero: [
+      sexo: [
         'Leitor',
         'Leitora'
       ]
@@ -54,20 +54,21 @@ class Cadastro extends Component {
   }
 
   salvarCadastro = () => {
-    const { email, senha, nome, cidade } = this.state;
-    const genero = this.tag.itemsSelected;    
+    const { email, senha, senhaConfirme, nome, cidade } = this.state;
+    const sexo = this.tag.itemsSelected;    
     const dtNasc = this.state.data;
     let cadastro = {
       email: email,
       senha: senha,
+      senhaConfirme: senhaConfirme,
       nome: nome,
       dtNasc: dtNasc,
       cidade: cidade,
-      genero: genero 
+      sexo: sexo 
     }
     AsyncStorage.setItem('cadastro', JSON.stringify(cadastro)).then(
       ()=>{
-        alert('Itens salvos: ' + email + ' ' + senha + ' ' + nome + ' '  + ' ' + dtNasc + ' ' + cidade + ' ' + genero);//colocar console.log depois
+        alert('Itens salvos: ' + email + ' ' + senha + ' ' + nome + ' '  + ' ' + dtNasc + ' ' + cidade + ' ' + sexo);//colocar console.log depois
       }).catch( ()=>{
        alert('Itens não salvos')
       }
@@ -83,7 +84,7 @@ class Cadastro extends Component {
         >
           <View style={compartilhado.imagemTransparente}>
             <AppBarHeader 
-              onPress={() => this.props.navigation.navigate('Login')} 
+              onPress={() => this.props.navigation.navigate('Home')} 
               title={"Cadastro"} 
             />              
             <ScrollView>
@@ -111,6 +112,13 @@ class Cadastro extends Component {
                   value={this.state.senha}
                   onChangeText={senha => this.setState({ senha })}
                 />     
+                <TextoInput
+                  inputStyle={cadastro.textInput}
+                  placeHolder='Confirme a senha'
+                  secureTextEntry={true}
+                  value={this.state.senhaConfirme}
+                  onChangeText={senhaConfirme => this.setState({ senhaConfirme })}
+                />   
                 <Text style={cadastro.texto}>
                   Fale um pouco sobre você
                 </Text>
@@ -123,6 +131,8 @@ class Cadastro extends Component {
                 <Calendario
                   date={ this.state.data}
                   onDateChange={data => this.setState({ data })}
+                  placeholder="Quando você nasceu?"
+                  dateInputStyle={cadastro.dateInput}
                 />     
                 <TextoInput
                   inputStyle={cadastro.textInput}
@@ -134,7 +144,7 @@ class Cadastro extends Component {
                   Como se identifica?
                 </Text>
                 <TagSelect
-                  data={this.state.genero}
+                  data={this.state.sexo}
                   max={1}
                   ref={(tag) => {
                     this.tag = tag;

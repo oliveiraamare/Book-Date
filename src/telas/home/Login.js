@@ -7,7 +7,7 @@ import {
   View    
 } from 'react-native';
 
-import Firebase from '../../../Firebase';
+import Firebase from '../../firebase/Firebase';
 
 import login from '../../estilos/login';
 import compartilhado from '../../estilos/compartilhado';

@@ -15,7 +15,7 @@ import { BotaoTransparente  } from '../../componentes/botao';
 import compartilhado from '../../estilos/compartilhado';
 import reenviarSenha from '../../estilos/reenviarSenha';
 
-import Firebase from '../../../Firebase';
+import Firebase from '../../firebase/Firebase';
 class ReenviarSenha extends Component {
   
   constructor(props) {

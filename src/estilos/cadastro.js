@@ -22,6 +22,17 @@ const cadastro = StyleSheet.create({
     color: cor.amareloA, 
     fontWeight:'bold'
   },
+  dateInput: {
+    alignItems: 'flex-start',
+    borderBottomWidth: 1, 
+    borderColor: cor.branco, 
+    borderTopColor: 'transparent',
+    borderLeftWidth: 0,
+    borderRightWidth : 0,
+    height: 50,  
+    margin: 40,
+    paddingLeft: 15
+  },
   header: {
     alignSelf: 'flex-end'
   },
@@ -32,15 +43,6 @@ const cadastro = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     textAlign:'justify'     
-  },
-  texto: {
-    color: cor.amarelo,  
-    fontSize: 15 ,  
-    marginBottom: 10,
-    marginTop: 20,
-    paddingLeft: 10,
-    paddingRight: 10,
-    textAlign: 'justify'
   },
   tagItem: {
     alignItems: 'center',
@@ -75,6 +77,15 @@ const cadastro = StyleSheet.create({
     marginTop: 5, 
     paddingLeft: 20,
     paddingRight: 20    
+  },
+  texto: {
+    color: cor.amarelo,  
+    fontSize: 15 ,  
+    marginBottom: 10,
+    marginTop: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+    textAlign: 'justify'
   }
 })
 

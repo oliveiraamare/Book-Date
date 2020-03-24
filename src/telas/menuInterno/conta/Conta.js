@@ -11,13 +11,13 @@ import { Avatar } from 'react-native-paper';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
-import FrasesPerfil from '../../../componentes/fraseAleatoria/frasesPerfil'
+import FrasesPerfil from '../../../componentes/fraseAleatoria/frasesPerfil';
 
 import compartilhado from '../../../estilos/compartilhado';
 import conta from '../../../estilos/conta';
 import cor from '../../../estilos/cores';
 
-import Firebase from '../../../../Firebase';
+import Firebase from '../../../firebase/Firebase';
 
 class Conta extends Component {
 
@@ -54,7 +54,7 @@ class Conta extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <ImageBackground
-          source={require('../../../imagens/fundo.jpg')} 
+          source={require('../../../imagens/41.jpg')} 
           style={compartilhado.imagemBackground}
         >
           <ScrollView >
@@ -156,8 +156,7 @@ class Conta extends Component {
             <BotaoTransparente
               buttonStyle={{marginTop:50, marginBottom: 60}}
               onPress={() => this.props.navigation.navigate('DeletarConta')}
-              texto="Deletar Conta"
-              
+              texto="Deletar Conta"              
             />
           </ScrollView>
         </ImageBackground>

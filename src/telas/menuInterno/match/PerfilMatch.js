@@ -13,7 +13,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
 
-import Firebase from '../../../../Firebase';
+import Firebase from '../../../firebase/Firebase';
 
 import { Preferencias } from '../../../componentes/topPreferencias';
 

@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     padding: 10
   },  
   subtitulo: {
+    alignSelf: 'flex-end',
     color: cor.amarelo
   }
 });

@@ -7,7 +7,7 @@ import DatePicker from 'react-native-datepicker';
 import cor from '../estilos/cores'; 
 export default class Calendario extends Component {
   render(){
-    const { date, onDateChange } = this.props
+    const { date, onDateChange, placeholder, dateInputStyle } = this.props
     return (
       <View style={styles.container}>
         <DatePicker
@@ -17,14 +17,14 @@ export default class Calendario extends Component {
           mode="date"
           androidMode="spinner"
           showIcon= {false}
-          placeholder="Quando você nasceu?"
+          placeholder={placeholder}
           format="YYYY-MM-DD"
-          minDate="01-01-1910"
-          maxDate="06-06-2002"
+          minDate="1910-01-01"
+          maxDate="2002-06-06"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
-            dateInput: styles.dateInput,
+            dateInput: dateInputStyle,
             dateText: {
               color: cor.branco 
             },
@@ -45,16 +45,5 @@ const styles = StyleSheet.create ({
     alignSelf: 'center', 
     marginBottom: 10, 
     marginTop: 5
-  },
-  dateInput: {
-    alignItems: 'flex-start',
-    borderBottomWidth: 1, 
-    borderColor: cor.branco, 
-    borderTopColor: 'transparent',
-    borderLeftWidth: 0,
-    borderRightWidth : 0,
-    height: 50,  
-    margin: 40,
-    paddingLeft: 15
   }
 })
