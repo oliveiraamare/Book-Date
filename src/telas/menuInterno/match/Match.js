@@ -71,8 +71,11 @@ export const  getNearestLocations = async () => {
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });
-      console.log('\n novo')
-      fire.get().doc('localizacao')
+      console.log('          novo')
+
+
+
+      fire.get().equalTo("localizacao")
       .then(function(querySnapshot) {
           //querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
