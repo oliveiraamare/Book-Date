@@ -1,3 +1,9 @@
+/*import { AsyncStorage } from 'react-native';
+
+AsyncStorage.getItem('matchProximos');
+var matches = JSON.parse(matchProximos);*/
+
+
 module.exports = [
 	{
 		id: 1,

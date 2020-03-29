@@ -33,6 +33,13 @@ const editarPerfil = StyleSheet.create({
   info:{
     marginTop: 10
   },
+  listItem: {
+    backgroundColor: 'transparent',
+    borderBottomWidth: 1,
+    borderColor: cor.cinza, 
+    borderTopWidth: 1,
+    height: 50
+  },
 	preferencias: {
 		height: 70
 	},
@@ -78,7 +85,6 @@ const editarPerfil = StyleSheet.create({
     paddingRight: 20,
     width: DIMENSION_WIDTH - 40
   },
-
   multilinha: {
     //backgroundColor: cor.branco,
     borderBottomColor: cor.cinza,

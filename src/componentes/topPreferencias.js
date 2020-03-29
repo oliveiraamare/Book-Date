@@ -7,45 +7,63 @@ import TextoInput from '../componentes/textInput/TextInput';
 import cor from '../estilos/cores';
 
 export const TopPreferencias = ({ 
-  nomeIcone, inputStyle, placeHolder, ...otherProps 
+  nomeIcone, inputStyle, placeHolder, value, 
+  maxLength, onChangeText, ...otherProps 
 }) => (
   <View>  
     <View style={styles.container}>
       <MaterialCommunityIcons name={nomeIcone} color={cor.amarelo} size={20} />
       <TextoInput
-        inputStyle={[styles.textInput, inputStyle]}
-        placeHolder={placeHolder}
+        inputStyle={[styles.textInput, inputStyle]}   
+        maxLength={maxLength}
+        value={value}
+        onChangeText={onChangeText}
       />
     </View>
   </View>
 )
+
 export const Preferencias = ({ tituloStyle, titulo, opcao1, opcao2, opcao3 }) => (
   <View>
-    <Text style={tituloStyle}>{titulo}</Text>
-    <View style={{flexDirection:'row'}}>
-      <MaterialCommunityIcons 
-        name='numeric-1-box-multiple-outline' 
-        color={cor.amarelo} 
-        size={20} 
-      />
-      <Text style={styles.opcao}>{opcao1}</Text> 
+  { 
+    opcao1 == null ? null 
+    : <View style={{backgroundColor:'transparent'}}>
+        <Text style={tituloStyle}>{titulo}</Text>
+        <View style={{flexDirection:'row'}}>
+          <MaterialCommunityIcons 
+            name='numeric-1-box-multiple-outline' 
+            color={cor.amarelo} 
+            size={20} 
+          />
+          <Text style={styles.opcao}>{opcao1}</Text> 
+        </View>
+
+        {
+          opcao2 == null ? null
+          : <View style={{backgroundColor:'transparent'}}>
+              <View style={{flexDirection:'row'}}>
+                <MaterialCommunityIcons 
+                  name='numeric-2-box-multiple-outline' 
+                  color={cor.amarelo} 
+                  size={20} 
+                />          
+                <Text style={styles.opcao}>{opcao2}</Text> 
+              </View> 
+            {
+              opcao3 == null ? null
+              : <View style={{flexDirection:'row'}}>
+                  <MaterialCommunityIcons 
+                    name='numeric-3-box-multiple-outline' 
+                    color={cor.amarelo} 
+                    size={20}       
+                  />
+                  <Text style={styles.opcao}>{opcao3}</Text> 
+                </View> 
+            }
+          </View>  
+        }
     </View>
-    <View style={{flexDirection:'row'}}>
-      <MaterialCommunityIcons 
-        name='numeric-2-box-multiple-outline' 
-        color={cor.amarelo} 
-        size={20} 
-      />
-      <Text style={styles.opcao}>{opcao2}</Text> 
-    </View>   
-    <View style={{flexDirection:'row'}}>
-      <MaterialCommunityIcons 
-        name='numeric-3-box-multiple-outline' 
-        color={cor.amarelo} 
-        size={20}       
-      />
-      <Text style={styles.opcao}>{opcao3}</Text> 
-    </View>   
+  }
   </View>
 )
 

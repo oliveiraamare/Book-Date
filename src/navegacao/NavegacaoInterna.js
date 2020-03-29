@@ -14,18 +14,31 @@ import Match from '../telas/menuInterno/match/Match';
 import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
 import Notificacao from '../telas/menuInterno/Notificacao';
 
-import EditarPerfil from '../telas/menuInterno/conta/perfil/EditarPerfil';
+import EditarPerfil from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarPerfil';
+import EditarPreferencias from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarPreferencias';
+import EditarTopTres from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarTopTres';
 import DeletarConta from '../telas/menuInterno/conta/DeletarConta';
+import Loading from '../telas/menuInterno/match/Loading';
 import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
 import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
 
+import { usuariosMatch } from '../acoes/usuariosMatch'
+
 const Tab = createBottomTabNavigator();
+
+const match = async () => {
+  var async = await AsyncStorage.getItem('matchProximos');
+  var dados = JSON.parse(async);
+  this.setState({dados:dados});
+  //console.log(x)
+}
 
 function HomeTabs({ navigation, route }) {
   return (
+    usuariosMatch(),
     <Tab.Navigator
       initialRouteName="Match"
       tabBarOptions={{
@@ -88,7 +101,10 @@ export default function NavegacaoInterna() {
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Home" component={HomeTabs} />   
         <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
+        <Stack.Screen name="EditarPreferencias" component={EditarPreferencias} />
+        <Stack.Screen name="EditarTopTres" component={EditarTopTres} />
         <Stack.Screen name="DeletarConta" component={DeletarConta} />
+        <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="Perfil" component={Perfil} />
         <Stack.Screen name="PerfilMatch" component={PerfilMatch} />
         <Stack.Screen name="SobreNos" component={SobreNos} />

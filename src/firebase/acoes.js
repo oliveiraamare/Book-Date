@@ -23,9 +23,22 @@ export const usuario = () => {
   return usuario;
 }
 
+export const usuarioConectado = () => {
+  if(usuario()){
+    return usuario.uid;
+  } else {
+    return null;
+  }
+}
+
+export const firestore = firebase.firestore();
+
+export const collection = (colecao) => {
+  const collection = firestore.collection(colecao);
+  return collection;
+}
+
 export const passwordReset = {
   passwordReset: email => { 
     return firebase.auth().sendPasswordResetEmail(email);
 }}
-
-export const firestore = firebase.firestore();

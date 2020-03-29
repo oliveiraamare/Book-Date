@@ -1,160 +1,259 @@
 //https://www.npmjs.com/package/age-calculator      
 import React, { Component } from 'react';
 import {
-  ImageBackground, Image,
+  Image,
+  ImageBackground, 
   ScrollView, 
   Text,
-  View,
-  Vibration
+  View
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import { Dimensions, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const DIMENSION_WIDTH = Dimensions.get('window').width;
-const DIMENSION_HEIGHT = Dimensions.get('window').height;
-
-import Firebase from '../../../firebase/Firebase';
+import { firestore, usuarioUid } from '../../../firebase/acoes';
 
 import { Preferencias } from '../../../componentes/topPreferencias';
 
-import perfil from '../../../estilos/perfilMatch';
+import perfilMatch from '../../../estilos/perfilMatch';
 import compartilhado from '../../../estilos/compartilhado';
-
 import cor from '../../../estilos/cores';
+
 let { AgeFromDateString } = require('age-calculator');
 
+var  um, dois, tres;
 class Perfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      usuario: {},
+      preferencias: {},
+      aventura: '',
+      prosa: '',
+      misterio: '',
+      contoFadas: '',
       autor: '',
       generoLiterario: {},
-      livro: '',
-      preferencias: {},
-      url: '',
-      usuario: {}
+      livro: ''
     };
   }
   componentDidMount() {
-    this.getAndLoadHttpUrl()
+    this.getAndLoadDados()
   }
 
-  async getAndLoadHttpUrl() {
-     var ref = Firebase.storage().ref('imagens/' + 'TElode8r55OPlcduRoKU1hLuyNE2')
-     var imagem = await ref.getDownloadURL()
-     this.setState({ url: imagem });
-
-    Firebase.database().ref('usuarios/' + 'TElode8r55OPlcduRoKU1hLuyNE2').once('value')
-    .then((snapshot) => {
-      var usuario = snapshot.val();
+  async getAndLoadDados() {
+    var uid = usuarioUid();
+    var data = firestore.collection('usuarios').doc(uid);
+    data.get().then((doc) => {
+      var usuario = doc.data();
       this.setState({usuario});
       var preferencias = usuario.preferencias;
       this.setState({preferencias});
+
+      var aventura = preferencias.aventura;
+      this.setState({aventura});
+      var prosa = preferencias.prosa;
+      this.setState({prosa});
+      var misterio = preferencias.misterio;
+      this.setState({misterio})
+      var contoFadas = preferencias.contoFadas;
+      this.setState({contoFadas});
+     
       var autor = usuario.preferencias.autor;
       this.setState({autor});
       var generoLiterario = usuario.preferencias.generoLiterario;
       this.setState({generoLiterario});
       var livro = usuario.preferencias.livro;
       this.setState({livro});
+    })
+    .catch(function(error) {
+      console.log("Erro ao pegar dados do usuário: " + error + ' ' + error.message);
     });
-}
+  }
 
   render() {
-    var dtNasc = this.state.usuario.dtNasc
+    var dtNasc = this.state.usuario.dtNasc;
     let idade = new AgeFromDateString(dtNasc).age;
-    var x = this.state.url
-    console.log(x)
     return (    
       <View style={compartilhado.container}> 
         <View style={compartilhado.statusBar}/>
         <ImageBackground style={compartilhado.imagemBackground}> 
-          <ScrollView style={perfil.scrollView}>        
+          <ScrollView style={perfilMatch.scrollView}>        
             <Image
               source={require('../../../imagens/perfil.jpg')} 
-              style={perfil.imagemFrame}
+              style={perfilMatch.imagemFrame}
             /> 
             <Image
-              source={{uri:x}}
-              style={perfil.imagemPerfil}
+              source={{uri:this.state.usuario.imagem}}
+              style={perfilMatch.imagemPerfil}
             />            
-            <View style={perfil.containerInfo}>
-              <View style={perfil.containerNome}>
-                <Text style={perfil.nome}>
-                  {this.state.usuario.nome}
+            <View style={perfilMatch.containerInfo}>
+
+              <View style={perfilMatch.containerNome}>
+                <Text style={perfilMatch.nome}>
+                  {this.state.usuario.nome} 
                 </Text>
               </View>
-              <Text style={perfil.descricaoIdadeCidade}>
+
+              <Text style={perfilMatch.descricaoIdadeCidade}>
                 {idade} anos, {this.state.usuario.cidade}
-              </Text>
-              <Text style={perfil.citacao}>
-                '{this.state.preferencias.citacao}'
-              </Text>      
-              <View style={perfil.preferencias}>
-                <Text style={perfil.perguntas}>
-                  O que estais a buscar?
-                </Text>
-                <View style={{flexDirection: 'row'}}>
-                  <CheckBox
-                    title='Aventura'
-                    checkedIcon='user-circle' 
-                    uncheckedIcon='circle-o'
-                    uncheckedColor={cor.amarelo}
-                    checked={true}
-                    checkedColor={cor.amarelo}
-                    size={20}
-                    containerStyle={{ backgroundColor: 'transparent', borderColor: 'transparent' }}
-                    textStyle={{fontSize: 14, color:cor.branco}}
-                  />  
-                  <CheckBox
-                    title='Mistério'
-                    checkedIcon='user-circle' 
-                    uncheckedIcon='circle-o'
-                    uncheckedColor={cor.amarelo}
-                    checked={true}
-                    checkedColor={cor.amarelo}
-                    size={20}
-                    containerStyle={{ backgroundColor: 'transparent', borderColor: 'transparent'}}
-                    textStyle={{fontSize: 14, paddingLeft: 10,color:cor.branco}}
-                  />  
+              </Text> 
+
+              {
+                this.state.preferencias.citacao == 'não informado' ? 
+                  null
+                : <Text style={perfilMatch.citacao}>
+                    "{this.state.preferencias.citacao}"
+                  </Text>   
+              }  
+              
+              { 
+                (
+                  this.state.aventura == 'false' && this.state.contoFadas == 'false' &&
+                  this.state.misterio == 'false' && this.state.prosa == 'false'              
+                ) ? null :   
+                  
+                <View style={perfilMatch.preferencias}>
+                  <Text style={perfilMatch.perguntas}>
+                    O que estais a buscar?
+                  </Text>
+                  <View style={perfilMatch.checkboxContainer}>
+                    {
+                      this.state.aventura == false ? 
+                        null
+                      : <CheckBox
+                          disabled={true}
+                          title='Aventura'
+                          checkedIcon='user-circle' 
+                          uncheckedIcon='circle-o'
+                          uncheckedColor={cor.amarelo}
+                          checked={true}
+                          checkedColor={cor.amarelo}
+                          size={20}
+                          containerStyle={perfilMatch.checkbox}
+                          textStyle={perfilMatch.checkboxTexto}
+                        /> 
+                    }
+                    {
+                      this.state.prosa == false ? 
+                        null
+                      : <CheckBox
+                          disabled={true}
+                          title='Prosa'
+                          checkedIcon='user-circle' 
+                          uncheckedIcon='circle-o'
+                          uncheckedColor={cor.amarelo}
+                          checked={true}
+                          checkedColor={cor.amarelo}
+                          size={20}
+                          containerStyle={perfilMatch.checkbox}
+                          textStyle={perfilMatch.checkboxTexto}
+                        /> 
+                    }
+                    {
+                      this.state.misterio == false ? 
+                        null
+                      : <CheckBox
+                          disabled={true}
+                          title='Misterio'
+                          checkedIcon='user-circle' 
+                          uncheckedIcon='circle-o'
+                          uncheckedColor={cor.amarelo}
+                          checked={true}
+                          checkedColor={cor.amarelo}
+                          size={20}
+                          containerStyle={perfilMatch.checkbox}
+                          textStyle={perfilMatch.checkboxTexto}
+                        /> 
+                    }
+                    {
+                      this.state.contoFadas == false ? 
+                        null
+                      : <CheckBox
+                          disabled={true}
+                          title='Conto de Fadas'
+                          checkedIcon='user-circle' 
+                          uncheckedIcon='circle-o'
+                          uncheckedColor={cor.amarelo}
+                          checked={true}
+                          checkedColor={cor.amarelo}
+                          size={20}
+                          containerStyle={perfilMatch.checkbox}
+                          textStyle={perfilMatch.checkboxTexto}
+                        /> 
+                    }
+                  </View>
                 </View>
-              </View>
-              <Text style={perfil.perguntas}>
+              }
+
+              <Text style={perfilMatch.perguntas}>
                 Se a sua vida fosse um livro, qual seria a sinopse?
               </Text>
-              <Text style={perfil.respostas}>
+              <Text style={perfilMatch.respostas}>
                 {this.state.preferencias.sinopse}
-              </Text>         
-              <Text style={perfil.perguntas}>
-                Peculiaridades
-              </Text>
-              <Text style={perfil.respostas}>
-                {this.state.preferencias.singularidade}
-              </Text>        
-              <View style={perfil.preferenciasLiterarias}>
-                <Text style={perfil.perguntas}>
-                  Top 3 de preferências literárias
+              </Text> 
+
+              {
+                this.state.preferencias.singularidade == 'não informado' ? 
+                  null
+                : <View>
+                    <Text style={perfilMatch.perguntas}>
+                      Peculiaridades
+                    </Text>
+                    <Text style={perfilMatch.respostas}>
+                      {this.state.preferencias.singularidade}
+                    </Text>  
+                  </View>
+              }
+                  
+              <View style={perfilMatch.preferenciasLiterarias}>
+                <Text style={perfilMatch.perguntas}>
+                  Top preferências literárias
                 </Text>
+
+                {
+                  this.state.autor[0] == 'não informado' ? null 
+                  :   
+                    um = this.state.autor[0],
+                    dois = (
+                      this.state.autor[1] == 'não informado' ? null : this.state.autor[1]
+                    ),
+                    tres = (
+                      this.state.autor[2] == 'não informado' ? null : this.state.autor[2]
+                    ),                    
+                    <Preferencias 
+                      tituloStyle={perfilMatch.preferenciasLiterariasResposta}
+                      titulo="Autor"
+                      opcao1={um}
+                      opcao2={dois}
+                      opcao3={tres}
+                    />                  
+                }
+
                 <Preferencias 
-                  tituloStyle={perfil.preferenciasLiterariasResposta}
-                  titulo="Autor"
-                  opcao1={this.state.autor[0]}
-                  opcao2={this.state.autor[1]}
-                  opcao3={this.state.autor[2]}
-                />
-                <Preferencias 
-                  tituloStyle={perfil.preferenciasLiterariasResposta}
+                  tituloStyle={perfilMatch.preferenciasLiterariasResposta}
                   titulo="Gênero"
                   opcao1={this.state.generoLiterario[0]}
                   opcao2={this.state.generoLiterario[1]}
                   opcao3={this.state.generoLiterario[2]}
                 />
-                <Preferencias 
-                  tituloStyle={perfil.preferenciasLiterariasResposta}
-                  titulo="Livro"
-                  opcao1={this.state.livro[0]}
-                  opcao2={this.state.livro[1]}
-                  opcao3={this.state.livro[2]}
-                /> 
+                
+                {
+                  this.state.livro[0] == 'não informado' ? null 
+                  : um = this.state.livro[0],
+                    dois = (
+                      this.state.livro[1] == 'não informado' ? null : this.state.livro[1]
+                    ),
+                    tres = (
+                      this.state.livro[2] == 'não informado' ? null : this.state.livro[2]
+                    ),    
+                    <Preferencias 
+                      tituloStyle={perfilMatch.preferenciasLiterariasResposta}
+                      titulo="Livro"
+                      opcao1={um}
+                      opcao2={dois}
+                      opcao3={tres}
+                    /> 
+                }
               </View>          
             </View>                                
           </ScrollView>

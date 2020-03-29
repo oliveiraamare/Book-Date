@@ -18,38 +18,45 @@ import conta from '../../../estilos/conta';
 import cor from '../../../estilos/cores';
 
 import Firebase from '../../../firebase/Firebase';
+import { usuarioUid, collection } from '../../../firebase/acoes';
 
 class Conta extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      usuario: {},
       isSwitchOn: false,
       url: ''
     };
   }
-  
+
+  componentDidMount() {
+    this.getAndLoadDados()
+  }
+
+  async getAndLoadDados() {
+    var uid = usuarioUid();
+    var data = collection('usuarios').doc(uid);
+    data.get().then((doc) => {
+      var usuario = doc.data(); 
+      this.setState({usuario});
+    })
+    .catch(function(error) {
+      console.log("Erro ao pegar dados do usuário: " + error + ' ' + error.message);
+    });
+  }
+
   handleLogout = () => {
     Firebase
-      .auth()
-      .signOut()
-      .then(() => 
-        alert('Usuário fez logout!'))
-      .catch(error => alert(error))
+    .auth()
+    .signOut()
+    .then(() => 
+      alert('Usuário fez logout!'))
+    .catch(error => alert(error))
   }
-  componentDidMount() {
-    this.getAndLoadHttpUrl()
-  }
-
-  async getAndLoadHttpUrl() {
-     var ref = Firebase.storage().ref('imagens/' + 'TElode8r55OPlcduRoKU1hLuyNE2')
-     var imagem = await ref.getDownloadURL()
-     this.setState({ url: imagem });
-}
 
   render() {
-    var x = this.state.url
-    console.log(x)
     return (
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
@@ -61,12 +68,12 @@ class Conta extends Component {
             <View style={conta.viewAvatar}>
               <View style={{marginRight: 15}}>
                 <Avatar.Image 
-                  size={200} source={{uri:this.state.url}} 
+                  size={200} source={{uri:this.state.usuario.imagem}} 
                 />
               </View>    
               <View style={conta.viewTexto}>
                 <Text style={{color: cor.cinza, fontSize: 20}}>
-                  Thellen Santiago
+                  {this.state.usuario.nome}
                 </Text>
                 <FrasesPerfil />
               </View>

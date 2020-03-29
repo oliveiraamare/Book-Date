@@ -55,7 +55,7 @@ class Cadastro extends Component {
 
   salvarCadastro = () => {
     const { email, senha, senhaConfirme, nome, cidade } = this.state;
-    const sexo = this.tag.itemsSelected;    
+    const sexo = this.tag.itemsSelected;  
     const dtNasc = this.state.data;
     let cadastro = {
       email: email,
@@ -64,7 +64,7 @@ class Cadastro extends Component {
       nome: nome,
       dtNasc: dtNasc,
       cidade: cidade,
-      sexo: sexo 
+      sexo: sexo[0] 
     }
     AsyncStorage.setItem('cadastro', JSON.stringify(cadastro)).then(
       ()=>{
@@ -108,6 +108,7 @@ class Cadastro extends Component {
                 <TextoInput
                   inputStyle={cadastro.textInput}
                   placeHolder='Senha'
+                  maxLength={15}
                   secureTextEntry={true}
                   value={this.state.senha}
                   onChangeText={senha => this.setState({ senha })}
@@ -115,6 +116,7 @@ class Cadastro extends Component {
                 <TextoInput
                   inputStyle={cadastro.textInput}
                   placeHolder='Confirme a senha'
+                  maxLength={15}
                   secureTextEntry={true}
                   value={this.state.senhaConfirme}
                   onChangeText={senhaConfirme => this.setState({ senhaConfirme })}
@@ -124,7 +126,8 @@ class Cadastro extends Component {
                 </Text>
                 <TextoInput
                   inputStyle={cadastro.textInput}
-                  placeHolder='Como se chama?'   
+                  placeHolder='Como se chama?' 
+                  maxLength={20}
                   value={this.state.nome}
                   onChangeText={nome => this.setState({ nome })}
                 />
@@ -137,6 +140,7 @@ class Cadastro extends Component {
                 <TextoInput
                   inputStyle={cadastro.textInput}
                   placeHolder='Qual é a sua cidade natal?'
+                  maxLength={20}
                   value={this.state.cidade}
                   onChangeText={cidade => this.setState({ cidade })}
                 />               

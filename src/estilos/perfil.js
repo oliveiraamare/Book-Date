@@ -27,6 +27,22 @@ const perfil = StyleSheet.create({
 		textAlign: 'center',
 		width: 190
 	},
+	checkbox: {
+		backgroundColor: 'transparent', 
+		borderColor: 'transparent'
+	},
+	checkboxContainer: {
+		alignItems: 'center',
+		flexDirection: 'row',  
+		flexWrap: 'wrap', 
+		margin: 5,
+		width: DIMENSION_WIDTH - 25 
+	},
+	checkboxTexto: {
+		fontSize: 14, 
+		paddingLeft: 10,
+		color: cor.branco
+	},
 	citacao: {
 		color: cor.amareloA,
 		fontSize: 16,

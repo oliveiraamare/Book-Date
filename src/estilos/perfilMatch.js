@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from "react-native";
 import cor from './cores';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
@@ -14,6 +14,34 @@ const perfilMatch = StyleSheet.create({
 		justifyContent: 'center',
 		marginLeft: 10,		
 		paddingHorizontal: 20,
+	},
+	botaoEditar: {
+		alignSelf:'center',
+		color: cor.branco,      
+		backgroundColor: cor.amarelo,
+		borderRadius: 20,
+		fontWeight: 'bold',
+ 		justifyContent:'center',
+		paddingHorizontal: 30,
+		paddingVertical: 9,
+		textAlign: 'center',
+		width: 190
+	},
+	checkbox: {
+		backgroundColor: 'transparent', 
+		borderColor: 'transparent'
+	},
+	checkboxContainer: {
+		alignItems: 'center',
+		flexDirection: 'row',  
+		flexWrap: 'wrap', 
+		margin: 5,
+		width: DIMENSION_WIDTH - 25 
+	},
+	checkboxTexto: {
+		fontSize: 14, 
+		paddingLeft: 10,
+		color: cor.branco
 	},
 	citacao: {
 		color: cor.amareloA,

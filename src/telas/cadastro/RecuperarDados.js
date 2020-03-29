@@ -22,7 +22,7 @@ export const recuperarCadastro = async() => {
       dtNasc: cadastro.dtNasc,
       cidade: cadastro.cidade,
       sexo: cadastro.sexo, 
-      buscando: preferencias.genero,
+      buscando: preferencias.buscando,
       preferencias: {
         citacao: preferencias.citacao,
         singularidade: preferencias.singularidade,
@@ -32,8 +32,8 @@ export const recuperarCadastro = async() => {
         prosa: preferencias.prosa,
         misterio: preferencias.misterio,
         contoFadas: preferencias.contoFadas,
-        autor: ['não informado', 'não informado', 'não informado'],
-        livro: ['não informado', 'não informado', 'não informado']
+        autor: { 0: 'não informado', 1: 'não informado', 2: 'não informado'},
+        livro: { 0: 'não informado', 1: 'não informado', 2: 'não informado'},
       }
     }
 
@@ -83,7 +83,7 @@ const salvarGeolocalizacao = (uid, lat, long) => {
   }, { merge: true });
 }
 
-const uploadImagem = async(uid, imagem) => {
+export const uploadImagem = async(uid, imagem) => {
   const resposta = await fetch(imagem);
   const blob = await resposta.blob();
 
@@ -104,6 +104,7 @@ const uploadImagem = async(uid, imagem) => {
 const inserirURLFirestore = (uid, downloadURL) => {
   var imagemFirestore = firestore.collection('usuarios').doc(uid);
   imagemFirestore.set({
-    imagem: downloadURL
+    imagem: downloadURL,
+    uid: uid
   }, { merge: true });
 }

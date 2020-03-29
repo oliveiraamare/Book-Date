@@ -32,9 +32,7 @@ class Geolocalizacao extends Component {
   getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'A permissão para acessar a localização foi negada',
-      });
+      this.props.navigation.navigate('PermissaoGeo');
     }
     if (status == 'granted') {
       //this.props.navigation.navigate('Regras');

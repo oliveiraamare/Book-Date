@@ -45,7 +45,7 @@ class Preferencias extends Component {
       prosa: false,
       misterio: false,
       contoFadas: false, 
-      genero: [
+      buscando: [
         'Leitor',
         'Leitora',
         'Ambos'
@@ -66,13 +66,17 @@ class Preferencias extends Component {
 
     const { sinopse, aventura, prosa, misterio, contoFadas } = this.state;
     const generoLiterario = this.tag.itemsSelected; 
-    const genero = this.genero.itemsSelected;    
+    const buscando = this.buscando.itemsSelected;    
     let preferencias = {
       citacao: citacao,
       singularidade: singularidade,
       sinopse: sinopse,
-      generoLiterario: generoLiterario,
-      genero: genero,
+      generoLiterario: {
+        0: generoLiterario[0],
+        1: generoLiterario[1],
+        2: generoLiterario[2]
+      },
+      buscando: buscando[0],
       aventura: aventura,
       prosa: prosa,
       misterio: misterio,
@@ -80,7 +84,7 @@ class Preferencias extends Component {
     }
     AsyncStorage.setItem('preferencias', JSON.stringify(preferencias)).then(
       ()=>{
-        alert('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + genero);//colocar console.log depois
+        alert('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + buscando);//colocar console.log depois
       }).catch( ()=>{
        alert('Itens não salvos');
       }
@@ -193,13 +197,13 @@ class Preferencias extends Component {
                 </Text> 
                 <View style={{alignItems:'center'}}>
                   <TagSelect
-                    data={this.state.genero}
+                    data={this.state.buscando}
                     max={1}
-                    ref={(genero) => {
-                      this.genero = genero;
+                    ref={(buscando) => {
+                      this.buscando = buscando;
                     }}
                     onMaxError={() => {
-                      Alert.alert('Ops', 'Max reached' + JSON.stringify(this.genero.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
+                      Alert.alert('Ops', 'Max reached' + JSON.stringify(this.buscando.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
                     }}
                     itemStyle={preferencias.tagItem}
                     itemLabelStyle={preferencias.tagLabel}
