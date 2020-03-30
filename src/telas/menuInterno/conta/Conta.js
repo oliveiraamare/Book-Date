@@ -77,7 +77,7 @@ class Conta extends Component {
             <View style={conta.viewAvatar}>
               <View style={{marginRight: 15}}>
                 <Avatar.Image 
-                  size={200} source={{uri:this.state.usuario.imagem}} 
+                  size={200} //source={{uri:this.state.usuario.imagem}} 
                 />
               </View>    
               <View style={conta.viewTexto}>

@@ -18,7 +18,7 @@ import compartilhado from '../../../estilos/compartilhado';
 import { BarIndicator } from 'react-native-indicators';
 import cor from '../../../estilos/cores';
 
-import { usuario } from '../../../firebase/acoes'
+import { usuarioUid } from '../../../firebase/acoes'
 
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
@@ -34,7 +34,7 @@ class Match extends Component {
     };
   }
   componentDidMount() {  
-    console.log(usuario())
+    console.log(usuarioUid())
    // this.match();
     setTimeout(() => {
       this.setState({isBVisible:true});

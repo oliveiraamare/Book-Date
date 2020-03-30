@@ -91,31 +91,31 @@ class Preferencias extends Component {
         var sinopse = preferencias.sinopse; this.setState({ sinopse });
 
         var aventura = preferencias.aventura; 
-        if(aventura != undefined){
-          this.setState({ aventura });
-        } else {
+        if(aventura == undefined){
           this.setState({ aventura: false });
+        } else {
+          this.setState({ aventura });
         };
 
         var prosa = preferencias.prosa;
-        if(aventura != undefined){
-          this.setState({ prosa });
-        } else {
+        if(prosa == undefined){
           this.setState({ prosa: false });
+        } else {
+          this.setState({ prosa });
         };
 
         var misterio = preferencias.misterio;
-        if(misterio != undefined){
-          this.setState({ misterio });
-        } else {
+        if(misterio == undefined){
           this.setState({ misterio: false });
+        } else {
+          this.setState({ misterio });
         };
 
         var contoFadas = preferencias.contoFadas;
-        if(contoFadas != undefined){
-          this.setState({ contoFadas });
-        } else {
+        if(contoFadas == undefined){
           this.setState({ contoFadas: false });
+        } else {
+          this.setState({ contoFadas });
         };
                 
         var buscando = preferencias.buscando; 
@@ -131,7 +131,10 @@ class Preferencias extends Component {
         }
         
       } else {
-        return
+        var aventura = false; this.setState({ aventura });
+        var prosa = false; this.setState({ prosa });
+        var misterio = false; this.setState({ misterio });
+        var contoFadas = false; this.setState({ contoFadas });
       }
     }).done();
   }
@@ -143,6 +146,7 @@ class Preferencias extends Component {
     const { sinopse, aventura, prosa, misterio, contoFadas } = this.state;
     const generoLiterario = this.generoLiterario.itemsSelected; 
     const buscando = this.buscando.itemsSelected;    
+    
     const preferencias = {
       citacao: citacao,
       singularidade: singularidade,
