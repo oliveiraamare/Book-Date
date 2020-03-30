@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
 import { 
+  BackHandler,
   ImageBackground, 
   Text, 
   View 
@@ -12,9 +13,22 @@ import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 import { BotaoTouchableOpacity  }from '../../componentes/botao';
 
-import { recuperarCadastro } from './RecuperarDados';
+import { recuperarCadastro } from '../../acoes/recuperarCadastro';
 
 class Regras extends Component {
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBack);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBack);
+  }
+
+  onBack = () => {
+    this.props.navigation.navigate('Geolocalizacao');    
+    return true;
+  }
 
   handleCadastroBanco = () => {
     recuperarCadastro();
@@ -29,13 +43,10 @@ class Regras extends Component {
         >
           <View style={compartilhado.imagemTransparente}>
             <AppBarHeader 
-              onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
+              onPress={() => this.props.navigation.navigate('Geolocalizacao')} 
               title={"Regras"} 
             />
-            <FraseTop 
-              titleStyle={regras.titleStyle} subtitleStyle={regras.subtitleStyle} 
-              title={frase} subtitle={autor}  
-            />           
+            <FraseTop titleStyle={{fontSize: 20}} subtitleStyle={{alignSelf: 'center'}} title={frase} subtitle={autor} />           
             <View style={regras.texto}>
               <Text style={regras.paragrafo}> 
                 Eu quero muito fazer isso dar certo. 

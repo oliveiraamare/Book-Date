@@ -1,84 +1,34 @@
 import React, { Component } from 'react';
 import { 
-  AsyncStorage, 
-  ImageBackground,
+  BackHandler,
+  ImageBackground, 
   Text, 
   View 
 } from 'react-native';
-import * as Permissions from 'expo-permissions';
-import * as Location from 'expo-location';
+import { Avatar } from 'react-native-paper';
 
-import { BotaoTouchableOpacity  } from '../../componentes/botao';
+import { BotaoTouchableOpacity  }from '../../componentes/botao';
 import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 
 import compartilhado from '../../estilos/compartilhado';
-import geo from '../../estilos/geolocalizacao';
-
+import permissaoGeo from '../../estilos/permissaoGeo';
 class Geolocalizacao extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: null,
-      geocode: null,
-      errorMessage: ''
-    };
-  }
 
   componentDidMount() {
-    this.getLocationAsync()
+    BackHandler.addEventListener('hardwareBackPress', this.onBack);
   }
 
-  getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.props.navigation.navigate('PermissaoGeo');
-    }
-    if (status == 'granted') {
-      //this.props.navigation.navigate('Regras');
-    }
-    let location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.BestForNavigation});
-    const { latitude , longitude } = location.coords
-    this.getGeocodeAsync({latitude, longitude})
-    this.setState({ location: {latitude, longitude}});
-  };
-
-  getGeocodeAsync= async (location) => {
-    let geocode = await Location.reverseGeocodeAsync(location)
-    this.setState({ geocode})
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBack);
   }
 
-  salvarGeo = () => {
-    const { location, geocode } = this.state
-    const pais = geocode  ? `${geocode[0].isoCountryCode}` : '';
-    const estado = geocode ? `${geocode[0].region}` : '';
-    const rua = geocode ? geocode[0].street : '';
-    const latitude = location ? `${location.latitude}` : '';
-    const longitude = location ? `${location.longitude}` : '';
-
-    let geolocalizacao = {
-      pais: pais,
-      estado: estado,
-      rua: rua,
-      latitude: latitude,
-      longitude: longitude
-    }
-    AsyncStorage.setItem('geolocalizacao', JSON.stringify(geolocalizacao)).then(
-      ()=>{
-        alert('Itens salvos: ' + pais + ' ' + estado + ' ' + rua + ' ' + latitude + ' ' + longitude);//colocar console.log depois
-      }).catch( ()=>{
-       alert('Itens não salvos')
-      }
-    );
-  }
-
-  handleGeo = () => {
-    this.salvarGeo();
-    this.props.navigation.navigate('Regras');
+  onBack = () => {
+    this.props.navigation.navigate('UploadImagem');    
+    return true;
   }
 
   render() {
-    const { location, geocode, errorMessage } = this.state
     return (
       <View style={compartilhado.container}>
         <ImageBackground
@@ -87,37 +37,34 @@ class Geolocalizacao extends Component {
         >
           <View style={compartilhado.imagemTransparente}>
             <AppBarHeader 
-              onPress={() => this.props.navigation.navigate('PermissaoGeo')} 
-              title={"Queremos te Encontrar"} 
-            />  
-            <FraseTop 
-              subtitleStyle={geo.header} 
-              title={frase} 
-              subtitle={autor} 
-            />      
-            <View style={geo.viewContainer}>
-              <Text style={geo.titulo}>O usuário não vai ver isso</Text>
-              <Text style={geo.titulo}>Você está aqui!</Text>
-              <Text style={geo.texto}>{geocode ? `${geocode[0].isoCountryCode}`:''}</Text>
-              <Text style={geo.texto}>{geocode ? `${geocode[0].region}`:''}</Text>
-              <Text style={geo.texto}>{geocode ? geocode[0].street :""}</Text>
-              <Text style={geo.texto}>{location ? `${location.latitude}, ${location.longitude}` :""}</Text>
-              <Text style={geo.permissaoNegada}>{errorMessage}</Text>
+              onPress={() => this.props.navigation.navigate('UploadImagem')} 
+              title={"Cadê o Wally?"} 
+            />
+            <FraseTop title={frase} subtitle={autor} />
+            <View style={{margin:10, top:5}}>
+              <Avatar.Icon 
+                size={200} 
+                icon="map-marker-radius"  
+                style={permissaoGeo.avatar}
+              />
+              <Text style={permissaoGeo.texto}>
+                Você precisa autorizar que acessemos sua localização para que possamos encontrar os leitores que cruzam o seu caminho
+              </Text>  
             </View>
             <BotaoTouchableOpacity 
-              buttonStyle={geo.botao}
-              onPress={() => this.handleGeo()}
-              text="Continuar" 
-              textStyle={geo.botaoTexto}
+              buttonStyle={permissaoGeo.botao}
+              onPress={() =>  this.props.navigation.navigate('PermissaoGeo')}
+              text="Bora lá" 
+              textStyle={permissaoGeo.botaoTexto}
             />
           </View>
         </ImageBackground>
-      </View> 
+      </View>
     );
   }
 }
 
-const frase='Só de vez em quando é que você encontra alguém com uma precença e eletricidade que combina com a tua no ato.';
-const autor='Charles Bukowski';
+const frase='"Você vai encontrar alguém que também queira te encontrar."';
+const autor='Autor Desconhecido';
 
 export default Geolocalizacao;

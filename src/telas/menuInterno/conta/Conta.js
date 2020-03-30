@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { 
+  AsyncStorage,
   ImageBackground,
   ScrollView, 
   Switch, 
@@ -48,12 +49,20 @@ class Conta extends Component {
   }
 
   handleLogout = () => {
-    Firebase
-    .auth()
-    .signOut()
+    this.removeEverything();
+    Firebase.auth().signOut()
     .then(() => 
       alert('Usuário fez logout!'))
-    .catch(error => alert(error))
+    .catch(error => alert('erro no logout' + error));
+  }
+
+  removeEverything = async () => {
+    try {
+      await AsyncStorage.clear()
+      console.log('Storage limpo com sucesso')
+    } catch (error) {
+      console.log('Falha ao limpar o Storage', error.message)
+    }
   }
 
   render() {

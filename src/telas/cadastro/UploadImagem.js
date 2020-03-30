@@ -6,8 +6,8 @@
 
 import React, { Component } from 'react';
 import {
-  ActivityIndicator,
   AsyncStorage,
+  BackHandler,
   ImageBackground,
   Text,
   View
@@ -22,35 +22,63 @@ import { BotaoTransparente }from '../../componentes/botao';
 
 import compartilhado from '../../estilos/compartilhado';
 import uploadImagem from '../../estilos/uploadImagem';
-import cor from '../../estilos/cores';
 
 class UploadImagem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null,
-      uploading: false
+      image: null
     };
+  }
+
+  componentDidMount() {
+    this.recuperaDados();
+    BackHandler.addEventListener('hardwareBackPress', this.onBack);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBack);
+  }
+
+  onBack = () => {
+    this.props.navigation.navigate('Preferencias');    
+    return true;
+  }
+
+  recuperaDados = async() => {
+    await AsyncStorage.getItem('image').then((image) => {
+      var image = JSON.parse(image);
+      if (image != null){
+        this.setState({ image });        
+      } else {
+        var image = '../../imagens/leitor.png';
+        this.setState({ image });
+      }
+    }).done();
   }
 
   handleImagem = () => {
     this.salvarImagem();
-    this.props.navigation.navigate('PermissaoGeo');
+    this.props.navigation.navigate('Geolocalizacao');
   }
 
-  salvarImagem = () => {
-    const { image } = this.state;
-    AsyncStorage.setItem('imagem', JSON.stringify(image)).then(
+  salvarImagem = async() => {
+    var image;
+    if (this.state.image != '../../imagens/leitor.png'){
+      image = this.state.image
+    } else {
+      image = null;
+    }
+    await AsyncStorage.setItem('imagem', JSON.stringify(image)).then(
       ()=>{
-        alert('Item salvo: ' + image);//colocar console.log depois
-      }).catch( ()=>{
-       alert('Item não salvo');
+        console.log('Item salvo: ' + image);
+      }).catch(error => {
+        console.log('A imagem não foi salva: ', error.message);
       }
     );
   }
 
   render() {
-    let { image } = this.state;
     return (
       <View style={compartilhado.container}>
         <ImageBackground
@@ -63,18 +91,24 @@ class UploadImagem extends Component {
               title={"Adicione sua foto"} 
             /> 
             <FraseTop 
-              subtitleStyle={uploadImagem.header} 
-              title={frase} 
-              subtitle={autor} 
+              subtitleStyle={uploadImagem.header} title={frase} subtitle={autor}
             />
-            <Avatar.Image 
-              size={200} 
-              source={{uri:image}} 
-              style={uploadImagem.avatar}
-            />
+            {
+              this.state.image == '../../imagens/leitor.png' 
+              ? <Avatar.Image 
+                  size={200} 
+                  source={require('../../imagens/leitor.png')}
+                  style={uploadImagem.avatar}
+                /> 
+              :  <Avatar.Image 
+                    size={200} 
+                    source={{uri:this.state.image}} 
+                    style={uploadImagem.avatar}
+                  />  
+            }
             <View style={uploadImagem.botaoComTexto}>
               <BotaoTransparente 
-                onPress={this._pickImage}
+                onPress={this._pegarDaGaleria}
                 text="Escolher foto da galeria"
               />
               <Text style={uploadImagem.ouEntao}>ou então</Text>
@@ -89,22 +123,11 @@ class UploadImagem extends Component {
               text="Continuar" 
               textStyle={uploadImagem.botaoContinuarTexto}
             />
-            {this._renderizarUploadingOverlay()}
           </View>
         </ImageBackground>
       </View>
     );
   }
-
-  _renderizarUploadingOverlay = () => {
-    if (this.state.uploading) {
-      return (
-        <View style={uploadImagem.renderizandoUpload}>
-          <ActivityIndicator size="large" color={cor.rosa} />
-        </View>
-      );
-    }
-  };
 
   _tirarFoto = async () => {
     const {
@@ -115,7 +138,6 @@ class UploadImagem extends Component {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-    // only if user allows permission to camera AND camera roll
     if (cameraPerm === 'granted' && cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
@@ -124,16 +146,15 @@ class UploadImagem extends Component {
 
       if (!pickerResult.cancelled) {
         this.setState({ image: pickerResult.uri });
-      }
+      } 
     }
   };
 
-  _pickImage = async () => {
+  _pegarDaGaleria = async () => {
     const {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-    // only if user allows permission to camera roll
     if (cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
@@ -143,12 +164,12 @@ class UploadImagem extends Component {
 
       if (!pickerResult.cancelled) {
         this.setState({ image: pickerResult.uri});
-      }
+      } 
     }
   };
 }
 
-const frase='Se uma imagem vale mais do que mil palavras, então diga isto com uma imagem.';
+const frase='"Se uma imagem vale mais do que mil palavras, então diga isto com uma imagem."';
 const autor='Millôr Fernandes';
 
 export default UploadImagem;

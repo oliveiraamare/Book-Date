@@ -7,7 +7,7 @@ const DIMENSION_WIDTH = Dimensions.get('window').width;
 const cadastro = StyleSheet.create({
   botao: {
     alignSelf: 'center',    
-    backgroundColor: cor.amareloD,        
+    backgroundColor: cor.amarelo,        
     borderColor: cor.amarelo,
     borderWidth: 1,
     bottom: 0,
@@ -33,9 +33,6 @@ const cadastro = StyleSheet.create({
     margin: 40,
     paddingLeft: 15
   },
-  header: {
-    alignSelf: 'flex-end'
-  },
   paragrafo:{      
     color: cor.branco,
     fontSize: 13,
@@ -43,6 +40,14 @@ const cadastro = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     textAlign:'justify'     
+  },
+  senha: {
+    height: 40,
+    padding: 2,
+    position: 'absolute',
+    right: 12,
+    top: 15,
+    width: 35 
   },
   tagItem: {
     alignItems: 'center',

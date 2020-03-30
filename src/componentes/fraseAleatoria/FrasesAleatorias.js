@@ -36,10 +36,11 @@ const styles = StyleSheet.create({
   },
   frase: {
     alignItems: 'center',
+    alignSelf: 'center',
     fontSize: 14,
-    marginBottom :200,
-    marginTop: 300,
-    padding: 8
+    padding: 8,
+    position: 'absolute', 
+    top: 240
   }
 })
 

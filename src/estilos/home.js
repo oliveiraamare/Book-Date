@@ -1,11 +1,11 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import cor from './cores';
 
 const home = StyleSheet.create({
   botoesAcao: {
     alignSelf:'center',
     bottom: 0,
-    marginBottom: 70,
+    marginBottom: 50,
     flexDirection: 'row', 
     justifyContent: 'space-around',
     position: 'absolute',
@@ -43,8 +43,8 @@ const home = StyleSheet.create({
     alignSelf: 'center',
     bottom: 0, 
     flexDirection: 'row',
-    marginBottom: 10, 
     justifyContent: 'space-between',
+    marginBottom: 10, 
     position: 'absolute'
   }
 })

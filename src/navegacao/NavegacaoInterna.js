@@ -1,7 +1,6 @@
 //https://reactnavigation.org/docs/screen-options-resolution/
 //https://reactnavigation.org/docs/stack-navigator/
 import * as React from 'react';
-import { View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -18,7 +17,6 @@ import EditarPerfil from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarP
 import EditarPreferencias from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarPreferencias';
 import EditarTopTres from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarTopTres';
 import DeletarConta from '../telas/menuInterno/conta/DeletarConta';
-import Loading from '../telas/menuInterno/match/Loading';
 import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
 import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
@@ -28,13 +26,6 @@ import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
 import { usuariosMatch } from '../acoes/usuariosMatch'
 
 const Tab = createBottomTabNavigator();
-
-const match = async () => {
-  var async = await AsyncStorage.getItem('matchProximos');
-  var dados = JSON.parse(async);
-  this.setState({dados:dados});
-  //console.log(x)
-}
 
 function HomeTabs({ navigation, route }) {
   return (
@@ -104,7 +95,6 @@ export default function NavegacaoInterna() {
         <Stack.Screen name="EditarPreferencias" component={EditarPreferencias} />
         <Stack.Screen name="EditarTopTres" component={EditarTopTres} />
         <Stack.Screen name="DeletarConta" component={DeletarConta} />
-        <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="Perfil" component={Perfil} />
         <Stack.Screen name="PerfilMatch" component={PerfilMatch} />
         <Stack.Screen name="SobreNos" component={SobreNos} />

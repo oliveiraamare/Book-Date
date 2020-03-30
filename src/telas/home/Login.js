@@ -6,22 +6,25 @@ import {
   TouchableOpacity,
   View    
 } from 'react-native';
-
-import Firebase from '../../firebase/Firebase';
-
-import login from '../../estilos/login';
-import compartilhado from '../../estilos/compartilhado';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 import { FraseTop } from '../../componentes/frase';
 import TextoInput from '../../componentes/textInput/TextInput';
 import { BotaoTransparente } from '../../componentes/botao';
 import { BotaoComTexto } from '../../componentes/botao';
 
+import login from '../../estilos/login';
+import compartilhado from '../../estilos/compartilhado';
+import cor from '../../estilos/cores';
+
+import Firebase from '../../firebase/Firebase';
+
 class Login extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      esconderSenha: true,
       email: '',
       senha: ''
     }
@@ -36,8 +39,11 @@ class Login extends Component {
   }    
   onBackPress = () => {
     this.props.navigation.navigate('Home');
-    // Return true to enable back button over ride.
     return true;
+  }
+
+  visibilidadeSenha = () => {
+    this.setState({ esconderSenha: !this.state.esconderSenha });
   }
 
   handleLogin = () => {
@@ -68,13 +74,28 @@ class Login extends Component {
                 value={this.state.email}
                 onChangeText={email => this.setState({ email })}
               />           
-              <TextoInput
-                inputStyle={login.textInput}        
-                placeHolder='Senha'
-                secureTextEntry={true}
-                value={this.state.senha}
-                onChangeText={senha => this.setState({ senha })}
-              />   
+              <View>
+                <TextoInput
+                  inputStyle={login.textInput}
+                  placeHolder='Senha'
+                  maxLength={15}
+                  secureTextEntry={this.state.esconderSenha}
+                  value={this.state.senha}
+                  onChangeText={senha => this.setState({ senha })}
+                />     
+                <TouchableOpacity 
+                  activeOpacity={0.8} style={login.senha} 
+                  onPress={this.visibilidadeSenha}
+                >
+                  { 
+                    this.state.esconderSenha 
+                    ?
+                      <MaterialCommunityIcons name='eye-off' color={cor.branco} size={27} />
+                    :
+                      <MaterialCommunityIcons name='eye' color={cor.amarelo} size={27} />
+                  } 
+                </TouchableOpacity>
+              </View>    
             </View>
             <TouchableOpacity 
               style={login.botaoEsqueceuLogin}

@@ -7,7 +7,8 @@ const DIMENSION_WIDTH = Dimensions.get('window').width;
 const uploadImagem = StyleSheet.create({
   avatar: {
     alignSelf: 'center', 
-    backgroundColor: cor.cinza 
+    backgroundColor: cor.cinza,
+    marginTop: 20
   },
   botaoContinuar: {
     alignSelf: 'center',    
@@ -33,8 +34,7 @@ const uploadImagem = StyleSheet.create({
     margin: 30
   },
   header: {
-    alignSelf: 'flex-end',
-    height: 0
+    alignSelf: 'flex-end'
   },
   ouEntao: {
     color:cor.branco, 

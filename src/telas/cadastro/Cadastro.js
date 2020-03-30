@@ -1,22 +1,21 @@
-//https://www.youtube.com/watch?v=sUlKjXi-zxk
 //https://stackoverflow.com/questions/53651505/pushing-text-input-data-in-json-format-through-asyncstorage-in-react-native
 //https://itqna.net/questions/8717/how-save-data-asyncstorage
 //https://www.npmjs.com/package/react-native-tag-select-max
-//https://reactnativeexample.com/text-and-textinput-with-mask-for-react-native-applications/
-//https://stackoverflow.com/questions/53090059/automatic-backslash-for-date-text-input-react-native 
-//https://github.com/benhurott/react-native-masked-text-> mask
 import React, { Component } from 'react';
 import { 
   Alert,
   AsyncStorage,
+  BackHandler,
   ImageBackground,
+  Keyboard,
   KeyboardAvoidingView,
   ScrollView,
   Text,  
-  View,
-  Keyboard
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { TagSelect } from 'react-native-tag-select-max';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
@@ -26,15 +25,14 @@ import { BotaoTransparente }from '../../componentes/botao';
 
 import cadastro from '../../estilos/cadastro';
 import compartilhado from '../../estilos/compartilhado';
-
-// TODO ajeitar KeyboardAvoidingView
-//BackHandler
+import cor from '../../estilos/cores';
 
 class Cadastro extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      esconderSenha: true,
       email: '',
       senha: '',
       nome: '',
@@ -43,8 +41,49 @@ class Cadastro extends Component {
       sexo: [
         'Leitor',
         'Leitora'
-      ]
+      ],
+      sx: []
     };
+  }
+
+  componentDidMount() {
+    this.recuperaDados();
+    BackHandler.addEventListener('hardwareBackPress', this.onBack);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBack);
+  }
+
+  onBack = () => {
+    this.props.navigation.navigate('Home');    
+    return true;
+  }
+
+  recuperaDados = async() => {
+    await AsyncStorage.getItem('cadastro').then((cadastro) => {
+      if (cadastro != null)
+      {
+        var cadastro = JSON.parse(cadastro);
+        var email = cadastro.email; this.setState({ email });
+        var nome = cadastro.nome; this.setState({ nome });
+        var data = cadastro.dtNasc; this.setState({ data });
+        var cidade = cadastro.cidade; this.setState({ cidade });
+        
+        var sexo = cadastro.sexo;  
+        if(sexo != undefined){
+          sx = [sexo];     
+          this.setState({ sx });
+        }
+        
+      } else {
+        return
+      }
+    }).done();
+  }
+
+  visibilidadeSenha = () => {
+    this.setState({ esconderSenha: !this.state.esconderSenha });
   }
 
   handleCadastro = () => {
@@ -53,24 +92,23 @@ class Cadastro extends Component {
     this.props.navigation.navigate('Preferencias');
   }
 
-  salvarCadastro = () => {
-    const { email, senha, senhaConfirme, nome, cidade } = this.state;
-    const sexo = this.tag.itemsSelected;  
+  salvarCadastro = async() => {
+    const { email, senha, nome, cidade } = this.state;
+    const sexo = this.sexo.itemsSelected;  
     const dtNasc = this.state.data;
-    let cadastro = {
+    const cadastro = {
       email: email,
       senha: senha,
-      senhaConfirme: senhaConfirme,
       nome: nome,
       dtNasc: dtNasc,
       cidade: cidade,
       sexo: sexo[0] 
     }
-    AsyncStorage.setItem('cadastro', JSON.stringify(cadastro)).then(
+    await AsyncStorage.setItem('cadastro', JSON.stringify(cadastro)).then(
       ()=>{
-        alert('Itens salvos: ' + email + ' ' + senha + ' ' + nome + ' '  + ' ' + dtNasc + ' ' + cidade + ' ' + sexo);//colocar console.log depois
-      }).catch( ()=>{
-       alert('Itens não salvos')
+        console.log('Itens salvos: ' + email + ' ' + senha + ' ' + nome + ' ' + dtNasc + ' ' + cidade + ' ' + sexo);
+      }).catch(error => {
+        console.log('Os itens do cadastro não foram salvos: ', error.message)
       }
     );
   }
@@ -88,39 +126,39 @@ class Cadastro extends Component {
               title={"Cadastro"} 
             />              
             <ScrollView>
-              <KeyboardAvoidingView 
-                style={{justifyContent: "flex-end", flex: 1 }} 
-                behavior='padding' 
-                enabled 
-              >
-                <FraseTop 
-                  subtitleStyle={cadastro.header} title={frase} subtitle={autor} 
-                />  
+              <KeyboardAvoidingView behavior='padding'>
+                <FraseTop title={frase} subtitle={autor} />  
                 <Text style={cadastro.texto}>
                   Para começarmos, digite um e-mail e senha
                 </Text>
-                <TextoInput
+                <TextoInput      
                   inputStyle={cadastro.textInput}
                   placeHolder='E-mail'
                   value={this.state.email}
                   onChangeText={email => this.setState({ email })}
                 />
-                <TextoInput
-                  inputStyle={cadastro.textInput}
-                  placeHolder='Senha'
-                  maxLength={15}
-                  secureTextEntry={true}
-                  value={this.state.senha}
-                  onChangeText={senha => this.setState({ senha })}
-                />     
-                <TextoInput
-                  inputStyle={cadastro.textInput}
-                  placeHolder='Confirme a senha'
-                  maxLength={15}
-                  secureTextEntry={true}
-                  value={this.state.senhaConfirme}
-                  onChangeText={senhaConfirme => this.setState({ senhaConfirme })}
-                />   
+                <View>
+                  <TextoInput
+                    inputStyle={cadastro.textInput}
+                    placeHolder='Senha'
+                    maxLength={15}
+                    secureTextEntry={this.state.esconderSenha}
+                    value={this.state.senha}
+                    onChangeText={senha => this.setState({ senha })}
+                  />     
+                  <TouchableOpacity 
+                    activeOpacity={0.8} style={cadastro.senha} 
+                    onPress={this.visibilidadeSenha}
+                  >
+                    { 
+                      this.state.esconderSenha 
+                      ?
+                        <MaterialCommunityIcons name='eye-off' color={cor.branco} size={27} />
+                      :
+                        <MaterialCommunityIcons name='eye' color={cor.amarelo} size={27} />
+                    } 
+                  </TouchableOpacity>
+                </View>               
                 <Text style={cadastro.texto}>
                   Fale um pouco sobre você
                 </Text>
@@ -147,20 +185,23 @@ class Cadastro extends Component {
                 <Text style={cadastro.texto}>
                   Como se identifica?
                 </Text>
-                <TagSelect
-                  data={this.state.sexo}
-                  max={1}
-                  ref={(tag) => {
-                    this.tag = tag;
-                  }}
-                  onMaxError={() => {
-                    Alert.alert('Ops', 'Max reached' + JSON.stringify(this.tag.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
-                  }}
-                  itemStyle={cadastro.tagItem}
-                  itemLabelStyle={cadastro.tagLabel}
-                  itemStyleSelected={cadastro.tagItemSelecionado}
-                  itemLabelStyleSelected={cadastro.tagLabelSelecionado}
-                />
+                <View style={{alignItems:'center'}}>
+                  <TagSelect
+                    value={this.state.sx}
+                    data={this.state.sexo}
+                    max={1}
+                    ref={(sexo) => {
+                      this.sexo = sexo;
+                    }}
+                    onMaxError={() => {
+                      Alert.alert('Ops', 'Escolha somente uma opção');
+                    }}
+                    itemStyle={cadastro.tagItem}
+                    itemLabelStyle={cadastro.tagLabel}
+                    itemStyleSelected={cadastro.tagItemSelecionado}
+                    itemLabelStyleSelected={cadastro.tagLabelSelecionado}
+                  />
+                </View> 
                 <BotaoTransparente 
                   buttonStyle={cadastro.botao}
                   onPress={() => this.handleCadastro()}
@@ -176,7 +217,7 @@ class Cadastro extends Component {
   }
 }
 
-const frase='Seja bem vindo a minha vida, está meio desarrumada, mas se você quiser ficar mais um pouco arrumamos juntos (..) é você quem eu tanto esperei!';
+const frase='"Seja bem vindo a minha vida, está meio desarrumada, mas se você quiser ficar mais um pouco arrumamos juntos (..) é você quem eu tanto esperei!"';
 const autor='Vilma Galvão';
 
 export default Cadastro;

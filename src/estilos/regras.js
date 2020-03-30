@@ -49,10 +49,6 @@ const regras = StyleSheet.create({
     color: cor.amarelo,
     fontSize: 14
   },
-  titleStyle: {
-    fontSize: 21,
-    marginBottom: 5
-  },
 })
 
 export default regras;

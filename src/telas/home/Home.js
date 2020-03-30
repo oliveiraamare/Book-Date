@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { ImageBackground, Text, View } from 'react-native';
+import {
+  Alert,
+  BackHandler,
+  ImageBackground, 
+  Text, 
+  View 
+} from 'react-native';
 
 import { BotaoTransparente } from '../../componentes/botao';
 import { BotaoTouchableOpacity  } from '../../componentes/botao';
@@ -9,6 +15,28 @@ import compartilhado from '../../estilos/compartilhado';
 import home from '../../estilos/home';
 
 class Home extends Component {
+
+  backAction = () => {
+    Alert.alert('Tem certeza de que queres sair?', '"A verdade é a seguinte: Você vai se apaixonar! Não tem jeito! Nem tente fugir." - Sussuro.', 
+    [
+      {  
+        text: "Cancelar",
+        onPress: () => null,
+        style: "cancel"
+      },
+      { text: "Sim", onPress: () => BackHandler.exitApp() }
+    ]);
+    return true;
+  };
+
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", this.backAction);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.backAction);
+  }
+
   render() {
     return (
       <View style={compartilhado.container}>
@@ -34,7 +62,7 @@ class Home extends Component {
             </View>
             <View style={home.botoesTermos}>
               <BotaoTransparente 
-                buttonStyle={{marginRight:10}}
+                buttonStyle={{marginRight:20}}
                 onPress={() => this.props.navigation.navigate('TermoUso')}
                 text="Termos de Uso" />
               <BotaoTransparente 

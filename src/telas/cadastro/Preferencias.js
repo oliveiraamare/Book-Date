@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { 
   Alert,
   AsyncStorage,
+  BackHandler,
   ImageBackground,
   KeyboardAvoidingView,
   ScrollView,
@@ -10,16 +11,14 @@ import {
 } from 'react-native';
 import { TagSelect } from 'react-native-tag-select-max';
 
-import preferencias from '../../estilos/preferencias';
-import compartilhado from '../../estilos/compartilhado';
-
 import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 import TextoMultilinha from '../../componentes/textInput/TextMultiline';
 import Checkbox from '../../componentes/Checkbox';
 import { BotaoTouchableOpacity }from '../../componentes/botao';
 
-// TODO ajeitar KeyboardAvoidingView
+import preferencias from '../../estilos/preferencias';
+import compartilhado from '../../estilos/compartilhado';
 
 class Preferencias extends Component {
 
@@ -35,39 +34,116 @@ class Preferencias extends Component {
         'Drama',
         'Fantasia',
         'Ficção',
-        'Infantil',
         'Mistério',
+        'Poesia',
         'Policial',
         'Romance',
         'Terror'
       ],  
-      aventura: false,
-      prosa: false,
-      misterio: false,
-      contoFadas: false, 
+      genero: [],
+      aventura: this.aventura,
+      prosa: this.prosa,
+      misterio: this.misterio,
+      contoFadas: this.contoFadas, 
       buscando: [
         'Leitor',
         'Leitora',
         'Ambos'
-      ]
+      ],
+      busco: []
     };
+  }
+
+  componentDidMount() {
+    this.recuperaDados();
+    BackHandler.addEventListener('hardwareBackPress', this.onBack);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBack);
+  }
+
+  onBack = () => {
+    this.props.navigation.navigate('Cadastro');    
+    return true;
   }
 
   handlePreferencias = () => {
     this.salvarPreferencias();
     this.props.navigation.navigate('UploadImagem');
   }
+
+  recuperaDados = async() => {
+    await AsyncStorage.getItem('preferencias').then((preferencias) => {
+      if (preferencias != null){
+        var preferencias = JSON.parse(preferencias);
+
+        var citacao = preferencias.citacao; 
+        if (citacao != 'não informado') {
+          this.setState({ citacao });
+        } ;
+        
+        var singularidade = preferencias.singularidade;
+        if (singularidade != 'não informado') {
+          this.setState({ singularidade });
+        };
+        
+        var sinopse = preferencias.sinopse; this.setState({ sinopse });
+
+        var aventura = preferencias.aventura; 
+        if(aventura != undefined){
+          this.setState({ aventura });
+        } else {
+          this.setState({ aventura: false });
+        };
+
+        var prosa = preferencias.prosa;
+        if(aventura != undefined){
+          this.setState({ prosa });
+        } else {
+          this.setState({ prosa: false });
+        };
+
+        var misterio = preferencias.misterio;
+        if(misterio != undefined){
+          this.setState({ misterio });
+        } else {
+          this.setState({ misterio: false });
+        };
+
+        var contoFadas = preferencias.contoFadas;
+        if(contoFadas != undefined){
+          this.setState({ contoFadas });
+        } else {
+          this.setState({ contoFadas: false });
+        };
+                
+        var buscando = preferencias.buscando; 
+        if(buscando != undefined){
+          busco = [buscando];     
+          this.setState({ busco });
+        }
+
+        var generoLiterario = preferencias.generoLiterario; 
+        var genero = Object.assign([], generoLiterario);
+        if(genero.length != 0 && genero.length === 3){
+          this.setState({ genero });
+        }
+        
+      } else {
+        return
+      }
+    }).done();
+  }
  
-  salvarPreferencias = () => {
-
+  salvarPreferencias = async() => {
     const citacao = this.state.citacao.length > 0 ? this.state.citacao : 'não informado';
-
     const singularidade =  this.state.singularidade.length > 0 ? this.state.singularidade : 'não informado';
 
     const { sinopse, aventura, prosa, misterio, contoFadas } = this.state;
-    const generoLiterario = this.tag.itemsSelected; 
+    const generoLiterario = this.generoLiterario.itemsSelected; 
     const buscando = this.buscando.itemsSelected;    
-    let preferencias = {
+    const preferencias = {
       citacao: citacao,
       singularidade: singularidade,
       sinopse: sinopse,
@@ -82,11 +158,11 @@ class Preferencias extends Component {
       misterio: misterio,
       contoFadas: contoFadas
     }
-    AsyncStorage.setItem('preferencias', JSON.stringify(preferencias)).then(
+    await AsyncStorage.setItem('preferencias', JSON.stringify(preferencias)).then(
       ()=>{
-        alert('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + buscando);//colocar console.log depois
-      }).catch( ()=>{
-       alert('Itens não salvos');
+        console.log('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + buscando);
+      }).catch(error => {
+        console.log('Os itens da preferência não foram salvos: ', error.message);
       }
     );
   }
@@ -104,12 +180,7 @@ class Preferencias extends Component {
               title={"Peculiariedades"} 
             />  
             <ScrollView>
-              <KeyboardAvoidingView 
-                style={{justifyContent: "flex-end", flex: 1 }} 
-                behavior='padding' 
-                enabled 
-                disableIntervalMomentum={true}
-              >
+              <KeyboardAvoidingView behavior='padding'>
                 <FraseTop 
                   subtitleStyle={preferencias.header} title={frase} subtitle={autor}
                 />            
@@ -159,7 +230,8 @@ class Preferencias extends Component {
                   />
                 </View>
                 <View style={{flexDirection: 'row', marginBottom: 15}}>
-                  <Checkbox title='Mistério'
+                  <Checkbox 
+                    title='Mistério'
                     checked={this.state.misterio}
                     onPress={checked => this.setState({ misterio: !this.state.misterio })}                   
                   />
@@ -169,7 +241,7 @@ class Preferencias extends Component {
                   />
                 </View>         
                 <Text style={preferencias.texto}>
-                  Quais genêros literários você mais gosta? Escolha até três tipos
+                  Quais desses genêros literários você mais gosta? Escolha três tipos
                 </Text>
                 <ScrollView
                   horizontal
@@ -177,13 +249,14 @@ class Preferencias extends Component {
                   showsHorizontalScrollIndicator={true}
                 >
                   <TagSelect
+                    value={this.state.genero}
                     data={this.state.generoLiterario}
                     max={3}
-                    ref={(tag) => {
-                      this.tag = tag;
+                    ref={(generoLiterario) => {
+                      this.generoLiterario = generoLiterario;
                     }}
                     onMaxError={() => {
-                      Alert.alert('Ops', 'Max reached' + JSON.stringify(this.tag.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
+                      Alert.alert('Ops', 'Escolha três opções')
                     }}
                     itemStyle={preferencias.tagItem}
                     itemLabelStyle={preferencias.tagLabel}
@@ -191,34 +264,32 @@ class Preferencias extends Component {
                     itemLabelStyleSelected={preferencias.tagLabelSelecionado}
                   />
                 </ScrollView>  
-                
                 <Text style={preferencias.texto}>
                   Quem você deseja encontrar?
                 </Text> 
-                <View style={{alignItems:'center'}}>
+                <View style={{alignItems:'center', marginBottom: 70}}>
                   <TagSelect
+                    value={this.state.busco}
                     data={this.state.buscando}
                     max={1}
                     ref={(buscando) => {
                       this.buscando = buscando;
                     }}
                     onMaxError={() => {
-                      Alert.alert('Ops', 'Max reached' + JSON.stringify(this.buscando.itemsSelected)+ ' ' + `Total: ${this.tag.totalSelected}`);
+                      Alert.alert('Ops', 'Escolha somente uma opção')
                     }}
                     itemStyle={preferencias.tagItem}
                     itemLabelStyle={preferencias.tagLabel}
                     itemStyleSelected={preferencias.tagItemSelecionado}
                     itemLabelStyleSelected={preferencias.tagLabelSelecionado}
-                  />
-                </View>
-                <View style={{marginTop: 70}}>
-                  <BotaoTouchableOpacity 
-                    buttonStyle={preferencias.botao}
-                    onPress={() => this.handlePreferencias()}
-                    text="Continuar" 
-                    textStyle={preferencias.botaoTexto}
-                  />
-                </View>
+                  /> 
+                </View>  
+                <BotaoTouchableOpacity 
+                  buttonStyle={preferencias.botao}
+                  onPress={() => this.handlePreferencias()}
+                  text="Continuar" 
+                  textStyle={preferencias.botaoTexto}
+                />
               </KeyboardAvoidingView>
             </ScrollView>
           </View>
@@ -228,7 +299,7 @@ class Preferencias extends Component {
   }
 }
 
-const frase='Queria que existissem outras vidas, só para eu ter o prazer de te conhecer de novo.';
+const frase='"Queria que existissem outras vidas, só para eu ter o prazer de te conhecer de novo."';
 const autor='Lais Lourenço';
 
 export default Preferencias;

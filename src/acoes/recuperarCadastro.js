@@ -2,10 +2,8 @@
 //https://medium.com/@ericmorgan1/upload-images-to-firebase-in-expo-c4a7d4c46d06
 //https://github.com/seantempesta/expo-cljs-template/issues/84
 import { AsyncStorage } from 'react-native';
-import * as firebase from 'firebase';
 
-import Firebase from '../../firebase/Firebase';
-import { firestore, usuarioUid } from '../../firebase/acoes';
+import { handleSignUp } from '../firebase/cadastro'
 
 export const recuperarCadastro = async() => {
   try{
@@ -54,57 +52,4 @@ export const recuperarCadastro = async() => {
   } catch {
     alert('Erro no recuperarCadastro')
   }
-}
-
-const  handleSignUp = (email, senha, usuario, lat, long, imagem) => {
-  Firebase.auth()
-  .createUserWithEmailAndPassword(email, senha)
-  .then(() => salvarUsuario(usuario, lat, long, imagem))
-  .catch(error => alert('erro no handleSignUp: ' + error.message + ' ' + error))
-}
-
-const salvarUsuario = (usuario, lat, long, imagem) => {
-  const uid = usuarioUid();
-  firestore.collection('usuarios').doc(uid).set(usuario)
-  .then(() => 
-    salvarGeolocalizacao(uid, lat, long),
-    uploadImagem(uid, imagem)
-  )
-  .catch(error => {
-    alert('salvarUsuario: '+ error.message  + ' ' + error)
-  })
-}
-
-const salvarGeolocalizacao = (uid, lat, long) => {
-  const localizacao = new firebase.firestore.GeoPoint(lat, long);
-  const geo = firestore.collection('usuarios').doc(uid);
-  geo.set({
-    localizacao
-  }, { merge: true });
-}
-
-export const uploadImagem = async(uid, imagem) => {
-  const resposta = await fetch(imagem);
-  const blob = await resposta.blob();
-
-  var ref = Firebase.storage().ref('imagens/' + uid);
-
-  var blobResponse = await ref.put(blob);
-  var downloadURL = await blobResponse.ref.getDownloadURL();
-
-  return ref.put(blob)
-  .then(()=>{
-    inserirURLFirestore(uid, downloadURL),
-    console.log('upload feito da imagem')
-  }).catch((error)=>{
-    alert('uploadImagem: '+ error.message  + ' ' + error);
-  });
-}
-
-const inserirURLFirestore = (uid, downloadURL) => {
-  var imagemFirestore = firestore.collection('usuarios').doc(uid);
-  imagemFirestore.set({
-    imagem: downloadURL,
-    uid: uid
-  }, { merge: true });
 }

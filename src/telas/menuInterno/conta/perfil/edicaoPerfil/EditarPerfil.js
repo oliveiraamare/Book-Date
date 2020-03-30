@@ -25,7 +25,7 @@ import { FraseTop } from '../../../../../componentes/frase';
 import Calendario from '../../../../../componentes/DatePicker';
 import TextoMultilinha from '../../../../../componentes/textInput/TextMultiline';
 
-import {uploadImagem} from '../../../../cadastro/RecuperarDados'
+import { uploadImagem } from '../../../../../acoes/recuperarCadastro'
 
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
 

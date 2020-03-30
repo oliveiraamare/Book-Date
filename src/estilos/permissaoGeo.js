@@ -26,10 +26,6 @@ const permissaoGeo = StyleSheet.create({
     color: cor.amareloA, 
     fontWeight:'bold'
   },
-  header: {
-    alignSelf:'flex-end', 
-    color: cor.amarelo
-  },
   texto: {
     color:cor.amarelo, 
     textAlign:'center'

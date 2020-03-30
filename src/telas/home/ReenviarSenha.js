@@ -2,6 +2,7 @@
 //https://medium.com/@ericmorgan1/change-user-email-password-in-firebase-and-react-native-d0abc8d21618
 import React, { Component } from 'react';
 import { 
+  BackHandler,
   ImageBackground,
   KeyboardAvoidingView,
   Text, 
@@ -23,6 +24,19 @@ class ReenviarSenha extends Component {
     this.state = {
       email: '',
     }
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBack);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBack);
+  }
+
+  onBack = () => {
+    this.props.navigation.navigate('Login');    
+    return true;
   }
 
   handleSenha = () => {
