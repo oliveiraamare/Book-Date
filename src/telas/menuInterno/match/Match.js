@@ -28,11 +28,10 @@ class Match extends Component {
   }
 
   componentDidMount() {  
-    console.log(usuarioUid())
     this.match();
     setTimeout(() => {
       this.setState({ carregarTelaMatch: true });
-    }, 7000);   
+    }, 10000);   
   }  
   
   match = async () => {

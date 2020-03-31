@@ -21,6 +21,7 @@ export const recuperarCadastro = async() => {
       cidade: cadastro.cidade,
       sexo: cadastro.sexo, 
       buscando: preferencias.buscando,
+      imagem : null,
       preferencias: {
         citacao: preferencias.citacao,
         singularidade: preferencias.singularidade,

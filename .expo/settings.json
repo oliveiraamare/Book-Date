@@ -1,6 +1,6 @@
 {
-  "urlRandomness": "3b-wrw",
-  "hostType": "tunnel",
+  "urlRandomness": "hh-9ww",
+  "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,

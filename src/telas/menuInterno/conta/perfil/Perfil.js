@@ -1,6 +1,7 @@
 //https://www.npmjs.com/package/age-calculator      
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   Image,
   ImageBackground, 
   ScrollView, 
@@ -17,6 +18,9 @@ import { Preferencias } from '../../../../componentes/topPreferencias';
 import perfil from '../../../../estilos/perfil';
 import compartilhado from '../../../../estilos/compartilhado';
 import cor from '../../../../estilos/cores';
+
+import { usuarioLogado } from '../../../../acoes/usuarioLogado';
+
 
 let { AgeFromDateString } = require('age-calculator');
 
@@ -35,39 +39,35 @@ class Perfil extends Component {
       livro: ''
     };
   }
+
   componentDidMount() {
-    this.getAndLoadDados()
+    this.forceUpdate();
+    this.getAndLoadDados();
   }
 
-  getAndLoadDados() {
-    var uid = usuarioUid();
-    var data = collection('usuarios').doc(uid);
-    data.get().then((doc) => {
-      var usuario = doc.data();
-      this.setState({usuario});
-      console.log(usuario)
-      var preferencias = usuario.preferencias;
-      this.setState({preferencias});
+  getAndLoadDados = async() => {
+    var usuario = await AsyncStorage.getItem('usuarioLogado');
+    usuario = JSON.parse(usuario); this.setState({usuario});
 
-      var aventura = preferencias.aventura;
-      this.setState({aventura});
-      var prosa = preferencias.prosa;
-      this.setState({prosa});
-      var misterio = preferencias.misterio;
-      this.setState({misterio})
-      var contoFadas = preferencias.contoFadas;
-      this.setState({contoFadas});
-     
-      var autor = usuario.preferencias.autor;
-      this.setState({autor});
-      var generoLiterario = usuario.preferencias.generoLiterario;
-      this.setState({generoLiterario});
-      var livro = usuario.preferencias.livro;
-      this.setState({livro});
-    })
-    .catch(function(error) {
-      console.log("Erro ao pegar dados do usuário: " + error + ' ' + error.message);
-    });
+    //console.log(usuario)
+    var preferencias = usuario.preferencias;
+    this.setState({preferencias});
+
+    var aventura = preferencias.aventura;
+    this.setState({aventura});
+    var prosa = preferencias.prosa;
+    this.setState({prosa});
+    var misterio = preferencias.misterio;
+    this.setState({misterio})
+    var contoFadas = preferencias.contoFadas;
+    this.setState({contoFadas});
+    
+    var autor = usuario.preferencias.autor;
+    this.setState({autor});
+    var generoLiterario = usuario.preferencias.generoLiterario;
+    this.setState({generoLiterario});
+    var livro = usuario.preferencias.livro;
+    this.setState({livro});
   }
 
   render() {

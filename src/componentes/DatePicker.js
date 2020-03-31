@@ -7,7 +7,7 @@ import DatePicker from 'react-native-datepicker';
 import cor from '../estilos/cores'; 
 export default class Calendario extends Component {
   render(){
-    const { date, onDateChange, placeholder, dateInputStyle } = this.props
+    const { date, onDateChange, placeholder, format, dateInputStyle } = this.props
     return (
       <View style={styles.container}>
         <DatePicker

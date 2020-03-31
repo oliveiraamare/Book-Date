@@ -38,8 +38,8 @@ const login = StyleSheet.create({
     height: 40,
     padding: 2,
     position: 'absolute',
-    right: 12,
-    top: 15,
+    right: 15,
+    top: 10,
     width: 35 
   },
   textInput: {

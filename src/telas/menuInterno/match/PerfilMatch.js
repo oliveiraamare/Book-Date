@@ -10,8 +10,6 @@ import {
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { firestore, usuarioUid } from '../../../firebase/acoes';
-
 import { Preferencias } from '../../../componentes/topPreferencias';
 
 import perfilMatch from '../../../estilos/perfilMatch';
@@ -21,6 +19,12 @@ import cor from '../../../estilos/cores';
 let { AgeFromDateString } = require('age-calculator');
 
 var  um, dois, tres;
+
+export const matchPerfil = (match) => {
+  console.log('iiiiiiiiiiiiiiiiitem', match)
+  getAndLoadDados(match);
+
+}
 class Perfil extends Component {
   constructor(props) {
     super(props);
@@ -33,44 +37,17 @@ class Perfil extends Component {
       contoFadas: '',
       autor: '',
       generoLiterario: {},
-      livro: ''
+      livro: '',
+      match: {},
+      data: {}
     };
-  }
-  componentDidMount() {
-    this.getAndLoadDados()
+    const { navigation }  = this.props;
+    const userData = navigation.getParam('item', null);
   }
 
-  async getAndLoadDados() {
-    var uid = usuarioUid();
-    var data = firestore.collection('usuarios').doc(uid);
-    data.get().then((doc) => {
-      var usuario = doc.data();
-      this.setState({usuario});
-      var preferencias = usuario.preferencias;
-      this.setState({preferencias});
-
-      var aventura = preferencias.aventura;
-      this.setState({aventura});
-      var prosa = preferencias.prosa;
-      this.setState({prosa});
-      var misterio = preferencias.misterio;
-      this.setState({misterio})
-      var contoFadas = preferencias.contoFadas;
-      this.setState({contoFadas});
-     
-      var autor = usuario.preferencias.autor;
-      this.setState({autor});
-      var generoLiterario = usuario.preferencias.generoLiterario;
-      this.setState({generoLiterario});
-      var livro = usuario.preferencias.livro;
-      this.setState({livro});
-    })
-    .catch(function(error) {
-      console.log("Erro ao pegar dados do usuário: " + error + ' ' + error.message);
-    });
-  }
 
   render() {
+   // const item = this.props.navigation.state.params.item
     var dtNasc = this.state.usuario.dtNasc;
     let idade = new AgeFromDateString(dtNasc).age;
     return (    
@@ -90,7 +67,7 @@ class Perfil extends Component {
 
               <View style={perfilMatch.containerNome}>
                 <Text style={perfilMatch.nome}>
-                  {this.state.usuario.nome} 
+                  {this.state.match.nome}
                 </Text>
               </View>
 

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import {
   Alert,
+  AsyncStorage,
   KeyboardAvoidingView,
   ScrollView, 
   Text,
@@ -9,14 +10,16 @@ import {
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { TagSelect } from 'react-native-tag-select-max';
+import { RootToaster, Toast } from 'react-native-root-toaster';
+
+import { AppBarHeader } from '../../../../../componentes/header';
 
 import editarPreferencias from '../../../../../estilos/editarPreferencias';
 import compartilhado from '../../../../../estilos/compartilhado';
 import cor from '../../../../../estilos/cores';
 
-import { AppBarHeader } from '../../../../../componentes/header';
-
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
+import { usuarioLogado } from '../../../../../acoes/usuarioLogado';
 
 class EditarPreferencias extends Component {
   constructor(props) {
@@ -40,36 +43,34 @@ class EditarPreferencias extends Component {
     this.getAndLoadDados()
   }
 
-  async getAndLoadDados() {
-    var uid = usuarioUid();
-    var data = collection('usuarios').doc(uid);
-    data.get().then((doc) => {
-      
-      var usuario = doc.data(); this.setState({usuario});
+  getAndLoadDados= async() => {
+    var usuarioLogado = await AsyncStorage.getItem('usuarioLogado');
+    usuarioLogado = JSON.parse(usuarioLogado);
 
-      var preferencias = usuario.preferencias;
+    var usuario = usuarioLogado; this.setState({usuario});
 
-      var aventura = preferencias.aventura;
-      this.setState({aventura});
-      var prosa = preferencias.prosa;
-      this.setState({prosa});
-      var misterio = preferencias.misterio;
-      this.setState({misterio})
-      var contoFadas = preferencias.contoFadas;
-      this.setState({contoFadas});
+    var preferencias = usuario.preferencias;
 
-      var buscando = usuario.buscando;  
-      busco = [buscando];     
-      this.setState({busco});
-    })
-    .catch(function(error) {
-      console.log("Erro ao pegar dados do usuário: " + error + ' ' + error.message);
-    });
+    var aventura = preferencias.aventura;
+    this.setState({aventura});
+    var prosa = preferencias.prosa;
+    this.setState({prosa});
+    var misterio = preferencias.misterio;
+    this.setState({misterio})
+    var contoFadas = preferencias.contoFadas;
+    this.setState({contoFadas});
+
+    var buscando = usuario.buscando;  
+    busco = [buscando];     
+    this.setState({busco});
   }
 
   handleUpdate = () => {
     this.updateDados();
-    this.props.navigation.navigate('EditarPerfil');
+    Toast.show('Alterações salvas!');
+    setTimeout(() => {
+      this.props.navigation.navigate('EditarPerfil');
+    }, 2000);   
   }
 
   updateDados = () => {
@@ -83,8 +84,11 @@ class EditarPreferencias extends Component {
       buscando: buscando[0],     
     })
     .then(() => 
-      console.log('update feito com sucesso'))
-    .catch(error => { console.log('erro no updateDados: ' + error.message + ' ' + error)})
+      usuarioLogado(),
+      console.log('Update dos dados da tela EditarPreferencias feito com sucesso.'))
+    .catch(error => { 
+      console.log('Erro o update da tela EditarPreferencias: ' + error.message + ' ' + error)
+    })
   }
 
   render() {
@@ -101,7 +105,10 @@ class EditarPreferencias extends Component {
             style={{justifyContent: "flex-end", flex: 1 }} 
             behavior='padding' 
             enabled 
-          >     
+          >   
+            <RootToaster 
+              defaultDuration={2000} defaultColor={cor.amarelo} 
+            />  
             <View style={editarPreferencias.info}>
               <Text style={editarPreferencias.texto}>
                 Estou tentando encontrar

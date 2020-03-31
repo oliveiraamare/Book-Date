@@ -1,7 +1,9 @@
 //https://www.npmjs.com/package/age-calculator      
+//https://www.npmjs.com/package/react-native-root-toaster
 import React, { Component } from 'react';
 import {
   Alert,
+  AsyncStorage,
   KeyboardAvoidingView,
   ScrollView, 
   Text,
@@ -10,10 +12,11 @@ import {
 } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { ListItem } from 'react-native-elements'
+import { ListItem } from 'react-native-elements';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { TagSelect } from 'react-native-tag-select-max';
-
+import { RootToaster, Toast } from 'react-native-root-toaster';
+import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 
 import editarPerfil from '../../../../../estilos/editarPerfil';
@@ -25,11 +28,12 @@ import { FraseTop } from '../../../../../componentes/frase';
 import Calendario from '../../../../../componentes/DatePicker';
 import TextoMultilinha from '../../../../../componentes/textInput/TextMultiline';
 
-import { uploadImagem } from '../../../../../acoes/recuperarCadastro'
-
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
+import { uploadImagem } from '../../../../../firebase/acoes';
+import { usuarioLogado } from '../../../../../acoes/usuarioLogado';
 
 class Perfil extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -37,6 +41,7 @@ class Perfil extends Component {
       nome: '',
       cidade: '',
       data: '', 
+      imagem: null,
       sexo: [
         'Leitor',
         'Leitora'
@@ -47,67 +52,22 @@ class Perfil extends Component {
       sx: []
     };
   }
+
   componentDidMount() {
-    this.getAndLoadDados()
+    this.forceUpdate();
+    this.getAndLoadDados();
   }
 
-  getAndLoadDados() {
-    var uid = usuarioUid();
-    var data = collection('usuarios').doc(uid);
-    data.get().then((doc) => {
-      
-      var usuario = doc.data(); this.setState({usuario});
-      
-      var nome = usuario.nome; this.setState({nome});
-      var cidade = usuario.cidade; this.setState({cidade});
-
-      var sexo = usuario.sexo;  
-      sx = [sexo];     
-      this.setState({sx});
-
-      var citacao = usuario.preferencias.citacao; this.setState({citacao});
-      var singularidade = usuario.preferencias.singularidade; this.setState({singularidade});
-      var sinopse = usuario.preferencias.sinopse; this.setState({sinopse});
-    })
-    .catch(function(error) {
-      console.log("Erro ao pegar dados do usuário: " + error + ' ' + error.message);
-    });
-  }
-
-  handleUpdate = () => {
+  handleUpdate() {
     this.updateDados();
-    this.props.navigation.navigate('Perfil');
+    Toast.show('Alterações salvas!');
+    setTimeout(() => {
+      this.props.navigation.navigate('Perfil');
+    }, 2000);   
   }
 
-  updateDados = () => {
-    const sexo = this.sexo.itemsSelected;  
-    var fire = collection('usuarios').doc(usuarioUid());
-    fire.update({
-      nome: this.state.nome,
-      cidade: this.state.cidade,
-      dtNasc: this.state.data, 
-      sexo: sexo[0],  
-      "preferencias.citacao": this.state.citacao,
-      "preferencias.singularidade": this.state.singularidade,
-      "preferencias.sinopse": this.state.sinopse      
-    })
-    .then(() => 
-      console.log('update feito com sucesso'))
-    .catch(error => { console.log('erro no updateDados: ' + error.message + ' ' + error)})
-  }
-
-  pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3]
-    })
-    console.log(result);
-    if (!result.cancelled) {
-      uploadImagem(usuarioUid(), result.uri)
-      .then(() => console.log('consegui chamar o uploadImagem'))
-      .catch((error)=>{console.log('pickImage: '+ error.message  + ' ' + error)});
-    }
+  confirmacaoImagem() {
+    Toast.show('Sua imagem será salva');
   }
 
   render() {
@@ -118,33 +78,61 @@ class Perfil extends Component {
             this.handleUpdate()
           } 
           title={"Editar Perfil"} 
-        />              
-        <ScrollView style={editarPerfil.scrollView}>  
+        />           
+        <ScrollView style={editarPerfil.scrollView}>    
           <KeyboardAvoidingView 
             style={{justifyContent: "flex-end", flex: 1 }} 
             behavior='padding' 
             enabled 
-          >    
-            <FraseTop title={frase} subtitle={autor} />    
+          > 
+            <RootToaster 
+              defaultDuration={2000} defaultColor={cor.amarelo} 
+            />   
+            <FraseTop title={frase} subtitle={autor} />   
             <View style={editarPerfil.containerImagem}>
-              
-                <Avatar.Image 
-                  size={220} 
-                  style={editarPerfil.imagemPerfil}
-                  source={{uri:this.state.usuario.imagem}} 
-                />          
-                <View style={editarPerfil.containerIcone}>
-                  <Icon.Button
-                    name='edit'
-                    backgroundColor='transparent'
-                    color={cor.amarelo}
-                    size={20}
-                    style={editarPerfil.botaoEditar}
-                    onPress={() => this.pickImage()}
-                  />
-                </View>     
-              
-            </View>   
+              {
+                this.state.imagem == '../../../../../imagens/leitor.png'
+                ? 
+                  <TouchableHighlight onPress={()=>this._pegarDaGaleria()}>                
+                    <View>
+                      <Avatar.Image 
+                        size={220} 
+                        style={editarPerfil.imagemPerfil}
+                        source={require('../../../../../imagens/leitor.png')}
+                      />          
+                      <View style={editarPerfil.containerIcone}>
+                        <Icon.Button
+                          name='edit'
+                          backgroundColor='transparent'
+                          color={cor.amarelo}
+                          size={20}
+                          style={editarPerfil.botaoEditar}
+                          onPress={() => this._pegarDaGaleria()}
+                        />
+                      </View>     
+                    </View>          
+                  </TouchableHighlight>
+                : <TouchableHighlight onPress={()=>this._pegarDaGaleria()}>
+                    <View>
+                      <Avatar.Image 
+                        size={220} 
+                        style={editarPerfil.imagemPerfil}
+                        source={{uri:this.state.imagem}} 
+                      />          
+                      <View style={editarPerfil.containerIcone}>
+                        <Icon.Button
+                          name='edit'
+                          backgroundColor='transparent'
+                          color={cor.amarelo}
+                          size={20}
+                          style={editarPerfil.botaoEditar}
+                          onPress={() => this._pegarDaGaleria()}
+                        />
+                      </View>     
+                    </View>    
+                  </TouchableHighlight>  
+              }
+            </View>           
             <View style={editarPerfil.info}>
               <Text style={editarPerfil.texto}>
                 Nome
@@ -174,7 +162,9 @@ class Perfil extends Component {
               <Calendario
                 date={this.state.data}
                 onDateChange={data => this.setState({ data })}
+                format="DD-MM-YYYY"
                 placeholder={this.state.usuario.dtNasc}
+                maxDate={this.state.usuario.dtNasc}
                 dateInputStyle={[editarPerfil.multilinha, editarPerfil.dateInput]}
               /> 
               <Text style={editarPerfil.texto}>
@@ -260,8 +250,90 @@ class Perfil extends Component {
       </View>
     );
   }
+
+  getAndLoadDados = async() => {
+    var usuarioLogado = await AsyncStorage.getItem('usuarioLogado');
+    usuarioLogado = JSON.parse(usuarioLogado);
+
+    var usuario = usuarioLogado; this.setState({usuario});
+
+    var imagem = usuario.imagem;
+
+    if (imagem != null){
+      this.setState({ imagem });  
+    } else {
+      imagem = '../../../../../imagens/leitor.png'
+      this.setState({ imagem });
+    } 
+
+    var nome = usuarioLogado.nome; this.setState({nome});
+    var cidade = usuarioLogado.cidade; this.setState({cidade});
+
+    var sexo = usuarioLogado.sexo;  
+    sx = [sexo];     
+    this.setState({sx});
+
+    var citacao = usuarioLogado.preferencias.citacao; this.setState({citacao});
+    var singularidade = usuarioLogado.preferencias.singularidade; 
+    this.setState({singularidade});
+    var sinopse = usuarioLogado.preferencias.sinopse; this.setState({sinopse});
+  }
+
+  updateDados = () => {
+    const sexo = this.sexo.itemsSelected;  
+
+    if(this.state.data == '') {
+      this.state.data = this.state.usuario.dtNasc
+    };
+
+    var fire = collection('usuarios').doc(usuarioUid());
+    fire.update({
+      nome: this.state.nome,
+      cidade: this.state.cidade,
+      dtNasc: this.state.data, 
+      sexo: sexo[0],  
+      "preferencias.citacao": this.state.citacao,
+      "preferencias.singularidade": this.state.singularidade,
+      "preferencias.sinopse": this.state.sinopse      
+    })
+    .then(() => {
+      usuarioLogado(),
+      console.log('Update dos dados da tela EditarPerfil feito com sucesso.');
+    })
+    .catch(error => { 
+      console.log('Erro no update da tela EditarPerfil: ' + error.message);
+    })
+  }
+
+  _pegarDaGaleria = async () => {
+    const {
+      status: cameraRollPerm
+    } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    if (cameraRollPerm === 'granted') {
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        base64: true,
+        aspect: [10, 10],
+      });
+
+      if (!pickerResult.cancelled) {
+        this.setState({ imagem: pickerResult.uri});
+
+       uploadImagem(usuarioUid(), pickerResult.uri)
+        .then(() => {
+          this.confirmacaoImagem();
+          console.log('Chamei o uploadImagem na tela de EditarPerfil');
+        })
+        .catch(error => {
+          console.log('Erro pegar a imagem na teka de EditarPerfil: ' + error.message);
+        });        
+      } 
+    }
+  }  
 }
-const frase='"Minha vida é como um livro, cada dia uma página, a cada hora um novo texto , a cada minuto uma palavra, e neste segundo um sim ou não que pode mudar minha história"';
+
+const frase='"Minha vida é como um livro, cada dia uma página, a cada hora um novo texto, a cada minuto uma palavra, e neste segundo um sim ou não que pode mudar minha história"';
 const autor='Elan klever';
 
 export default Perfil;

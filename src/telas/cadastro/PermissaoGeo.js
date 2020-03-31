@@ -22,12 +22,14 @@ class PermissaoGeo extends Component {
     super(props);
     this.state = {
       location: null,
-      geocode: null
+      geocode: null,
+      nome: ''
     };
   }
 
   componentDidMount() {
     this.getLocationAsync();
+    this.getAndLoadDados();
     BackHandler.addEventListener('hardwareBackPress', this.onBack);
   }
 
@@ -40,6 +42,12 @@ class PermissaoGeo extends Component {
     return true;
   }
 
+  getAndLoadDados = async() => {
+    var usuario = await AsyncStorage.getItem('cadastro');
+    usuario = JSON.parse(usuario);
+    var nome = usuario.nome; this.setState({ nome });  
+  }
+
   getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
@@ -48,10 +56,10 @@ class PermissaoGeo extends Component {
     };
 
     if (status == 'granted') {
-      setTimeout(() => {
+      /*setTimeout(() => {
         this.salvarGeo(),
         this.props.navigation.navigate('Regras');
-      }, 4000);
+      }, 4000);*/
     };
 
     let location = await Location.getCurrentPositionAsync({
@@ -105,11 +113,14 @@ class PermissaoGeo extends Component {
               subtitle={autor} 
             />       
             <View style={geo.viewLocal}>
+              <Text style={geo.nome}>
+                Só uns segundinhos, {this.state.nome}.
+              </Text>  
               <Text style={geo.texto}>
-                Encontrando a localização do Wally
+                Estamos buscando a sua localização atual.
               </Text>  
               <PulseIndicator 
-                color={cor.amareloA}
+                color={'rgba(255, 224, 102, 0.60)'}
                 size={120}
                 animating={true}
                 interaction={true}

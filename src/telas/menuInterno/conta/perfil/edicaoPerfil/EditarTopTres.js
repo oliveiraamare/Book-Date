@@ -1,19 +1,23 @@
 //https://www.npmjs.com/package/age-calculator      
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   KeyboardAvoidingView,
   ScrollView, 
   Text,
   View
 } from 'react-native';
+import { RootToaster, Toast } from 'react-native-root-toaster';
+
+import { AppBarHeader } from '../../../../../componentes/header';
+import { TopPreferencias } from '../../../../../componentes/topPreferencias';
 
 import editarTopTres from '../../../../../estilos/editarTopTres';
 import compartilhado from '../../../../../estilos/compartilhado';
-
-import { AppBarHeader } from '../../../../../componentes/header';
-import { TopPreferencias } from '../../../../../componentes/topPreferencias'
+import cor from '../../../../../estilos/cores';
 
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
+import { usuarioLogado } from '../../../../../acoes/usuarioLogado';
 
 class EditarTopTres extends Component {
   constructor(props) {
@@ -37,36 +41,31 @@ class EditarTopTres extends Component {
   }
 
   async getAndLoadDados() {
-    var uid = usuarioUid();
-    var data = collection('usuarios').doc(uid);
-    data.get().then((doc) => {
+    var usuarioLogado = await AsyncStorage.getItem('usuarioLogado');
+    usuarioLogado = JSON.parse(usuarioLogado);
+
+    var usuario = usuarioLogado; this.setState({usuario});
       
-      var usuario = doc.data(); this.setState({usuario});
+    var autor0 = usuario.preferencias.autor[0];
+    this.setState({autor0});
+    var autor1 = usuario.preferencias.autor[1];
+    this.setState({autor1});
+    var autor2 = usuario.preferencias.autor[2];
+    this.setState({autor2});
 
-      var autor0 = usuario.preferencias.autor[0];
-      this.setState({autor0});
-      var autor1 = usuario.preferencias.autor[1];
-      this.setState({autor1});
-      var autor2 = usuario.preferencias.autor[2];
-      this.setState({autor2});
+    var genero0 = usuario.preferencias.generoLiterario[0];
+    this.setState({genero0});
+    var genero1 = usuario.preferencias.generoLiterario[1];
+    this.setState({genero1});
+    var genero2 = usuario.preferencias.generoLiterario[2];
+    this.setState({genero2});
 
-      var genero0 = usuario.preferencias.generoLiterario[0];
-      this.setState({genero0});
-      var genero1 = usuario.preferencias.generoLiterario[1];
-      this.setState({genero1});
-      var genero2 = usuario.preferencias.generoLiterario[2];
-      this.setState({genero2});
-
-      var livro0 = usuario.preferencias.livro[0];
-      this.setState({livro0});
-      var livro1 = usuario.preferencias.livro[1];
-      this.setState({livro1});
-      var livro2 = usuario.preferencias.livro[2];
-      this.setState({livro2});
-    })
-    .catch(function(error) {
-      console.log("Erro ao pegar dados do usuário: " + error + ' ' + error.message);
-    });
+    var livro0 = usuario.preferencias.livro[0];
+    this.setState({livro0});
+    var livro1 = usuario.preferencias.livro[1];
+    this.setState({livro1});
+    var livro2 = usuario.preferencias.livro[2];
+    this.setState({livro2});
   }
 
   handleUpdate = () => {
@@ -87,7 +86,11 @@ class EditarTopTres extends Component {
     };
     
     this.updateDados(autor, generoLiterario, livro);
-    this.props.navigation.navigate('EditarPerfil');
+
+    Toast.show('Alterações salvas!');
+    setTimeout(() => {
+      this.props.navigation.navigate('EditarPerfil');
+    }, 2000);       
   }
 
   updateDados = (autor, generoLiterario, livro) => {
@@ -98,8 +101,11 @@ class EditarTopTres extends Component {
       "preferencias.livro": livro    
     })
     .then(() => 
-      console.log('update feito com sucesso'))
-    .catch(error => { console.log('erro no updateDados: ' + error.message + ' ' + error)})
+      usuarioLogado(),
+      console.log('Update dos dados da tela EditarTopTres feito com sucesso.'))
+    .catch(error => { 
+      console.log('Erro no update da tela EditarTopTres: ' + error.message + ' ' + error)
+    })
   }
 
   render() {
@@ -117,6 +123,9 @@ class EditarTopTres extends Component {
             behavior='padding' 
             enabled 
           >    
+            <RootToaster 
+              defaultDuration={2000} defaultColor={cor.amarelo} 
+            />  
             <View style={editarTopTres.info}>
               <Text style={editarTopTres.texto}>Meu top 3 de autores</Text>   
               <TopPreferencias

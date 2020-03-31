@@ -23,21 +23,21 @@ const CardItem = ({
           <View style={cardItem.acoes}>       
             <IconButton
               icon='account-off-outline'
-              color={cor.cinzabEscuro}
+              color={cor.preto}
               size={23}
               style={cardItem.miniBotao} 
               onPress={() => onPressLeft()}
             />
             <IconButton
               icon='account-heart'
-              color={cor.cinzaEscuro}
+              color={cor.preto}
               size={23}
               style={cardItem.botaoMaior} 
               onPress={() => onPressPerfil()}
             />
             <IconButton
               icon='comment-account'
-              color={cor.cinzaEscuro}
+              color={cor.preto}
               size={23}
               style={cardItem.miniBotao} 
               onPress={() => onPressRight()}
