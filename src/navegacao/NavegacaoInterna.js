@@ -23,13 +23,13 @@ import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
 
-import { usuariosMatch } from '../acoes/usuariosMatch'
+import { usuariosMatch } from '../acoes/usuariosMatch';
+import { usuarioLogado } from '../acoes/usuarioLogado';
 
 const Tab = createBottomTabNavigator();
 
 function HomeTabs({ navigation, route }) {
   return (
-    usuariosMatch(),
     <Tab.Navigator
       initialRouteName="Match"
       tabBarOptions={{
@@ -88,6 +88,10 @@ const Stack = createStackNavigator();
 
 export default function NavegacaoInterna() {
   return (
+    
+    usuariosMatch(),
+    usuarioLogado(),
+
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Home" component={HomeTabs} />   

@@ -1,74 +1,76 @@
 import { Dimensions, StyleSheet } from 'react-native'
 
-const fullWidth = Dimensions.get('window').width;
-const fullHeight = Dimensions.get('window').height;
+const Dimensions_WIDTH = Dimensions.get('window').width;
+const Dimensions_HEIGHT = Dimensions.get('window').height;
 
 import cor from './cores';
 
 const cardItem = StyleSheet.create({
 	acoes: {
-		alignItems: "center",
-		//bottom: 0,
-		flexDirection: "row",
-		paddingVertical: 30
+		alignSelf: 'flex-start', 
+		flexDirection: 'column',
+		marginTop: 130,
+		paddingVertical: 20
 	},
 	botaoMaior: {
-		alignItems: "center",
-		backgroundColor: cor.branco,
-		borderRadius: 30,
-		justifyContent: "center",
-		height: 60,
+		alignItems: 'center',
+		backgroundColor: cor.amareloH,
+		borderRadius: 70,
+		justifyContent: 'center',
+		height: 80,
 		marginHorizontal: 7,
-		shadowColor: cor.preto,
-		//shadowOffset: { height: 10, width: 0 }
-		shadowOpacity: 20,
-		shadowRadius: 50,
-		width: 60
+		marginLeft: 5,
+		width: 50
+	},
+	containerGenero: {
+		alignSelf: 'center',
+		backgroundColor: 'transparent',
+		flexDirection: 'row', 
+		justifyContent: 'space-around',
+		paddingHorizontal: 10,
+		width: '100%' ,  
 	},
 	containerInfo: {
-    alignItems: "center",
-    backgroundColor: cor.pretoTransparente,
-		borderRadius: 20,
-		margin: 10,
-		bottom: 0,
-	//	paddingHorizontal: 10,
-		//paddingVertical: 10,
-    position:'absolute',
-	},
-	descricao: {
-		color: cor.branco,
-		marginTop: 10,
-		textAlign: "center"
-	},
-	imageBackground: {
-		alignContent: 'center', 
 		alignItems: 'center',
-		alignSelf: 'center',
-		height: fullHeight - 95,
-		justifyContent: 'center',
-		marginHorizontal: 10, 
-		marginVertical: 10,
-		resizeMode: 'cover',
-		width: fullWidth - 20
+		backgroundColor: 'transparent',
+		flex: 1,
+		height: Dimensions_HEIGHT,
+		position: 'absolute',
+		width: Dimensions_WIDTH
 	},
+	containerUsuarioInfo: {
+		bottom: 0, 
+		marginBottom: 85,
+		position:'absolute'
+	},
+	genero: {
+		color: cor.amareloG, 
+		fontSize: 15,
+		fontWeight:'bold',
+		marginBottom: 20
+  },
 	miniBotao: {
-		alignItems: "center",
-		backgroundColor: cor.branco,
+		backgroundColor: cor.amareloH,
 		borderRadius: 30,
-		height: 40,
-		justifyContent: "center",
+		height: 50,
 		marginHorizontal: 7,
-		shadowColor: cor.preto,
-		shadowOffset: { height: 10, width: 0 },
-		shadowOpacity: 0.15,
-		shadowRadius: 20,
-		width: 40
+		width: 50
 	},
 	nome: {
-		color: cor.branco,
+		color: cor.amareloA,
 		fontSize: 20,
-		paddingBottom: 7,
-		paddingTop: 10
+		fontWeight: 'bold',
+		marginLeft: 30,
+		marginBottom: 5,
+		textAlign: 'justify'
+	},
+	sinopse: {
+		alignItems: 'center',
+		color: cor.amareloA,
+		fontSize: 15,
+		marginBottom: 5,
+		paddingHorizontal: 30,
+		textAlign: 'justify'
 	}
 })
 

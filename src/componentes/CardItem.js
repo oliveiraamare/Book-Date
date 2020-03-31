@@ -1,85 +1,67 @@
 import React from 'react';
-import { ImageBackground, Text, View} from 'react-native';
+import { Text, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
-import BotaoGradiente from './botoes/botaoGradiente';
 import cardItem from '../estilos/cardItem';
-
 import cor from '../estilos/cores';
 
 const CardItem = ({
   actions,
-  description,
+  sinopse,
   genero1,
   genero2,
   genero3,
-  image,
-  name,
+  nome,
   onPressLeft,
-  onPressMensagem,
   onPressPerfil,
   onPressRight
 }) => {  
   return (
-    <ImageBackground 
-      source={image} 
-      style={cardItem.imageBackground}
-    >
       <View style={cardItem.containerInfo}> 
-      
-        {/* nome */}
-        <Text style={cardItem.nome}>{name}</Text>
 
-        <View style={{flexDirection:'row'}}>
-          <BotaoGradiente text={genero1} />
-          <BotaoGradiente text={genero2} />
-          <BotaoGradiente text={genero3} />
-        </View>
-
-        {/* descrição */}
-        {description && (
-          <Text style={cardItem.descricao}>{description}</Text>
-        )}
-
-        {/* ACTIONS */}
         {actions && (
           <View style={cardItem.acoes}>       
             <IconButton
-              icon="shield-account"
-              color={cor.cinzaEscuro}
+              icon='account-off-outline'
+              color={cor.cinzabEscuro}
               size={23}
               style={cardItem.miniBotao} 
-              onPress={() => onPressPerfil()}
-            />
-
-            <IconButton
-              icon="bookmark-check"
-              color={cor.cinzaEscuro}
-              size={35}
-              style={cardItem.botaoMaior} 
               onPress={() => onPressLeft()}
             />
-
             <IconButton
-              icon="bookmark-remove"
+              icon='account-heart'
               color={cor.cinzaEscuro}
-              size={35}
+              size={23}
               style={cardItem.botaoMaior} 
-              onPress={() => onPressRight()}
+              onPress={() => onPressPerfil()}
             />
-
             <IconButton
-              icon="chat-processing"
+              icon='comment-account'
               color={cor.cinzaEscuro}
               size={23}
               style={cardItem.miniBotao} 
-              onPress={() => onPressMensagem()}
+              onPress={() => onPressRight()}
             />
-           
           </View>
         )}
+
+        <View style={cardItem.containerUsuarioInfo}>
+          {nome && (
+            <Text style={cardItem.nome}>{nome}</Text>
+          )}
+
+          <View style={cardItem.containerGenero}>
+            {genero1 && (<Text style={cardItem.genero}>#{genero1}</Text>)}
+            {genero2 && (<Text style={cardItem.genero}>#{genero2}</Text>)}
+            {genero3 && (<Text style={cardItem.genero}>#{genero3}</Text>)}
+          </View>
+
+          {sinopse && (
+            <Text style={cardItem.sinopse}>{sinopse}</Text>
+          )}
+        </View>
+
       </View>
-    </ImageBackground>
   );
 };
 

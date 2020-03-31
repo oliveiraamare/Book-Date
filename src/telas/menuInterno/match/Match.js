@@ -2,132 +2,107 @@
 //https://www.npmjs.com/package/react-native-card-stack-swiper
 
 import React, { Component } from 'react';
-import { AsyncStorage,Dimensions, ImageBackground, Text, View } from 'react-native';
+import { AsyncStorage, ImageBackground, View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
-
+import { DotIndicator  } from 'react-native-indicators';
 
 import { FraseTop } from '../../../componentes/frase';
-
 import CardItem from '../../../componentes/CardItem';
-import Demo from './demo.js';
-
-import { usuariosMatch } from '../../../acoes/usuariosMatch';
 
 import compartilhado from '../../../estilos/compartilhado';
-
-import { BarIndicator } from 'react-native-indicators';
 import cor from '../../../estilos/cores';
+import match from '../../../estilos/match';
 
 import { usuarioUid } from '../../../firebase/acoes'
 
-
-const DIMENSION_WIDTH = Dimensions.get('window').width;
-const DIMENSION_HEIGHT = Dimensions.get('window').height;
-
+import { matchPerfil } from './PerfilMatch';
 
 class Match extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
      dados: {},
-     isBVisible:false
+     carregarTelaMatch: false
     };
   }
+
   componentDidMount() {  
     console.log(usuarioUid())
-   // this.match();
+    this.match();
     setTimeout(() => {
-      this.setState({isBVisible:true});
-    }, 7000);
-   
+      this.setState({ carregarTelaMatch: true });
+    }, 7000);   
   }  
   
   match = async () => {
     var async = await AsyncStorage.getItem('matchProximos');
     var dados = JSON.parse(async);
-  //  console.log(dados)
     this.setState({dados});
-    dados.map((currElement, index) => {
-      console.log("The current iteration is: " + index);
-      console.log("The current element is: " + currElement);
-      console.log("The current element is: " + currElement.nome);
-      console.log("The current element is: " + currElement.imagem);
-      console.log("The current element is: " + currElement.preferencias.generoLiterario[0]);
-      console.log("The current element is: " + currElement.preferencias.generoLiterario[1]);
-      console.log("The current element is: " + currElement.preferencias.generoLiterario[2]);
-      console.log("The current element is: " + currElement.preferencias.sinopse);
-      console.log("\n");
-    });
-
   }
 
-  render() {
+  swipedLeft = () => {
+    console.log('tratar isso')
+  }
+
+  render() { 
     return (
       <View style={compartilhado.container}>
-        <View style={compartilhado.statusBar} />
-        {/*
-          this.state.isBVisible ?     
-            
-            <CardStack
+        
+        {
+          this.state.carregarTelaMatch  
+          ? <CardStack
               loop={true}
               verticalSwipe={false}
               renderNoMoreCards={() => null}
               ref={swiper => (this.swiper = swiper)}
-            >
-          
+              onSwipedLeft={() => this.swipedLeft()}
+              onSwipedRight={() => this.props.navigation.navigate('Mensagem')}
+            >  
               { 
                 this.state.dados.map((item, index) => (
-                <Card key={index}>
-                  <ImageBackground
-                   // source={{uri:item.imagem}}
-                    style={{flex: 1,
-    height: DIMENSION_HEIGHT,
-		resizeMode: 'contain',
-		width: DIMENSION_WIDTH}}
-                  >    
-                    <CardItem
-                   //   name={item.nome}
-                      //idade={item.idade}
-                      //image={item.image}
-                     // genero1={[item.preferencias.generoLiterario[0]]}
-                     // genero2={[item.preferencias.generoLiterario[1]]}
-                     // genero3={[item.preferencias.generoLiterario[2]]}
-                     // description={[item.preferencias.sinopse]}
-                      actions
-                      onPressPerfil={() => this.props.navigation.navigate('PerfilMatch')}
-                      onPressLeft={() => this.swiper.swipeLeft()}
-                      onPressRight={() => this.swiper.swipeRight()}
-                      onPressMensagem={() => this.props.navigation.navigate('Mensagem')}
-                    />
-                 </ImageBackground>    
-
-                </Card>
-              ))}
+                  <Card key={index}>
+                    <ImageBackground
+                      source={{uri:item.imagem}}
+                      style={match.imagem}
+                    >    
+                    <View style={match.imagemTransparente}>
+                      <CardItem
+                        nome={item.nome}
+                        genero1={[item.preferencias.generoLiterario[0]]}
+                        genero2={[item.preferencias.generoLiterario[1]]}
+                        genero3={[item.preferencias.generoLiterario[2]]}
+                        sinopse={[item.preferencias.sinopse]}
+                        actions
+                        onPressPerfil={() => this.props.navigation.navigate('PerfilMatch', {item : 'oi'})}
+                        onPressLeft={() => this.swiper.swipeLeft()}
+                        onPressRight={() => this.props.navigation.navigate('Mensagem')} 
+                      />
+                      </View>
+                    </ImageBackground>    
+                  </Card>
+                ))
+              }
             </CardStack>           
           
-          : 
-          <View style={{top: 20}}>
-          <FraseTop title={frase} subtitle={autor} />    
-            <Text style={{color: cor.amareloA,
-      fontSize: 20,
-      marginBottom: 40,
-      paddingBottom: 5,
-      paddingHorizontal: 5,
-      paddingLeft: 5,
-      paddingRight: 5,
-      paddingTop: 5,
-      textAlign: 'justify'}}>Julgue pela capa e perca uma granse história - desconhecido</Text>
-            <BarIndicator 
-              color={cor.amarelo}
-              count={5}
-              size={70}
-              animating={true}
-              interaction={true}
-              />   
-          </View>
-          
-          
-         */ }
+            : <View style={match.imagemTransparente}>
+                <View style={compartilhado.statusBar}/>
+                <View style={{top:390}}>
+                  <DotIndicator  
+                    color={cor.amarelo}
+                    count={5}
+                    size={20}
+                    animating={true}
+                    interaction={true}
+                  />   
+                </View>
+                <FraseTop 
+                  topbarStyle={{top:280}} titleStyle={{fontSize:15}} 
+                  title={frase} subtitleStyle={{alignSelf:'center'}} 
+                  subtitle={autor} 
+                />    
+              </View>              
+        }
       </View>
     );
   }

@@ -1,6 +1,7 @@
-//https://stackoverflow.com/questions/53651505/pushing-text-input-data-in-json-format-through-asyncstorage-in-react-native
+////https://stackoverflow.com/questions/53651505/pushing-text-input-data-in-json-format-through-asyncstorage-in-react-native
 //https://itqna.net/questions/8717/how-save-data-asyncstorage
 //https://www.npmjs.com/package/react-native-tag-select-max
+//https://stackoverflow.com/questions/44628346/passing-checkbox-value-to-show-hide-password-via-react-native
 import React, { Component } from 'react';
 import { 
   Alert,

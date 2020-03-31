@@ -10,7 +10,7 @@ class BotaoGradiente extends Component {
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={['#fac8e3', '#FCBCD7', '#F9A3CB', '#EF87BE', '#ed66b6', '#E56AB3']}
+          colors={['#FFB302', '#FFBA01', '#FEC300', '#FFCF00', '#FED901', '#FFDF01']}
           start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
           style={{ height: 37, width: 90, alignItems: 'center', borderRadius: 100 }}
         >

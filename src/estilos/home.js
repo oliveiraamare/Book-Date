@@ -12,7 +12,7 @@ const home = StyleSheet.create({
     width: '100%' 
   },
   botoesAcaoTexto: {
-    color:cor.amareloA, 
+    color: cor.amareloA, 
     fontWeight:'bold'
   },
   bookDate: {

@@ -47,8 +47,10 @@ export const recuperarCadastro = async() => {
     var long = geolocalizacao.longitude;
     long = Number(long);
 
-    console.log(email + ' ' + senha + ' ' + JSON.stringify(usuario) + ' ' + imagem + ' ' + lat + ' ' + long)
-    handleSignUp(email, senha, usuario, lat, long, imagem)
+    console.log(email + ' ' + senha + ' ' + JSON.stringify(usuario) + ' ' + imagem + ' ' + lat + ' ' + long);
+
+    handleSignUp(email, senha, usuario, lat, long, imagem);
+
   } catch {
     alert('Erro no recuperarCadastro')
   }

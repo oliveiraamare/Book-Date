@@ -18,7 +18,7 @@ const compartilhado = StyleSheet.create({
 		width: DIMENSION_WIDTH
   },
   imagemTransparente: {
-    backgroundColor: cor.pretoTransparente, 
+    backgroundColor: 'rgba(0, 0, 0, 0.20)', 
     flex: 1
   },
   statusBar: {

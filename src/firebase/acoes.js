@@ -3,24 +3,36 @@ import '@firebase/firestore';
 
 import Firebase from './Firebase';
 
+export const firestore = firebase.firestore();
+
+// pegar dados collection firestore
+export const collection = (colecao) => {
+  const collection = firestore.collection(colecao);
+  return collection;
+}
+
+//pegar dados da storage
 export const storage = (colecao) => {
   const storage = Firebase.storage().ref(colecao + usuarioUid());
   return storage;
 }
 
+//pegar dados do realtime
 export const database = (colecao) => {
   const database = Firebase.database().ref(colecao + usuarioUid());
   return database;
 }
 
-export const usuarioUid = () => {
-  const usuarioUid = firebase.auth().currentUser.uid;
-  return usuarioUid;
-}
-
+//pegar dados do usuário logado
 export const usuario = () => {
   const usuario = firebase.auth().currentUser;
   return usuario;
+}
+
+//pegar uid do usuário logado
+export const usuarioUid = () => {
+  const usuarioUid = firebase.auth().currentUser.uid;
+  return usuarioUid;
 }
 
 export const usuarioConectado = () => {
@@ -31,18 +43,13 @@ export const usuarioConectado = () => {
   }
 }
 
-export const firestore = firebase.firestore();
-
-export const collection = (colecao) => {
-  const collection = firestore.collection(colecao);
-  return collection;
-}
-
+//enviar email para resetar senha
 export const passwordReset = {
   passwordReset: email => { 
     return firebase.auth().sendPasswordResetEmail(email);
 }}
 
+//salvar e atualizar a geolocalização no firestore
 export const salvarGeolocalizacao = (uid, lat, long) => {
   const localizacao = new firebase.firestore.GeoPoint(lat, long);
   const geo = firestore.collection('usuarios').doc(uid);
@@ -55,6 +62,7 @@ export const salvarGeolocalizacao = (uid, lat, long) => {
   }, { merge: true });
 }
 
+//salvar a imagem no storage e fazer o upload da url no firestore
 export const uploadImagem = async(uid, imagem) => {
   if(imagem != null){
     const resposta = await fetch(imagem);

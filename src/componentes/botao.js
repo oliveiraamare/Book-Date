@@ -37,6 +37,17 @@ export const BotaoTouchableOpacity = ({ buttonStyle, onPress, textStyle, text })
   );
 }
 
+export const BotaoInterligado = ({ buttonStyle, onPress, textStyle, text }) => {
+  return (
+    <TouchableOpacity 
+      disabled
+      style={[styles.botaoInterligado, buttonStyle]}
+    >
+      <Text style={[styles.botaoInterligadoTexto, textStyle]}>{text}</Text>
+    </TouchableOpacity>
+  );
+}
+
 const styles = StyleSheet.create({
   botaoComTexto: {
     backgroundColor: 'transparent',
@@ -44,6 +55,20 @@ const styles = StyleSheet.create({
   },
   botaoTransparente:{
     backgroundColor:'transparent'
+  },
+  botaoInterligado: {
+    backgroundColor: 'transparent',
+    borderColor: cor.amarelo,
+    borderWidth: 1,
+    borderRadius: 70, 
+    height: 55,
+    justifyContent: 'center',       
+    width: 220   
+  },
+  botaoInterligadoTexto:
+  { 
+		color:cor.amareloA, 
+    fontWeight:'bold'
   },
   botaoTouchableOpacity: {
     alignItems: 'center',

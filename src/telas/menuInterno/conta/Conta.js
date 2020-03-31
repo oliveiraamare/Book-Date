@@ -20,48 +20,41 @@ import cor from '../../../estilos/cores';
 
 import Firebase from '../../../firebase/Firebase';
 import { usuarioUid, collection } from '../../../firebase/acoes';
-
 class Conta extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      usuario: {},
+      usuarioLogado: {},
       isSwitchOn: false,
-      url: ''
+      url: null,
     };
   }
 
   componentDidMount() {
-    this.getAndLoadDados()
+    this.pegarDadosUsuarioLogado();
   }
 
-  async getAndLoadDados() {
-    var uid = usuarioUid();
-    var data = collection('usuarios').doc(uid);
-    data.get().then((doc) => {
-      var usuario = doc.data(); 
-      this.setState({usuario});
-    })
-    .catch(function(error) {
-      console.log("Erro ao pegar dados do usuário: " + error + ' ' + error.message);
-    });
+  pegarDadosUsuarioLogado = async() => {
+    var usuarioLogado = await AsyncStorage.getItem('usuarioLogado');
+    usuarioLogado = JSON.parse(usuarioLogado);
+    this.setState({usuarioLogado});
   }
 
   handleLogout = () => {
-    this.removeEverything();
+    this.removeDadosAsync();
     Firebase.auth().signOut()
     .then(() => 
       alert('Usuário fez logout!'))
     .catch(error => alert('erro no logout' + error));
   }
 
-  removeEverything = async () => {
+  removeDadosAsync = async() => {
     try {
-      await AsyncStorage.clear()
-      console.log('Storage limpo com sucesso')
+      await AsyncStorage.clear();
+      console.log('Storage limpo com sucesso');
     } catch (error) {
-      console.log('Falha ao limpar o Storage', error.message)
+      console.log('Falha ao limpar o Storage', error.message);
     }
   }
 
@@ -70,19 +63,20 @@ class Conta extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <ImageBackground
-          source={require('../../../imagens/41.jpg')} 
+          source={require('../../../imagens/41.jpg')}
           style={compartilhado.imagemBackground}
         >
           <ScrollView >
             <View style={conta.viewAvatar}>
               <View style={{marginRight: 15}}>
                 <Avatar.Image 
-                  size={200} //source={{uri:this.state.usuario.imagem}} 
+                  size={200} 
+                  source={{ uri: this.state.usuarioLogado.imagem }}  
                 />
               </View>    
               <View style={conta.viewTexto}>
-                <Text style={{color: cor.cinza, fontSize: 20}}>
-                  {this.state.usuario.nome}
+                <Text style={{color: cor.amarelo, fontSize: 20}}>
+                  {this.state.usuarioLogado.nome}
                 </Text>
                 <FrasesPerfil />
               </View>

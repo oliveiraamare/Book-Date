@@ -31,7 +31,7 @@ class Regras extends Component {
   }
 
   handleCadastroBanco = () => {
-    recuperarCadastro();
+    recuperarCadastro(); 
   }
         
   render(){
