@@ -1,9 +1,9 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 14552,
+  "packagerPid": 5132,
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "expoServerNgrokUrl": "https://hh-9ww.oliveiraamare.bookdate.exp.direct",
-  "packagerNgrokUrl": "https://packager.hh-9ww.oliveiraamare.bookdate.exp.direct",
-  "ngrokPid": 6204
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://un-72g.oliveiraamare.bookdate.exp.direct",
+  "packagerNgrokUrl": "https://packager.un-72g.oliveiraamare.bookdate.exp.direct",
+  "ngrokPid": 10280
 }

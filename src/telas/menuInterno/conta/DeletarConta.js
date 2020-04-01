@@ -1,25 +1,58 @@
 import React, { Component } from 'react';
-import { ImageBackground, View } from 'react-native';
-import { Paragraph } from 'react-native-paper';
+import '@firebase/firestore';
 
 import compartilhado from '../../../estilos/compartilhado';
 import deletarConta from '../../../estilos/deletarConta';
 
-import { AppBarHeader } from '../../../componentes/header';
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
-import { FraseTop } from '../../../componentes/frase';
 
 import Firebase from '../../../firebase/Firebase';
 
 class DeletarConta extends Component {
 
   handleDelete = () => {
-    var user = Firebase.auth().currentUser;
-      user.delete()
-      .then(() => 
-        alert('Usuário deletado com sucesso!'),
-      )
-      .catch(error => alert(error.message))
+    var usuarioLogado = Firebase.auth().currentUser;
+
+    /**
+     * var storageRef = storage('imagem');
+    storageRef.delete().then(() => {
+      console.log('Imagem deletada com sucesso no storage');
+    }).catch(error => {
+      console.log('Erro ao deletar a imagem no storage: ', error.message);
+    });    
+
+     */
+
+    collection('usuarios').doc(usuarioUid()).delete()
+    .then(() => {
+      console.log('Usuário deletado com sucesso no firestore');
+    })
+    .catch(error => {
+      console.log('Erro ao deletar o usuário no firestore: ', error.message);
+    })
+
+    /*usuarioLogado.delete()
+    .then(() => {
+      console.log('Usuário deletado com sucesso no Auth');
+      Alert.alert(
+        'Tchauzinho!', 'Foi divertido te conhecer. Esperamos um dia rever-te!'
+      );
+    })
+    .catch( error => {
+      console.log('Erro ao deletar o usuário no Auth: ', error.message);
+      //Alert.alert('Ops', 'Falha na rede, tente novamente mais tarde');
+    })*/
+
+    removeDadosAsync();
+  }
+
+  removeDadosAsync = async() => {
+    try {
+      await AsyncStorage.clear();
+      console.log('Storage limpo com sucesso');
+    } catch (error) {
+      console.log('Falha ao limpar o Storage', error.message);
+    }
   }
 
   render() {      
@@ -42,7 +75,10 @@ class DeletarConta extends Component {
               Se você conheceu alguém, nós te desejamos os melhor! Você sempre será bem-vindo no futuro.
             </Paragraph>
             <Paragraph style={deletarConta.paragrafo}>
-              Você pode excluir sua conta a qualquer momento. Ao deletá-la, você perderá todos os dados e conteúdos contidos nela. 
+              Você pode excluir sua conta a qualquer momento mas ao deletá-la, perderá todos os dados e conteúdos contidos nela. 
+            </Paragraph>
+            <Paragraph style={deletarConta.paragrafo}>
+              Esperamos rever-te em breve!
             </Paragraph>
           </View>        
           <BotaoTransparente

@@ -13,6 +13,9 @@ export const recuperarCadastro = async() => {
     var preferencias = await AsyncStorage.getItem('preferencias');
     preferencias = JSON.parse(preferencias);
 
+    var geolocalizacao = await AsyncStorage.getItem('geolocalizacao');
+    geolocalizacao = JSON.parse(geolocalizacao);
+
     var email = cadastro.email
     var senha = cadastro.senha
     var usuario = {
@@ -33,14 +36,16 @@ export const recuperarCadastro = async() => {
         contoFadas: preferencias.contoFadas,
         autor: { 0: 'não informado', 1: 'não informado', 2: 'não informado'},
         livro: { 0: 'não informado', 1: 'não informado', 2: 'não informado'},
+      },
+      primeiraLocalizacao:{
+        latitude: geolocalizacao.latitude,
+        longitude: geolocalizacao.longitude
       }
     }
 
     var imagem = await AsyncStorage.getItem('imagem');
     imagem = JSON.parse(imagem);
 
-    var geolocalizacao = await AsyncStorage.getItem('geolocalizacao');
-    geolocalizacao = JSON.parse(geolocalizacao);
 
     var lat = geolocalizacao.latitude;
     lat = Number(lat);

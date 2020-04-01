@@ -15,14 +15,18 @@ const conta = StyleSheet.create({
     alignItems: 'center',  
     marginBottom: 20,
     marginTop: 20, 
-    paddingBottom: 8,
+    paddingBottom: 5,
     paddingLeft: 15, 
     paddingRight: 15,
     paddingTop: 6
   },
+  viewImagem: {
+    alignSelf: 'center',
+    marginTop: 10
+  },
   viewTexto: {
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 5,
     paddingBottom: 10,
     paddingLeft: 15, 
     paddingRight: 15,

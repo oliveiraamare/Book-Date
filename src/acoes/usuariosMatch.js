@@ -1,17 +1,42 @@
+import { AsyncStorage } from 'react-native';
 import { ordenarPorDistancia } from './ordenarPorDistancia';
 import { usuarioUid, collection} from '../firebase/acoes';
 
+/*
+  Primeira chamada de match.
+  Primeiro fazemos a consulta no banco e retornamos um array.
+  Esse array possui somente os dados dos usuários que possui o gênero procurado pelo usuário logado.
+  Após isso é chamado o ordenarPorDistancia que ordena esses usuários do mais próximo ao mais longe.
+  Em seguida guardamos o resultado ordenado no RealTime.
+*/
+
+/*
+  Fluxo: usuariosMatch ->  ordenarPorDistancia -> salvarUsuariosProximos
+  A tela de navegacaoInicial chama o usuariosMatch
+  A tela de Match recupera o array do banco
+*/
+
 export const usuariosMatch = () => {
+  var geolocalizacao = AsyncStorage.getItem('geolocalizacao');
+  var geo = JSON.parse(geolocalizacao);
+
   var uid = usuarioUid();
   var data = collection('usuarios');
 
   data.doc(uid).get().then((doc) => {
 
     var usuario = doc.data();
-    
-    var longitude = usuario.localizacao.atual.longitude;
-    var latitude = usuario.localizacao.atual.latitude;
     var buscando = usuario.buscando;
+ 
+    if(usuario.localizacao){
+      var longitude = usuario.localizacao.longitude;
+      var latitude = usuario.localizacao.latitude;
+      console.log('primeiro aqui')
+    } else {
+      var longitude = geo.longitude;
+      var latitude = geo.latitude;
+      console.log('depois aqui')
+    }
 
     var arrayUids = [];
     var dadosUsuarioMatch = [];
@@ -24,8 +49,8 @@ export const usuariosMatch = () => {
           if ((usuarioMatch.uid != usuario.uid) && (usuarioMatch.buscando == usuario.sexo || usuarioMatch.buscando == 'Ambos'))
           {
             arrayUids.push({
-              longitude: usuarioMatch.localizacao.atual.longitude,
-              latitude: usuarioMatch.localizacao.atual.latitude,
+              longitude: usuarioMatch.localizacao.longitude,
+              latitude: usuarioMatch.localizacao.latitude,
               uid: usuarioMatch.uid,
               usuarioMatch
             });    
@@ -44,8 +69,8 @@ export const usuariosMatch = () => {
           if ((usuarioMatch.uid != usuario.uid) && (usuarioMatch.buscando == usuario.sexo))
           {  
             arrayUids.push({
-              longitude: usuarioMatch.localizacao.atual.longitude,
-              latitude: usuarioMatch.localizacao.atual.latitude,
+              longitude: usuarioMatch.localizacao.longitude,
+              latitude: usuarioMatch.localizacao.latitude,
               uid: usuarioMatch.uid,
               usuarioMatch
             });

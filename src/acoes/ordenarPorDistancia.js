@@ -1,14 +1,13 @@
 //https://www.npmjs.com/package/sort-by-distance
 import { AsyncStorage } from 'react-native';
 
-export const ordenarPorDistancia = (points, long, lat) => {
+import { usuarioUid } from '../firebase/acoes';
+import Firebase from '../firebase/Firebase';
 
+export const ordenarPorDistancia = (points, long, lat) => {
   const sortByDistance = require('sort-by-distance');
  
-  const opts = {
-    yName: 'latitude',
-    xName: 'longitude'
-  };
+  const opts = { yName: 'latitude', xName: 'longitude'};
   
   const origin = { longitude: long, latitude: lat};
   
@@ -21,12 +20,21 @@ export const ordenarPorDistancia = (points, long, lat) => {
   arrayMatch.forEach(element => {
     matchProximos.push(
       element.usuarioMatch
-    )
-
+    );
   })
-  //console.log('Resultado com os usuários mais próximos: ', matchProximos)
-  salvarMatchProximos(matchProximos);
+  
+  salvarUsuariosProximos(matchProximos);
 }
+
+//salva no realtime o array com os usuários próximos
+const salvarUsuariosProximos = (matchProximos) => {
+  Firebase.database().ref('match/' + usuarioUid()).set(matchProximos)
+  .then(()=>{
+      console.log('Os dados dos usuarios match foram guardados no banco com sucesso');
+  }).catch( error => {
+    console.log('Não foi possivel salvar no banco os dados do usuario match, ', error.message)
+  });
+} 
 
 const salvarMatchProximos = async(matchProximos) => {
   await AsyncStorage.setItem('matchProximos', JSON.stringify(matchProximos))
@@ -35,7 +43,5 @@ const salvarMatchProximos = async(matchProximos) => {
       console.log('Os dados dos usuarios match foram guardados com sucesso');
     }).catch( error => {
       console.log('Não foi possivel salvar os dados do usuario match, ', error.message)
-    }
-  );
+    });
 }
-

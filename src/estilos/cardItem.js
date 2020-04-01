@@ -40,7 +40,7 @@ const cardItem = StyleSheet.create({
 	},
 	containerUsuarioInfo: {
 		bottom: 0, 
-		marginBottom: 85,
+		marginBottom: 55,
 		position:'absolute'
 	},
 	genero: {

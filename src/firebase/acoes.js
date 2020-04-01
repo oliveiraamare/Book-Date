@@ -43,23 +43,24 @@ export const usuarioConectado = () => {
   }
 }
 
-//enviar email para resetar senha
-export const passwordReset = {
-  passwordReset: email => { 
-    return firebase.auth().sendPasswordResetEmail(email);
-}}
-
 //salvar e atualizar a geolocalização no firestore
 export const salvarGeolocalizacao = (uid, lat, long) => {
-  const localizacao = new firebase.firestore.GeoPoint(lat, long);
-  const geo = firestore.collection('usuarios').doc(uid);
-  geo.set({
-    localizacao:{
-      atual: localizacao,
-      ultimaConhecida: localizacao
-    },
-    uid: uid
-  }, { merge: true });
+  return new Promise((resolve, reject) => {
+    const localizacao = new firebase.firestore.GeoPoint(lat, long);
+    const geo = firestore.collection('usuarios').doc(uid);
+    geo.set({
+      localizacao,
+      uid: uid
+    }, { merge: true })
+    .then((data)=>{
+      console.log('Localização salva com sucesso')
+      resolve(data)
+    })
+    .catch(error => {
+      console.log('Erro ao salvar a localização: ' + error.message)
+      reject(error)
+    })
+  })
 }
 
 //salvar a imagem no storage e fazer o upload da url no firestore
@@ -89,5 +90,11 @@ const inserirURLFirestore = (uid, downloadURL) => {
   var imagemFirestore = firestore.collection('usuarios').doc(uid);
   imagemFirestore.set({
     imagem: downloadURL
-  }, { merge: true });
+  }, { merge: true })
+  .then(()=>{
+    console.log('URL da imagem salva com sucesso')
+  })
+  .catch(error => {
+    console.log('Erro ao salvar a url da imagem: ' + error.message)
+  })
 }

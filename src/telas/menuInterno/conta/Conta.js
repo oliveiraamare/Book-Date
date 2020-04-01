@@ -20,6 +20,8 @@ import cor from '../../../estilos/cores';
 
 import Firebase from '../../../firebase/Firebase';
 import { usuarioUid, collection } from '../../../firebase/acoes';
+import { usuarioLogado } from '../../../acoes/usuarioLogado';
+
 class Conta extends Component {
 
   constructor(props) {
@@ -27,18 +29,26 @@ class Conta extends Component {
     this.state = {
       usuarioLogado: {},
       isSwitchOn: false,
-      url: null,
+      imagem: null
     };
   }
 
   componentDidMount() {
-    this.pegarDadosUsuarioLogado();
+    this.dadosUsuarioLogado();
   }
 
-  pegarDadosUsuarioLogado = async() => {
+  dadosUsuarioLogado = async() => {
     var usuarioLogado = await AsyncStorage.getItem('usuarioLogado');
     usuarioLogado = JSON.parse(usuarioLogado);
     this.setState({usuarioLogado});
+
+    var imagem = usuarioLogado.imagem;
+    if (imagem != null){
+      this.setState({ imagem });  
+    } else {
+      imagem = '../../../imagens/leitor.png'
+      this.setState({ imagem });
+    } 
   }
 
   handleLogout = () => {
@@ -68,14 +78,21 @@ class Conta extends Component {
         >
           <ScrollView >
             <View style={conta.viewAvatar}>
-              <View style={{marginRight: 15}}>
-                <Avatar.Image 
-                  size={200} 
-                  source={{ uri: this.state.usuarioLogado.imagem }}  
-                />
-              </View>    
+              <View style={conta.viewImagem}>
+                {
+                  this.state.imagem == '../../../imagens/leitor.png'
+                  ? <Avatar.Image 
+                      size={200} 
+                      source={require('../../../imagens/leitor.png')}
+                    />
+                  : <Avatar.Image 
+                      size={200} 
+                      source={{ uri: this.state.imagem }}  
+                    />
+                }
+                </View>    
               <View style={conta.viewTexto}>
-                <Text style={{color: cor.amarelo, fontSize: 20}}>
+                <Text style={{color: cor.amarelo, fontSize: 20, textAlign: "justify"}}>
                   {this.state.usuarioLogado.nome}
                 </Text>
                 <FrasesPerfil />
@@ -90,8 +107,9 @@ class Conta extends Component {
                   <Switch
                     value={this.state.isSwitchOn}
                     onValueChange={() =>
-                      { this.setState({ isSwitchOn: !this.state.isSwitchOn }),
-                      this.sendPushNotification()
+                      { 
+                        this.setState({ isSwitchOn: !this.state.isSwitchOn }),
+                        this.sendPushNotification()
                       }
                     }
                     trackColor={{true:cor.branco, false: cor.cinza}}
@@ -119,7 +137,7 @@ class Conta extends Component {
                 title="Termos de Privacidade"
                 titleStyle={{color:cor.branco}}
                 leftIcon={
-                  <MaterialCommunityIcons name="sort-variant-lock" color={cor.amarelo} size={20} />
+                  <MaterialCommunityIcons name="view-headline" color={cor.amarelo} size={20} />
                 } 
                 rightElement={
                   <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
@@ -131,7 +149,7 @@ class Conta extends Component {
                 title="Termos de Uso"
                 titleStyle={{color:cor.branco}}
                 leftIcon={
-                  <MaterialCommunityIcons name="locker-multiple" color={cor.amarelo} size={20} />
+                  <MaterialCommunityIcons name="view-headline" color={cor.amarelo} size={20} />
                 } 
                 rightElement={
                   <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />

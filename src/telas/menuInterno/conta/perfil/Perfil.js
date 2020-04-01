@@ -11,8 +11,6 @@ import {
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { usuarioUid, collection } from '../../../../firebase/acoes';
-
 import { Preferencias } from '../../../../componentes/topPreferencias';
 
 import perfil from '../../../../estilos/perfil';
@@ -20,7 +18,6 @@ import compartilhado from '../../../../estilos/compartilhado';
 import cor from '../../../../estilos/cores';
 
 import { usuarioLogado } from '../../../../acoes/usuarioLogado';
-
 
 let { AgeFromDateString } = require('age-calculator');
 
@@ -36,43 +33,22 @@ class Perfil extends Component {
       contoFadas: '',
       autor: '',
       generoLiterario: {},
-      livro: ''
+      livro: '',
+      imagem: null
     };
   }
 
   componentDidMount() {
     this.forceUpdate();
+    usuarioLogado();
     this.getAndLoadDados();
   }
 
-  getAndLoadDados = async() => {
-    var usuario = await AsyncStorage.getItem('usuarioLogado');
-    usuario = JSON.parse(usuario); this.setState({usuario});
-
-    //console.log(usuario)
-    var preferencias = usuario.preferencias;
-    this.setState({preferencias});
-
-    var aventura = preferencias.aventura;
-    this.setState({aventura});
-    var prosa = preferencias.prosa;
-    this.setState({prosa});
-    var misterio = preferencias.misterio;
-    this.setState({misterio})
-    var contoFadas = preferencias.contoFadas;
-    this.setState({contoFadas});
-    
-    var autor = usuario.preferencias.autor;
-    this.setState({autor});
-    var generoLiterario = usuario.preferencias.generoLiterario;
-    this.setState({generoLiterario});
-    var livro = usuario.preferencias.livro;
-    this.setState({livro});
-  }
-
   render() {
+
     var dtNasc = this.state.usuario.dtNasc;
     let idade = new AgeFromDateString(dtNasc).age;
+
     return (    
       <View style={compartilhado.container}> 
         <View style={compartilhado.statusBar}/>
@@ -82,10 +58,17 @@ class Perfil extends Component {
               source={require('../../../../imagens/perfil.jpg')} 
               style={perfil.imagemFrame}
             /> 
-            <Image
-              source={{uri:this.state.usuario.imagem}}
-              style={perfil.imagemPerfil}
-            />            
+            {
+              this.state.imagem == '../../../../imagens/leitor.png'
+              ? <Image
+                  source={require('../../../../imagens/leitor.png')}
+                  style={perfil.imagemPerfil}
+                />    
+              : <Image
+                  source={{uri:this.state.imagem}}
+                  style={perfil.imagemPerfil}
+                />       
+            }          
             <View style={perfil.containerInfo}>
               <View style={perfil.containerNome}>
                 <Icon.Button
@@ -232,6 +215,39 @@ class Perfil extends Component {
         </ImageBackground>
       </View>
     );
+  }
+
+  getAndLoadDados = async() => {
+    var usuario = await AsyncStorage.getItem('usuarioLogado');
+    usuario = JSON.parse(usuario); this.setState({usuario});
+
+    var imagem = usuario.imagem;
+    if (imagem != null){
+      this.setState({ imagem });  
+    } else {
+      imagem = '../../../../imagens/leitor.png'
+      this.setState({ imagem });
+    } 
+
+    //console.log(usuario)
+    var preferencias = usuario.preferencias;
+    this.setState({preferencias});
+
+    var aventura = preferencias.aventura;
+    this.setState({aventura});
+    var prosa = preferencias.prosa;
+    this.setState({prosa});
+    var misterio = preferencias.misterio;
+    this.setState({misterio})
+    var contoFadas = preferencias.contoFadas;
+    this.setState({contoFadas});
+    
+    var autor = usuario.preferencias.autor;
+    this.setState({autor});
+    var generoLiterario = usuario.preferencias.generoLiterario;
+    this.setState({generoLiterario});
+    var livro = usuario.preferencias.livro;
+    this.setState({livro});
   }
 }
 

@@ -22,7 +22,6 @@ import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
-
 import { usuariosMatch } from '../acoes/usuariosMatch';
 import { usuarioLogado } from '../acoes/usuarioLogado';
 
@@ -31,7 +30,7 @@ const Tab = createBottomTabNavigator();
 function HomeTabs({ navigation, route }) {
   return (
     <Tab.Navigator
-      initialRouteName="Match"
+      initialRouteName="Loading"
       tabBarOptions={{
         //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
         activeTintColor: cor.amarelo,
@@ -103,7 +102,7 @@ export default function NavegacaoInterna() {
         <Stack.Screen name="PerfilMatch" component={PerfilMatch} />
         <Stack.Screen name="SobreNos" component={SobreNos} />
         <Stack.Screen name="TermoPrivacidade" component={TermoPrivacidade} />
-        <Stack.Screen name="TermoUso" component={TermoUso} />
+        <Stack.Screen name="TermoUso" component={TermoUso} />        
       </Stack.Navigator>
     </NavigationContainer>
   );

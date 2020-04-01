@@ -11,8 +11,9 @@ export const usuarioLogado = () => {
   var data = collection('usuarios').doc(uid);  
   data.get().then((doc) => {
     var usuarioLogado = doc.data();
+    console.log(usuarioLogado)
     salvarAsyncStorage(usuarioLogado);
-    console.log('usuario uid: ', usuarioLogado.uid);    
+    //console.log('usuario uid: ', usuarioLogado.uid);    
   })
   .catch(function(error) {
     console.log("Erro ao pegar dados do usuarioLogado: " + error + ' ' + error.message);
@@ -20,7 +21,7 @@ export const usuarioLogado = () => {
 }
 
 //salvar informações do usuário logado no asyncstorage
-export const salvarAsyncStorage = async(usuarioLogado) => {
+const salvarAsyncStorage = async(usuarioLogado) => {
   await AsyncStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado))
     .then(()=>
     {

@@ -11,10 +11,10 @@ export const  handleSignUp = (email, senha, usuario, lat, long, imagem) => {
 const salvarUsuario = (usuario, lat, long, imagem) => {
   const uid = usuarioUid();
   firestore.collection('usuarios').doc(uid).set(usuario)
-  .then(() => 
-    salvarGeolocalizacao(uid, lat, long),
-    uploadImagem(uid, imagem)
-  )
+  .then(() => {
+    salvarGeolocalizacao(uid, lat, long);
+    uploadImagem(uid, imagem);
+  })
   .catch(error => {
     alert('erro no salvarUsuario: '+ error.message  + ' ' + error)
   })

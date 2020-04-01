@@ -1,8 +1,9 @@
 //https://github.com/stevenpersia/tinder-react-native
 //https://www.npmjs.com/package/react-native-card-stack-swiper
+//https://stackoverflow.com/questions/47547465/how-to-render-one-react-native-component-after-another-component-had-rendered
 
 import React, { Component } from 'react';
-import { AsyncStorage, ImageBackground, View } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { DotIndicator  } from 'react-native-indicators';
 
@@ -13,41 +14,44 @@ import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
 import match from '../../../estilos/match';
 
-import { usuarioUid } from '../../../firebase/acoes'
-
-import { matchPerfil } from './PerfilMatch';
+import { database } from '../../../firebase/acoes';
 
 class Match extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
-     dados: {},
-     carregarTelaMatch: false
+     carregarTelaMatch: false,
+     matchDados: {}
     };
   }
 
-  componentDidMount() {  
-    this.match();
+  componentDidMount() {   
+    this.pegarDadosBanco();    
     setTimeout(() => {
       this.setState({ carregarTelaMatch: true });
-    }, 10000);   
+    }, 7000);
   }  
-  
-  match = async () => {
-    var async = await AsyncStorage.getItem('matchProximos');
-    var dados = JSON.parse(async);
-    this.setState({dados});
-  }
 
   swipedLeft = () => {
-    console.log('tratar isso')
+    console.log('Tratar swipedLeft');
   }
+
+  pegarDadosBanco(){
+    database('match/').once('value').then(snapshot => 
+    {
+      var matchDados = snapshot.val();
+      this.setState({matchDados});      
+    })
+    .catch(error => {      
+      console.log('Não foi possível recuperar os dados do Banco no Match. ', error.message);
+    })
+  }
+
 
   render() { 
     return (
-      <View style={compartilhado.container}>
-        
+      <View style={compartilhado.container}>     
         {
           this.state.carregarTelaMatch  
           ? <CardStack
@@ -59,34 +63,46 @@ class Match extends Component {
               onSwipedRight={() => this.props.navigation.navigate('Mensagem')}
             >  
               { 
-                this.state.dados.map((item, index) => (
+                this.state.matchDados.map((item, index) => (
                   <Card key={index}>
                     <ImageBackground
-                      source={{uri:item.imagem}}
+                      source={require('../../../imagens/leitor.png')}
                       style={match.imagem}
-                    >    
-                    <View style={match.imagemTransparente}>
-                      <CardItem
-                        nome={item.nome}
-                        genero1={[item.preferencias.generoLiterario[0]]}
-                        genero2={[item.preferencias.generoLiterario[1]]}
-                        genero3={[item.preferencias.generoLiterario[2]]}
-                        sinopse={[item.preferencias.sinopse]}
-                        actions
-                        onPressPerfil={() => this.props.navigation.navigate('PerfilMatch', {item : 'oi'})}
-                        onPressLeft={() => this.swiper.swipeLeft()}
-                        onPressRight={() => this.props.navigation.navigate('Mensagem')} 
-                      />
+                    >  
+                      <View style={match.semFoto}> 
+                        <ImageBackground
+                          source={{uri:item.imagem}}
+                          style={match.imagem}
+                        >    
+                          <View style={match.imagemTransparente}>
+                            <CardItem
+                              nome={item.nome}
+                              genero1={[item.preferencias.generoLiterario[0]]}
+                              genero2={[item.preferencias.generoLiterario[1]]}
+                              genero3={[item.preferencias.generoLiterario[2]]}
+                              sinopse={[item.preferencias.sinopse]}
+                              actions
+                              onPressPerfil={() => this.props.navigation.navigate('PerfilMatch')}
+                              onPressLeft={() => this.swiper.swipeLeft()}
+                              onPressRight={() => this.props.navigation.navigate('Mensagem')} 
+                            />
+                          </View>
+                        </ImageBackground>    
                       </View>
-                    </ImageBackground>    
-                  </Card>
+                    </ImageBackground>
+                  </Card>     
                 ))
               }
             </CardStack>           
           
             : <View style={match.imagemTransparente}>
                 <View style={compartilhado.statusBar}/>
-                <View style={{top:390}}>
+                <FraseTop 
+                  topbarStyle={match.loading} titleStyle={{fontSize:15}} 
+                  title={frase} subtitleStyle={{alignSelf:'center'}} 
+                  subtitle={autor} 
+                />   
+                <View style={match.loading}>
                   <DotIndicator  
                     color={cor.amarelo}
                     count={5}
@@ -94,12 +110,7 @@ class Match extends Component {
                     animating={true}
                     interaction={true}
                   />   
-                </View>
-                <FraseTop 
-                  topbarStyle={{top:280}} titleStyle={{fontSize:15}} 
-                  title={frase} subtitleStyle={{alignSelf:'center'}} 
-                  subtitle={autor} 
-                />    
+                </View> 
               </View>              
         }
       </View>

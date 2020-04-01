@@ -260,7 +260,7 @@ class Preferencias extends Component {
                       this.generoLiterario = generoLiterario;
                     }}
                     onMaxError={() => {
-                      Alert.alert('Ops', 'Escolha três opções')
+                      Alert.alert('Ops', 'Escolha três opções somente')
                     }}
                     itemStyle={preferencias.tagItem}
                     itemLabelStyle={preferencias.tagLabel}
