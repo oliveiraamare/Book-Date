@@ -23,6 +23,10 @@ const deletarConta = StyleSheet.create({
     marginBottom: 22,
     marginTop: 30,
     textAlign:'center'
+  },
+  popUp: {
+    borderBottomColor: cor.amarelo, 
+    borderBottomWidth: 1
   }
 })
 
