@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native';
 import { ordenarPorDistancia } from './ordenarPorDistancia';
 import { usuarioUid, collection} from '../firebase/acoes';
 
@@ -17,8 +16,6 @@ import { usuarioUid, collection} from '../firebase/acoes';
 */
 
 export const usuariosMatch = () => {
-  var geolocalizacao = AsyncStorage.getItem('geolocalizacao');
-  var geo = JSON.parse(geolocalizacao);
 
   var uid = usuarioUid();
   var data = collection('usuarios');
@@ -31,12 +28,13 @@ export const usuariosMatch = () => {
     if(usuario.localizacao){
       var longitude = usuario.localizacao.longitude;
       var latitude = usuario.localizacao.latitude;
-      console.log('primeiro aqui')
+      console.log('cehgeui')
     } else {
-      var longitude = geo.longitude;
-      var latitude = geo.latitude;
-      console.log('depois aqui')
+      var longitude = usuario.primeiraLocalizacao.longitude;
+      var latitude = usuario.primeiraLocalizacao.latitude;
+      console.log("e ai")
     }
+    
 
     var arrayUids = [];
     var dadosUsuarioMatch = [];
