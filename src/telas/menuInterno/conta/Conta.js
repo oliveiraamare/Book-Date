@@ -19,8 +19,6 @@ import conta from '../../../estilos/conta';
 import cor from '../../../estilos/cores';
 
 import Firebase from '../../../firebase/Firebase';
-import { usuarioUid, collection } from '../../../firebase/acoes';
-import { usuarioLogado } from '../../../acoes/usuarioLogado';
 
 class Conta extends Component {
 
@@ -55,8 +53,8 @@ class Conta extends Component {
     this.removeDadosAsync();
     Firebase.auth().signOut()
     .then(() => 
-      alert('Usuário fez logout!'))
-    .catch(error => alert('erro no logout' + error));
+      console.log('Usuário fez logout!'))
+    .catch(error => alert('Ocorreu um erro no logout' + error));
   }
 
   removeDadosAsync = async() => {

@@ -1,6 +1,6 @@
 {
   "urlRandomness": "z4-wbe",
-  "hostType": "tunnel",
+  "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,

@@ -99,7 +99,11 @@ export default function NavegacaoInterna() {
         <Stack.Screen name="EditarTopTres" component={EditarTopTres} />
         <Stack.Screen name="DeletarConta" component={DeletarConta} />
         <Stack.Screen name="Perfil" component={Perfil} />
-        <Stack.Screen name="PerfilMatch" component={PerfilMatch} />
+        <Stack.Screen name="PerfilMatch" component={PerfilMatch} 
+          options={({route, navigation}) => (
+            {route: {route}, navigation: {navigation}}
+          )}
+        />
         <Stack.Screen name="SobreNos" component={SobreNos} />
         <Stack.Screen name="TermoPrivacidade" component={TermoPrivacidade} />
         <Stack.Screen name="TermoUso" component={TermoUso} />        

@@ -82,7 +82,17 @@ class Match extends Component {
                               genero3={[item.preferencias.generoLiterario[2]]}
                               sinopse={[item.preferencias.sinopse]}
                               actions
-                              onPressPerfil={() => this.props.navigation.navigate('PerfilMatch')}
+
+                              
+                              onPressPerfil={() => this.props.navigation.navigate('PerfilMatch', { item })}
+
+
+
+
+
+
+
+
                               onPressLeft={() => this.swiper.swipeLeft()}
                               onPressRight={() => this.props.navigation.navigate('Mensagem')} 
                             />

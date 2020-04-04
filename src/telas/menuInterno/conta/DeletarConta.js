@@ -1,3 +1,4 @@
+//https://www.npmjs.com/package/react-native-dialog
 import React, { Component } from 'react';
 import { 
   Alert,

@@ -1,4 +1,5 @@
 //https://www.npmjs.com/package/age-calculator      
+//https://stackoverflow.com/questions/45388957/how-to-pass-parameters-to-screen-in-stacknavigator
 import React, { Component } from 'react';
 import {
   Image,
@@ -8,7 +9,6 @@ import {
   View
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Preferencias } from '../../../componentes/topPreferencias';
 
@@ -18,37 +18,41 @@ import cor from '../../../estilos/cores';
 
 let { AgeFromDateString } = require('age-calculator');
 
-var  um, dois, tres;
-
-export const matchPerfil = (match) => {
-  console.log('iiiiiiiiiiiiiiiiitem', match)
-  getAndLoadDados(match);
-
-}
 class Perfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuario: {},
-      preferencias: {},
-      aventura: '',
-      prosa: '',
-      misterio: '',
-      contoFadas: '',
-      autor: '',
-      generoLiterario: {},
-      livro: '',
-      match: {},
-      data: {}
+      dados: {},
+      preferencias: '',
+      autor: {},
+      livro: {},
+      generoLiterario: {}
     };
-    const { navigation }  = this.props;
-    const userData = navigation.getParam('item', null);
   }
 
+  componentDidMount(){
+    this.recuperarDados();
+  }
+
+  recuperarDados() {
+    const dados = this.props.route.params.item;
+    this.setState({ dados });
+
+    const preferencias = this.props.route.params.item.preferencias;
+    this.setState({ preferencias });
+
+    const autor = this.props.route.params.item.preferencias.autor;
+    this.setState({ autor });
+
+    const livro = this.props.route.params.item.preferencias.livro;
+    this.setState({ livro });
+    
+    const generoLiterario = this.props.route.params.item.preferencias.generoLiterario;
+    this.setState({ generoLiterario });
+  }
 
   render() {
-   // const item = this.props.navigation.state.params.item
-    var dtNasc = this.state.usuario.dtNasc;
+    var dtNasc = this.state.dados.dtNasc;
     let idade = new AgeFromDateString(dtNasc).age;
     return (    
       <View style={compartilhado.container}> 
@@ -59,20 +63,27 @@ class Perfil extends Component {
               source={require('../../../imagens/perfil.jpg')} 
               style={perfilMatch.imagemFrame}
             /> 
-            <Image
-              source={{uri:this.state.usuario.imagem}}
-              style={perfilMatch.imagemPerfil}
-            />            
+            {
+              this.state.dados.imagem == null
+              ? <Image
+                  source={require('../../../imagens/leitor.png')}
+                  style={perfilMatch.imagemPerfil}
+                />    
+              : <Image
+                  source={{uri:this.state.dados.imagem}}
+                  style={perfilMatch.imagemPerfil}
+                />       
+            }             
             <View style={perfilMatch.containerInfo}>
 
               <View style={perfilMatch.containerNome}>
                 <Text style={perfilMatch.nome}>
-                  {this.state.match.nome}
+                  {this.state.dados.nome}
                 </Text>
               </View>
 
               <Text style={perfilMatch.descricaoIdadeCidade}>
-                {idade} anos, {this.state.usuario.cidade}
+                {idade} anos, {this.state.dados.cidade}
               </Text> 
 
               {
@@ -85,8 +96,8 @@ class Perfil extends Component {
               
               { 
                 (
-                  this.state.aventura == 'false' && this.state.contoFadas == 'false' &&
-                  this.state.misterio == 'false' && this.state.prosa == 'false'              
+                  this.state.preferencias.aventura == false && this.state.preferencias.contoFadas == false &&
+                  this.state.preferencias.misterio == false && this.state.preferencias.prosa == false             
                 ) ? null :   
                   
                 <View style={perfilMatch.preferencias}>
@@ -95,7 +106,7 @@ class Perfil extends Component {
                   </Text>
                   <View style={perfilMatch.checkboxContainer}>
                     {
-                      this.state.aventura == false ? 
+                      this.state.preferencias.aventura == false ? 
                         null
                       : <CheckBox
                           disabled={true}
@@ -111,7 +122,7 @@ class Perfil extends Component {
                         /> 
                     }
                     {
-                      this.state.prosa == false ? 
+                      this.state.preferencias.prosa == false ? 
                         null
                       : <CheckBox
                           disabled={true}
@@ -127,7 +138,7 @@ class Perfil extends Component {
                         /> 
                     }
                     {
-                      this.state.misterio == false ? 
+                      this.state.preferencias.misterio == false ? 
                         null
                       : <CheckBox
                           disabled={true}
@@ -143,7 +154,7 @@ class Perfil extends Component {
                         /> 
                     }
                     {
-                      this.state.contoFadas == false ? 
+                      this.state.preferencias.contoFadas == false ? 
                         null
                       : <CheckBox
                           disabled={true}
@@ -181,7 +192,7 @@ class Perfil extends Component {
                     </Text>  
                   </View>
               }
-                  
+
               <View style={perfilMatch.preferenciasLiterarias}>
                 <Text style={perfilMatch.perguntas}>
                   Top preferências literárias
@@ -231,7 +242,7 @@ class Perfil extends Component {
                       opcao3={tres}
                     /> 
                 }
-              </View>          
+              </View>                        
             </View>                                
           </ScrollView>
         </ImageBackground>
