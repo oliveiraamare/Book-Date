@@ -59,9 +59,9 @@ class Perfil extends Component {
               style={perfil.imagemFrame}
             /> 
             {
-              this.state.imagem == '../../../../imagens/leitura.png'
+              this.state.imagem == '../../../../imagens/icone.png'
               ? <Image
-                  source={require('../../../../imagens/leitura.png')}
+                  source={require('../../../../imagens/icone.png')}
                   style={perfil.imagemPerfil}
                 />    
               : <Image
@@ -225,7 +225,7 @@ class Perfil extends Component {
     if (imagem != null){
       this.setState({ imagem });  
     } else {
-      imagem = '../../../../imagens/leitura.png'
+      imagem = '../../../../imagens/icone.png'
       this.setState({ imagem });
     } 
 

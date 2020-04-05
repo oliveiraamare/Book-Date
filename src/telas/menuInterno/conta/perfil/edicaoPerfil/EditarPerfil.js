@@ -91,14 +91,14 @@ class Perfil extends Component {
             <FraseTop title={frase} subtitle={autor} />   
             <View style={editarPerfil.containerImagem}>
               {
-                this.state.imagem == '../../../../../imagens/leitura.png'
+                this.state.imagem == '../../../../../imagens/icone.png'
                 ? 
                   <TouchableHighlight onPress={()=>this._pegarDaGaleria()}>                
                     <View>
                       <Avatar.Image 
                         size={220} 
                         style={editarPerfil.imagemPerfil}
-                        source={require('../../../../../imagens/leitura.png')}
+                        source={require('../../../../../imagens/icone.png')}
                       />          
                       <View style={editarPerfil.containerIcone}>
                         <Icon.Button
@@ -262,7 +262,7 @@ class Perfil extends Component {
     if (imagem != null){
       this.setState({ imagem });  
     } else {
-      imagem = '../../../../../imagens/leitura.png'
+      imagem = '../../../../../imagens/icone.png'
       this.setState({ imagem });
     } 
 

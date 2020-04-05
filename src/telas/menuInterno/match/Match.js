@@ -94,7 +94,10 @@ class Match extends Component {
               }
             </CardStack>           
           
-            : <View style={match.imagemTransparente}>
+            : <ImageBackground
+          source={require('../../../imagens/fundoInterno.jpg')} 
+          style={match.imagem}
+        >
                 <View style={compartilhado.statusBar}/>
                 <FraseTop 
                   topbarStyle={match.loading} titleStyle={{fontSize:15}} 
@@ -110,7 +113,7 @@ class Match extends Component {
                     interaction={true}
                   />   
                 </View> 
-              </View>              
+              </ImageBackground>              
         }
       </View>
     );

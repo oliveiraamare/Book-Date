@@ -51,7 +51,7 @@ class UploadImagem extends Component {
       if (image != null){
         this.setState({ image });        
       } else {
-        var image = '../../imagens/leitura.png';
+        var image = '../../imagens/icone.png';
         this.setState({ image });
       }
     }).done();
@@ -64,7 +64,7 @@ class UploadImagem extends Component {
 
   salvarImagem = async() => {
     var image;
-    if (this.state.image != '../../imagens/leitura.png'){
+    if (this.state.image != '../../imagens/icone.png'){
       image = this.state.image
     } else {
       image = null;
@@ -94,10 +94,10 @@ class UploadImagem extends Component {
               subtitleStyle={uploadImagem.header} title={frase} subtitle={autor}
             />
             {
-              this.state.image == '../../imagens/leitura.png' 
+              this.state.image == '../../imagens/icone.png' 
               ? <Avatar.Image 
                   size={200} 
-                  source={require('../../imagens/leitura.png')}
+                  source={require('../../imagens/icone.png')}
                   style={uploadImagem.avatar}
                 /> 
               :  <Avatar.Image 

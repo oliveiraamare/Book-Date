@@ -44,7 +44,7 @@ class Conta extends Component {
     if (imagem != null){
       this.setState({ imagem });  
     } else {
-      imagem = '../../../imagens/leitura.png'
+      imagem = '../../../imagens/icone.png'
       this.setState({ imagem });
     } 
   }
@@ -71,17 +71,17 @@ class Conta extends Component {
       <View style={compartilhado.container}>
         <View style={compartilhado.statusBar} />
         <ImageBackground
-          source={require('../../../imagens/41.jpg')}
+          source={require('../../../imagens/fundoInterno.jpg')}
           style={compartilhado.imagemBackground}
         >
           <ScrollView >
             <View style={conta.viewAvatar}>
               <View style={conta.viewImagem}>
                 {
-                  this.state.imagem == '../../../imagens/leitura.png'
+                  this.state.imagem == '../../../imagens/icone.png'
                   ? <Avatar.Image 
                       size={200} 
-                      source={require('../../../imagens/leitura.png')}
+                      source={require('../../../imagens/icone.png')}
                     />
                   : <Avatar.Image 
                       size={200} 
