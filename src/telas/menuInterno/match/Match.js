@@ -48,7 +48,6 @@ class Match extends Component {
     })
   }
 
-
   render() { 
     return (
       <View style={compartilhado.container}>     
@@ -66,37 +65,27 @@ class Match extends Component {
                 this.state.matchDados.map((item, index) => (
                   <Card key={index}>
                     <ImageBackground
-                      source={require('../../../imagens/leitor.png')}
-                      style={match.imagem}
+                      source={require('../../../imagens/match.jpg')}
+                      style={match.background}
                     >  
-                      <View style={match.semFoto}> 
+                      <View> 
                         <ImageBackground
                           source={{uri:item.imagem}}
                           style={match.imagem}
                         >    
-                          <View style={match.imagemTransparente}>
-                            <CardItem
-                              nome={item.nome}
-                              genero1={[item.preferencias.generoLiterario[0]]}
-                              genero2={[item.preferencias.generoLiterario[1]]}
-                              genero3={[item.preferencias.generoLiterario[2]]}
-                              sinopse={[item.preferencias.sinopse]}
-                              actions
-
-                              
-                              onPressPerfil={() => this.props.navigation.navigate('PerfilMatch', { item })}
-
-
-
-
-
-
-
-
-                              onPressLeft={() => this.swiper.swipeLeft()}
-                              onPressRight={() => this.props.navigation.navigate('Mensagem')} 
-                            />
-                          </View>
+                          <CardItem
+                            nome={item.nome}
+                            genero1={[item.preferencias.generoLiterario[0]]}
+                            genero2={[item.preferencias.generoLiterario[1]]}
+                            genero3={[item.preferencias.generoLiterario[2]]}
+                            sinopse={[item.preferencias.sinopse]}
+                            actions
+                            onPressPerfil={() => 
+                              this.props.navigation.navigate('PerfilMatch', { item })
+                            }
+                            onPressLeft={() => this.swiper.swipeLeft()}
+                            onPressRight={() => this.props.navigation.navigate('Mensagem')} 
+                          />
                         </ImageBackground>    
                       </View>
                     </ImageBackground>

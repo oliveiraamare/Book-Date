@@ -66,7 +66,7 @@ class Perfil extends Component {
             {
               this.state.dados.imagem == null
               ? <Image
-                  source={require('../../../imagens/leitor.png')}
+                  source={require('../../../imagens/match.jpg')}
                   style={perfilMatch.imagemPerfil}
                 />    
               : <Image

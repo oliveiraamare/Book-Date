@@ -43,7 +43,7 @@ function HomeTabs({ navigation, route }) {
           left: 0,
           position: 'absolute',
           right: 0
-        },
+        }
       }}  
     >
       <Tab.Screen

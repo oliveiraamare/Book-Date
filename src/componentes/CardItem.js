@@ -18,7 +18,6 @@ const CardItem = ({
 }) => {  
   return (
       <View style={cardItem.containerInfo}> 
-
         {actions && (
           <View style={cardItem.acoes}>       
             <IconButton

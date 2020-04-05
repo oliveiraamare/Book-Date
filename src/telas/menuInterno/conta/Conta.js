@@ -44,7 +44,7 @@ class Conta extends Component {
     if (imagem != null){
       this.setState({ imagem });  
     } else {
-      imagem = '../../../imagens/leitor.png'
+      imagem = '../../../imagens/leitura.png'
       this.setState({ imagem });
     } 
   }
@@ -78,10 +78,10 @@ class Conta extends Component {
             <View style={conta.viewAvatar}>
               <View style={conta.viewImagem}>
                 {
-                  this.state.imagem == '../../../imagens/leitor.png'
+                  this.state.imagem == '../../../imagens/leitura.png'
                   ? <Avatar.Image 
                       size={200} 
-                      source={require('../../../imagens/leitor.png')}
+                      source={require('../../../imagens/leitura.png')}
                     />
                   : <Avatar.Image 
                       size={200} 

@@ -1,7 +1,7 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, StatusBar, StyleSheet  } from 'react-native'
 
 const Dimensions_WIDTH = Dimensions.get('window').width;
-const Dimensions_HEIGHT = Dimensions.get('window').height;
+const Dimensions_HEIGHT = Dimensions.get('screen').height !== Dimensions.get('window').height && StatusBar.currentHeight > 24 ? (Dimensions.get('window').height + 56) : Dimensions.get('window').height;
 
 import cor from './cores';
 
@@ -9,8 +9,9 @@ const cardItem = StyleSheet.create({
 	acoes: {
 		alignSelf: 'flex-start', 
 		flexDirection: 'column',
-		marginTop: 130,
-		paddingVertical: 20
+		marginTop: StatusBar.currentHeight + 100,
+		paddingVertical: 20,
+		position: 'absolute'
 	},
 	botaoMaior: {
 		alignItems: 'center',
@@ -32,15 +33,14 @@ const cardItem = StyleSheet.create({
 	},
 	containerInfo: {
 		alignItems: 'center',
-		backgroundColor: 'transparent',
+		backgroundColor: cor.pretoTransparente,
 		flex: 1,
-		height: Dimensions_HEIGHT,
-		position: 'absolute',
+		height: Dimensions_HEIGHT,		
 		width: Dimensions_WIDTH
 	},
 	containerUsuarioInfo: {
 		bottom: 0, 
-		marginBottom: 55,
+		marginBottom: 65,
 		position:'absolute'
 	},
 	genero: {
