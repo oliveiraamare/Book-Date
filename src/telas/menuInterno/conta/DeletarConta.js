@@ -81,7 +81,6 @@ class DeletarConta extends Component {
   };
  
   handleDelete = (senha) => {
-    console.log(this.state.senha);
     this.deletarBanco();
     this.setState({ popoUpVisivel: false });
   };
@@ -90,7 +89,7 @@ class DeletarConta extends Component {
     return (
       <View style={compartilhado.container}>
         <ImageBackground
-          source={require('../../../imagens/fundo.jpg')} 
+          source={require('../../../imagens/fundoInterno.jpg')} 
           style={compartilhado.imagemBackground}
         >
           <AppBarHeader 

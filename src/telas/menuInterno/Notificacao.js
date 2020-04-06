@@ -10,10 +10,11 @@ import notificacao from '../../estilos/notificacao/notificacao';
 import List from '../../estilos/notificacao/list';
 
 const notificacoes = [
-  { id: 1, message: 'Enfim você chegou!' },
-  { id: 2, message:  'Sinta-se em casa!' },
-  { id: 3, message: 'Se estiver gostando do nosso conceito, chame seus amigos!' }
+  { id: 1, message: 'Enfim você chegou! Estavamos te esperando.' },
+  { id: 2, message:  'Respire fundo, sorria e sinta-se em casa. Estamos felizes em conhecer-te!' },
+  { id: 3, message: 'Convide seus amigos!!' }
 ];
+
 class Notificacao extends Component {
   render() {
     return (

@@ -32,6 +32,7 @@ class Regras extends Component {
 
   handleCadastroBanco = () => {
     recuperarCadastro(); 
+    this.props.navigation.navigate('PushExpo');    
   }
         
   render(){

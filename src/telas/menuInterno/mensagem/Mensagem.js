@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { ImageBackground, View , StyleSheet} from 'react-native';
 

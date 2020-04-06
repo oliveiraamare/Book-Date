@@ -15,6 +15,7 @@ import cor from '../../../estilos/cores';
 import match from '../../../estilos/match';
 
 import { database } from '../../../firebase/acoes';
+import { usuarioLogado } from '../../../acoes/usuarioLogado';
 
 class Match extends Component {
   
@@ -26,11 +27,14 @@ class Match extends Component {
     };
   }
 
-  componentDidMount() {   
-    this.pegarDadosBanco();    
+  componentDidMount() {       
+    setTimeout(() => {
+      this.pegarDadosBanco(); 
+    }, 3000);
+    
     setTimeout(() => {
       this.setState({ carregarTelaMatch: true });
-    }, 7000);
+    }, 10000);
   }  
 
   swipedLeft = () => {
@@ -41,7 +45,8 @@ class Match extends Component {
     database('match/').once('value').then(snapshot => 
     {
       var matchDados = snapshot.val();
-      this.setState({matchDados});      
+      this.setState({matchDados});   
+      console.log('recuperei os dados do banco na tela de match');   
     })
     .catch(error => {      
       console.log('Não foi possível recuperar os dados do Banco no Match. ', error.message);
@@ -95,9 +100,9 @@ class Match extends Component {
             </CardStack>           
           
             : <ImageBackground
-          source={require('../../../imagens/fundoInterno.jpg')} 
-          style={match.imagem}
-        >
+                source={require('../../../imagens/fundoInterno.jpg')} 
+                style={match.imagem}
+              >
                 <View style={compartilhado.statusBar}/>
                 <FraseTop 
                   topbarStyle={match.loading} titleStyle={{fontSize:15}} 

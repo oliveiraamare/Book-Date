@@ -45,22 +45,20 @@ export const usuarioConectado = () => {
 
 //salvar e atualizar a geolocalização no firestore
 export const salvarGeolocalizacao = (uid, lat, long) => {
-  return new Promise((resolve, reject) => {
     const localizacao = new firebase.firestore.GeoPoint(lat, long);
     const geo = firestore.collection('usuarios').doc(uid);
     geo.set({
       localizacao,
       uid: uid
     }, { merge: true })
-    .then((data)=>{
+    .then(()=>{
       console.log('Localização salva com sucesso')
-      resolve(data)
+      //resolve(data)
     })
     .catch(error => {
       console.log('Erro ao salvar a localização: ' + error.message)
-      reject(error)
+      //reject(error)
     })
-  })
 }
 
 //salvar a imagem no storage e fazer o upload da url no firestore
