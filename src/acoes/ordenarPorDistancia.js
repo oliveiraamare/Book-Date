@@ -22,7 +22,6 @@ export const ordenarPorDistancia = (points, long, lat) => {
       element.usuarioMatch
     );
   })
-  
   salvarUsuariosProximos(matchProximos);
 }
 

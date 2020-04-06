@@ -71,7 +71,8 @@ class UploadImagem extends Component {
     }
     await AsyncStorage.setItem('imagem', JSON.stringify(image)).then(
       ()=>{
-        console.log('Item salvo: ' + image);
+        //console.log('Item salvo: ' + image);
+        console.log('A url da imagem foi salva no async.')
       }).catch(error => {
         console.log('A imagem não foi salva: ', error.message);
       }

@@ -58,7 +58,8 @@ const perfilMatch = StyleSheet.create({
 		position: 'absolute' 
 	},
 	containerNome: {
-		alignSelf: 'center',   
+		alignSelf: 'center', 
+		alignItems: 'center',
 		backgroundColor: cor.amarelo,
 		borderRadius: 20,
 		marginTop: -15,
@@ -104,7 +105,8 @@ const perfilMatch = StyleSheet.create({
 	nome: {
 		alignSelf:'center',
 		color: cor.branco,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		textAlign: 'center'
 	},
 	perguntas: {
 		alignSelf:'flex-start',

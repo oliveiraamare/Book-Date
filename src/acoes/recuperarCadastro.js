@@ -37,7 +37,7 @@ export const recuperarCadastro = async() => {
         autor: { 0: 'não informado', 1: 'não informado', 2: 'não informado'},
         livro: { 0: 'não informado', 1: 'não informado', 2: 'não informado'},
       },
-      primeiraLocalizacao:{
+      localizacao:{
         latitude: geolocalizacao.latitude,
         longitude: geolocalizacao.longitude
       }
@@ -46,18 +46,17 @@ export const recuperarCadastro = async() => {
     var imagem = await AsyncStorage.getItem('imagem');
     imagem = JSON.parse(imagem);
 
-
     var lat = geolocalizacao.latitude;
     lat = Number(lat);
   
     var long = geolocalizacao.longitude;
     long = Number(long);
 
-    console.log(email + ' ' + senha + ' ' + JSON.stringify(usuario) + ' ' + imagem + ' ' + lat + ' ' + long);
-
+    //console.log(email + ' ' + senha + ' ' + JSON.stringify(usuario) + ' ' + imagem + ' ' + lat + ' ' + long);
+    
     handleSignUp(email, senha, usuario, lat, long, imagem);
 
-  } catch {
-    alert('Erro no recuperarCadastro')
+  } catch (error) {
+    console.log('Erro no recuperarCadastro: ', error.message)
   }
 }

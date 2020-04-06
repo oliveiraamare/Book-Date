@@ -9,7 +9,6 @@ import NavegacaoInterna from '../navegacao/NavegacaoInterna';
 import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
 import PermissaoGeo from '../telas/cadastro/PermissaoGeo';
 import Preferencias from '../telas/cadastro/Preferencias';
-import PushExpo from '../telas/menuInterno/PushExpo';
 import ReenviarSenha from '../telas/home/ReenviarSenha';
 import Regras from '../telas/cadastro/Regras';
 import TermoPrivacidade from '../telas/termos/TermoPrivacidade';
@@ -27,7 +26,6 @@ const NavegacaoSwitch = createSwitchNavigator(
         Perfil: { screen: Perfil },
         PermissaoGeo: { screen: PermissaoGeo },
         Preferencias: { screen: Preferencias },
-        PushExpo: { screen: PushExpo },
         Regras: { screen: Regras },
         ReenviarSenha: { screen: ReenviarSenha },
         TermoPrivacidade: { screen: TermoPrivacidade },

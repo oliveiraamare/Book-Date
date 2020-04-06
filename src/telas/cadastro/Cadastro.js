@@ -107,7 +107,8 @@ class Cadastro extends Component {
     }
     await AsyncStorage.setItem('cadastro', JSON.stringify(cadastro)).then(
       ()=>{
-        console.log('Itens salvos: ' + email + ' ' + senha + ' ' + nome + ' ' + dtNasc + ' ' + cidade + ' ' + sexo);
+        //console.log('Itens salvos: ' + email + ' ' + senha + ' ' + nome + ' ' + dtNasc + ' ' + cidade + ' ' + sexo);
+        console.log('Os itens do cadastro foram salvos no async.')
       }).catch(error => {
         console.log('Os itens do cadastro não foram salvos: ', error.message)
       }

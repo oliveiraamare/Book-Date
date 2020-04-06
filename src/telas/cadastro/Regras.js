@@ -12,6 +12,7 @@ import regras from '../../estilos/regras';
 import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 import { BotaoTouchableOpacity  }from '../../componentes/botao';
+import { pushExpo } from '../../componentes/pushExpo';
 
 import { recuperarCadastro } from '../../acoes/recuperarCadastro';
 
@@ -32,7 +33,7 @@ class Regras extends Component {
 
   handleCadastroBanco = () => {
     recuperarCadastro(); 
-    this.props.navigation.navigate('PushExpo');    
+    pushExpo();
   }
         
   render(){

@@ -164,7 +164,8 @@ class Preferencias extends Component {
     }
     await AsyncStorage.setItem('preferencias', JSON.stringify(preferencias)).then(
       ()=>{
-        console.log('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + buscando);
+        //console.log('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + buscando);
+        console.log('Os itens da preferência foram salvos no async.')
       }).catch(error => {
         console.log('Os itens da preferência não foram salvos: ', error.message);
       }

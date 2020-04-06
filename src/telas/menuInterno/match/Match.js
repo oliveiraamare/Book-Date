@@ -45,6 +45,7 @@ class Match extends Component {
     database('match/').once('value').then(snapshot => 
     {
       var matchDados = snapshot.val();
+      //console.log('matchDados na tela Maataach: ', matchDados)
       this.setState({matchDados});   
       console.log('recuperei os dados do banco na tela de match');   
     })

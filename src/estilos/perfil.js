@@ -53,6 +53,7 @@ const perfil = StyleSheet.create({
 	},
 	containerBotao: {
 		alignSelf:'center',
+		alignItems: 'center',
 		bottom: 0,
 		marginTop: 50,
 		position: 'absolute' 

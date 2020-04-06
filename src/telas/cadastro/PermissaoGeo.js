@@ -89,7 +89,8 @@ class PermissaoGeo extends Component {
 
     await AsyncStorage.setItem('geolocalizacao', JSON.stringify(geolocalizacao)).then(
       ()=>{
-        console.log('Itens salvos: ' + latitude + ' ' + longitude);
+        //console.log('Itens salvos: ' + latitude + ' ' + longitude);
+        console.log('Os itens de localização foram salvos no async.')
       }).catch(error => {
         console.log('Os itens de geolocalização não foram salvos: ', error.message)
       }

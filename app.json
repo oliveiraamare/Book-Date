@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "bookdate",
-    "slug": "bookdate",
+    "name": "BookDate",
+    "slug": "BookDate",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [

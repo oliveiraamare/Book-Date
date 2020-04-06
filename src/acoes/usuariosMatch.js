@@ -25,17 +25,9 @@ export const usuariosMatch = () => {
     var usuario = doc.data();
     var buscando = usuario.buscando;
  
-    if(usuario.localizacao){
-      var longitude = usuario.localizacao.longitude;
-      var latitude = usuario.localizacao.latitude;
-      console.log('cehgeui')
-    } else {
-      var longitude = usuario.primeiraLocalizacao.longitude;
-      var latitude = usuario.primeiraLocalizacao.latitude;
-      console.log("e ai")
-    }
-    
-
+    var longitude = usuario.localizacao.longitude;
+    var latitude = usuario.localizacao.latitude;
+  
     var arrayUids = [];
     var dadosUsuarioMatch = [];
 
@@ -44,7 +36,7 @@ export const usuariosMatch = () => {
         snapshot.forEach(doc => {
           var usuarioMatch = doc.data();
   
-          if ((usuarioMatch.uid != usuario.uid) && (usuarioMatch.buscando == usuario.sexo || usuarioMatch.buscando == 'Ambos'))
+          if ((usuarioMatch.uid != uid) && (usuarioMatch.buscando == usuario.sexo || usuarioMatch.buscando == 'Ambos'))
           {
             arrayUids.push({
               longitude: usuarioMatch.localizacao.longitude,
