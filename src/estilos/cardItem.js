@@ -7,21 +7,23 @@ import cor from './cores';
 
 const cardItem = StyleSheet.create({
 	acoes: {
-		alignSelf: 'flex-start', 
-		flexDirection: 'column',
-		marginTop: StatusBar.currentHeight + 100,
+		alignSelf: 'center', 
+		alignItems: 'center',
+		bottom: 0, 
+		flexDirection: 'row',
+		marginBottom: 40,
 		paddingVertical: 20,
-		position: 'absolute'
+		position:'absolute'
 	},
 	botaoMaior: {
 		alignItems: 'center',
-		backgroundColor: cor.amareloH,
+		backgroundColor: cor.pretoTransparente,
 		borderRadius: 70,
 		justifyContent: 'center',
-		height: 80,
+		height: 40,
 		marginHorizontal: 7,
 		marginLeft: 5,
-		width: 50
+		width: 90
 	},
 	containerGenero: {
 		alignSelf: 'center',
@@ -40,25 +42,25 @@ const cardItem = StyleSheet.create({
 	},
 	containerUsuarioInfo: {
 		bottom: 0, 
-		marginBottom: 65,
+		marginBottom: 125,
 		position:'absolute'
 	},
 	genero: {
 		color: cor.amareloG, 
 		fontSize: 15,
 		fontWeight:'bold',
-		marginBottom: 20
+		marginBottom: 10
   },
 	miniBotao: {
-		backgroundColor: cor.amareloH,
+		backgroundColor: cor.pretoTransparente,
 		borderRadius: 30,
 		height: 50,
 		marginHorizontal: 7,
 		width: 50
 	},
 	nome: {
-		color: cor.amareloA,
-		fontSize: 20,
+		color: cor.cinza,
+		fontSize: 25,
 		fontWeight: 'bold',
 		marginLeft: 30,
 		marginBottom: 5,
@@ -66,8 +68,9 @@ const cardItem = StyleSheet.create({
 	},
 	sinopse: {
 		alignItems: 'center',
-		color: cor.amareloA,
+		color: cor.cinza,
 		fontSize: 15,
+		fontWeight:'bold',
 		marginBottom: 5,
 		paddingHorizontal: 30,
 		textAlign: 'justify'

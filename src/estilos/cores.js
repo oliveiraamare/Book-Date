@@ -20,7 +20,8 @@ const cor = {
   amareloE: '#FFBC0F',
   amareloF: '#FFD800',
   amareloG: '#FFBA01',
-  amareloH: '#FCF6BA'
+  amareloH: '#FCF6BA',
+  amareloI: 'rgba(255, 186, 1, 0.40)'
 }
 
 export default cor;

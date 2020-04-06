@@ -12,7 +12,7 @@ import { Avatar } from 'react-native-paper';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
-import FrasesPerfil from '../../../componentes/fraseAleatoria/frasesPerfil';
+import { Citacoes } from '../../../componentes/fraseAleatoria/citacoes';
 
 import compartilhado from '../../../estilos/compartilhado';
 import conta from '../../../estilos/conta';
@@ -65,7 +65,7 @@ class Conta extends Component {
       console.log('Falha ao limpar o Storage', error.message);
     }
   }
-
+  
   render() {
     return (
       <View style={compartilhado.container}>
@@ -74,7 +74,11 @@ class Conta extends Component {
           source={require('../../../imagens/fundoInterno.jpg')}
           style={compartilhado.imagemBackground}
         >
-          <ScrollView >
+          <ScrollView>
+            <Citacoes 
+              container={conta.containerCitacao} 
+              textoStyle={conta.citacao} autorStyle={conta.autor} 
+            />
             <View style={conta.viewAvatar}>
               <View style={conta.viewImagem}>
                 {
@@ -93,31 +97,10 @@ class Conta extends Component {
                 <Text style={{color: cor.amarelo, fontSize: 20, textAlign: "justify"}}>
                   {this.state.usuarioLogado.nome}
                 </Text>
-                <FrasesPerfil />
               </View>
             </View>
-            <View>
-              <ListItem
-                title="Notificação Push"
-                titleStyle={{color:cor.branco}}
-                containerStyle={conta.listItem}
-                rightElement={
-                  <Switch
-                    value={this.state.isSwitchOn}
-                    onValueChange={() =>
-                      { 
-                        this.setState({ isSwitchOn: !this.state.isSwitchOn }),
-                        this.sendPushNotification()
-                      }
-                    }
-                    trackColor={{true:cor.branco, false: cor.cinza}}
-                    thumbColor={[this.state.isSwitchOn==true?cor.amarelo:cor.branco]}    
-                  />
-                }
-                leftIcon={
-                  <MaterialCommunityIcons name="bell-ring" color={cor.amarelo} size={20} />
-                }               
-              />
+
+            <View style={{marginTop: 70}}>
               <ListItem
                 containerStyle={conta.listItem}
                 title="Meu Perfil"

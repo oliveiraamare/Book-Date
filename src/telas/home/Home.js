@@ -9,7 +9,7 @@ import {
 
 import { BotaoTransparente } from '../../componentes/botao';
 import { BotaoTouchableOpacity  } from '../../componentes/botao';
-import FrasesAleatorias from '../../componentes/fraseAleatoria/FrasesAleatorias';
+import { Citacoes } from '../../componentes/fraseAleatoria/citacoes';
 
 import compartilhado from '../../estilos/compartilhado';
 import home from '../../estilos/home';
@@ -47,7 +47,7 @@ class Home extends Component {
         >        
           <View style={compartilhado.imagemTransparente}>
             <Text style={home.bookDate}>Book Date</Text>  
-            <FrasesAleatorias />
+            <Citacoes />
             <View style={home.botoesAcao}>
               <BotaoTouchableOpacity 
                 buttonStyle={home.botaoLogin}
