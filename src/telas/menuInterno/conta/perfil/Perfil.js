@@ -6,6 +6,7 @@ import {
   ImageBackground, 
   ScrollView, 
   Text,
+  TouchableHighlight,
   View
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
@@ -16,8 +17,6 @@ import { Preferencias } from '../../../../componentes/topPreferencias';
 import perfil from '../../../../estilos/perfil';
 import compartilhado from '../../../../estilos/compartilhado';
 import cor from '../../../../estilos/cores';
-
-import { usuarioLogado } from '../../../../acoes/usuarioLogado';
 
 let { AgeFromDateString } = require('age-calculator');
 
@@ -39,9 +38,12 @@ class Perfil extends Component {
   }
 
   componentDidMount() {
-    this.forceUpdate();
-    usuarioLogado();
+    
     this.getAndLoadDados();
+    setInterval(() => {
+      this.getAndLoadDados();
+    }, 5000);
+    
   }
 
   render() {
@@ -70,16 +72,20 @@ class Perfil extends Component {
                 />       
             }          
             <View style={perfil.containerInfo}>
-              <View style={perfil.containerNome}>
-                <Icon.Button
-                  name='edit'
-                  backgroundColor='transparent'
-                  onPress={() => this.props.navigation.navigate('EditarPerfil')}
-                  style={perfil.botaoEditar}
-                >
-                  {this.state.usuario.nome} 
-                </Icon.Button>
-              </View>
+              <TouchableHighlight 
+                onPress={() => this.props.navigation.navigate('EditarPerfil')}
+              > 
+                <View style={perfil.containerNome}>
+                  <Icon.Button
+                    name='edit'
+                    backgroundColor='transparent'
+                    onPress={() => this.props.navigation.navigate('EditarPerfil')}
+                    style={perfil.botaoEditar}
+                  >
+                    {this.state.usuario.nome} 
+                  </Icon.Button>
+                </View>
+              </TouchableHighlight>
               <Text style={perfil.descricaoIdadeCidade}>
                 {idade} anos, {this.state.usuario.cidade}
               </Text>

@@ -56,7 +56,7 @@ export const usuariosMatch = () => {
         snapshot.forEach(doc => {
           var usuarioMatch = doc.data();
           
-          if ((usuarioMatch.uid != usuario.uid) && (usuarioMatch.buscando == usuario.sexo))
+          if ((usuarioMatch.uid != usuario.uid) && (usuarioMatch.buscando == usuario.sexo || usuarioMatch.buscando == 'Ambos'))
           {  
             arrayUids.push({
               longitude: usuarioMatch.localizacao.longitude,
@@ -64,7 +64,7 @@ export const usuariosMatch = () => {
               uid: usuarioMatch.uid,
               usuarioMatch
             });
-            dadosUsuarioMatch.push(usuarioMatch);
+            //dadosUsuarioMatch.push(usuarioMatch);
           }
         })
         ordenarPorDistancia(arrayUids, longitude, latitude);

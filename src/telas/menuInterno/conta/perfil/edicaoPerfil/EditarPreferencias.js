@@ -99,16 +99,16 @@ class EditarPreferencias extends Component {
             this.handleUpdate()
           } 
           title={"Editar Preferências"} 
-        />              
+        />          
+        <RootToaster 
+          defaultDuration={2000} defaultColor={cor.amarelo} 
+        />     
         <ScrollView style={editarPreferencias.scrollView}>  
           <KeyboardAvoidingView 
             style={{justifyContent: "flex-end", flex: 1 }} 
             behavior='padding' 
             enabled 
-          >   
-            <RootToaster 
-              defaultDuration={2000} defaultColor={cor.amarelo} 
-            />  
+          >    
             <View style={editarPreferencias.info}>
               <Text style={editarPreferencias.texto}>
                 Estou tentando encontrar

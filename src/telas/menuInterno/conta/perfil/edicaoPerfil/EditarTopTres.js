@@ -116,16 +116,16 @@ class EditarTopTres extends Component {
             this.handleUpdate()
           } 
           title={"Editar Top Três"} 
-        />              
+        />        
+        <RootToaster 
+          defaultDuration={2000} defaultColor={cor.amarelo} 
+        />        
         <ScrollView style={editarTopTres.scrollView}>  
           <KeyboardAvoidingView 
             style={{justifyContent: "flex-end", flex: 1 }} 
             behavior='padding' 
             enabled 
           >    
-            <RootToaster 
-              defaultDuration={2000} defaultColor={cor.amarelo} 
-            />  
             <View style={editarTopTres.info}>
               <Text style={editarTopTres.texto}>Meu top 3 de autores</Text>   
               <TopPreferencias

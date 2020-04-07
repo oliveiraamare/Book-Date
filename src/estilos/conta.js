@@ -16,6 +16,7 @@ const conta = StyleSheet.create({
     fontSize: 14,
     justifyContent: 'center',
     marginBottom: 30,
+    marginTop: 15,
     padding: 10,
     top: 10
   },
@@ -55,7 +56,7 @@ const conta = StyleSheet.create({
     paddingLeft: 15, 
     paddingRight: 15,
     paddingTop: 6,
-    top: 80
+    top: 110
   },
   viewImagem: {
     alignSelf: 'center',

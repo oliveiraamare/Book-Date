@@ -26,13 +26,15 @@ class Conta extends Component {
     super(props);
     this.state = {
       usuarioLogado: {},
-      isSwitchOn: false,
       imagem: null
     };
   }
 
   componentDidMount() {
     this.dadosUsuarioLogado();
+    setInterval(() => {
+      this.dadosUsuarioLogado();
+    }, 15000);
   }
 
   dadosUsuarioLogado = async() => {
@@ -92,7 +94,7 @@ class Conta extends Component {
                       source={{ uri: this.state.imagem }}  
                     />
                 }
-                </View>    
+              </View>    
               <View style={conta.viewTexto}>
                 <Text style={{color: cor.amarelo, fontSize: 20, textAlign: "justify"}}>
                   {this.state.usuarioLogado.nome}
@@ -100,7 +102,7 @@ class Conta extends Component {
               </View>
             </View>
 
-            <View style={{marginTop: 70}}>
+            <View style={{marginTop: 100}}>
               <ListItem
                 containerStyle={conta.listItem}
                 title="Meu Perfil"

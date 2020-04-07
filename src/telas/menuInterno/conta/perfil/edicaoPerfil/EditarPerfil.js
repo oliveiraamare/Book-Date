@@ -78,22 +78,22 @@ class Perfil extends Component {
             this.handleUpdate()
           } 
           title={"Editar Perfil"} 
-        />           
+        />      
+        <RootToaster 
+          defaultDuration={2000} defaultColor={cor.amarelo} 
+        />        
         <ScrollView style={editarPerfil.scrollView}>    
           <KeyboardAvoidingView 
             style={{justifyContent: "flex-end", flex: 1 }} 
             behavior='padding' 
             enabled 
           > 
-            <RootToaster 
-              defaultDuration={2000} defaultColor={cor.amarelo} 
-            />   
             <FraseTop title={frase} subtitle={autor} />   
             <View style={editarPerfil.containerImagem}>
               {
                 this.state.imagem == '../../../../../imagens/icone.png'
                 ? 
-                  <TouchableHighlight onPress={()=>this._pegarDaGaleria()}>                
+                  <TouchableHighlight onPress={() => this._pegarDaGaleria()}>                
                     <View>
                       <Avatar.Image 
                         size={220} 
