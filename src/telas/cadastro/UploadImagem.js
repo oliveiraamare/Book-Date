@@ -141,8 +141,7 @@ class UploadImagem extends Component {
 
     if (cameraPerm === 'granted' && cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-        aspect: [10, 10],
+        allowsEditing: true
       });
 
       if (!pickerResult.cancelled) {
@@ -159,8 +158,7 @@ class UploadImagem extends Component {
     if (cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
-        base64: true,
-        aspect: [10, 10],
+        base64: true
       });
 
       if (!pickerResult.cancelled) {

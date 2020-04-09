@@ -6,25 +6,6 @@ const Dimensions_HEIGHT = Dimensions.get('screen').height !== Dimensions.get('wi
 import cor from './cores';
 
 const cardItem = StyleSheet.create({
-	acoes: {
-		alignSelf: 'center', 
-		alignItems: 'center',
-		bottom: 0, 
-		flexDirection: 'row',
-		marginBottom: 40,
-		paddingVertical: 20,
-		position:'absolute'
-	},
-	botaoMaior: {
-		alignItems: 'center',
-		backgroundColor: cor.pretoTransparente,
-		borderRadius: 70,
-		justifyContent: 'center',
-		height: 40,
-		marginHorizontal: 7,
-		marginLeft: 5,
-		width: 90
-	},
 	containerGenero: {
 		alignSelf: 'center',
 		backgroundColor: 'transparent',
@@ -37,12 +18,13 @@ const cardItem = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: cor.pretoTransparente,
 		flex: 1,
-		height: Dimensions_HEIGHT,		
+		height: Dimensions_HEIGHT,
+		position: 'absolute',
 		width: Dimensions_WIDTH
 	},
 	containerUsuarioInfo: {
 		bottom: 0, 
-		marginBottom: 125,
+		marginBottom: 60,
 		position:'absolute'
 	},
 	genero: {
@@ -51,13 +33,6 @@ const cardItem = StyleSheet.create({
 		fontWeight:'bold',
 		marginBottom: 10
   },
-	miniBotao: {
-		backgroundColor: cor.pretoTransparente,
-		borderRadius: 30,
-		height: 50,
-		marginHorizontal: 7,
-		width: 50
-	},
 	nome: {
 		color: cor.cinza,
 		fontSize: 25,
@@ -70,7 +45,6 @@ const cardItem = StyleSheet.create({
 		alignItems: 'center',
 		color: cor.cinza,
 		fontSize: 15,
-		fontWeight:'bold',
 		marginBottom: 5,
 		paddingHorizontal: 30,
 		textAlign: 'justify'

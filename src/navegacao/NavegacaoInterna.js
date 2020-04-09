@@ -11,7 +11,7 @@ import cor from '../estilos/cores';
 import Conta from '../telas/menuInterno/conta/Conta';
 import Match from '../telas/menuInterno/match/Match';
 import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
-import Notificacao from '../telas/menuInterno/Notificacao';
+import BookShelf from '../telas/menuInterno/BookShelf';
 
 import EditarPerfil from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarPerfil';
 import EditarPreferencias from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarPreferencias';
@@ -55,10 +55,10 @@ function HomeTabs({ navigation, route }) {
         }}
       />
       <Tab.Screen 
-        name="Notificações" component={Notificacao} 
+        name="BookShelf" component={BookShelf} 
         options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="bell-ring" color={color} size={size} />
+              <MaterialCommunityIcons name="library-shelves" color={color} size={size} />
             )
           }}
       />

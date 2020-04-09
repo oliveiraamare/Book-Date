@@ -2,6 +2,8 @@
 //https://www.npmjs.com/package/react-native-card-stack-swiper
 //https://stackoverflow.com/questions/47547465/how-to-render-one-react-native-component-after-another-component-had-rendered
 
+const arrayEstante =  [];
+
 import React, { Component } from 'react';
 import { ImageBackground, View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
@@ -14,8 +16,9 @@ import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
 import match from '../../../estilos/match';
 
-import { database } from '../../../firebase/acoes';
+import { database, collection, usuarioUid } from '../../../firebase/acoes';
 import { usuarioLogado } from '../../../acoes/usuarioLogado';
+
 
 class Match extends Component {
   
@@ -36,10 +39,17 @@ class Match extends Component {
       this.setState({ carregarTelaMatch: true });
     }, 10000);
   }  
-
-  swipedLeft = () => {
-    console.log('Tratar swipedLeft');
+  
+//messages.map((item, index) =>{console.log('pessoasNaEstante: ', item.pessoasNaEstante[index].nome)})
+  swiped = (item) => {
+    arrayEstante.push(item);  
+    console.log('arraaaaaaaaay: ', arrayEstante)
+    var pessoasNaEstante = Object.assign({}, arrayEstante)
+    collection('estante').doc(usuarioUid()).set(
+      pessoasNaEstante)
   }
+
+  
 
   pegarDadosBanco(){
     database('match/').once('value').then(snapshot => 
@@ -47,6 +57,7 @@ class Match extends Component {
       var matchDados = snapshot.val();
       //console.log('matchDados na tela Maataach: ', matchDados)
       this.setState({matchDados});   
+      //console.log('match dados: ', matchDados)
       console.log('recuperei os dados do banco na tela de match');   
     })
     .catch(error => {      
@@ -64,12 +75,14 @@ class Match extends Component {
               verticalSwipe={false}
               renderNoMoreCards={() => null}
               ref={swiper => (this.swiper = swiper)}
-              onSwipedLeft={() => this.swipedLeft()}
-              onSwipedRight={() => this.props.navigation.navigate('Mensagem')}
             >  
               { 
                 this.state.matchDados.map((item, index) => (
-                  <Card key={index}>
+                  <Card 
+                    key={index} 
+                    onSwipedLeft={() => this.swiped(item)}
+                    onSwipedRight={() => this.swiped(item)}
+                  >
                     <ImageBackground
                       source={require('../../../imagens/match.jpg')}
                       style={match.background}
@@ -89,8 +102,7 @@ class Match extends Component {
                             onPressPerfil={() => 
                               this.props.navigation.navigate('PerfilMatch', { item })
                             }
-                            onPressLeft={() => this.swiper.swipeLeft()}
-                            onPressRight={() => this.props.navigation.navigate('Mensagem')} 
+                            onPressRight={() => this.swiper.swipeLeft()} 
                           />
                         </ImageBackground>    
                       </View>

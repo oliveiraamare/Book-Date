@@ -1,20 +1,14 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { IconButton } from 'react-native-paper';
 
 import cardItem from '../estilos/cardItem';
-import cor from '../estilos/cores';
 
 const CardItem = ({
-  actions,
   sinopse,
   genero1,
   genero2,
   genero3,
-  nome,
-  onPressLeft,
-  onPressPerfil,
-  onPressRight
+  nome
 }) => {  
   return (
     <View style={cardItem.containerInfo}> 
@@ -35,33 +29,6 @@ const CardItem = ({
         )}
         
       </View>
-
-      {actions && (
-        <View style={cardItem.acoes}>       
-          <IconButton
-            icon='account-off-outline'
-            color={cor.amareloG}
-            size={23}
-            style={cardItem.miniBotao} 
-            onPress={() => onPressLeft()}
-          />
-          <IconButton
-            icon='account-heart'
-            color={cor.amareloG}
-            size={23}
-            style={cardItem.botaoMaior} 
-            onPress={() => onPressPerfil()}
-          />
-          <IconButton
-            icon='comment-account-outline'
-            color={cor.amareloG}
-            size={23}
-            style={cardItem.miniBotao} 
-            onPress={() => onPressRight()}
-          />
-        </View>
-      )}
-
     </View>
   );
 };

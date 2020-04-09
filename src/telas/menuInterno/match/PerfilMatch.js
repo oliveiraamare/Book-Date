@@ -6,9 +6,11 @@ import {
   ImageBackground, 
   ScrollView, 
   Text,
+  TouchableHighlight,
   View
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Preferencias } from '../../../componentes/topPreferencias';
 
@@ -63,6 +65,7 @@ class Perfil extends Component {
               source={require('../../../imagens/perfil.jpg')} 
               style={perfilMatch.imagemFrame}
             /> 
+
             {
               this.state.dados.imagem == null
               ? <Image
@@ -73,7 +76,8 @@ class Perfil extends Component {
                   source={{uri:this.state.dados.imagem}}
                   style={perfilMatch.imagemPerfil}
                 />       
-            }             
+            }     
+
             <View style={perfilMatch.containerInfo}>
 
               <View style={perfilMatch.containerNome}>
@@ -242,8 +246,21 @@ class Perfil extends Component {
                       opcao3={tres}
                     /> 
                 }
-              </View>                        
-            </View>                                
+              </View>   
+              <TouchableHighlight 
+                onPress={() => navigation.navigate('Mensagem')} 
+                style={perfilMatch.botao}
+              >
+                <Icon.Button
+                  name='comments'
+                  backgroundColor='transparent'
+                  onPress={() => this.props.navigation.navigate('Mensagem')}
+                  style={perfilMatch.icone}
+                >
+                  Conversar
+                </Icon.Button>
+              </TouchableHighlight>                
+            </View>                                           
           </ScrollView>
         </ImageBackground>
       </View>

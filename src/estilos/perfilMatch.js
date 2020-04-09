@@ -6,26 +6,15 @@ const DIMENSION_HEIGHT = Dimensions.get('window').height;
 
 const perfilMatch = StyleSheet.create({
 	botao: {
-		alignContent:'center',
-		alignItems: 'center',
-		backgroundColor: cor.amarelo,
-		borderRadius: 25,
-		height: 40,
-		justifyContent: 'center',
-		marginLeft: 10,		
-		paddingHorizontal: 20,
-	},
-	botaoEditar: {
-		alignSelf:'center',
-		color: cor.branco,      
-		backgroundColor: cor.amarelo,
-		borderRadius: 20,
-		fontWeight: 'bold',
- 		justifyContent:'center',
-		paddingHorizontal: 30,
-		paddingVertical: 9,
-		textAlign: 'center',
-		width: 190
+		alignSelf: 'center',    
+		backgroundColor: cor.pretoTransparente, borderRadius: 5,
+		bottom: 0,
+		height: 47,
+		justifyContent: 'center',   
+		marginBottom: 0, 
+		marginTop: 30,
+		position: 'absolute',
+		width: DIMENSION_WIDTH - 40,
 	},
 	checkbox: {
 		backgroundColor: 'transparent', 
@@ -50,12 +39,6 @@ const perfilMatch = StyleSheet.create({
 		paddingBottom: 5,
 		paddingTop: 5,
 		textAlign: 'center'
-	},
-	containerBotao: {
-		alignSelf:'center',
-		bottom: 0,
-		marginTop: 50,
-		position: 'absolute' 
 	},
 	containerNome: {
 		alignSelf: 'center', 
@@ -83,9 +66,17 @@ const perfilMatch = StyleSheet.create({
 		paddingBottom: 10,
 		textAlign: 'center'
 	},
-	iconeBotao: { 
-		color: cor.branco,
-		fontSize: 20 
+	icone: { 
+		alignSelf:'center',
+		color: cor.branco,      
+		backgroundColor: cor.amarelo,
+		borderRadius: 20,
+		fontWeight: 'bold',
+		justifyContent:'center',
+		paddingHorizontal: 30,
+		paddingVertical: 9,
+		textAlign: 'center',
+		width: 190
 	 },
 	 imagemFrame: {
 		alignSelf:'center',
@@ -133,6 +124,7 @@ const perfilMatch = StyleSheet.create({
 		paddingLeft: 5,
 		paddingRight: 5,
 		paddingTop: 8,
+		marginBottom: 65,
     textAlign: 'justify'
 	},
 	preferenciasLiterariasResposta: {
@@ -158,12 +150,7 @@ const perfilMatch = StyleSheet.create({
 	scrollView: { 
 		marginHorizontal: 0 ,
 		height: DIMENSION_HEIGHT +150,
-	},
-	textoBotao: {
-		color: cor.branco,
-		fontSize: 15,
-		paddingLeft: 5
-	},	
+	}
 });
 	
 export default perfilMatch;
