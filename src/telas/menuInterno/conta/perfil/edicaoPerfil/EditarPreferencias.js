@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   Alert,
   AsyncStorage,
+  ImageBackground,
   KeyboardAvoidingView,
   ScrollView, 
   Text,
@@ -41,6 +42,114 @@ class EditarPreferencias extends Component {
 
   componentDidMount() {
     this.getAndLoadDados()
+  }
+
+  componentWillUnmount(){
+    this.getAndLoadDados();    
+  }
+
+  render() {
+    return (    
+      <View style={compartilhado.container}>  
+        <ImageBackground 
+          source={require('../../../../../imagens/editarPerfil.jpg')}
+          style={compartilhado.imagemBackground}
+        > 
+          <AppBarHeader 
+            onPress={() => 
+              this.handleUpdate()
+            } 
+            title={"Editar Preferências"} 
+          />          
+          <RootToaster 
+            defaultDuration={2000} defaultColor={cor.amarelo} 
+          />     
+          <ScrollView style={editarPreferencias.scrollView}>  
+            <KeyboardAvoidingView 
+              style={{justifyContent: "flex-end", flex: 1 }} 
+              behavior='padding' 
+              enabled 
+            >    
+              <View style={editarPreferencias.info}>
+                <Text style={editarPreferencias.texto}>
+                  Estou tentando encontrar
+                </Text>
+                <View style={editarPreferencias.checkboxContainer}>
+                  <CheckBox
+                    title='Aventura'
+                    checkedIcon='user-circle' 
+                    uncheckedIcon='circle-o'
+                    uncheckedColor={cor.amarelo}
+                    checked={this.state.aventura}
+                    checkedColor={cor.amarelo}
+                    size={20}
+                    containerStyle={editarPreferencias.checkbox}
+                    textStyle={editarPreferencias.checkboxTexto}
+                    onPress={checked => this.setState({ aventura: !this.state.aventura })} 
+                  /> 
+                  <CheckBox
+                    title='Prosa'
+                    checkedIcon='user-circle' 
+                    uncheckedIcon='circle-o'
+                    uncheckedColor={cor.amarelo}
+                    checked={this.state.prosa}
+                    checkedColor={cor.amarelo}
+                    size={20}
+                    containerStyle={editarPreferencias.checkbox}
+                    textStyle={editarPreferencias.checkboxTexto}
+                    onPress={checked => this.setState({ prosa: !this.state.prosa })} 
+                  /> 
+                  <CheckBox
+                    title='Misterio'
+                    checkedIcon='user-circle' 
+                    uncheckedIcon='circle-o'
+                    uncheckedColor={cor.amarelo}
+                    checked={this.state.misterio}
+                    checkedColor={cor.amarelo}
+                    size={20}
+                    containerStyle={editarPreferencias.checkbox}
+                    textStyle={editarPreferencias.checkboxTexto}
+                    onPress={checked => this.setState({ misterio: !this.state.misterio })} 
+                  />
+                  <CheckBox
+                    title='Conto de Fadas'
+                    checkedIcon='user-circle' 
+                    uncheckedIcon='circle-o'
+                    uncheckedColor={cor.amarelo}
+                    checked={this.state.contoFadas}
+                    checkedColor={cor.amarelo}
+                    size={20}
+                    containerStyle={editarPreferencias.checkbox}
+                    textStyle={editarPreferencias.checkboxTexto}
+                    onPress={checked => this.setState({ contoFadas: !this.state.contoFadas })} 
+                  /> 
+                </View>    
+                <Text style={editarPreferencias.texto}>
+                  Estou buscando
+                </Text> 
+                <View style={{alignItems:'center'}}>
+                  <TagSelect
+                    value={this.state.busco}
+                    data={this.state.buscando}
+                    max={1}
+                    ref={(buscando) => {
+                      this.buscando = buscando;
+                    }}
+                    onMaxError={() => {
+                      Alert.alert('Ops', 'Max reached' + JSON.stringify(this.buscando.itemsSelected)+ ' ' + `Total: ${this.buscando.totalSelected}`);
+                    }}
+                    itemStyle={editarPreferencias.tagItem}
+                    itemLabelStyle={editarPreferencias.tagLabel}
+                    itemStyleSelected={editarPreferencias.tagItemSelecionado}
+                    itemLabelStyleSelected={editarPreferencias.tagLabelSelecionado}
+                  /> 
+                </View>         
+              </View>
+            </KeyboardAvoidingView>
+          </ScrollView>
+        </ImageBackground>
+      </View>
+    );
   }
 
   getAndLoadDados= async() => {
@@ -89,105 +198,6 @@ class EditarPreferencias extends Component {
     .catch(error => { 
       console.log('Erro o update da tela EditarPreferencias: ' + error.message + ' ' + error)
     })
-  }
-
-  render() {
-    return (    
-      <View style={compartilhado.container}>  
-        <AppBarHeader 
-          onPress={() => 
-            this.handleUpdate()
-          } 
-          title={"Editar Preferências"} 
-        />          
-        <RootToaster 
-          defaultDuration={2000} defaultColor={cor.amarelo} 
-        />     
-        <ScrollView style={editarPreferencias.scrollView}>  
-          <KeyboardAvoidingView 
-            style={{justifyContent: "flex-end", flex: 1 }} 
-            behavior='padding' 
-            enabled 
-          >    
-            <View style={editarPreferencias.info}>
-              <Text style={editarPreferencias.texto}>
-                Estou tentando encontrar
-              </Text>
-              <View style={editarPreferencias.checkboxContainer}>
-                <CheckBox
-                  title='Aventura'
-                  checkedIcon='user-circle' 
-                  uncheckedIcon='circle-o'
-                  uncheckedColor={cor.amarelo}
-                  checked={this.state.aventura}
-                  checkedColor={cor.amarelo}
-                  size={20}
-                  containerStyle={editarPreferencias.checkbox}
-                  textStyle={editarPreferencias.checkboxTexto}
-                  onPress={checked => this.setState({ aventura: !this.state.aventura })} 
-                /> 
-                <CheckBox
-                  title='Prosa'
-                  checkedIcon='user-circle' 
-                  uncheckedIcon='circle-o'
-                  uncheckedColor={cor.amarelo}
-                  checked={this.state.prosa}
-                  checkedColor={cor.amarelo}
-                  size={20}
-                  containerStyle={editarPreferencias.checkbox}
-                  textStyle={editarPreferencias.checkboxTexto}
-                  onPress={checked => this.setState({ prosa: !this.state.prosa })} 
-                /> 
-                <CheckBox
-                  title='Misterio'
-                  checkedIcon='user-circle' 
-                  uncheckedIcon='circle-o'
-                  uncheckedColor={cor.amarelo}
-                  checked={this.state.misterio}
-                  checkedColor={cor.amarelo}
-                  size={20}
-                  containerStyle={editarPreferencias.checkbox}
-                  textStyle={editarPreferencias.checkboxTexto}
-                  onPress={checked => this.setState({ misterio: !this.state.misterio })} 
-                />
-                <CheckBox
-                  title='Conto de Fadas'
-                  checkedIcon='user-circle' 
-                  uncheckedIcon='circle-o'
-                  uncheckedColor={cor.amarelo}
-                  checked={this.state.contoFadas}
-                  checkedColor={cor.amarelo}
-                  size={20}
-                  containerStyle={editarPreferencias.checkbox}
-                  textStyle={editarPreferencias.checkboxTexto}
-                  onPress={checked => this.setState({ contoFadas: !this.state.contoFadas })} 
-                /> 
-              </View>    
-              <Text style={editarPreferencias.texto}>
-                Estou buscando
-              </Text> 
-              <View style={{alignItems:'center'}}>
-                <TagSelect
-                  value={this.state.busco}
-                  data={this.state.buscando}
-                  max={1}
-                  ref={(buscando) => {
-                    this.buscando = buscando;
-                  }}
-                  onMaxError={() => {
-                    Alert.alert('Ops', 'Max reached' + JSON.stringify(this.buscando.itemsSelected)+ ' ' + `Total: ${this.buscando.totalSelected}`);
-                  }}
-                  itemStyle={editarPreferencias.tagItem}
-                  itemLabelStyle={editarPreferencias.tagLabel}
-                  itemStyleSelected={editarPreferencias.tagItemSelecionado}
-                  itemLabelStyleSelected={editarPreferencias.tagLabelSelecionado}
-                /> 
-              </View>         
-            </View>
-          </KeyboardAvoidingView>
-        </ScrollView>
-      </View>
-    );
   }
 }
 

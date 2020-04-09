@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import {
   Alert,
   AsyncStorage,
+  ImageBackground,
   KeyboardAvoidingView,
   ScrollView, 
   Text,
@@ -54,8 +55,11 @@ class Perfil extends Component {
   }
 
   componentDidMount() {
-    this.forceUpdate();
     this.getAndLoadDados();
+  }
+
+  ccomponentWillUnmount(){
+    this.getAndLoadDados();    
   }
 
   handleUpdate() {
@@ -73,180 +77,185 @@ class Perfil extends Component {
   render() {
     return (    
       <View style={compartilhado.container}>  
-        <AppBarHeader 
-          onPress={() => 
-            this.handleUpdate()
-          } 
-          title={"Editar Perfil"} 
-        />      
-        <RootToaster 
-          defaultDuration={2000} defaultColor={cor.amarelo} 
-        />        
-        <ScrollView style={editarPerfil.scrollView}>    
-          <KeyboardAvoidingView 
-            style={{justifyContent: "flex-end", flex: 1 }} 
-            behavior='padding' 
-            enabled 
-          > 
-            <FraseTop title={frase} subtitle={autor} />   
-            <View style={editarPerfil.containerImagem}>
-              {
-                this.state.imagem == '../../../../../imagens/icone.png'
-                ? 
-                  <TouchableHighlight onPress={() => this._pegarDaGaleria()}>                
-                    <View>
-                      <Avatar.Image 
-                        size={220} 
-                        style={editarPerfil.imagemPerfil}
-                        source={require('../../../../../imagens/icone.png')}
-                      />          
-                      <View style={editarPerfil.containerIcone}>
-                        <Icon.Button
-                          name='edit'
-                          backgroundColor='transparent'
-                          color={cor.amarelo}
-                          size={20}
-                          style={editarPerfil.botaoEditar}
-                          onPress={() => this._pegarDaGaleria()}
-                        />
-                      </View>     
-                    </View>          
-                  </TouchableHighlight>
-                : <TouchableHighlight onPress={()=>this._pegarDaGaleria()}>
-                    <View>
-                      <Avatar.Image 
-                        size={220} 
-                        style={editarPerfil.imagemPerfil}
-                        source={{uri:this.state.imagem}} 
-                      />          
-                      <View style={editarPerfil.containerIcone}>
-                        <Icon.Button
-                          name='edit'
-                          backgroundColor='transparent'
-                          color={cor.amarelo}
-                          size={20}
-                          style={editarPerfil.botaoEditar}
-                          onPress={() => this._pegarDaGaleria()}
-                        />
-                      </View>     
-                    </View>    
-                  </TouchableHighlight>  
-              }
-            </View>           
-            <View style={editarPerfil.info}>
-              <Text style={editarPerfil.texto}>
-                Nome
-              </Text>   
-              <TextoMultilinha
-                inputStyle={editarPerfil.multilinha}
-                multiline={true}
-                maxLength={20}
-                numberOfLines={1}  
-                value={this.state.nome}
-                onChangeText={nome => this.setState({ nome })}
-              />
-              <Text style={editarPerfil.texto}>
-                Cidade natal
-              </Text>   
-              <TextoMultilinha
-                inputStyle={editarPerfil.multilinha}
-                multiline={true}
-                maxLength={20}
-                numberOfLines={1}  
-                value={this.state.cidade}
-                onChangeText={cidade => this.setState({ cidade })}
-              />
-              <Text style={editarPerfil.texto}>
-                Ano de nascimento
-              </Text>   
-              <Calendario
-                date={this.state.data}
-                onDateChange={data => this.setState({ data })}
-                format="DD-MM-YYYY"
-                placeholder={this.state.usuario.dtNasc}
-                maxDate={this.state.usuario.dtNasc}
-                dateInputStyle={[editarPerfil.multilinha, editarPerfil.dateInput]}
-              /> 
-              <Text style={editarPerfil.texto}>
-                Me identifico como
-              </Text> 
-              <View style={{alignItems:'center'}}>
-                <TagSelect
-                  value={this.state.sx}
-                  data={this.state.sexo}
-                  max={1}
-                  ref={(sexo) => {
-                    this.sexo = sexo;
-                  }}
-                  onMaxError={() => {
-                    Alert.alert('Ops', 'Max reached' + JSON.stringify(this.sexo.itemsSelected)+ ' ' + `Total: ${this.sexo.totalSelected}`);
-                  }}
-                  itemStyle={editarPerfil.tagItem}
-                  itemLabelStyle={editarPerfil.tagLabel}
-                  itemStyleSelected={editarPerfil.tagItemSelecionado}
-                  itemLabelStyleSelected={editarPerfil.tagLabelSelecionado}
+        <ImageBackground 
+          source={require('../../../../../imagens/editarPerfil.jpg')}
+          style={compartilhado.imagemBackground}
+        > 
+          <AppBarHeader 
+            onPress={() => 
+              this.handleUpdate()
+            } 
+            title={"Editar Perfil"} 
+          />      
+          <RootToaster 
+            defaultDuration={2000} defaultColor={cor.amarelo} 
+          />        
+          <ScrollView style={editarPerfil.scrollView}>    
+            <KeyboardAvoidingView 
+              style={{justifyContent: "flex-end", flex: 1 }} 
+              behavior='padding' 
+              enabled 
+            > 
+              <FraseTop title={frase} subtitle={autor} />   
+              <View style={editarPerfil.containerImagem}>
+                {
+                  this.state.imagem == '../../../../../imagens/icone.png'
+                  ? 
+                    <TouchableHighlight onPress={() => this._pegarDaGaleria()}>                
+                      <View>
+                        <Avatar.Image 
+                          size={220} 
+                          style={editarPerfil.imagemPerfil}
+                          source={require('../../../../../imagens/icone.png')}
+                        />          
+                        <View style={editarPerfil.containerIcone}>
+                          <Icon.Button
+                            name='edit'
+                            backgroundColor='transparent'
+                            color={cor.amarelo}
+                            size={20}
+                            style={editarPerfil.botaoEditar}
+                            onPress={() => this._pegarDaGaleria()}
+                          />
+                        </View>     
+                      </View>          
+                    </TouchableHighlight>
+                  : <TouchableHighlight onPress={()=>this._pegarDaGaleria()}>
+                      <View>
+                        <Avatar.Image 
+                          size={220} 
+                          style={editarPerfil.imagemPerfil}
+                          source={{uri:this.state.imagem}} 
+                        />          
+                        <View style={editarPerfil.containerIcone}>
+                          <Icon.Button
+                            name='edit'
+                            backgroundColor='transparent'
+                            color={cor.amarelo}
+                            size={20}
+                            style={editarPerfil.botaoEditar}
+                            onPress={() => this._pegarDaGaleria()}
+                          />
+                        </View>     
+                      </View>    
+                    </TouchableHighlight>  
+                }
+              </View>           
+              <View style={editarPerfil.info}>
+                <Text style={editarPerfil.texto}>
+                  Nome
+                </Text>   
+                <TextoMultilinha
+                  inputStyle={editarPerfil.multilinha}
+                  multiline={true}
+                  maxLength={20}
+                  numberOfLines={1}  
+                  value={this.state.nome}
+                  onChangeText={nome => this.setState({ nome })}
                 />
-              </View> 
-              <Text style={editarPerfil.texto}>
-                Minha citação favorita
-              </Text> 
-              <TextoMultilinha
-                inputStyle={[editarPerfil.multilinha, editarPerfil.preferencias]}
-                multiline={true}
-                maxLength={180}
-                numberOfLines={4}  
-                value={this.state.citacao}
-                onChangeText={citacao => this.setState({ citacao })}
-              />
-              <Text style={editarPerfil.texto}>
-                Minha(s) singularidade(s)
-              </Text> 
-              <TextoMultilinha
-                inputStyle={[editarPerfil.multilinha, editarPerfil.preferencias]}
-                multiline={true}
-                maxLength={140}
-                numberOfLines={4}  
-                value={this.state.singularidade}
-                onChangeText={singularidade => this.setState({ singularidade })}
-              />
-              <Text style={editarPerfil.texto}>
-                Sinopse da minha vida
-              </Text> 
-              <TextoMultilinha
-                inputStyle={[editarPerfil.multilinha, editarPerfil.preferencias]}
-                multiline={true}
-                maxLength={200}
-                numberOfLines={4}  
-                value={this.state.sinopse}
-                onChangeText={sinopse => this.setState({ sinopse })}
-              />         
-              <Text style={editarPerfil.texto}>
-                Meus top três
-              </Text>
-              <ListItem
-                containerStyle={editarPerfil.listItem}
-                title="Editar meus top três"
-                titleStyle={{color:cor.branco}}
-                rightElement={
-                  <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
-                }
-                onPress={() => this.props.navigation.navigate('EditarTopTres') }
-              />
-              <Text style={editarPerfil.texto}>
-                Minhas preferências
-              </Text>
-              <ListItem
-                containerStyle={editarPerfil.listItem}
-                title="Editar minhas preferências"
-                titleStyle={{color:cor.branco}}
-                rightElement={
-                  <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
-                }
-                onPress={() => this.props.navigation.navigate('EditarPreferencias') }
-              />
-            </View>
-          </KeyboardAvoidingView>
-        </ScrollView>
+                <Text style={editarPerfil.texto}>
+                  Cidade natal
+                </Text>   
+                <TextoMultilinha
+                  inputStyle={editarPerfil.multilinha}
+                  multiline={true}
+                  maxLength={20}
+                  numberOfLines={1}  
+                  value={this.state.cidade}
+                  onChangeText={cidade => this.setState({ cidade })}
+                />
+                <Text style={editarPerfil.texto}>
+                  Ano de nascimento
+                </Text>   
+                <Calendario
+                  date={this.state.data}
+                  onDateChange={data => this.setState({ data })}
+                  format="DD-MM-YYYY"
+                  placeholder={this.state.usuario.dtNasc}
+                  maxDate={this.state.usuario.dtNasc}
+                  dateInputStyle={[editarPerfil.multilinha, editarPerfil.dateInput]}
+                /> 
+                <Text style={editarPerfil.texto}>
+                  Me identifico como
+                </Text> 
+                <View style={{alignItems:'center'}}>
+                  <TagSelect
+                    value={this.state.sx}
+                    data={this.state.sexo}
+                    max={1}
+                    ref={(sexo) => {
+                      this.sexo = sexo;
+                    }}
+                    onMaxError={() => {
+                      Alert.alert('Ops', 'Max reached' + JSON.stringify(this.sexo.itemsSelected)+ ' ' + `Total: ${this.sexo.totalSelected}`);
+                    }}
+                    itemStyle={editarPerfil.tagItem}
+                    itemLabelStyle={editarPerfil.tagLabel}
+                    itemStyleSelected={editarPerfil.tagItemSelecionado}
+                    itemLabelStyleSelected={editarPerfil.tagLabelSelecionado}
+                  />
+                </View> 
+                <Text style={editarPerfil.texto}>
+                  Minha citação favorita
+                </Text> 
+                <TextoMultilinha
+                  inputStyle={[editarPerfil.multilinha, editarPerfil.preferencias]}
+                  multiline={true}
+                  maxLength={180}
+                  numberOfLines={4}  
+                  value={this.state.citacao}
+                  onChangeText={citacao => this.setState({ citacao })}
+                />
+                <Text style={editarPerfil.texto}>
+                  Minha(s) singularidade(s)
+                </Text> 
+                <TextoMultilinha
+                  inputStyle={[editarPerfil.multilinha, editarPerfil.preferencias]}
+                  multiline={true}
+                  maxLength={140}
+                  numberOfLines={4}  
+                  value={this.state.singularidade}
+                  onChangeText={singularidade => this.setState({ singularidade })}
+                />
+                <Text style={editarPerfil.texto}>
+                  Sinopse da minha vida
+                </Text> 
+                <TextoMultilinha
+                  inputStyle={[editarPerfil.multilinha, editarPerfil.preferencias]}
+                  multiline={true}
+                  maxLength={200}
+                  numberOfLines={4}  
+                  value={this.state.sinopse}
+                  onChangeText={sinopse => this.setState({ sinopse })}
+                />         
+                <Text style={editarPerfil.texto}>
+                  Meus top três
+                </Text>
+                <ListItem
+                  containerStyle={editarPerfil.listItem}
+                  title="Editar meus top três"
+                  titleStyle={{color:cor.branco}}
+                  rightElement={
+                    <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
+                  }
+                  onPress={() => this.props.navigation.navigate('EditarTopTres') }
+                />
+                <Text style={editarPerfil.texto}>
+                  Minhas preferências
+                </Text>
+                <ListItem
+                  containerStyle={editarPerfil.listItem}
+                  title="Editar minhas preferências"
+                  titleStyle={{color:cor.branco}}
+                  rightElement={
+                    <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
+                  }
+                  onPress={() => this.props.navigation.navigate('EditarPreferencias') }
+                />
+              </View>
+            </KeyboardAvoidingView>
+          </ScrollView>
+        </ImageBackground>
       </View>
     );
   }
@@ -313,8 +322,7 @@ class Perfil extends Component {
     if (cameraRollPerm === 'granted') {
       let pickerResult = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
-        base64: true,
-        aspect: [10, 10],
+        base64: true
       });
 
       if (!pickerResult.cancelled) {

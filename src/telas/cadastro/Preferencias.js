@@ -73,105 +73,6 @@ class Preferencias extends Component {
     this.props.navigation.navigate('UploadImagem');
   }
 
-  recuperaDados = async() => {
-    await AsyncStorage.getItem('preferencias').then((preferencias) => {
-      if (preferencias != null){
-        var preferencias = JSON.parse(preferencias);
-
-        var citacao = preferencias.citacao; 
-        if (citacao != 'não informado') {
-          this.setState({ citacao });
-        } ;
-        
-        var singularidade = preferencias.singularidade;
-        if (singularidade != 'não informado') {
-          this.setState({ singularidade });
-        };
-        
-        var sinopse = preferencias.sinopse; this.setState({ sinopse });
-
-        var aventura = preferencias.aventura; 
-        if(aventura == undefined){
-          this.setState({ aventura: false });
-        } else {
-          this.setState({ aventura });
-        };
-
-        var prosa = preferencias.prosa;
-        if(prosa == undefined){
-          this.setState({ prosa: false });
-        } else {
-          this.setState({ prosa });
-        };
-
-        var misterio = preferencias.misterio;
-        if(misterio == undefined){
-          this.setState({ misterio: false });
-        } else {
-          this.setState({ misterio });
-        };
-
-        var contoFadas = preferencias.contoFadas;
-        if(contoFadas == undefined){
-          this.setState({ contoFadas: false });
-        } else {
-          this.setState({ contoFadas });
-        };
-                
-        var buscando = preferencias.buscando; 
-        if(buscando != undefined){
-          busco = [buscando];     
-          this.setState({ busco });
-        }
-
-        var generoLiterario = preferencias.generoLiterario; 
-        var genero = Object.assign([], generoLiterario);
-        if(genero.length != 0 && genero.length === 3){
-          this.setState({ genero });
-        }
-        
-      } else {
-        var aventura = false; this.setState({ aventura });
-        var prosa = false; this.setState({ prosa });
-        var misterio = false; this.setState({ misterio });
-        var contoFadas = false; this.setState({ contoFadas });
-      }
-    }).done();
-  }
- 
-  salvarPreferencias = async() => {
-    const citacao = this.state.citacao.length > 0 ? this.state.citacao : 'não informado';
-    const singularidade =  this.state.singularidade.length > 0 ? this.state.singularidade : 'não informado';
-
-    const { sinopse, aventura, prosa, misterio, contoFadas } = this.state;
-    const generoLiterario = this.generoLiterario.itemsSelected; 
-    const buscando = this.buscando.itemsSelected;    
-    
-    const preferencias = {
-      citacao: citacao,
-      singularidade: singularidade,
-      sinopse: sinopse,
-      generoLiterario: {
-        0: generoLiterario[0],
-        1: generoLiterario[1],
-        2: generoLiterario[2]
-      },
-      buscando: buscando[0],
-      aventura: aventura,
-      prosa: prosa,
-      misterio: misterio,
-      contoFadas: contoFadas
-    }
-    await AsyncStorage.setItem('preferencias', JSON.stringify(preferencias)).then(
-      ()=>{
-        //console.log('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + buscando);
-        console.log('Os itens da preferência foram salvos no async.')
-      }).catch(error => {
-        console.log('Os itens da preferência não foram salvos: ', error.message);
-      }
-    );
-  }
-
   render() {    
     return (
       <View style={compartilhado.container}>
@@ -301,6 +202,106 @@ class Preferencias extends Component {
         </ImageBackground>
       </View>
     )
+  }
+
+  recuperaDados = async() => {
+    await AsyncStorage.getItem('preferencias').then((preferencias) => {
+      if (preferencias != null){
+        var preferencias = JSON.parse(preferencias);
+
+        var citacao = preferencias.citacao; 
+        if (citacao != 'não informado') {
+          this.setState({ citacao });
+        } ;
+        
+        var singularidade = preferencias.singularidade;
+        if (singularidade != 'não informado') {
+          this.setState({ singularidade });
+        };
+        
+        var sinopse = preferencias.sinopse; this.setState({ sinopse });
+
+        var aventura = preferencias.aventura; 
+        if(aventura == undefined){
+          this.setState({ aventura: false });
+        } else {
+          this.setState({ aventura });
+        };
+
+        var prosa = preferencias.prosa;
+        if(prosa == undefined){
+          this.setState({ prosa: false });
+        } else {
+          this.setState({ prosa });
+        };
+
+        var misterio = preferencias.misterio;
+        if(misterio == undefined){
+          this.setState({ misterio: false });
+        } else {
+          this.setState({ misterio });
+        };
+
+        var contoFadas = preferencias.contoFadas;
+        if(contoFadas == undefined){
+          this.setState({ contoFadas: false });
+        } else {
+          this.setState({ contoFadas });
+        };
+                
+        var buscando = preferencias.buscando; 
+        if(buscando != undefined){
+          busco = [buscando];     
+          this.setState({ busco });
+        }
+
+        var generoLiterario = preferencias.generoLiterario; 
+        var genero = Object.assign([], generoLiterario);
+        if(genero.length != 0 && genero.length === 3){
+          this.setState({ genero });
+        }
+        
+      } else {
+        var aventura = false; this.setState({ aventura });
+        var prosa = false; this.setState({ prosa });
+        var misterio = false; this.setState({ misterio });
+        var contoFadas = false; this.setState({ contoFadas });
+      }
+    }).done();
+  }
+ 
+  salvarPreferencias = async() => {
+    const citacao = this.state.citacao.length > 0 ? this.state.citacao : 'não informado';
+    const singularidade =  this.state.singularidade.length > 0 ? this.state.singularidade : 'não informado';
+
+    const { sinopse, aventura, prosa, misterio, contoFadas } = this.state;
+    const generoLiterario = this.generoLiterario.itemsSelected; 
+    const buscando = this.buscando.itemsSelected;    
+    
+    const preferencias = {
+      citacao: citacao,
+      singularidade: singularidade,
+      sinopse: sinopse,
+      generoLiterario: {
+        0: generoLiterario[0],
+        1: generoLiterario[1],
+        2: generoLiterario[2]
+      },
+      buscando: buscando[0],
+      aventura: aventura,
+      prosa: prosa,
+      misterio: misterio,
+      contoFadas: contoFadas
+    }
+    
+    await AsyncStorage.setItem('preferencias', JSON.stringify(preferencias)).then(
+      ()=>{
+        //console.log('Itens salvos: ' + citacao + ' ' + singularidade + ' ' + sinopse + ' ' + aventura + ' ' + prosa + ' ' + misterio + ' ' + contoFadas + ' ' + generoLiterario + ' ' + buscando);
+        console.log('Os itens da preferência foram salvos no async.')
+      }).catch(error => {
+        console.log('Os itens da preferência não foram salvos: ', error.message);
+      }
+    );
   }
 }
 

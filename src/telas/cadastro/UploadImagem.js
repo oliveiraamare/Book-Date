@@ -37,46 +37,13 @@ class UploadImagem extends Component {
   }
 
   componentWillUnmount() {
+    this.recuperaDados();
     BackHandler.removeEventListener('hardwareBackPress', this.onBack);
   }
 
   onBack = () => {
     this.props.navigation.navigate('Preferencias');    
     return true;
-  }
-
-  recuperaDados = async() => {
-    await AsyncStorage.getItem('image').then((image) => {
-      var image = JSON.parse(image);
-      if (image != null){
-        this.setState({ image });        
-      } else {
-        var image = '../../imagens/icone.png';
-        this.setState({ image });
-      }
-    }).done();
-  }
-
-  handleImagem = () => {
-    this.salvarImagem();
-    this.props.navigation.navigate('Geolocalizacao');
-  }
-
-  salvarImagem = async() => {
-    var image;
-    if (this.state.image != '../../imagens/icone.png'){
-      image = this.state.image
-    } else {
-      image = null;
-    }
-    await AsyncStorage.setItem('imagem', JSON.stringify(image)).then(
-      ()=>{
-        //console.log('Item salvo: ' + image);
-        console.log('A url da imagem foi salva no async.')
-      }).catch(error => {
-        console.log('A imagem não foi salva: ', error.message);
-      }
-    );
   }
 
   render() {
@@ -165,7 +132,43 @@ class UploadImagem extends Component {
         this.setState({ image: pickerResult.uri});
       } 
     }
-  };
+  }
+
+  recuperaDados = async() => {
+    await AsyncStorage.getItem('image').then((image) => {
+      var image = JSON.parse(image);
+      if (image != null){
+        this.setState({ image });        
+      } else {
+        var image = '../../imagens/icone.png';
+        this.setState({ image });
+      }
+    }).done();
+  }
+
+  handleImagem = () => {
+    this.salvarImagem();
+    this.props.navigation.navigate('Geolocalizacao');
+  }
+
+  salvarImagem = async() => {
+    var image;
+
+    if (this.state.image != '../../imagens/icone.png'){
+      image = this.state.image
+    } else {
+      image = null;
+    }
+    
+    await AsyncStorage.setItem('imagem', JSON.stringify(image)).then(
+      ()=>{
+        //console.log('Item salvo: ' + image);
+        console.log('A url da imagem foi salva no async.')
+      }).catch(error => {
+        console.log('A imagem não foi salva: ', error.message);
+      }
+    );
+  }
 }
 
 const frase='"Se uma imagem vale mais do que mil palavras, então diga isto com uma imagem."';

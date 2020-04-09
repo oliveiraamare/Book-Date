@@ -34,57 +34,6 @@ class DeletarConta extends Component {
     };
   }
 
-  deletarBanco = () => {
-    var usuarioLogado = usuario();
-   
-    var email = usuarioLogado.email;
-    var senha = this.state.senha;
-
-    const credential = firebase.auth.EmailAuthProvider.credential(email, senha);
-    usuarioLogado.reauthenticateWithCredential(credential).then(() => 
-    {
-      console.log('Usuario reautenticado');
-
-      usuarioLogado.delete().then(() => {
-        console.log('Usuário deletado com sucesso no Auth');
-      })
-
-      deletarStorage();
-      deletarDatabase();
-      deletarCollection();
-      
-      Alert.alert(
-        'Tchauzinho!', 'Foi divertido te conhecer. Esperamos um dia rever-te!'
-      );
-    }).catch(error => {
-      console.log('Erro ao reautenticar o usuário: ', error.message);
-      Alert.alert('Ops', 'Falha na rede, tente novamente mais tarde');
-    });
-    this.removeDadosAsync();
-  }
-
-  removeDadosAsync = async() => {
-    try {
-      await AsyncStorage.clear();
-      console.log('Storage limpo com sucesso');
-    } catch (error) {
-      console.log('Falha ao limpar o Storage', error.message);
-    }
-  }
-
-  showDialog() {
-    this.setState({ popoUpVisivel: true });
-  };
- 
-  handleCancel() {
-    this.setState({ popoUpVisivel: false });
-  };
- 
-  handleDelete = (senha) => {
-    this.deletarBanco();
-    this.setState({ popoUpVisivel: false });
-  };
-
   render() {      
     return (
       <View style={compartilhado.container}>
@@ -140,6 +89,57 @@ class DeletarConta extends Component {
       </View>
     )
   }
+
+  deletarBanco = () => {
+    var usuarioLogado = usuario();
+   
+    var email = usuarioLogado.email;
+    var senha = this.state.senha;
+
+    const credential = firebase.auth.EmailAuthProvider.credential(email, senha);
+    usuarioLogado.reauthenticateWithCredential(credential).then(() => 
+    {
+      console.log('Usuario reautenticado');
+
+      usuarioLogado.delete().then(() => {
+        console.log('Usuário deletado com sucesso no Auth');
+      })
+
+      deletarStorage();
+      deletarDatabase();
+      deletarCollection();
+      
+      Alert.alert(
+        'Tchauzinho!', 'Foi divertido te conhecer. Esperamos um dia rever-te!'
+      );
+    }).catch(error => {
+      console.log('Erro ao reautenticar o usuário: ', error.message);
+      Alert.alert('Ops', 'Falha na rede, tente novamente mais tarde');
+    });
+    this.removeDadosAsync();
+  }
+
+  removeDadosAsync = async() => {
+    try {
+      await AsyncStorage.clear();
+      console.log('Storage limpo com sucesso');
+    } catch (error) {
+      console.log('Falha ao limpar o Storage', error.message);
+    }
+  }
+
+  showDialog() {
+    this.setState({ popoUpVisivel: true });
+  };
+ 
+  handleCancel() {
+    this.setState({ popoUpVisivel: false });
+  };
+ 
+  handleDelete = (senha) => {
+    this.deletarBanco();
+    this.setState({ popoUpVisivel: false });
+  };
 }
 
 const frase='Não vá embora, por favor. Tenha um pouco de fé em mim e um pouco de paciência. Por favor.';

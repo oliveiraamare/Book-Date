@@ -14,11 +14,19 @@ import compartilhado from '../../estilos/compartilhado';
 class Loading extends Component {
 
   componentDidMount() {
+    this.usuario_auth()
+  }  
+
+  componentWillUnmount() {
+    this.usuario_auth()
+  }
+
+  usuario_auth() {
     Firebase.auth()
     .onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? 'NavegacaoInterna' : 'Home')
     })
-  }  
+  }
   
   render() {
     return (      

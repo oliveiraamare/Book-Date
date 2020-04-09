@@ -38,16 +38,14 @@ class Perfil extends Component {
   }
 
   componentDidMount() {
-    
-    this.getAndLoadDados();
-    setInterval(() => {
-      this.getAndLoadDados();
-    }, 5000);
-    
+    this.getAndLoadDados();    
+  }
+
+  componentWillUnmount(){
+    this.getAndLoadDados();    
   }
 
   render() {
-
     var dtNasc = this.state.usuario.dtNasc;
     let idade = new AgeFromDateString(dtNasc).age;
 

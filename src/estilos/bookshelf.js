@@ -9,7 +9,7 @@ const bookshelf = StyleSheet.create({
   background: {
     flex: 1, 
     resizeMode: 'contain',
-    backgroundColor: 'rgba(0, 0, 0, 0.80)'
+    backgroundColor: 'transparent'
   },
   containerParagrafo: {
     top: DIMENSION_HEIGHT/2 - 200

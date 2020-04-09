@@ -32,7 +32,11 @@ class Perfil extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
+    this.recuperarDados();
+  }
+
+  componentWillUnmount() {
     this.recuperarDados();
   }
 
