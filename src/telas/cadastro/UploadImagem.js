@@ -37,7 +37,6 @@ class UploadImagem extends Component {
   }
 
   componentWillUnmount() {
-    this.recuperaDados();
     BackHandler.removeEventListener('hardwareBackPress', this.onBack);
   }
 

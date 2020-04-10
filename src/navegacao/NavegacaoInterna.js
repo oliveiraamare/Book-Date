@@ -22,7 +22,7 @@ import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
-import { usuarios_match } from '../acoes/usuariosMatch';
+import { buscar_dados } from '../acoes/usuariosMatch';
 import { usuarioLogado } from '../acoes/usuarioLogado';
 
 const Tab = createBottomTabNavigator();
@@ -88,7 +88,7 @@ const Stack = createStackNavigator();
 export default function NavegacaoInterna() {
   return (
     
-    usuarios_match(),
+    buscar_dados(),
     usuarioLogado(),
 
     <NavigationContainer>

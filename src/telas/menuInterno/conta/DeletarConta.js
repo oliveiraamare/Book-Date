@@ -106,7 +106,6 @@ class DeletarConta extends Component {
       })
 
       deletarStorage();
-      deletarDatabase();
       deletarCollection();
       
       Alert.alert(

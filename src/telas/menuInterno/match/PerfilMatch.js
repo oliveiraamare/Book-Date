@@ -36,10 +36,6 @@ class Perfil extends Component {
     this.recuperarDados();
   }
 
-  componentWillUnmount() {
-    this.recuperarDados();
-  }
-
   recuperarDados() {
     const dados = this.props.route.params.item;
     this.setState({ dados });

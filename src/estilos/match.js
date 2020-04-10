@@ -14,6 +14,9 @@ const cadastro = StyleSheet.create({
   containerParagrafo: {
     top: DIMENSION_HEIGHT/2 - 200
   },
+  containerSwipedAll: {
+    top: DIMENSION_HEIGHT/2 - 100
+  },
   imagem: {
     flex: 1,
     height: DIMENSION_HEIGHT,

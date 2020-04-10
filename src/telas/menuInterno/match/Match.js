@@ -1,144 +1,168 @@
 //https://github.com/stevenpersia/tinder-react-native
 //https://www.npmjs.com/package/react-native-card-stack-swiper
 //https://stackoverflow.com/questions/47547465/how-to-render-one-react-native-component-after-another-component-had-rendered
-
-const arrayEstante =  [];
-
-import React, { Component } from 'react';
-import { ImageBackground, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ImageBackground, Text, TouchableHighlight, View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
-import { DotIndicator  } from 'react-native-indicators';
+import { DotIndicator } from 'react-native-indicators';
+import { useNavigation } from '@react-navigation/native';
 
 import { FraseTop } from '../../../componentes/frase';
 import CardItem from '../../../componentes/CardItem';
+import { YellowBox } from 'react-native';
 
 import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
 import match from '../../../estilos/match';
 
-import { database, collection, usuarioUid } from '../../../firebase/acoes';
-import { usuarioLogado } from '../../../acoes/usuarioLogado';
+import { collection, usuarioUid } from '../../../firebase/acoes';
 
+export default function Booklovers() {
 
-class Match extends Component {
+  const [ dados_match, setDados_match ] = useState(null);  
   
-  constructor(props) {
-    super(props);
-    this.state = {
-     carregarTelaMatch: false,
-     matchDados: {}
-    };
-  }
+  const firestore = collection('usuarios_proximos').doc(usuarioUid());
 
-  componentDidMount() {       
-    setTimeout(() => {
-      this.pegarDadosBanco(); 
-    }, 3000);
-    
-    setTimeout(() => {
-      this.setState({ carregarTelaMatch: true });
-    }, 10000);
-  }  
-  
-//messages.map((item, index) =>{console.log('pessoasNaEstante: ', item.pessoasNaEstante[index].nome)})
-  swiped = (item) => {
-    arrayEstante.push(item);  
-    console.log('arraaaaaaaaay: ', arrayEstante)
-    var pessoasNaEstante = Object.assign({}, arrayEstante)
-    collection('estante').doc(usuarioUid()).set(
-      pessoasNaEstante)
-  }
+  const salvar_estante =  [];
+  const frase ='"Julgue pela capa e perca uma grande história."';
+  const autor ='Autor Desconhecido';
+  const thats_all = '"That\'s all folks!"';
 
-  
+  const navigation = useNavigation();
 
-  pegarDadosBanco(){
-    database('match/').once('value').then(snapshot => 
-    {
-      var matchDados = snapshot.val();
-      //console.log('matchDados na tela Maataach: ', matchDados)
-      this.setState({matchDados});   
-      //console.log('match dados: ', matchDados)
-      console.log('recuperei os dados do banco na tela de match');   
-    })
-    .catch(error => {      
-      console.log('Não foi possível recuperar os dados do Banco no Match. ', error.message);
-    })
-  }
+  useEffect(() => {
+    estante_de_usuarios(); YellowBox.ignoreWarnings([
+      'Non-serializable values were found in the navigation state',
+    ]);
+  }, []);
 
-  render() { 
+  const estante_de_usuarios = () => {
+    firestore.onSnapshot(snapshot => {
+      const usuarios_proximos = Object.assign([], snapshot.data());
+      setDados_match(usuarios_proximos);
+    }, error => console.log('Erro ao executar snapshot no Booklovers: ', error.message));
+  };
+
+  const swiped = (item) => {
+    salvar_estante.push(item);  
+    const usuarios_na_estante = Object.assign({}, salvar_estante);
+    collection('estante').doc(usuarioUid()).set(usuarios_na_estante);
+  }   
+
+  if(!dados_match) {
     return (
-      <View style={compartilhado.container}>     
-        {
-          this.state.carregarTelaMatch  
-          ? <CardStack
-              loop={true}
-              verticalSwipe={false}
-              renderNoMoreCards={() => null}
-              ref={swiper => (this.swiper = swiper)}
-            >  
-              { 
-                this.state.matchDados.map((item, index) => (
-                  <Card 
-                    key={index} 
-                    onSwipedLeft={() => this.swiped(item)}
-                    onSwipedRight={() => this.swiped(item)}
-                  >
-                    <ImageBackground
-                      source={require('../../../imagens/match.jpg')}
-                      style={match.background}
-                    >  
-                      <View> 
-                        <ImageBackground
-                          source={{uri:item.imagem}}
-                          style={match.imagem}
-                        >    
-                          <CardItem
-                            nome={item.nome}
-                            genero1={[item.preferencias.generoLiterario[0]]}
-                            genero2={[item.preferencias.generoLiterario[1]]}
-                            genero3={[item.preferencias.generoLiterario[2]]}
-                            sinopse={[item.preferencias.sinopse]}
-                            actions
-                            onPressPerfil={() => 
-                              this.props.navigation.navigate('PerfilMatch', { item })
-                            }
-                            onPressRight={() => this.swiper.swipeLeft()} 
-                          />
-                        </ImageBackground>    
-                      </View>
-                    </ImageBackground>
-                  </Card>     
-                ))
-              }
-            </CardStack>           
-          
-            : <ImageBackground
-                source={require('../../../imagens/fundoInterno.jpg')} 
-                style={match.imagem}
-              >
-                <View style={compartilhado.statusBar}/>
-                <FraseTop 
-                  topbarStyle={match.loading} titleStyle={{fontSize:15}} 
-                  title={frase} subtitleStyle={{alignSelf:'center'}} 
-                  subtitle={autor} 
-                />   
-                <View style={match.loading}>
-                  <DotIndicator  
-                    color={cor.amarelo}
-                    count={5}
-                    size={20}
-                    animating={true}
-                    interaction={true}
-                  />   
-                </View> 
-              </ImageBackground>              
-        }
+      <View style={compartilhado.container}>   
+        <View style={compartilhado.statusBar}/>
+        <ImageBackground
+          source={require('../../../imagens/fundoInterno.jpg')} 
+          style={match.imagem}
+        >
+          <DotIndicator  
+            color={cor.amarelo}
+            count={5}
+            size={20}
+            animating={true}
+            interaction={true}
+          />   
+        </ImageBackground>
       </View>
-    );
+    )
   }
+
+  const render_booklovers = () => {
+    if(!dados_match.length) {
+      return (
+        <View style={compartilhado.container}>   
+          <View style={compartilhado.statusBar}/>
+          <ImageBackground
+            source={require('../../../imagens/fundoInterno.jpg')} 
+            style={match.imagem}
+          >
+            <FraseTop 
+             titleStyle={{fontSize:15}} 
+              title={frase} subtitleStyle={{alignSelf:'center'}} 
+              subtitle={autor} 
+            />   
+            <View style={match.containerParagrafo}>
+              <Text style={match.paragrafo}>
+                Aqui aparecerão os booklovers que estão mais próximos da sua localização atual. 
+              </Text>
+              <Text style={match.texto}>
+                Que tal dar uma chance a eles?
+              </Text>
+            </View>
+          </ImageBackground>
+        </View>
+      )
+    } 
+
+    const swipedAll = () => {
+      return (
+        <View style={compartilhado.container}>   
+          <View style={compartilhado.statusBar}/>
+          <ImageBackground
+            source={require('../../../imagens/fundoInterno.jpg')} 
+            style={match.imagem}
+          >
+            <FraseTop 
+              titleStyle={{fontSize:15}} title={thats_all}
+            />   
+            <View style={match.containerSwipedAll}>
+              <Text style={match.paragrafo}>
+                Enquanto buscando novos booklovers
+              </Text>
+              <Text style={match.texto}>
+                Que tal dar uma passada no bookshelf?
+              </Text>
+            </View>
+          </ImageBackground>
+        </View>
+      ) 
+    }
+
+    return (
+      <View style={compartilhado.container}>   
+        <CardStack
+          loop={false}
+          verticalSwipe={false}
+          renderNoMoreCards={() => swipedAll()}
+          ref={swiper => (swiper = swiper)}
+          onSwipedAll={() => swipedAll()}      
+        >  
+          { 
+            dados_match.map((item, index) => (
+              <Card 
+                key={index}
+                onSwipedLeft={() => swiped(item)}
+                onSwipedRight={() => swiped(item)}
+              >
+                <TouchableHighlight onPress={() => navigation.navigate('PerfilMatch', { item })}>
+                  <ImageBackground
+                    source={require('../../../imagens/match.jpg')}
+                    style={match.background}
+                  >  
+                    <View> 
+                      <ImageBackground
+                        source={{uri:item.imagem}}
+                        style={match.imagem}
+                      >    
+                        <CardItem
+                          nome={item.nome}
+                          genero1={[item.preferencias.generoLiterario[0]]}
+                          genero2={[item.preferencias.generoLiterario[1]]}
+                          genero3={[item.preferencias.generoLiterario[2]]}
+                          sinopse={[item.preferencias.sinopse]}
+                        />
+                      </ImageBackground>    
+                    </View>
+                  </ImageBackground>
+                </TouchableHighlight>
+              </Card>     
+            ))
+          }
+        </CardStack>           
+      </View>
+    )}
+
+  return ( render_booklovers() );
 }
-
-const frase='"Julgue pela capa e perca uma grande história."';
-const autor='Autor Desconhecido';
-
-export default Match;

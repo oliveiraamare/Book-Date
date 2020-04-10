@@ -36,7 +36,7 @@ export default function Bookshelf() {
     }, error => console.log('Erro ao executar snapshot no Bookshelf: ', error.message));
   };
 
-  const swiped = (uid) => {
+  /*const swiped = (uid) => {
     firestore.get().then(snapshot => {
       const usuariosNaEstante = Object.assign([], snapshot.data());
 
@@ -49,7 +49,7 @@ export default function Bookshelf() {
     .catch(function(error) {
       console.log("Erro ao deletar o usuario: ", error.message);
     });
-  }
+  }*/
 
   if(!usuarios_estante) {
     return (
@@ -110,12 +110,12 @@ export default function Bookshelf() {
             usuarios_estante.map((item, index) => (
               <Card 
                 key={index}
-                onSwipedLeft={() => swiped(item.uid)}
-                onSwipedRight={() => swiped(item.uid)}
+                onSwipedLeft={() => null}
+                onSwipedRight={() => null}
               >
                 <TouchableHighlight onPress={() => navigation.navigate('PerfilMatch', { item })}>
                   <ImageBackground
-                    source={require('../../imagens/fundoInterno.jpg')}
+                    source={require('../../imagens/match.jpg')}
                     style={bookshelf.background}
                   >  
                     <View> 
