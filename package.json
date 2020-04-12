@@ -65,7 +65,9 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "save": "^2.4.0",
-    "sort-by-distance": "^1.1.0"
+    "sort-by-distance": "^1.1.0",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
   },
   "devDependencies": {
     "babel-preset-expo": "^7.1.0",

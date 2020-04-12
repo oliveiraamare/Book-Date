@@ -1,190 +1,105 @@
-//const functions = require('firebase-functions');
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-
-
 let admin = require('firebase-admin');
+admin.initializeApp();
+const firestore = admin.firestore();
 const functions = require('firebase-functions');
-admin.initializeApp(functions.config().firebase);
-///admin.initializeApp();
-const db = admin.firestore();
-const { Expo } = require('expo-server-sdk')
-let expo = new Expo();
-const {pushExpo} = require('../src/componentes/pushExpo')
+const sortByDistance = require('sort-by-distance'); 
 
-exports.notificacaoPush = functions.firestore
-  .document('usuarios/{userId}').onCreate(
-    pushExpo()
-  )
-  
+/*https://stackoverflow.com/questions/49789658/firebase-cloud-function-triggering-expo-sdk-to-push-notifications-to-users
 
-//https://docs.expo.io/versions/latest/guides/push-notifications/#2-call-expos-push-api-with-the
-
-
-/*
-exports.dbTest = functions.https.onCall((request, response) => {
-
-    Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-        accuracy: Location.Accuracy.BestForNavigation,
-        timeInterval: 60000
-      });
-
-      
-
-
-    var doc = db.collection('usuarios').doc(usuarioUid());
-
-
-
-    return doc
-      .set({
-        name: 'TEST'
-      })
-      .then(() => {
-        return { result: 'document updated' };
-      })
-      .catch(error => {
-        console.error("Erro ao salvar a geolocalização: ", error.message);
-         //Adapt as you wish, see https://firebase.google.com/docs/reference/functions/functions.https.HttpsError
-       });
-
-});
-* /
+exports.notificacoes = functions.firestore
+  .document('usuarios/{userId}').onWrite( (snap, context) => {
+    const usuario_logado = snap.data();
+    const token = usuario_logado.expoToken;
+  })*/
 
 
 
 
+/* salva um array com os usuários próximos ao usuário que 
+  acabou de ser criado 
+*/
+exports.salvar_usuarios_proximos = functions.firestore
+  .document('usuarios/{userId}').onCreate( (snap, context) => {
+    const usuario_logado = snap.data();
+    const buscando = usuario_logado.buscando;
+    const usuario_uid = context.params.userId
+    const long = usuario_logado.localizacao.longitude;
+    const lat = usuario_logado.localizacao.latitude;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/ *import Expo from 'exponent-server-sdk';
-import * as functions from 'firebase-functions';
-
-export const helloWorld = functions.https.onRequest((req, resp) => {
- resp.send("Hello from Firebase!");
-});
-
-
-let admin = require('firebase-admin');
-
-admin.initializeApp(functions.config().firebase);
-
-exports.sendPush = functions.database.ref('/usuarios/{uid}').onWrite(event => {
-    let projectStateChanged = false;
-    let projectCreated = false;
-    let projectData = event.data.val();
-    if (!event.data.previous.exists()) {
-        projectCreated = true;
+    if (buscando ===  'Ambos'){
+      return trazer_ambos(usuario_logado, usuario_uid, long, lat);
+    } else {
+      return trazer_sexo_escolhido(usuario_logado, usuario_uid, buscando, long, lat);
     }
-    if (!projectCreated && event.data.changed()) {
-        projectStateChanged = true;
-    }
+})
 
-    let msg = 'A project state was changed';
-
-		if (projectCreated) {
-			msg = `The following new project was added to the project: ${projectData.title}`;
-		}
-
-    return loadUsers().then(users => {
-        let tokens = [];
-        for (let user of users) {
-            tokens.push(user.pushToken);
-        }
-
-        let payload = {
-            notification: {
-                title: 'Firebase Notification',
-                body: msg,
-                sound: 'default',
-                badge: '1'
-            }
-        };
-
-        return admin.messaging().sendToDevice(tokens, payload);
-    });
-});
-
-function loadUsers() {
-    let dbRef = admin.database().ref('/usuarios');
-    let defer = new Promise((resolve, reject) => {
-        dbRef.once('value', (snap) => {
-            let data = snap.val();
-            let users = [];
-            for (var property in data) {
-                users.push(data[property]);
-            }
-            resolve(users);
-        }, (err) => {
-            reject(err);
-        });
-    });
-    return defer;
+async function trazer_ambos(usuario_logado, usuario_uid, long, lat) {
+  return firestore.collection('usuarios').get()
+    .then(snapshot => {
+      var possiveis_matchs = [];
+      snapshot.forEach(doc => {
+        const usuario_match = doc.data();
+        if ((usuario_match.uid !== usuario_uid) 
+              && (usuario_match.buscando === usuario_logado.sexo 
+                    || usuario_match.buscando === 'Ambos')
+        ){
+          possiveis_matchs.push({
+            longitude: usuario_match.localizacao.longitude,
+            latitude: usuario_match.localizacao.latitude,
+            usuario_match
+          });    
+        }     
+        return ordenar_por_distancia(possiveis_matchs, long, lat, usuario_uid);  
+      })
+      return true
+    }).catch(error => {console.log('Erro ao trazer os usuarios(ambos): ', error);})
 }
 
+async function trazer_sexo_escolhido(usuario_logado, usuario_uid, buscando, long, lat) {
+  var possiveis_matchs = [];
+  firestore.collection('usuarios').where('sexo', '==', buscando).get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        const usuario_match = doc.data();
+        if ((usuario_match.uid !== usuario_uid)  
+           && (usuario_match.buscando === usuario_logado.sexo 
+              || usuario_match.buscando === 'Ambos')
+        ){  
+          possiveis_matchs.push({
+            longitude: usuario_match.localizacao.longitude,
+            latitude: usuario_match.localizacao.latitude,
+            usuario_match
+          });
+        }
+      })
+      return ordenar_por_distancia(possiveis_matchs, long, lat, usuario_uid);
+    }).catch(error => {
+      console.log('Erro ao trazer os usuarios(sexo escolhido): ', error.message);
+    });
+}
 
+async function ordenar_por_distancia(possiveis_matchs, long, lat, usuario_uid) {
+  const coordenadas = { yName: 'latitude', xName: 'longitude'};  
+  const localizacao_usuario_logado = { longitude: long, latitude: lat};
+  const resultado_localizacao = sortByDistance(
+    localizacao_usuario_logado, 
+    possiveis_matchs, 
+    coordenadas
+  );
+  var usuarios_proximos = [];
+  resultado_localizacao.forEach(element => {
+    usuarios_proximos.push(
+      element.usuario_match
+    );
+  })
+  return salva_usuarios_proximos(usuarios_proximos, usuario_uid);
+}
 
-
-
-* /
-
-/ *const functions = require('firebase-functions');
-var fetch = require('node-fetch')
-
-const admin = require('firebase-admin')
-admin.initializeApp(functions.config().firebase);
-
-exports.sendPushNotification = functions.database.ref('contacts/{id}').onCreate(event => {
-
-    const root = event.data.ref.root
-    var messages = []
-
-    //return the main promise
-    return root.child('/users').once('value').then(snapshot => {
-        snapshot.forEach(childSnapshot => {
-            var expoToken = childSnapshot.val().expoToken
-            if (expoToken) {
-                messages.push({
-                    "to": expoToken,
-                    "body": "New Note Added"
-                })
-            }
-        })
-        return Promise.all(messages)
-    }).
-    then(messages => {
-        fetch('https://exp.host/--/api/v2/push/send', {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(messages)
-        })
-        return
-    })
-    .catch(error=>{
-      console.log('erro: ', error.message)
-    })
-
-})*/
+async function salva_usuarios_proximos(usuarios_proximos, usuario_uid) {
+  const usuarios = Object.assign({}, usuarios_proximos);
+  return firestore.collection('usuarios_proximos').doc(usuario_uid)
+    .set(usuarios)
+    .catch( error => {
+      console.log('Não foi possivel salvar os usuarios próximos: ', error.message)
+    });
+}

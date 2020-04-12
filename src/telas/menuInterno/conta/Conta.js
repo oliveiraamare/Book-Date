@@ -30,32 +30,25 @@ export default function Conta() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    usuario_data(); 
-  }, []);
-
-  const usuario_data = () => {
-    firestore.onSnapshot(snapshot => {
+    const usuario_data = firestore.onSnapshot(snapshot => {
       const dados_usuario = Object.assign([], snapshot.data());
       setUsuarioLogado(dados_usuario);
-    }, error => console.log('Erro ao executar snapshot no Bookshelf: ', error.message));
-  };
+    });
+
+    return () => {
+      usuario_data();
+    }
+  }, []);
 
   const sair_popup = () => {
     Alert.alert('Deseja realmente sair?', '"A verdade é a seguinte: Você vai se apaixonar! Não tem jeito! Nem tente fugir." - Sussuro.', 
     [
       { text: "Cancelar", onPress: () => null },
-      { text: "Sim", onPress: () => handleLogout() }
+      { text: "Sim", onPress: () => Firebase.auth().signOut() }
     ]);
     return true;
   };
   
-  const handleLogout = () => {
-    Firebase.auth().signOut()
-    .then(() => 
-      console.log('Usuário fez logout!'))
-    .catch(error => alert('Ocorreu um erro no logout' + error));
-  }
-
   return (
     <View style={compartilhado.container}>
       <View style={compartilhado.statusBar} />
@@ -79,16 +72,24 @@ export default function Conta() {
                   />
                   
                 : <View>
-                    <Avatar.Image 
-                      size={200} 
-                      source={{ uri: usuario_logado.imagem }}  
-                    />
-                    <View style={conta.viewTexto}>
-                      <Text style={{color: cor.amarelo, fontSize: 20, textAlign: "justify"}}>
-                        {usuario_logado.nome}
-                      </Text>
-                    </View>
+                    { usuario_logado.imagem == null 
+                    
+                      ? <Avatar.Image 
+                          size={200} 
+                          source={require('../../../imagens/icone.png')}
+                        />
+
+                      : <Avatar.Image 
+                          size={200} 
+                          source={{ uri: usuario_logado.imagem }}  
+                        />
+                    }
+                  <View style={conta.viewTexto}>
+                    <Text style={{color: cor.amarelo, fontSize: 20, textAlign: "justify"}}>
+                      {usuario_logado.nome}
+                    </Text>
                   </View>
+                </View>
               }
             </View>    
           </View>

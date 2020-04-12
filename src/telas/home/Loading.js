@@ -11,21 +11,23 @@ import Firebase from '../../firebase/Firebase';
 import cor from '../../estilos/cores';
 import compartilhado from '../../estilos/compartilhado';
 
+import { usuario_logado_dados } from '../../acoes/recuperaDadoUsuario';
+
 class Loading extends Component {
 
   componentDidMount() {
-    this.usuario_auth()
+    this.usuario_auth();
   }  
 
-  componentWillUnmount() {
-    this.usuario_auth()
+  usuario_auth() {
+    Firebase.auth().onAuthStateChanged(user => {
+      user ? this.usuario_autenticado() : this.props.navigation.navigate('Home')
+    })
   }
 
-  usuario_auth() {
-    Firebase.auth()
-    .onAuthStateChanged(user => {
-      this.props.navigation.navigate(user ? 'NavegacaoInterna' : 'Home')
-    })
+  usuario_autenticado() {
+    usuario_logado_dados()
+    this.props.navigation.navigate('NavegacaoInterna');
   }
   
   render() {

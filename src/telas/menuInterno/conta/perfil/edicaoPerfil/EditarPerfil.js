@@ -31,7 +31,7 @@ import TextoMultilinha from '../../../../../componentes/textInput/TextMultiline'
 
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
 import { uploadImagem } from '../../../../../firebase/acoes';
-import { usuarioLogado } from '../../../../../acoes/usuarioLogado';
+import { usuario_logado_dados } from '../../../../../acoes/recuperaDadoUsuario';
 
 class Perfil extends Component {
 
@@ -56,10 +56,6 @@ class Perfil extends Component {
 
   componentDidMount() {
     this.getAndLoadDados();
-  }
-
-  ccomponentWillUnmount(){
-    this.getAndLoadDados();    
   }
 
   handleUpdate() {
@@ -306,7 +302,7 @@ class Perfil extends Component {
       "preferencias.sinopse": this.state.sinopse      
     })
     .then(() => {
-      usuarioLogado(),
+      usuario_logado_dados(),
       console.log('Update dos dados da tela EditarPerfil feito com sucesso.');
     })
     .catch(error => { 

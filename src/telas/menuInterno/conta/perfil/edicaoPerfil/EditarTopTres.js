@@ -18,7 +18,7 @@ import compartilhado from '../../../../../estilos/compartilhado';
 import cor from '../../../../../estilos/cores';
 
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
-import { usuarioLogado } from '../../../../../acoes/usuarioLogado';
+import { usuario_logado_dados } from '../../../../../acoes/recuperaDadoUsuario';
 
 class EditarTopTres extends Component {
   constructor(props) {
@@ -40,78 +40,6 @@ class EditarTopTres extends Component {
 
   componentDidMount() {
     this.getAndLoadDados()
-  }
-
-  componentWillUnmount(){
-    this.getAndLoadDados();    
-  }
-
-  async getAndLoadDados() {
-    var usuarioLogado = await AsyncStorage.getItem('usuarioLogado');
-    usuarioLogado = JSON.parse(usuarioLogado);
-
-    var usuario = usuarioLogado; this.setState({usuario});
-      
-    var autor0 = usuario.preferencias.autor[0];
-    this.setState({autor0});
-    var autor1 = usuario.preferencias.autor[1];
-    this.setState({autor1});
-    var autor2 = usuario.preferencias.autor[2];
-    this.setState({autor2});
-
-    var genero0 = usuario.preferencias.generoLiterario[0];
-    this.setState({genero0});
-    var genero1 = usuario.preferencias.generoLiterario[1];
-    this.setState({genero1});
-    var genero2 = usuario.preferencias.generoLiterario[2];
-    this.setState({genero2});
-
-    var livro0 = usuario.preferencias.livro[0];
-    this.setState({livro0});
-    var livro1 = usuario.preferencias.livro[1];
-    this.setState({livro1});
-    var livro2 = usuario.preferencias.livro[2];
-    this.setState({livro2});
-  }
-
-  handleUpdate = () => {
-    var autor = {
-      0: this.state.autor0,
-      1: this.state.autor1,
-      2: this.state.autor2
-    };
-    var generoLiterario = {
-      0: this.state.genero0,
-      1: this.state.genero1,
-      2: this.state.genero2
-    };
-    var livro = {
-      0: this.state.livro0,
-      1: this.state.livro1,
-      2: this.state.livro2
-    };
-    
-    this.updateDados(autor, generoLiterario, livro);
-
-    Toast.show('Alterações salvas!');
-    setTimeout(() => {
-      this.props.navigation.navigate('EditarPerfil');
-    }, 2000);       
-  }
-
-  updateDados = (autor, generoLiterario, livro) => {
-    var fire = collection('usuarios').doc(usuarioUid());
-    fire.update({
-      "preferencias.autor": autor,
-      "preferencias.generoLiterario": generoLiterario,
-      "preferencias.livro": livro    
-    })
-    .then(() => 
-      usuarioLogado(),
-      console.log('Update dos dados da tela EditarTopTres feito com sucesso.'))
-    .catch(error => { 
-      console.log('Erro no update da tela EditarTopTres: ' + error.message + ' ' + error)
-    })
   }
 
   render() {
@@ -203,6 +131,71 @@ class EditarTopTres extends Component {
         </ImageBackground>
       </View>
     );
+  }
+  async getAndLoadDados() {
+    var usuarioLogado = await AsyncStorage.getItem('usuarioLogado');
+    usuarioLogado = JSON.parse(usuarioLogado);
+
+    var usuario = usuarioLogado;
+      
+    var autor0 = usuario.preferencias.autor[0];
+    this.setState({autor0});
+    var autor1 = usuario.preferencias.autor[1];
+    this.setState({autor1});
+    var autor2 = usuario.preferencias.autor[2];
+    this.setState({autor2});
+
+    var genero0 = usuario.preferencias.generoLiterario[0];
+    this.setState({genero0});
+    var genero1 = usuario.preferencias.generoLiterario[1];
+    this.setState({genero1});
+    var genero2 = usuario.preferencias.generoLiterario[2];
+    this.setState({genero2});
+
+    var livro0 = usuario.preferencias.livro[0];
+    this.setState({livro0});
+    var livro1 = usuario.preferencias.livro[1];
+    this.setState({livro1});
+    var livro2 = usuario.preferencias.livro[2];
+    this.setState({livro2});
+  }
+
+  handleUpdate = () => {
+    var autor = {
+      0: this.state.autor0,
+      1: this.state.autor1,
+      2: this.state.autor2
+    };
+    var generoLiterario = {
+      0: this.state.genero0,
+      1: this.state.genero1,
+      2: this.state.genero2
+    };
+    var livro = {
+      0: this.state.livro0,
+      1: this.state.livro1,
+      2: this.state.livro2
+    };    
+    this.updateDados(autor, generoLiterario, livro);
+    Toast.show('Alterações salvas!');
+    setTimeout(() => {
+      this.props.navigation.navigate('EditarPerfil');
+    }, 2000);       
+  }
+
+  updateDados = (autor, generoLiterario, livro) => {
+    collection('usuarios').doc(usuarioUid())
+      .update({
+        "preferencias.autor": autor,
+        "preferencias.generoLiterario": generoLiterario,
+        "preferencias.livro": livro    
+      })
+      .then(() => 
+        usuario_logado_dados(),
+        console.log('Update dos dados da tela EditarTopTres feito com sucesso.'))
+      .catch(error => { 
+        console.log('Erro no update da tela EditarTopTres: ' + error.message)
+      })
   }
 }
 

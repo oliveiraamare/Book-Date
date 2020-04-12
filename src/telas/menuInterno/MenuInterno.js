@@ -1,6 +1,6 @@
 import Configuracao from './conta/Configuracoes/Configuracao';
 import Conta from './conta/Conta';
-import Match from './match/Match';
+import Booklovers from './match/Booklovers';
 import Mensagem from './mensagem/Mensagem';
 import BookShelf from './BookShelf';
 import Perfil from './conta/perfil/Perfil';
@@ -9,7 +9,7 @@ import SobreNos from './conta/SobreNos';
 export {
   Configuracao,
   Conta,
-  Match,
+  Booklovers,
   Mensagem,
   BookShelf,
   Perfil,

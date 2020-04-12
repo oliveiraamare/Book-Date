@@ -4,7 +4,7 @@ import { Platform, Vibration } from 'react-native';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 
-export const pushExpo = async() => {
+export const push_expo = async() => {
 
   const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
   let finalStatus = existingStatus;
@@ -30,25 +30,25 @@ export const pushExpo = async() => {
     });
   }; 
   
-  timeout(token);
+  envia_notificacao(token);
 };
 
-const handleNotification = () => {
+const notificacao = () => {
   Vibration.vibrate();
 };
 
-const timeout = (token) => {
+const envia_notificacao = (token) => {
 
   setTimeout(() => {
-    bemVindo(token)
+    bem_vindo(token)
   }, 5000);
 
   setTimeout(() => {
-    convitePush(token)
+    apimente_descricao(token)
   }, 60000);
 }
 
-const bemVindo = async (token) => {
+const bem_vindo = async (token) => {
 
   const message = {
     to: token,
@@ -70,11 +70,11 @@ const bemVindo = async (token) => {
     body: JSON.stringify(message),
   });
   
-  handleNotification();
+  notificacao();
 
 };
 
- const convitePush = async (token) => {
+ const apimente_descricao = async (token) => {
   const message = {
     to: token,
     sound: 'default',
@@ -92,5 +92,5 @@ const bemVindo = async (token) => {
     body: JSON.stringify(message),
   });
 
-  handleNotification();
+  notificacao();
 };

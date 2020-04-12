@@ -6,15 +6,14 @@ import {
   View 
 } from 'react-native';
 
-import compartilhado from '../../estilos/compartilhado';
-import regras from '../../estilos/regras';
-
 import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 import { BotaoTouchableOpacity  }from '../../componentes/botao';
-import { pushExpo } from '../../componentes/pushExpo';
 
-import { recuperarCadastro } from '../../acoes/recuperarCadastro';
+import compartilhado from '../../estilos/compartilhado';
+import regras from '../../estilos/regras';
+
+import { recupera_cadastro } from '../../acoes/recuperarCadastro';
 
 class Regras extends Component {
 
@@ -32,8 +31,7 @@ class Regras extends Component {
   }
 
   handleCadastroBanco = () => {
-    recuperarCadastro(); 
-    pushExpo();
+    recupera_cadastro(); 
   }
         
   render(){

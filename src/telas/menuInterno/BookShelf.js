@@ -21,20 +21,21 @@ export default function Bookshelf() {
 
   const [ usuarios_estante, setUsuarios_estante ] = useState(null);  
 
-  const firestore = collection('estante').doc(usuarioUid());
+  const firestore = collection('usuarios_swiped').doc(usuarioUid()).collection('estante').doc(usuarioUid());
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    estante_de_usuarios();
-  }, []);
-
-  const estante_de_usuarios = () => {
-    firestore.onSnapshot(snapshot => {
+    const estante_de_usuarios = firestore.onSnapshot(snapshot => {
       const usuariosNaEstante = Object.assign([], snapshot.data());
       setUsuarios_estante(usuariosNaEstante);
-    }, error => console.log('Erro ao executar snapshot no Bookshelf: ', error.message));
-  };
+    });
+
+    return () => {
+      estante_de_usuarios();
+    }  
+  }, []);
+
 
   /*const swiped = (uid) => {
     firestore.get().then(snapshot => {

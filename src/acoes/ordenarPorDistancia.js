@@ -3,22 +3,15 @@
 import { usuarioUid, collection } from '../firebase/acoes';
 
 export const ordenarPorDistancia = (possiveis_matchs, long, lat) => {
-
-  const sortByDistance = require('sort-by-distance');
- 
-  //change the name of the x and y
-  const coordenadas = { yName: 'latitude', xName: 'longitude'};
-  
+  const sortByDistance = require('sort-by-distance'); 
+  const coordenadas = { yName: 'latitude', xName: 'longitude'};  
   const localizacao_usuario_logado = { longitude: long, latitude: lat};
-
   const resultado_localizacao = sortByDistance(
     localizacao_usuario_logado, 
     possiveis_matchs, 
     coordenadas
   );
-
   var usuarios_proximos = [];
-
   resultado_localizacao.forEach(element => {
     usuarios_proximos.push(
       element.usuario_match

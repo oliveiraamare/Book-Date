@@ -20,7 +20,7 @@ import compartilhado from '../../../../../estilos/compartilhado';
 import cor from '../../../../../estilos/cores';
 
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
-import { usuarioLogado } from '../../../../../acoes/usuarioLogado';
+import { usuario_logado_dados } from '../../../../../acoes/recuperaDadoUsuario';
 
 class EditarPreferencias extends Component {
   constructor(props) {
@@ -42,10 +42,6 @@ class EditarPreferencias extends Component {
 
   componentDidMount() {
     this.getAndLoadDados()
-  }
-
-  componentWillUnmount(){
-    this.getAndLoadDados();    
   }
 
   render() {
@@ -184,20 +180,21 @@ class EditarPreferencias extends Component {
 
   updateDados = () => {
     const buscando = this.buscando.itemsSelected;  
-    var fire = collection('usuarios').doc(usuarioUid());
-    fire.update({
-      "preferencias.aventura": this.state.aventura,
-      "preferencias.prosa": this.state.prosa,
-      "preferencias.misterio": this.state.misterio,
-      "preferencias.contoFadas": this.state.contoFadas,
-      buscando: buscando[0],     
-    })
-    .then(() => 
-      usuarioLogado(),
-      console.log('Update dos dados da tela EditarPreferencias feito com sucesso.'))
-    .catch(error => { 
-      console.log('Erro o update da tela EditarPreferencias: ' + error.message + ' ' + error)
-    })
+    collection('usuarios').doc(usuarioUid())
+      .update({
+        "preferencias.aventura": this.state.aventura,
+        "preferencias.prosa": this.state.prosa,
+        "preferencias.misterio": this.state.misterio,
+        "preferencias.contoFadas": this.state.contoFadas,
+        buscando: buscando[0],     
+      })
+      .then(() => 
+        usuario_logado_dados(),
+        console.log('Update dos dados da tela EditarPreferencias feito com sucesso.')
+      )
+      .catch(error => { 
+        console.log('Erro o update da tela EditarPreferencias: ' + error.message)
+      })
   }
 }
 

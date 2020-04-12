@@ -41,10 +41,6 @@ class Perfil extends Component {
     this.getAndLoadDados();    
   }
 
-  componentWillUnmount(){
-    this.getAndLoadDados();    
-  }
-
   render() {
     var dtNasc = this.state.usuario.dtNasc;
     let idade = new AgeFromDateString(dtNasc).age;

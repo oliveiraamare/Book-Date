@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import cor from '../estilos/cores';
 
 import Conta from '../telas/menuInterno/conta/Conta';
-import Match from '../telas/menuInterno/match/Match';
+import Booklovers from '../telas/menuInterno/match/Booklovers';
 import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
 import BookShelf from '../telas/menuInterno/BookShelf';
 
@@ -23,7 +23,6 @@ import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
 import { buscar_dados } from '../acoes/usuariosMatch';
-import { usuarioLogado } from '../acoes/usuarioLogado';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,7 +46,7 @@ function HomeTabs({ navigation, route }) {
       }}  
     >
       <Tab.Screen
-        name="BookLovers" component={Match} 
+        name="BookLovers" component={Booklovers} 
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-heart" color={color} size={size} />
@@ -87,10 +86,6 @@ const Stack = createStackNavigator();
 
 export default function NavegacaoInterna() {
   return (
-    
-    buscar_dados(),
-    usuarioLogado(),
-
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Home" component={HomeTabs} />   
@@ -99,11 +94,7 @@ export default function NavegacaoInterna() {
         <Stack.Screen name="EditarTopTres" component={EditarTopTres} />
         <Stack.Screen name="DeletarConta" component={DeletarConta} />
         <Stack.Screen name="Perfil" component={Perfil} />
-        <Stack.Screen name="PerfilMatch" component={PerfilMatch} 
-          options={({route, navigation}) => (
-            {route: {route}, navigation: {navigation}}
-          )}
-        />
+        <Stack.Screen name="PerfilMatch" component={PerfilMatch}/>
         <Stack.Screen name="SobreNos" component={SobreNos} />
         <Stack.Screen name="TermoPrivacidade" component={TermoPrivacidade} />
         <Stack.Screen name="TermoUso" component={TermoUso} />        

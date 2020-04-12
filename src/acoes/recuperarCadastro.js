@@ -3,21 +3,21 @@
 //https://github.com/seantempesta/expo-cljs-template/issues/84
 import { AsyncStorage } from 'react-native';
 
-import { handleSignUp } from '../firebase/cadastro'
+import { handle_signup } from '../firebase/cadastro';
 
-export const recuperarCadastro = async() => {
+export const recupera_cadastro = async() => {
   try{
+
     var cadastro = await AsyncStorage.getItem('cadastro');
     cadastro = JSON.parse(cadastro);
-
     var preferencias = await AsyncStorage.getItem('preferencias');
     preferencias = JSON.parse(preferencias);
-
     var geolocalizacao = await AsyncStorage.getItem('geolocalizacao');
     geolocalizacao = JSON.parse(geolocalizacao);
 
-    var email = cadastro.email
-    var senha = cadastro.senha
+    var email = cadastro.email;
+    var senha = cadastro.senha;
+
     var usuario = {
       nome: cadastro.nome,
       dtNasc: cadastro.dtNasc,
@@ -54,9 +54,9 @@ export const recuperarCadastro = async() => {
 
     //console.log(email + ' ' + senha + ' ' + JSON.stringify(usuario) + ' ' + imagem + ' ' + lat + ' ' + long);
     
-    handleSignUp(email, senha, usuario, lat, long, imagem);
+    handle_signup(email, senha, usuario, lat, long, imagem);
 
   } catch (error) {
-    console.log('Erro no recuperarCadastro: ', error.message)
+    console.log('Erro no recupera_cadastro: ', error.message)
   }
 }
