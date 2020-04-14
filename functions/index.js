@@ -97,9 +97,70 @@ async function ordenar_por_distancia(possiveis_matchs, long, lat, usuario_uid) {
 
 async function salva_usuarios_proximos(usuarios_proximos, usuario_uid) {
   const usuarios = Object.assign({}, usuarios_proximos);
-  return firestore.collection('usuarios_proximos').doc(usuario_uid)
+  return firestore.collection('usuarios').doc(usuario_uid).collection('usuarios_proximos').doc(usuario_uid)
     .set(usuarios)
     .catch( error => {
       console.log('Não foi possivel salvar os usuarios próximos: ', error.message)
     });
 }
+
+/*exports.update_usuarios_proximos = functions.firestore
+  .document('usuarios/{userId}/usuarios_manipulados').onWrite((change, context) => { /* ... * /
+    console.log('ocorreu uma mudança')
+    return true
+});*/
+
+///////////////////////////////////////////////////////////////////////////////////
+/** listening usuarios_manipulados */
+
+exports.update_usuarios_proximos = functions.firestore
+  .document('usuarios/{userId}/usuarios_manipulados/{messageId}').onWrite((change, context) => {
+    console.log('ocorreu uma nova mudança')
+    const usuario_uid =context.params.userId 
+
+    if(change.after.exists){
+      var promise = new Promise((resolve, reject) => {
+        console.log('existe data')
+      const usuarios = change.after.data();
+      const usuarios_manipulados = Object.assign([], usuarios); 
+      console.log(usuarios_manipulados)
+       resolve(pega_usuarios_proximos(usuarios_manipulados, usuario_uid))        
+    });
+      return promise;
+    }
+    return promise;
+  })
+
+  async function pega_usuarios_proximos(usuarios_manipulados, usuario_uid) {
+    console.log('cheguei para pegar os usuarios proximos')
+    return firestore.collection('usuarios').doc(usuario_uid)
+      .collection('usuarios_proximos').doc(usuario_uid)
+      .get().then(snapshot => {   
+        const usuarios_proximos = Object.assign([], snapshot.data());   
+        console.log(usuarios_proximos)
+        return compara_manipulado_e_existentes(usuarios_proximos, usuarios_manipulados, usuario_uid)
+      }).catch(error => {
+        console.log('Erro ao trazer todos os usuarios: ', error);
+      }) 
+  }
+  async function compara_manipulado_e_existentes(usuarios_proximos, usuarios_manipulados ,usuario_uid) {
+    console.log('cheguei na comparação')
+    //Find values that are in result2 but not in result1
+    const novos_usuarios = usuarios_proximos.filter((novo)=> {
+      return !usuarios_manipulados.some((existente) => {
+          return novo.uid === existente.uid;
+      });
+    });
+    console.log(novos_usuarios)
+    return salvaUsuariosProximos(novos_usuarios, usuario_uid);
+  }
+
+  async function salvaUsuariosProximos(novos_usuarios, usuario_uid) {
+    console.log('cheguei para salvar o resultado')
+    const usuarios = Object.assign({}, novos_usuarios);
+    return firestore.collection('usuarios').doc(usuario_uid).collection('usuarios_proximos').doc(usuario_uid)
+      .set(usuarios)
+      .catch( error => {
+        console.log('Não foi possivel salvar os usuarios próximos: ', error.message)
+      });
+  }

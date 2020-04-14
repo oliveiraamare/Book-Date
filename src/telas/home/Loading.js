@@ -26,8 +26,8 @@ class Loading extends Component {
   }
 
   usuario_autenticado() {
-    usuario_logado_dados()
     this.props.navigation.navigate('NavegacaoInterna');
+    usuario_logado_dados();
   }
   
   render() {

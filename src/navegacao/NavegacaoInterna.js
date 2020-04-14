@@ -22,7 +22,6 @@ import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
-import { buscar_dados } from '../acoes/usuariosMatch';
 
 const Tab = createBottomTabNavigator();
 

@@ -46,6 +46,12 @@ class Login extends Component {
     this.setState({ esconderSenha: !this.state.esconderSenha });
   }
 
+  validacao() {
+    if(this.email() && this.senha()){
+      this.handleLogin()
+    } else { return }
+  }
+
   handleLogin = () => {
     const { email, senha } = this.state
     Firebase
@@ -104,7 +110,7 @@ class Login extends Component {
             </TouchableOpacity>   
             <BotaoTransparente 
               buttonStyle={login.botaoLogin}
-              onPress={() => this.handleLogin()}
+              onPress={() => this.validacao()}
               text="Login" 
               textStyle={login.botaoLoginTexto}
             />                   
@@ -120,6 +126,26 @@ class Login extends Component {
         </ImageBackground>
       </View>
     )
+  }
+
+  email() {
+    const email_pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!email_pattern.test(this.state.email)) {
+      Alert.alert('Ops', 'Digite um e-mail válido!');
+      return false
+    }  else {
+      return true
+    }
+  }
+
+  senha() {
+    const senha_pattern = /^\S{8,15}/;
+    if (!senha_pattern.test(this.state.senha)) {
+      Alert.alert('Ops', 'Digite sua senha com oito ou mais caracteres!');
+      return false
+    } else {
+      return true
+    }
   }
 }
 
