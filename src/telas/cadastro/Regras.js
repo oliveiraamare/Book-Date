@@ -13,7 +13,7 @@ import { BotaoTouchableOpacity  }from '../../componentes/botao';
 import compartilhado from '../../estilos/compartilhado';
 import regras from '../../estilos/regras';
 
-import { recupera_cadastro } from '../../acoes/recuperarCadastro';
+import { recupera_cadastro } from '../../acoes/recuperar_cadastro';
 
 class Regras extends Component {
 

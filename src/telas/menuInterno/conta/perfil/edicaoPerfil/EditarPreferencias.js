@@ -20,7 +20,7 @@ import compartilhado from '../../../../../estilos/compartilhado';
 import cor from '../../../../../estilos/cores';
 
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
-import { usuario_logado_dados } from '../../../../../acoes/recuperaDadoUsuario';
+import { usuario_logado_dados } from '../../../../../acoes/dados_usuario_logado';
 
 class EditarPreferencias extends Component {
   constructor(props) {

@@ -35,64 +35,10 @@ export const usuarioUid = () => {
   return usuarioUid;
 }
 
-export const usuarioConectado = () => {
+export const usuario_conectado = () => {
   if(usuario()){
     return usuario.uid;
   } else {
     return null;
   }
-}
-
-//salvar e atualizar a geolocalização no firestore
-export const salvarGeolocalizacao = (uid, lat, long) => {
-  const localizacao = new firebase.firestore.GeoPoint(lat, long);
-  const geo = firestore.collection('usuarios').doc(uid);
-  geo.set({
-    localizacao,
-    uid: uid
-  }, { merge: true })
-  .then(()=>{
-    console.log('Localização salva com sucesso');
-    //resolve(data)
-  })
-  .catch(error => {
-    console.log('Erro ao salvar a localização: ' + error.message);
-    //reject(error)
-  })
-}
-
-//salvar a imagem no storage e fazer o upload da url no firestore
-export const uploadImagem = async(uid, imagem) => {
-  if(imagem != null){
-    const resposta = await fetch(imagem);
-    const blob = await resposta.blob();
-
-    var ref = Firebase.storage().ref('imagens/' + uid);
-
-    var blobResponse = await ref.put(blob);
-    var downloadURL = await blobResponse.ref.getDownloadURL();
-
-    return ref.put(blob)
-    .then(()=>{
-      inserirURLFirestore(uid, downloadURL),
-      console.log('upload feito da imagem')
-    }).catch((error)=>{
-      alert('erro no uploadImagem: '+ error.message  + ' ' + error);
-    });
-  } else {
-    return
-  }
-}
-
-const inserirURLFirestore = (uid, downloadURL) => {
-  var imagemFirestore = firestore.collection('usuarios').doc(uid);
-  imagemFirestore.set({
-    imagem: downloadURL
-  }, { merge: true })
-  .then(()=>{
-    console.log('URL da imagem salva com sucesso')
-  })
-  .catch(error => {
-    console.log('Erro ao salvar a url da imagem: ' + error.message)
-  })
 }

@@ -217,14 +217,9 @@ class Cadastro extends Component {
       cidade: cidade,
       sexo: sexo[0] 
     }
-    await AsyncStorage.setItem('cadastro', JSON.stringify(cadastro)).then(
-      ()=>{
-        //console.log('Itens salvos: ' + email + ' ' + senha + ' ' + nome + ' ' + dtNasc + ' ' + cidade + ' ' + sexo);
-        console.log('Os itens do cadastro foram salvos no async.')
-      }).catch(error => {
-        console.log('Os itens do cadastro não foram salvos: ', error.message)
-      }
-    );
+    await AsyncStorage.setItem('cadastro', JSON.stringify(cadastro))
+      .then(()=> { console.log('Os itens do cadastro foram salvos no async.') })
+      .catch(error => { console.log('Os itens do cadastro não foram salvos: ', error.message) });
   }
 
   email() {
@@ -232,9 +227,7 @@ class Cadastro extends Component {
     if (!email_pattern.test(this.state.email)) {
       Alert.alert('Ops', 'Digite um e-mail válido!');
       return false
-    }  else {
-      return true
-    }
+    }  else { return true }
   }
 
   senha() {
@@ -242,9 +235,7 @@ class Cadastro extends Component {
     if (!senha_pattern.test(this.state.senha)) {
       Alert.alert('Ops', 'Digite uma senha com oito ou mais caracteres!');
       return false
-    } else {
-      return true
-    }
+    } else { return true }
   }
 
   nome() {
@@ -252,27 +243,21 @@ class Cadastro extends Component {
     if (!nome_pattern.test(this.state.nome)) {
       Alert.alert('Ops', 'Faltou inserir seu nome!');
       return false
-    } else {
-      return true
-    }
+    } else { return true }
   }
 
   dataNasc() {
     if(this.state.data.trim() == '') {
       Alert.alert('Ops', 'Faltou inserir sua data de nascimento!');
       return false
-    } else {
-      return true
-    }
+    } else { return true }
   }
 
   cidade() {
     if(this.state.cidade.trim() == '') {
       Alert.alert('Ops', 'Nos diga a sua cidade natal!');
       return false
-    } else {
-      return true
-    }
+    } else { return true }
   }
 }
 

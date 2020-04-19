@@ -11,9 +11,7 @@ export const usuario_logado_dados = () => {
       console.log('UID do usuário logado: ', uid)
       salva_storage(usuarioLogado);
     })
-    .catch(function(error) {
-      console.log("Erro ao pegar dados do usuarioLogado: " + error.message);
-    });
+    .catch(error => { console.log("Erro ao pegar dados do usuarioLogado: " + error.message) });
 }
 
 //salva informações do usuário logado no asyncstorage

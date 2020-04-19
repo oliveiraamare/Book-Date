@@ -26,7 +26,7 @@ import {
   deletar_estante, 
   deletar_mensagem,
   deletar_usuario
-} from '../../../firebase/deletarUsuario';
+} from '../../../firebase/deletar_usuario';
 
 export default class DeletarConta extends Component {
 

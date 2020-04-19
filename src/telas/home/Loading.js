@@ -11,7 +11,7 @@ import Firebase from '../../firebase/Firebase';
 import cor from '../../estilos/cores';
 import compartilhado from '../../estilos/compartilhado';
 
-import { usuario_logado_dados } from '../../acoes/recuperaDadoUsuario';
+import { usuario_logado_dados } from '../../acoes/dados_usuario_logado';
 
 class Loading extends Component {
 

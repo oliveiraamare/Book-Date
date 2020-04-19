@@ -30,8 +30,8 @@ import Calendario from '../../../../../componentes/DatePicker';
 import TextoMultilinha from '../../../../../componentes/textInput/TextMultiline';
 
 import { usuarioUid, collection } from '../../../../../firebase/acoes';
-import { uploadImagem } from '../../../../../firebase/acoes';
-import { usuario_logado_dados } from '../../../../../acoes/recuperaDadoUsuario';
+import { usuario_logado_dados } from '../../../../../acoes/dados_usuario_logado';
+import { upload_imagem } from '../../../../../acoes/cadastrar_usuario';
 
 class Perfil extends Component {
 
@@ -324,14 +324,12 @@ class Perfil extends Component {
       if (!pickerResult.cancelled) {
         this.setState({ imagem: pickerResult.uri});
 
-       uploadImagem(usuarioUid(), pickerResult.uri)
-        .then(() => {
-          this.confirmacaoImagem();
-          console.log('Chamei o uploadImagem na tela de EditarPerfil');
-        })
-        .catch(error => {
-          console.log('Erro pegar a imagem na teka de EditarPerfil: ' + error.message);
-        });        
+        upload_imagem(usuarioUid(), pickerResult.uri)
+          .then(() => {
+            this.confirmacaoImagem();
+            console.log('Chamei o upload_imagem na tela de EditarPerfil');
+          })
+          .catch(error => { console.log('Erro pegar a imagem na teka de EditarPerfil: ' + error.message) });        
       } 
     }
   }  

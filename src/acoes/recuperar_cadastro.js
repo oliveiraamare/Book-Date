@@ -3,7 +3,7 @@
 //https://github.com/seantempesta/expo-cljs-template/issues/84
 import { AsyncStorage } from 'react-native';
 
-import { handle_signup } from '../firebase/cadastro';
+import { handle_signup } from './cadastrar_usuario';
 
 export const recupera_cadastro = async() => {
   try{
@@ -50,8 +50,6 @@ export const recupera_cadastro = async() => {
     var lat = Number(geolocalizacao.latitude);
   
     var long = Number(geolocalizacao.longitude);
-
-    console.log(lat + ' ' + long);
     
     handle_signup(email, senha, usuario, lat, long, imagem);
 

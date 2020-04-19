@@ -24,18 +24,16 @@ TaskManager.defineTask(book_date, ({ data, error }) => {
 export async function localizacao() {
   await Location.startLocationUpdatesAsync(book_date, {
     accuracy: Location.Accuracy.High,
-    timeInterval: 1200000, //2 minutos (em milissegundos)
-    pausesUpdatesAutomatically: true,
-    //Receive updates only when the location has changed by at least this distance in meters.
-    distanceInterval: 5,
-    //he distance in meters that must occur between last reported location and the current location before deferred locations are reported. 
-    deferredUpdatesDistance: 5,
-    //indicating whether the location manager can pause location updates to improve battery life without sacrificing location data. When this option is set to true, the location manager pauses updates (and powers down the appropriate hardware) at times when the location data is unlikely to change. 
-    pausesUpdatesAutomatically: true
+    timeInterval: 300000, // 5 minutos (em milissegundos)
+    pausesUpdatesAutomatically: true,    
+    distanceInterval: 5, //Receive updates only when the location has changed by at least this distance in meters.
+    deferredUpdatesDistance: 5, //the distance in meters that must occur between last reported location and the current location before deferred locations are reported. 
+    pausesUpdatesAutomatically: true //indicating whether the location manager can pause location updates to improve battery life without sacrificing location data. When this option is set to true, the location manager pauses updates (and powers down the appropriate hardware) at times when the location data is unlikely to change. 
   })  
 }
 
 async function verifica_localizacao(latitude_nova, longitude_nova) {
+  console.log('cheguei aqqui')
   var usuario_logado = await AsyncStorage.getItem('usuarioLogado');
   usuario_logado = JSON.parse(usuario_logado);
   var latitude_antiga = usuario_logado.localizacao.U;
@@ -46,10 +44,11 @@ async function verifica_localizacao(latitude_nova, longitude_nova) {
   console.log('--------------Localização Nova---------------')
   console.log(latitude_nova, longitude_nova)
 
-  if((latitude_nova != latitude_antiga) && (longitude_nova != longitude_antiga)){
+  /*if((latitude_nova != latitude_antiga) || (longitude_nova != longitude_antiga)){
     const localizacao = new firebase.firestore.GeoPoint(latitude_nova, longitude_nova);
-    collection('usuarios').doc(usuarioUid).set({
-      localizacao,
-    }, { merge: true })
-  }
+    collection('usuarios').doc(usuarioUid())
+      .set({ localizacao }, { merge: true })
+  }*/
+
+  console.log(Math.round(new Date().getTime()/1000))
 }
