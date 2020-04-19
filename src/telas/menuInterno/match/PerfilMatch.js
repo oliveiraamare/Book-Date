@@ -2,6 +2,7 @@
 //https://stackoverflow.com/questions/45388957/how-to-pass-parameters-to-screen-in-stacknavigator
 import React, { Component } from 'react';
 import {
+  YellowBox,
   Image,
   ImageBackground, 
   ScrollView, 
@@ -19,7 +20,9 @@ import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
 
 let { AgeFromDateString } = require('age-calculator');
-
+YellowBox.ignoreWarnings([
+  'Non-serializable values were found in the navigation state',
+]);
 class Perfil extends Component {
   constructor(props) {
     super(props);

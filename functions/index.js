@@ -132,6 +132,8 @@ exports.update_estante = functions.https.onRequest((req, res) => {
 async function salva_nova_estante(nova_estante, uid) {
   return firestore.collection('usuarios').doc(uid)
     .collection('estante').doc(uid).set(nova_estante)
+    .then(() => console.log('Update feito na estante'))
+    .catch(error => { console.log('Erro ao fazer update dos usuários na estante. ', error.message)})
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,12 +157,13 @@ exports.update_usuarios_proximos = functions.firestore
       usuario_sem_modificacao.localizacao.longitude !== usuario_modificado.localizacao.longitude ? true : false
     );
 
-    if( usuario_modificado.swipedAll === true 
-        || houve_modificacao_latidude
-        || houve_modificacao_longitude ) 
-    {
+    if( usuario_modificado.swipedAll === true ) {
       return buscar_usuarios(usuario_modificado)
     } 
+
+    if ( houve_modificacao_latidude || houve_modificacao_longitude ) {
+      return buscar_usuarios(usuario_modificado)
+    }
     return true
 })
 
@@ -293,27 +296,21 @@ async function salva_novos_usuarios_proximos(usuarios_proximos, usuario_modifica
   return firestore.collection('usuarios').doc(usuario_modificado.uid)
     .collection('usuarios_proximos').doc(usuario_modificado.uid)
     .set(usuarios_novos)
-    .then(() => modifica_swipedAll(usuario_modificado))
+    .then(() => modifica_swipedAll(usuarios_novos, usuario_modificado))
     .catch( error => {
       console.log('Não foi possivel salvar os novos usuários próximos. ', error.message)
     });
 }
 
-/* Verifica se a collection usuarios_proximos está vazia, se sim, o swipedAll continua como true,
+/* Verifica se o objeto usuarios_novos está vazio, se sim, o swipedAll continua como true,
   caso não, seta o swipedAll para false
 */
-async function modifica_swipedAll(usuario_modificado) {
-  return firestore.collection('usuarios').doc(usuario_modificado.uid)
-    .collection('usuarios_proximos').doc(usuario_modificado.uid)
-    .get().then(snapshot => {
-      if (snapshot.exists) {
-       return firestore.collection('usuarios').doc(usuario_modificado.uid)
-        .set({swipedAll: false}, { merge: true })
-      } else {
-        return null
-      }
-    }).catch( error => {
-      console.log('Não foi possível pegar os usuários swiped: ', error.message)
-    });
+async function modifica_swipedAll(usuarios_novos, usuario_modificado) {
+  if( !(Object.entries(usuarios_novos).length === 0 
+      && usuarios_novos.constructor === Object)) 
+  {
+    return firestore.collection('usuarios').doc(usuario_modificado.uid)
+      .set({swipedAll: false}, { merge: true })
+  } else { return null }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -16,7 +16,6 @@ import match from '../../../estilos/match';
 
 import { collection, usuarioUid } from '../../../firebase/acoes';
 import { localizacao } from '../../../componentes/localizacao';
-import { buscar_dados } from '../../../acoes/usuariosMatch';
 
 export default function Booklovers() {
 
@@ -37,12 +36,10 @@ export default function Booklovers() {
       const usuarios_proximos = Object.assign([], snapshot.data());
       setDados_match(usuarios_proximos);
     });
-    buscar_dados();
      //localizacao();
 
     return () => {
       estante_de_usuarios();
-      buscar_dados();
       //localizacao();
     }      
   }, []);   
@@ -115,9 +112,7 @@ export default function Booklovers() {
       )
     } 
 
-    const swipedAll = () => {
-      firestore.collection('usuarios').doc(usuarioUid())
-        .set({ swipedAll: true }, { merge: true });
+    const sem_cards = () => {
       return (
         <View style={compartilhado.container}>   
           <View style={compartilhado.statusBar}/>
@@ -141,12 +136,17 @@ export default function Booklovers() {
       ) 
     }
 
+    const swipedAll = () => {
+      collection('usuarios').doc(usuarioUid())
+        .set({ swipedAll: true }, { merge: true });
+    }
+
     return (
       <View style={compartilhado.container}>   
         <CardStack
           loop={false}
           verticalSwipe={false}
-          renderNoMoreCards={() => swipedAll()}
+          renderNoMoreCards={() => sem_cards()}
           ref={swiper => (swiper = swiper)}
           onSwipedAll={() => swipedAll()}      
         >  

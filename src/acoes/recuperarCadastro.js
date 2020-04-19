@@ -47,13 +47,11 @@ export const recupera_cadastro = async() => {
     var imagem = await AsyncStorage.getItem('imagem');
     imagem = JSON.parse(imagem);
 
-    var lat = geolocalizacao.latitude;
-    lat = Number(lat);
+    var lat = Number(geolocalizacao.latitude);
   
-    var long = geolocalizacao.longitude;
-    long = Number(long);
+    var long = Number(geolocalizacao.longitude);
 
-    //console.log(email + ' ' + senha + ' ' + JSON.stringify(usuario) + ' ' + imagem + ' ' + lat + ' ' + long);
+    console.log(lat + ' ' + long);
     
     handle_signup(email, senha, usuario, lat, long, imagem);
 

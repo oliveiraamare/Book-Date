@@ -1,10 +1,10 @@
 {
-  "packagerPort": null,
-  "packagerPid": null,
+  "packagerPort": 19001,
+  "packagerPid": 6948,
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://9i-dw9.oliveiraamare.bookdate.exp.direct",
+  "packagerNgrokUrl": "https://packager.9i-dw9.oliveiraamare.bookdate.exp.direct",
+  "ngrokPid": 6764,
   "webpackServerPort": null
 }

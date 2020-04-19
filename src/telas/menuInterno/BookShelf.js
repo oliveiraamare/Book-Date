@@ -37,18 +37,16 @@ export default function Bookshelf() {
   }, []);
 
   const swipedRight = (item) => {
-    swiped(item);
+    swiped(item.uid);
     navigation.navigate('Mensagem');
   }  
 
   const swiped = (match_uid) => {
     const uid = usuarioUid();
-    axios({
-      method: 'post',
-      url: 'https://us-central1-<bookdate>.cloudfunctions.net/update_estante',
+    axios.post('https://us-central1-bookdate-app.cloudfunctions.net/update_estante', {
       data: {
         uid: uid,
-        match_uid: match_uid.uid
+        match_uid: match_uid
       }
     })
     .then(data => { console.log(data.status) })

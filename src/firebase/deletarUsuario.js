@@ -1,4 +1,4 @@
-import { collection, storage, usuarioUid } from './acoes';
+import { collection, storage } from './acoes';
 
 const deletar_storage = () => {
   storage('imagens/').delete().then(() => {
