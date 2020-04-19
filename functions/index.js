@@ -3,20 +3,16 @@ admin.initializeApp();
 const firestore = admin.firestore();
 const functions = require('firebase-functions');
 const sortByDistance = require('sort-by-distance'); 
-const escapeHtml = require('escape-html');
 
-/* salva um array com os usuários próximos ao usuário que 
-  acabou de ser criado 
-*/
+/* Cadastra o usuário no banco e retorna para ele os possíveis matchs que estão ao redor */
 
-exports.salvar_usuarios_proximos = functions.firestore
+exports.cadastra_usuario = functions.firestore
   .document('usuarios/{userId}').onCreate( (snap, context) => {
     const usuario_logado = snap.data();
     const buscando = usuario_logado.buscando;
     const usuario_uid = context.params.userId
     const long = usuario_logado.localizacao.longitude;
     const lat = usuario_logado.localizacao.latitude;
-
     if (buscando ===  'Ambos'){
       return trazer_ambos(usuario_logado, usuario_uid, long, lat);
     } else {
@@ -94,14 +90,13 @@ async function salva_usuarios_proximos(usuarios_proximos, usuario_uid) {
       console.log('Não foi possivel salvar os usuarios próximos: ', error.message)
     });
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* Caso o usuário_logado mande mensagem para alguém que está no Bookshelf, retiramos este do array --estante-- para que não apareça mais no Bookshelf. */
+/* Caso o usuário_logado mande mensagem para alguém que está no Bookshelf, retiramos este do array --estante--
+ para que não apareça mais no Bookshelf. 
+*/
 
 exports.update_estante = functions.https.onRequest((req, res) => {
-  console.log(req.body)
-  console.log(req.body.data)
-
   firestore.collection('usuarios').doc(req.body.data.uid)
     .collection('estante').doc(req.body.data.uid).get()
     .then(snapshot => {
@@ -109,7 +104,8 @@ exports.update_estante = functions.https.onRequest((req, res) => {
       var nova_estante = usuarios_na_estante.filter(doc => doc.uid !== req.body.data.match_uid);
       nova_estante = Object.assign({}, nova_estante);
       return salva_nova_estante(nova_estante, req.body.data.uid)
-    }).catch(error => { console.log('Erro ao deletar o usuário na estante. ', error.message)})
+    })
+    .catch(error => { console.log('Erro ao deletar o usuário na estante. ', error.message)})
   res.status(200).send(console.log('Usuário deletado da estante.'));
 })
 
@@ -118,7 +114,7 @@ async function salva_nova_estante(nova_estante, uid) {
     .collection('estante').doc(uid).set(nova_estante)
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /** listening usuarios_manipulados * /
 
 exports.update_usuarios_proximos = functions.firestore

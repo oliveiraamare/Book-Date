@@ -25,7 +25,6 @@ export default function Booklovers() {
   const firestore = collection('usuarios').doc(usuarioUid()).collection('usuarios_proximos').doc(usuarioUid());
 
   var salvar_estante =  [];
-  var salvar_msg = [];
   var salvar_listagem_usuarios = [];
   const frase ='"Julgue pela capa e perca uma grande história."';
   const autor ='Autor Desconhecido';
@@ -35,15 +34,15 @@ export default function Booklovers() {
 
   useEffect(() => {
     const estante_de_usuarios = firestore.onSnapshot(snapshot => {
-        const usuarios_proximos = Object.assign([], snapshot.data());
-        setDados_match(usuarios_proximos);
+      const usuarios_proximos = Object.assign([], snapshot.data());
+      setDados_match(usuarios_proximos);
     });
-      //buscar_dados()
+    buscar_dados();
      //localizacao();
 
     return () => {
       estante_de_usuarios();
-      //buscar_dados()
+      buscar_dados();
       //localizacao();
     }      
   }, []);   
@@ -52,7 +51,6 @@ export default function Booklovers() {
     swiped(item);
     salvar_estante.push(item);  
     const usuarios_na_estante = Object.assign({}, salvar_estante);
-    //collection('usuarios_swiped').doc(usuarioUid())
     collection('usuarios').doc(usuarioUid())
       .collection('estante').doc(usuarioUid())
       .set(usuarios_na_estante, {merge: true});
@@ -60,12 +58,6 @@ export default function Booklovers() {
 
   const swipedRight = (item) => {
     swiped(item);
-    salvar_msg.push(item);  
-    const usuarios_na_msg = Object.assign({}, salvar_msg);
-    //collection('usuarios_swiped').doc(usuarioUid())
-    collection('usuarios').doc(usuarioUid())
-      .collection('mensagem').doc(usuarioUid())
-      .set(usuarios_na_msg);
   }  
   
   const swiped = (item) => {
@@ -124,6 +116,8 @@ export default function Booklovers() {
     } 
 
     const swipedAll = () => {
+      firestore.collection('usuarios').doc(usuarioUid())
+        .set({ swipedAll: true }, { merge: true });
       return (
         <View style={compartilhado.container}>   
           <View style={compartilhado.statusBar}/>

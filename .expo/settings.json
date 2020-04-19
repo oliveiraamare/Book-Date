@@ -1,8 +1,8 @@
 {
   "urlRandomness": "v3-w34",
-  "hostType": "lan",
+  "hostType": "tunnel",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "https": false
+  "https": true
 }
