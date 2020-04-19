@@ -10,7 +10,6 @@ import { Platform, Vibration } from 'react-native';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 
-import { usuario_logado_dados } from '../acoes/recuperaDadoUsuario';
 import { push_expo } from '../componentes/pushExpo';
 
 export const handle_signup = (email, senha, usuario, lat, long, imagem) => {
@@ -63,7 +62,6 @@ const salva_token_expo = (token) => {
 }
 
 const trata_dados = () => {
-  usuario_logado_dados();
   remove_dados_async();
 }
 

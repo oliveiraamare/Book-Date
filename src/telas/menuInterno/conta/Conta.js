@@ -10,6 +10,7 @@ import { ListItem } from 'react-native-elements'
 import { Avatar } from 'react-native-paper';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import * as Location from 'expo-location';
 
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
 import { Citacoes } from '../../../componentes/fraseAleatoria/citacoes';
@@ -44,11 +45,18 @@ export default function Conta() {
     Alert.alert('Deseja realmente sair?', '"A verdade é a seguinte: Você vai se apaixonar! Não tem jeito! Nem tente fugir." - Sussuro.', 
     [
       { text: "Cancelar", onPress: () => null },
-      { text: "Sim", onPress: () => Firebase.auth().signOut() }
+      { text: "Sim", onPress: () => sair()  }
     ]);
     return true;
   };
-  
+
+  const book_date = 'background-location-task';
+
+  const sair = async() => {
+    await Location.stopLocationUpdatesAsync(book_date);
+    Firebase.auth().signOut();    
+  }
+
   return (
     <View style={compartilhado.container}>
       <View style={compartilhado.statusBar} />
