@@ -1,6 +1,6 @@
 {
-  "urlRandomness": "v3-w34",
-  "hostType": "tunnel",
+  "urlRandomness": "v5-fdi",
+  "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,

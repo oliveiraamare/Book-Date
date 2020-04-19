@@ -1,16 +1,16 @@
 import { AsyncStorage } from 'react-native'
 import Firebase from '../firebase/Firebase';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
+
+import { push_expo } from '../componentes/pushExpo';
+
 import { 
   firestore, 
   uploadImagem,
   usuarioUid, 
   salvarGeolocalizacao
 } from '../firebase/acoes';
-import { Platform, Vibration } from 'react-native';
-import { Notifications } from 'expo';
-import * as Permissions from 'expo-permissions';
-
-import { push_expo } from '../componentes/pushExpo';
 
 export const handle_signup = (email, senha, usuario, lat, long, imagem) => {
   Firebase.auth()
@@ -27,7 +27,7 @@ const salvar_usuario = (usuario, lat, long, imagem) => {
       uploadImagem(uid, imagem);
       recupera_token_expo();
       trata_dados();
-      //push_expo();
+      push_expo();
     })
     .catch(error => {
       alert('erro no salvar_usuario: '+ error.message  + ' ' + error)

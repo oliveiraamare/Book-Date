@@ -4,8 +4,13 @@ const firestore = admin.firestore();
 const functions = require('firebase-functions');
 const sortByDistance = require('sort-by-distance'); 
 
-/* Cadastra o usuário no banco e retorna para ele os possíveis matchs que estão ao redor */
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/* Função que cadastra o usuário no banco e retorna para ele os possíveis matchs que estão ao redor */
+
+/* Verificamos qual o gênero o usuário que foi modificado deseja encontrar para podermos 
+  retornar para ele somente o que escolheu
+*/
 exports.cadastra_usuario = functions.firestore
   .document('usuarios/{userId}').onCreate( (snap, context) => {
     const usuario_logado = snap.data();
@@ -20,6 +25,9 @@ exports.cadastra_usuario = functions.firestore
     }
 })
 
+/* Caso o novo usuário queira ambos os sexos, verificamos no array de usuarios_cadastrados
+  quem também quer uma pessoa do mesmo sexo que o usuario que foi modificado é.
+*/
 async function trazer_ambos(usuario_logado, usuario_uid, long, lat) {
   return firestore.collection('usuarios').get()
     .then(snapshot => {
@@ -42,6 +50,9 @@ async function trazer_ambos(usuario_logado, usuario_uid, long, lat) {
     }).catch(error => {console.log('Erro ao trazer os usuarios(ambos): ', error);})
 }
 
+/* Caso o novo usuário queira um sexo específico, verificamos no array de usuarios_cadastrados
+  quem também quer uma pessoa do mesmo sexo que o usuario que foi modificado é.
+*/
 async function trazer_sexo_escolhido(usuario_logado, usuario_uid, buscando, long, lat) {
   var possiveis_matchs = [];
   firestore.collection('usuarios').where('sexo', '==', buscando).get()
@@ -65,6 +76,9 @@ async function trazer_sexo_escolhido(usuario_logado, usuario_uid, buscando, long
     });
 }
 
+/* Retorna um array ordenado com os usuarios que estão próximos (do mais próximo ao
+  mais longe) ao usuário modificado.
+*/
 async function ordenar_por_distancia(possiveis_matchs, long, lat, usuario_uid) {
   const coordenadas = { yName: 'latitude', xName: 'longitude'};  
   const localizacao_usuario_logado = { longitude: long, latitude: lat};
@@ -82,6 +96,8 @@ async function ordenar_por_distancia(possiveis_matchs, long, lat, usuario_uid) {
   return salva_usuarios_proximos(usuarios_proximos, usuario_uid);
 }
 
+/* Salva um array de objetos na collection do novo usuário contendo os usuários próximos
+*/
 async function salva_usuarios_proximos(usuarios_proximos, usuario_uid) {
   const usuarios = Object.assign({}, usuarios_proximos);
   return firestore.collection('usuarios').doc(usuario_uid).collection('usuarios_proximos').doc(usuario_uid)
@@ -90,10 +106,14 @@ async function salva_usuarios_proximos(usuarios_proximos, usuario_uid) {
       console.log('Não foi possivel salvar os usuarios próximos: ', error.message)
     });
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* Caso o usuário_logado mande mensagem para alguém que está no Bookshelf, retiramos este do array --estante--
- para que não apareça mais no Bookshelf. 
+/* Função que faz update na collection estante para retirar os usuários que foram migrados para a
+  collection mensagem.
+*/
+
+/* Caso o usuário_logado mande mensagem para alguém que está no Bookshelf, retiramos este do array --estante-- para que não apareça mais no Bookshelf. 
 */
 
 exports.update_estante = functions.https.onRequest((req, res) => {
@@ -110,85 +130,108 @@ exports.update_estante = functions.https.onRequest((req, res) => {
 })
 
 async function salva_nova_estante(nova_estante, uid) {
-  firestore.collection('usuarios').doc(uid)
+  return firestore.collection('usuarios').doc(uid)
     .collection('estante').doc(uid).set(nova_estante)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/** listening usuarios_manipulados * /
 
+/* listening usuarios_proximos */
+/* Função utilizada para fazer update da collection usuários próximos.
+  Para acontecer o update um dos segintes parâmetros deve ter seu valor mudado:
+        o valor do swipedAll ser mudado para true
+        ou a localização ser atualizada com novos valores
+*/
 exports.update_usuarios_proximos = functions.firestore
-  .document('usuarios/{userId}/{messageCollectionId}/{messageId}').onWrite((change, context) => {
-    console.log('ocorreu uma nova mudança')
-    if(change.after.exists){
-      return buscar_dados()
-    } else {
-      return null
-    }
+  .document('usuarios/{userId}').onWrite((change, context) => {
+    const usuario_modificado = change.after.data();
+    const usuario_sem_modificacao = change.before.data();
+
+    const houve_modificacao_latidude = (
+      usuario_sem_modificacao.localizacao.latitude !== usuario_modificado.localizacao.latitude ? true : false
+    );
+  
+    const houve_modificacao_longitude = (
+      usuario_sem_modificacao.localizacao.longitude !== usuario_modificado.localizacao.longitude ? true : false
+    );
+
+    if( usuario_modificado.swipedAll === true 
+        || houve_modificacao_latidude
+        || houve_modificacao_longitude ) 
+    {
+      return buscar_usuarios(usuario_modificado)
+    } 
+    return true
 })
 
-async function buscar_dados() {
+/* Retorna um array com todos os usuários cadastrados no banco */
+async function buscar_usuarios(usuario_modificado) {
   var usuarios_cadastrados = [];
   firestore.collection('usuarios').get().then(snapshot => {      
     snapshot.forEach(doc => {
       const usuarios = doc.data();
       usuarios_cadastrados.push(usuarios);  
     })     
-    return tratar_usuarios(usuarios_cadastrados)
+    return pega_usuarios_swiped(usuarios_cadastrados, usuario_modificado)
   }).catch(error => {
-    console.log('Erro ao trazer os dados do usuário logado: ', error.message);
+    console.log('Não foi possível retornar a busca pelos usuários cadastrados. ',error.message);
   });    
 }
 
-async function tratar_usuarios(usuarios_cadastrados){
-  usuarios_cadastrados.forEach(snapshot => {
-    const usuario = snapshot;
-    return (pega_usuarios_swiped(usuarios_cadastrados, usuario))
-  })
-}
-
-async function pega_usuarios_swiped(usuarios_cadastrados, usuario) {
-  firestore.collection('usuarios').doc(usuario.uid)
-    .collection('usuarios_swiped').doc(usuario.uid)
+/* Retorna um array com as pessoas que já apareceram no feed do usuario atual, caso a collection 
+  usuarios_swiped esteja populada, caso não esteja, segue o fluxo normal para cadastrar os
+  novos usuários
+*/
+async function pega_usuarios_swiped(usuarios_cadastrados, usuario_modificado) {
+  firestore.collection('usuarios').doc(usuario_modificado.uid)
+    .collection('usuarios_swiped').doc(usuario_modificado.uid)
     .get().then(snapshot => {
       if (snapshot.exists) {
         const usuarios_swiped = Object.assign([], snapshot.data());
-        return compara_estante_e_proximos(usuarios_cadastrados, usuarios_swiped, usuario); 
+        return compara_estante_e_proximos(usuarios_cadastrados, usuarios_swiped, usuario_modificado); 
       } else {
-        return pega_info_usuario(usuarios_cadastrados, usuario)
+        return info_usuario_modificado(usuarios_cadastrados, usuario_modificado)
       }
     }).catch( error => {
-      console.log('Não foi possível pegar os usuários swiped: ', error.message)
+      console.log('Não foi possível retornar os usuarios_swiped. ', error.message)
     });
 }
 
-async function compara_estante_e_proximos(usuarios_cadastrados, usuarios_swiped, usuario) {
+/* Compara o array de usuarios_cadastrados com o array de usuarios_swiped e retorna um novo array 
+  contendo somente os usuários que não estão no usuarios_swiped  
+*/
+async function compara_estante_e_proximos(usuarios_cadastrados, usuarios_swiped, usuario_modificado) {
   //Find values that are in result2 but not in result1
   const novos_usuarios = usuarios_cadastrados.filter(novo => {
     return !usuarios_swiped.some(existente => {
         return novo.uid === existente.uid;
     });
   });
-  return pega_info_usuario(novos_usuarios, usuario);
+  return info_usuario_modificado(novos_usuarios, usuario_modificado);
 }
 
-async function pega_info_usuario(novos_usuarios, usuario){
-  const buscando = usuario.buscando;
-  const long = usuario.localizacao.longitude;
-  const lat = usuario.localizacao.latitude;
+/* Após as comparações iniciais, verificamos qual o gênero o usuário que foi modificado deseja encontrar
+  para podermos retornar para ele somente o que escolheu
+*/
+async function info_usuario_modificado(novos_usuarios, usuario_modificado){
+  const buscando = usuario_modificado.buscando;
+  const long = usuario_modificado.localizacao.longitude;
+  const lat = usuario_modificado.localizacao.latitude;
   if (buscando ===  'Ambos'){
-    return trazerAmbos(usuario, long, lat, novos_usuarios);
+    return retorna_ambos_sexos(usuario_modificado, long, lat, novos_usuarios);
   } else {
-    console.log('entrei aqui')
-    return trazer_sexoEscolhido(usuario, long, lat, novos_usuarios);
+    return retorna_sexo_escolhido(usuario_modificado, long, lat, novos_usuarios);
   }
 }
 
-async function trazerAmbos(usuario, long, lat, novos_usuarios) {
+/* Caso o usuário modificado queira ambos os sexos, verificamos no array de usuarios_cadastrados
+  quem também quer uma pessoa do mesmo sexo que o usuario que foi modificado é.
+*/
+async function retorna_ambos_sexos(usuario_modificado, long, lat, novos_usuarios) {
   var usuarios_match = [];
   novos_usuarios.forEach(dados_novos_usuarios => {
-    if ((dados_novos_usuarios.uid !== usuario.uid) 
-          && (dados_novos_usuarios.buscando === usuario.sexo 
+    if ((dados_novos_usuarios.uid !== usuario_modificado.uid) 
+          && (dados_novos_usuarios.buscando === usuario_modificado.sexo 
                 || dados_novos_usuarios.buscando === 'Ambos')
     ){
       usuarios_match.push({
@@ -198,15 +241,18 @@ async function trazerAmbos(usuario, long, lat, novos_usuarios) {
       });    
     }         
   })
-  return ordena_por_distancia(usuarios_match, long, lat, usuario)
+  return ordena_por_distancia(usuarios_match, long, lat, usuario_modificado)
 }
 
-async function trazer_sexoEscolhido(usuario, long, lat, novos_usuarios) {
+/* Caso o usuário modificado queira um sexo específico, verificamos no array de usuarios_cadastrados
+  quem também quer uma pessoa do mesmo sexo que o usuario que foi modificado é.
+*/
+async function retorna_sexo_escolhido(usuario_modificado, long, lat, novos_usuarios) {
   var usuarios_match = [];
   novos_usuarios.forEach(dados_novos_usuarios => {
-    if ((dados_novos_usuarios.sexo === usuario.buscando)
-          && (dados_novos_usuarios.uid !== usuario.uid)  
-          && (dados_novos_usuarios.buscando === usuario.sexo 
+    if ((dados_novos_usuarios.sexo === usuario_modificado.buscando)
+          && (dados_novos_usuarios.uid !== usuario_modificado.uid)  
+          && (dados_novos_usuarios.buscando === usuario_modificado.sexo 
           || dados_novos_usuarios.buscando === 'Ambos')
      ){  
         usuarios_match.push({
@@ -216,10 +262,13 @@ async function trazer_sexoEscolhido(usuario, long, lat, novos_usuarios) {
         });
       }
   });  
-  return ordena_por_distancia(usuarios_match, long, lat, usuario);
+  return ordena_por_distancia(usuarios_match, long, lat, usuario_modificado);
 }
 
-async function ordena_por_distancia(usuarios_match, long, lat, usuario) {
+/* Retorna um array ordenado com os usuarios que estão próximos (do mais próximo ao
+  mais longe) ao usuário modificado.
+*/
+async function ordena_por_distancia(usuarios_match, long, lat, usuario_modificado) {
   const sortByDistance = require('sort-by-distance'); 
   const coordenadas = { yName: 'latitude', xName: 'longitude'};  
   const localizacao_usuario_logado = { longitude: long, latitude: lat};
@@ -234,81 +283,37 @@ async function ordena_por_distancia(usuarios_match, long, lat, usuario) {
       element.dados_novos_usuarios,
     );
   })
-  return salva_usuariosProximos(usuarios_proximos, usuario);
+  return salva_novos_usuarios_proximos(usuarios_proximos, usuario_modificado);
 }
 
-async function salva_usuariosProximos(usuarios_proximos, usuario) {
-  usuarios_proximos.forEach(element => {
-    console.log(element.nome)
-  });
-  const usuarios = Object.assign({}, usuarios_proximos);
-  firestore.collection('usuarios').doc(usuario.uid)
-    .collection('usuarios_proximos').doc(usuario.uid)
-    .set(usuarios)
+/* Salva um array de objetos na collection do usuário modificado contendo os novos usuários próximos
+*/
+async function salva_novos_usuarios_proximos(usuarios_proximos, usuario_modificado) {
+  const usuarios_novos = Object.assign({}, usuarios_proximos);
+  return firestore.collection('usuarios').doc(usuario_modificado.uid)
+    .collection('usuarios_proximos').doc(usuario_modificado.uid)
+    .set(usuarios_novos)
+    .then(() => modifica_swipedAll(usuario_modificado))
     .catch( error => {
-      console.log('Não foi possivel salvar os usuarios proximos, ', error.message)
+      console.log('Não foi possivel salvar os novos usuários próximos. ', error.message)
     });
 }
 
-
-/**--------------------------------------------------------------------------------- 
-
-exports.update_estante = functions.firestore
-  .document('usuarios/{userId}/mensagem/{messageId}').onWrite((change, context) => {
-    console.log('ocorreu uma nova mudança')
-    if(change.after.exists){
-      const usuario_logado = snap.data();
-      const usuario_uid = context.params.userId
-      return pega_usuarios_estante(usuario_uid)
-    } else {
-      return null
-    }
-})
- 
-async function pega_usuarios_estante(usuario_uid) {
-    console.log('cheguei para pegar os usuarios estante')
-    return firestore.collection('usuarios').doc(usuario_uid)
-      .collection('estante').doc(usuario_uid)
-      .get().then(snapshot => {   
-        const usuarios_estante= Object.assign([], snapshot.data());   
-        console.log(usuarios_estante)
-        return pega_usuarios_mensagem(usuarios_estante, usuario_uid)
-      }).catch(error => {
-        console.log('Erro ao trazer todos os usuarios: ', error);
-      }) 
-  }
-
-  async function pega_usuarios_mensagem(usuarios_estante, usuario_uid) {
-    console.log('cheguei para pegar os usuarios mensagem')
-    return firestore.collection('usuarios').doc(usuario_uid)
-      .collection('mensagem').doc(usuario_uid)
-      .get().then(snapshot => {   
-        const usuarios_mensagem= Object.assign([], snapshot.data());   
-        console.log(usuarios_mensagem)
-        return compara_manipulado_e_existentes(usuarios_estante, usuarios_mensagem, usuario_uid)
-      }).catch(error => {
-        console.log('Erro ao trazer todos os usuarios: ', error);
-      }) 
-  }
-
-  async function compara_manipulado_e_existentes(usuarios_estante, usuarios_mensagem ,usuario_uid) {
-    console.log('cheguei na comparação')
-    //Find values that are in result2 but not in result1
-    const novos_usuarios = usuarios_estante.filter((novo)=> {
-      return !usuarios_mensagem.some((existente) => {
-          return novo.uid === existente.uid;
-      });
+/* Verifica se a collection usuarios_proximos está vazia, se sim, o swipedAll continua como true,
+  caso não, seta o swipedAll para false
+*/
+async function modifica_swipedAll(usuario_modificado) {
+  return firestore.collection('usuarios').doc(usuario_modificado.uid)
+    .collection('usuarios_proximos').doc(usuario_modificado.uid)
+    .get().then(snapshot => {
+      if (snapshot.exists) {
+       return firestore.collection('usuarios').doc(usuario_modificado.uid)
+        .set({swipedAll: false}, { merge: true })
+      } else {
+        return null
+      }
+    }).catch( error => {
+      console.log('Não foi possível pegar os usuários swiped: ', error.message)
     });
-    console.log(novos_usuarios)
-    return salvaUsuariosProximos(novos_usuarios, usuario_uid);
-  }
-
-  async function salvaUsuariosProximos(novos_usuarios, usuario_uid) {
-    console.log('cheguei para salvar o resultado')
-    const usuarios = Object.assign({}, novos_usuarios);
-    return firestore.collection('usuarios').doc(usuario_uid).collection('estante').doc(usuario_uid)
-      .set(usuarios)
-      .catch( error => {
-        console.log('Não foi possivel salvar os usuarios próximos: ', error.message)
-      });
-  }  */
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
