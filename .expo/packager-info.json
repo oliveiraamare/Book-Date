@@ -1,9 +1,9 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 12600,
+  "packagerPid": 2516,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://pi-vzx.oliveiraamare.bookdate.exp.direct",
-  "packagerNgrokUrl": "https://packager.pi-vzx.oliveiraamare.bookdate.exp.direct",
-  "ngrokPid": 17352
+  "expoServerNgrokUrl": "https://v3-w34.oliveiraamare.bookdate.exp.direct",
+  "packagerNgrokUrl": "https://packager.v3-w34.oliveiraamare.bookdate.exp.direct",
+  "ngrokPid": 816
 }
