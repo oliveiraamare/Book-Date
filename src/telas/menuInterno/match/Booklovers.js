@@ -1,7 +1,7 @@
 //https://github.com/stevenpersia/tinder-react-native
 //https://www.npmjs.com/package/react-native-card-stack-swiper
 //https://stackoverflow.com/questions/47547465/how-to-render-one-react-native-component-after-another-component-had-rendered
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import { ImageBackground, Text, TouchableHighlight, View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { DotIndicator } from 'react-native-indicators';
@@ -15,15 +15,18 @@ import cor from '../../../estilos/cores';
 import match from '../../../estilos/match';
 
 import { collection, usuarioUid } from '../../../firebase/acoes';
+import { localizacao } from '../../../componentes/localizacao';
+import { buscar_dados } from '../../../acoes/usuariosMatch';
 
 export default function Booklovers() {
 
   const [ dados_match, setDados_match ] = useState(null);  
   
-  const firestore = collection('usuarios_proximos').doc(usuarioUid());
+  const firestore = collection('usuarios').doc(usuarioUid()).collection('usuarios_proximos').doc(usuarioUid());
 
-  const salvar_estante =  [];
-  const salvar_msg = [];
+  var salvar_estante =  [];
+  var salvar_msg = [];
+  var salvar_listagem_usuarios = [];
   const frase ='"Julgue pela capa e perca uma grande história."';
   const autor ='Autor Desconhecido';
   const thats_all = '"That\'s all folks!"';
@@ -34,28 +37,44 @@ export default function Booklovers() {
     const estante_de_usuarios = firestore.onSnapshot(snapshot => {
         const usuarios_proximos = Object.assign([], snapshot.data());
         setDados_match(usuarios_proximos);
-      });
+    });
+      //buscar_dados()
+     //localizacao();
 
     return () => {
       estante_de_usuarios();
+      //buscar_dados()
+      //localizacao();
     }      
   }, []);   
 
   const swipedLeft = (item) => {
+    swiped(item);
     salvar_estante.push(item);  
     const usuarios_na_estante = Object.assign({}, salvar_estante);
-    collection('usuarios_swiped').doc(usuarioUid())
+    //collection('usuarios_swiped').doc(usuarioUid())
+    collection('usuarios').doc(usuarioUid())
       .collection('estante').doc(usuarioUid())
-      .set(usuarios_na_estante);
+      .set(usuarios_na_estante, {merge: true});
   }   
 
   const swipedRight = (item) => {
+    swiped(item);
     salvar_msg.push(item);  
     const usuarios_na_msg = Object.assign({}, salvar_msg);
-    collection('usuarios_swiped').doc(usuarioUid())
+    //collection('usuarios_swiped').doc(usuarioUid())
+    collection('usuarios').doc(usuarioUid())
       .collection('mensagem').doc(usuarioUid())
       .set(usuarios_na_msg);
-  }    
+  }  
+  
+  const swiped = (item) => {
+    salvar_listagem_usuarios.push(item);  
+    const usuarios_manipulados = Object.assign({}, salvar_listagem_usuarios);
+    collection('usuarios').doc(usuarioUid())
+      .collection('usuarios_swiped').doc(usuarioUid())
+      .set(usuarios_manipulados);
+  }
 
   if(!dados_match) {
     return (

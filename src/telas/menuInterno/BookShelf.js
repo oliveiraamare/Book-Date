@@ -4,6 +4,7 @@ import { ImageBackground, View, Text, TouchableHighlight } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { DotIndicator } from 'react-native-indicators';
 import { useNavigation } from '@react-navigation/native';
+const axios = require('axios').default;
 
 import { FraseTop } from '../../componentes/frase';
 import CardItem from '../../componentes/CardItem';
@@ -21,8 +22,9 @@ export default function Bookshelf() {
 
   const [ usuarios_estante, setUsuarios_estante ] = useState(null);  
 
-  const firestore = collection('usuarios_swiped').doc(usuarioUid()).collection('estante').doc(usuarioUid());
-
+  const firestore = collection('usuarios').doc(usuarioUid()).collection('estante').doc(usuarioUid());
+  var salvar_msg = [];
+  var salvar_listagem_usuarios = [];
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -36,11 +38,32 @@ export default function Bookshelf() {
     }  
   }, []);
 
+  const swipedRight = (item) => {
+    swiped(item);
+    salvar_msg.push(item);  
+    const usuarios_na_msg = Object.assign({}, salvar_msg);
+    //collection('usuarios_swiped').doc(usuarioUid())
+    collection('usuarios').doc(usuarioUid())
+      .collection('mensagem').doc(usuarioUid())
+      .set(usuarios_na_msg, {merge: true});
+      navigation.navigate('Mensagem')
+  }  
 
-  /*const swiped = (uid) => {
-    firestore.get().then(snapshot => {
+  
+  
+
+  const swiped = (match_uid) => {
+    const uid = usuarioUid();
+    axios({
+      method: 'post',
+      url: 'https://us-central1-bookdate.cloudfunctions.net/update_estante',
+      data: {
+        uid: uid,
+        match_uid: match_uid
+      }
+    });
+   /* firestore.get().then(snapshot => {
       const usuariosNaEstante = Object.assign([], snapshot.data());
-
       //retiro o usuário do array
       var novaEstante = usuariosNaEstante.filter(doc => doc.uid != uid);
       novaEstante = Object.assign({}, novaEstante);
@@ -49,8 +72,8 @@ export default function Bookshelf() {
     })
     .catch(function(error) {
       console.log("Erro ao deletar o usuario: ", error.message);
-    });
-  }*/
+    });*/
+  }
 
   if(!usuarios_estante) {
     return (
@@ -112,7 +135,7 @@ export default function Bookshelf() {
               <Card 
                 key={index}
                 onSwipedLeft={() => null}
-                onSwipedRight={() => null}
+                onSwipedRight={() => swipedRight(item)}
               >
                 <TouchableHighlight onPress={() => navigation.navigate('PerfilMatch', { item })}>
                   <ImageBackground

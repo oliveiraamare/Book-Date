@@ -18,13 +18,17 @@ import { AppBarHeader } from '../../../componentes/header';
 import compartilhado from '../../../estilos/compartilhado';
 import deletarConta from '../../../estilos/deletarConta';
 
-import { usuario } from '../../../firebase/acoes';
+import { usuario, usuarioUid } from '../../../firebase/acoes';
 import {   
-  deletarStorage,
-  deletarDatabase,
-  deletarCollection
+  deletar_storage, 
+  deletar_usuarios_proximos,
+  deletar_usuarios_swiped, 
+  deletar_estante, 
+  deletar_mensagem,
+  deletar_usuario
 } from '../../../firebase/deletarUsuario';
-class DeletarConta extends Component {
+
+export default class DeletarConta extends Component {
 
   constructor(props) {
     super(props);
@@ -91,40 +95,38 @@ class DeletarConta extends Component {
   }
 
   deletarBanco = () => {
-    var usuarioLogado = usuario();
-   
-    var email = usuarioLogado.email;
-    var senha = this.state.senha;
-
+    const usuarioLogado = usuario();   
+    const email = usuarioLogado.email;
+    const senha = this.state.senha;
     const credential = firebase.auth.EmailAuthProvider.credential(email, senha);
-    usuarioLogado.reauthenticateWithCredential(credential).then(() => 
-    {
-      console.log('Usuario reautenticado');
+    const uid = usuarioUid();
 
-      usuarioLogado.delete().then(() => {
-        console.log('Usuário deletado com sucesso no Auth');
+    usuarioLogado.reauthenticateWithCredential(credential)
+      .then(() => {
+        deletar_storage();
+        deletar_usuarios_proximos(uid);
+        deletar_usuarios_swiped(uid);
+        deletar_estante(uid);
+        deletar_mensagem(uid);
+        deletar_usuario(uid);
       })
+      .then(() => {
+        usuarioLogado.delete();
+        Alert.alert(
+          'Tchauzinho!', 'Foi divertido te conhecer. Esperamos um dia rever-te!'
+        );
+      })
+      .catch(error => {
+        console.log('Erro ao reautenticar o usuário: ', error.message);
+        Alert.alert('Ops', 'Falha na rede, tente novamente mais tarde');
+      });
 
-      deletarStorage();
-      deletarCollection();
-      
-      Alert.alert(
-        'Tchauzinho!', 'Foi divertido te conhecer. Esperamos um dia rever-te!'
-      );
-    }).catch(error => {
-      console.log('Erro ao reautenticar o usuário: ', error.message);
-      Alert.alert('Ops', 'Falha na rede, tente novamente mais tarde');
-    });
     this.removeDadosAsync();
   }
 
   removeDadosAsync = async() => {
-    try {
-      await AsyncStorage.clear();
-      console.log('Storage limpo com sucesso');
-    } catch (error) {
-      console.log('Falha ao limpar o Storage', error.message);
-    }
+    try { await AsyncStorage.clear() } 
+    catch (error) { console.log('Falha ao limpar o Storage', error.message) }
   }
 
   showDialog() {
@@ -143,5 +145,3 @@ class DeletarConta extends Component {
 
 const frase='Não vá embora, por favor. Tenha um pouco de fé em mim e um pouco de paciência. Por favor.';
 const autor='50 Tons de Cinza';
-
-export default DeletarConta;
