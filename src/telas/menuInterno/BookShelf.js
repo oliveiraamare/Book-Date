@@ -50,17 +50,19 @@ export default function Bookshelf() {
   }  
 
   
-  
-
   const swiped = (match_uid) => {
     const uid = usuarioUid();
-    axios({
-      method: 'post',
-      url: 'https://us-central1-bookdate.cloudfunctions.net/update_estante',
+    axios.post('https://us-central1-bookdate-app.cloudfunctions.net/update_estante', {
       data: {
         uid: uid,
-        match_uid: match_uid
+        match_uid: match_uid.uid
       }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
    /* firestore.get().then(snapshot => {
       const usuariosNaEstante = Object.assign([], snapshot.data());

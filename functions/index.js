@@ -100,15 +100,17 @@ async function salva_usuarios_proximos(usuarios_proximos, usuario_uid) {
 
 exports.update_estante = functions.https.onRequest((req, res) => {
   console.log(req.body)
-  firestore.collection('usuarios').doc(req.body.uid)
-    .collection('estante').doc(req.body.uid).get()
+  console.log(req.body.data)
+
+  firestore.collection('usuarios').doc(req.body.data.uid)
+    .collection('estante').doc(req.body.data.uid).get()
     .then(snapshot => {
       const usuarios_na_estante = Object.assign([], snapshot.data());
-      var nova_estante = usuarios_na_estante.filter(doc => doc.uid !== req.body.match_uid);
+      var nova_estante = usuarios_na_estante.filter(doc => doc.uid !== req.body.data.match_uid);
       nova_estante = Object.assign({}, nova_estante);
-      return salva_nova_estante(nova_estante, req.body.uid)
+      return salva_nova_estante(nova_estante, req.body.data.uid)
     }).catch(error => { console.log('Erro ao deletar o usuário na estante. ', error.message)})
-  res.send(console.log('Usuário deletado da estante.'));
+  res.status(200).send(console.log('Usuário deletado da estante.'));
 })
 
 async function salva_nova_estante(nova_estante, uid) {
