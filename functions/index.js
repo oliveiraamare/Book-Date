@@ -138,7 +138,7 @@ async function salva_nova_estante(nova_estante, uid) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* listening usuarios_proximos */
+/* listening collection usuarios */
 /* Função utilizada para fazer update da collection usuários próximos.
   Para acontecer o update um dos segintes parâmetros deve ter seu valor mudado:
         o valor do swipedAll ser mudado para true
@@ -313,4 +313,49 @@ async function modifica_swipedAll(usuarios_novos, usuario_modificado) {
       .set({swipedAll: false}, { merge: true })
   } else { return null }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+exports.refresh_usuarios_proximos = functions.https.onRequest((req, res) => {
+  firestore.collection('usuarios').doc(req.body.data.uid)
+    .collection('usuarios_proximos').doc(req.body.data.uid).get()
+    .then(snapshot => {
+      const usuarios_proximos = Object.assign([], snapshot.data());
+      return usuarios_swiped(usuarios_proximos, req.body.data.uid)
+    })
+    .catch(error => { console.log('Erro ao deletar o usuário na estante. ', error.message)})
+  res.status(200).send(console.log('Usuário deletado da estante.'));
+})
+
+async function usuarios_swiped(usuarios_proximos, uid) {
+  firestore.collection('usuarios').doc(uid)
+    .collection('usuarios_swiped').doc(uid)
+    .get().then(snapshot => {
+      if (snapshot.exists) {
+        const usuarios_swiped = Object.assign([], snapshot.data());
+        return compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, uid); 
+      } else {
+        return null;
+      }
+    }).catch( error => {
+      console.log('Não foi possível retornar os usuarios_swiped. ', error.message)
+    });
+}
+
+async function compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, uid) {
+  //Find values that are in result2 but not in result1
+  const usuarios_existentes = usuarios_proximos.filter(novo => {
+    return !usuarios_swiped.some(existente => {
+        return novo.uid === existente.uid;
+    });
+  });
+  return refresh_usuarios_proximos(usuarios_existentes, uid);
+}
+
+async function refresh_usuarios_proximos(usuarios_existentes, uid) {
+  return firestore.collection('usuarios').doc(uid)
+    .collection('usuarios_proximos').doc(uid).set(usuarios_existentes)
+    .then(() => console.log('Refresh feito na collection usuarios_proximos.'))
+    .catch(error => { console.log('Erro ao fazer refresh do usuarios_proximos. ', error.message)})
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

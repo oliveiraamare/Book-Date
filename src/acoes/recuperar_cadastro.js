@@ -17,7 +17,7 @@ export const recupera_cadastro = async() => {
 
     var email = cadastro.email;
     var senha = cadastro.senha;
-
+    var lastUpdated = new Date().getTime();
     var usuario = {
       nome: cadastro.nome,
       dtNasc: cadastro.dtNasc,
@@ -26,6 +26,7 @@ export const recupera_cadastro = async() => {
       buscando: preferencias.buscando,
       imagem : null,
       swipedAll: false,
+      lastUpdated: lastUpdated,
       preferencias: {
         citacao: preferencias.citacao,
         singularidade: preferencias.singularidade,

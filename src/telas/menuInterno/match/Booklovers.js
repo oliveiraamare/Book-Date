@@ -32,6 +32,7 @@ export default function Booklovers() {
   const navigation = useNavigation();
 
   useEffect(() => {
+    //refresh(match_uid);
     const estante_de_usuarios = firestore.onSnapshot(snapshot => {
       const usuarios_proximos = Object.assign([], snapshot.data());
       setDados_match(usuarios_proximos);
@@ -65,6 +66,15 @@ export default function Booklovers() {
       .set(usuarios_manipulados);
   }
 
+  const refresh = (uid) => {
+    axios.post('https://us-central1-bookdate-app.cloudfunctions.net/refresh_usuarios_proximos', {
+      data: { uid: uid }
+    })
+    .then(data => { console.log(data.status) })
+    .catch(error => { console.log(error.message) });
+  }  
+
+
   if(!dados_match) {
     return (
       <View style={compartilhado.container}>   
@@ -86,6 +96,7 @@ export default function Booklovers() {
   }
 
   const render_booklovers = () => {
+    //refresh(usuarioUid());
     if(!dados_match.length) {
       return (
         <View style={compartilhado.container}>   

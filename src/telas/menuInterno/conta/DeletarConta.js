@@ -10,6 +10,7 @@ import Dialog from "react-native-dialog";
 import { Paragraph } from 'react-native-paper';
 import '@firebase/firestore';
 import  * as firebase from 'firebase';
+import * as Location from 'expo-location';
 
 import { FraseTop } from '../../../componentes/frase';
 import BotaoTransparente from '../../../componentes/botoes/BotaoTransparente';
@@ -27,6 +28,8 @@ import {
   deletar_mensagem,
   deletar_usuario
 } from '../../../firebase/deletar_usuario';
+
+const book_date = 'background-location-task';
 
 export default class DeletarConta extends Component {
 
@@ -112,6 +115,7 @@ export default class DeletarConta extends Component {
       })
       .then(() => {
         usuarioLogado.delete();
+        Location.stopLocationUpdatesAsync(book_date);
         Alert.alert(
           'Tchauzinho!', 'Foi divertido te conhecer. Esperamos um dia rever-te!'
         );
