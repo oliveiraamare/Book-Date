@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import QUOTES from './frases.json';
 
 import cor from '../../estilos/cores';
+import compartilhado from '../../estilos/compartilhado';
 
 export const Citacoes = ({ container, textoStyle, autorStyle }) => {
 
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   },
   texto: {
     color: cor.pagina, 
-    fontFamily: 'goudy-old-style-italic-bt',
+    fontFamily: compartilhado.fonteAutor.fontFamily,
     fontSize: 17,
     textAlign: 'center'
   },

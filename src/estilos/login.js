@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import cor from '../estilos/cores';
+import compartilhado from './compartilhado';
 
 const login = StyleSheet.create({
   botaoComTexto:{
@@ -29,7 +30,7 @@ const login = StyleSheet.create({
   },  
   botaoLoginTexto: {
     color: cor.pagina,
-    fontFamily: 'palatino-linotype',
+    fontFamily: compartilhado.fontePadrao.fontFamily,
     fontSize: 16
   },
   header: {
@@ -55,7 +56,7 @@ const login = StyleSheet.create({
   },
   textoEsqueceuLogin: {
     color: cor.amarelo,
-    fontFamily: 'palatino-linotype'
+    fontFamily: compartilhado.fontePadrao.fontFamily,
   },
   styleBotaoComTexto1: {
     color: cor.pagina, 
@@ -65,7 +66,7 @@ const login = StyleSheet.create({
   },
   styleBotaoComTexto2: {
     color: cor.amarelo,
-    fontFamily: 'palatino-linotype',
+    fontFamily: compartilhado.fontePadrao.fontFamily,
     fontSize: 15
   }
 })

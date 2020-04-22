@@ -25,6 +25,18 @@ const compartilhado = StyleSheet.create({
     backgroundColor: cor.amarelo,
     height: Constants.statusBarHeight
   },
+  fonteAutor: {
+    fontFamily: 'goudy-old-style-italic-bt'
+  },
+  fonteBookDate: {
+    fontFamily:'LymboDemo'
+  },
+  fonteCitacao: {
+    fontFamily: 'goudy-old-style-bold'
+  },
+  fontePadrao: {
+    fontFamily: 'palatino-linotype'
+  } 
 })
 
 export default compartilhado;

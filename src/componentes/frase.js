@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import cor from '../estilos/cores';
+import compartilhado from '../estilos/compartilhado';
 
 export const FraseTop = ({ topbarStyle, titleStyle, subtitleStyle, title, subtitle }) => {
   return (
@@ -17,7 +18,7 @@ export const FraseTop = ({ topbarStyle, titleStyle, subtitleStyle, title, subtit
 const styles = StyleSheet.create({
   titulo:{
     color: cor.pagina,
-    fontFamily: 'goudy-old-style-bold',
+    fontFamily: compartilhado.fonteCitacao.fontFamily,
     fontSize: 17,
     marginTop: 20,
     textAlign: "justify"
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   subtitulo: {
     alignSelf: 'flex-end',
     color: cor.amarelo,
-    fontFamily: 'goudy-old-style-italic-bt',
+    fontFamily: compartilhado.fonteAutor.fontFamily,
     fontSize: 15
   }
 });

@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import cor from './cores';
+import compartilhado from './compartilhado';
 
 const home = StyleSheet.create({
   botoesAcao: {
@@ -18,7 +19,7 @@ const home = StyleSheet.create({
     alignSelf: 'center',  
     color: cor.pagina,
     flex: 1,
-    fontFamily: 'LymboDemo',
+    fontFamily: compartilhado.fonteBookDate.fontFamily,
     fontSize: 80,
     position: 'absolute', 
     top: 60

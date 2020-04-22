@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 import cor from '../../estilos/cores';
+import compartilhado from '../../estilos/compartilhado';
 
 class TextoInput extends Component {
   state = {
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     borderWidth: 20,
     color: cor.branco,
-    fontFamily: 'palatino-linotype',
+    fontFamily: compartilhado.fontePadrao.fontFamily,
     fontSize: 16,
     height: 50,
     margin: 15

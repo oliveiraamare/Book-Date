@@ -23,8 +23,8 @@ const reenviarSenha = StyleSheet.create({
     alignSelf: 'flex-end'
   },
   texto: {
-    color: cor.branco, 
-    fontFamily: 'palatino-linotype',
+    color: cor.branco,  
+    fontFamily: compartilhado.fontePadrao.fontFamily,
     marginBottom: 100,
     marginLeft: 20, 
     marginRight: 20, 
