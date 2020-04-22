@@ -23,17 +23,21 @@ export const Citacoes = ({ container, textoStyle, autorStyle }) => {
 const styles = StyleSheet.create({
   autor: {
     color: cor.amarelo, 
+    fontFamily: 'goudy-old-style-bold-italic',
+    fontSize: 16,
+    marginTop: 5,
     textAlign: 'center'
   },
   texto: {
-    color: cor.branco, 
-    textAlign: 'center',
+    color: cor.pagina, 
+    fontFamily: 'goudy-old-style-italic-bt',
+    fontSize: 17,
+    textAlign: 'center'
   },
   frase: {
     alignItems: 'center',
     alignSelf: 'center',
-    fontSize: 14,
-    padding: 8,
+    padding: 5,
     position: 'absolute', 
     top: 240
   }

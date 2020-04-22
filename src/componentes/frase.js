@@ -16,8 +16,10 @@ export const FraseTop = ({ topbarStyle, titleStyle, subtitleStyle, title, subtit
 
 const styles = StyleSheet.create({
   titulo:{
-    color: cor.branco,
-    fontWeight: 'bold',
+    color: cor.pagina,
+    fontFamily: 'goudy-old-style-bold',
+    fontSize: 17,
+    marginTop: 20,
     textAlign: "justify"
   },
   topbar: {
@@ -29,6 +31,8 @@ const styles = StyleSheet.create({
   },  
   subtitulo: {
     alignSelf: 'flex-end',
-    color: cor.amarelo
+    color: cor.amarelo,
+    fontFamily: 'goudy-old-style-italic-bt',
+    fontSize: 15
   }
 });

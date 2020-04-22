@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     borderWidth: 20,
     color: cor.branco,
+    fontFamily: 'palatino-linotype',
+    fontSize: 16,
     height: 50,
     margin: 15
   }

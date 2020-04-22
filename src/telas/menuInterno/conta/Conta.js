@@ -53,7 +53,7 @@ export default function Conta() {
   const book_date = 'background-location-task';
 
   const sair = () => {
-    Location.stopLocationUpdatesAsync(book_date);
+   // Location.stopLocationUpdatesAsync(book_date);
     Firebase.auth().signOut();    
   }
 

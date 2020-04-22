@@ -12,16 +12,16 @@ const home = StyleSheet.create({
     width: '100%' 
   },
   botoesAcaoTexto: {
-    color: cor.amareloA, 
-    fontWeight:'bold'
+    color: cor.pagina
   },
   bookDate: {
     alignSelf: 'center',  
-    color: cor.branco,
+    color: cor.pagina,
     flex: 1,
-    fontSize: 40,
+    fontFamily: 'LymboDemo',
+    fontSize: 80,
     position: 'absolute', 
-    top: 80
+    top: 60
   },
   botaoCadastro: {  
     borderColor: cor.amarelo,
@@ -44,7 +44,8 @@ const home = StyleSheet.create({
     bottom: 0, 
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10, 
+    left: 18,
+    margin: 10, 
     position: 'absolute'
   }
 })

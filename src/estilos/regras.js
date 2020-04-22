@@ -30,6 +30,7 @@ const regras = StyleSheet.create({
     color: cor.branco,
     fontSize: 13,
     fontWeight: 'bold',
+    fontFamily: 'sans-serif-medium',
     marginTop: 5,  
     marginLeft: 10,
     marginRight: 10,
@@ -38,6 +39,8 @@ const regras = StyleSheet.create({
   subparagrafo: {
     color: cor.amarelo,
     fontSize: 13,
+    fontFamily: 'palatino-linotype',//'sans-serif-thin',
+    //fontWeight: 'bold',
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10,

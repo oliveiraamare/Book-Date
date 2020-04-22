@@ -82,14 +82,15 @@ const styles = StyleSheet.create({
   texto: {
     alignItems: 'center',
     alignSelf: 'center',
-    color: cor.branco,
-    fontSize: 15,    
+    color: cor.pagina,
+    fontFamily: 'palatino-linotype',
+    fontSize: 16,    
     justifyContent: 'center'
   },
   textoTransparente: {
     color: cor.amarelo, 
-    //fontWeight:'bold',
-    fontSize: 15, 
+    fontFamily: 'palatino-linotype',
+    fontSize: 14, 
     textAlign: 'center'
   },  
   viewStyle: {

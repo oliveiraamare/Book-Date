@@ -322,23 +322,22 @@ exports.refresh_usuarios_proximos = functions.https.onRequest((req, res) => {
       const usuarios_proximos = Object.assign([], snapshot.data());
       return usuarios_swiped(usuarios_proximos, req.body.data.uid)
     })
-    .catch(error => { console.log('Erro ao deletar o usuário na estante. ', error.message)})
-  res.status(200).send(console.log('Usuário deletado da estante.'));
+    .catch(error => { console.log('Erro ao buscar os usuários próximos. ', error.message)})
+  res.status(200).send(console.log('O refresh no usuarios_proximos foi realizado.'));
 })
 
 async function usuarios_swiped(usuarios_proximos, uid) {
   firestore.collection('usuarios').doc(uid)
-    .collection('usuarios_swiped').doc(uid)
-    .get().then(snapshot => {
+    .collection('usuarios_swiped').doc(uid).get()
+    .then(snapshot => {
       if (snapshot.exists) {
         const usuarios_swiped = Object.assign([], snapshot.data());
-        return compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, uid); 
+        return compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, uid)
       } else {
-        return null;
+        return false;
       }
-    }).catch( error => {
-      console.log('Não foi possível retornar os usuarios_swiped. ', error.message)
-    });
+    })
+    .catch(error => { console.log('Não foi possível retornar os usuarios_swiped. ', error.message)})
 }
 
 async function compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, uid) {

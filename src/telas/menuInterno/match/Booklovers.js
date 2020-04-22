@@ -6,6 +6,7 @@ import { ImageBackground, Text, TouchableHighlight, View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { DotIndicator } from 'react-native-indicators';
 import { useNavigation } from '@react-navigation/native';
+const axios = require('axios').default;
 
 import { FraseTop } from '../../../componentes/frase';
 import CardItem from '../../../componentes/CardItem';
@@ -32,7 +33,7 @@ export default function Booklovers() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    //refresh(match_uid);
+    refresh(usuarioUid());
     const estante_de_usuarios = firestore.onSnapshot(snapshot => {
       const usuarios_proximos = Object.assign([], snapshot.data());
       setDados_match(usuarios_proximos);
@@ -96,7 +97,6 @@ export default function Booklovers() {
   }
 
   const render_booklovers = () => {
-    //refresh(usuarioUid());
     if(!dados_match.length) {
       return (
         <View style={compartilhado.container}>   

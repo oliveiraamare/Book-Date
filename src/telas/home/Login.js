@@ -107,7 +107,7 @@ class Login extends Component {
             <TouchableOpacity 
               style={login.botaoEsqueceuLogin}
               onPress={() => this.props.navigation.navigate('ReenviarSenha')}>
-                <Text style={{color: '#FFCC00'}}>Esqueceu seu login?</Text>
+                <Text style={login.textoEsqueceuLogin}>Esqueceu seu login?</Text>
             </TouchableOpacity>   
             <BotaoTransparente 
               buttonStyle={login.botaoLogin}

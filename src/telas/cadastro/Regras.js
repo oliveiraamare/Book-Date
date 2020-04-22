@@ -46,7 +46,7 @@ class Regras extends Component {
               onPress={() => this.props.navigation.navigate('Geolocalizacao')} 
               title={"Regras"} 
             />
-            <FraseTop titleStyle={{fontSize: 20}} subtitleStyle={{alignSelf: 'center'}} title={frase} subtitle={autor} />           
+            <FraseTop titleStyle={{fontSize: 20, fontFamily:'serif'}} subtitleStyle={{alignSelf: 'center'}} title={frase} subtitle={autor} />           
             <View style={regras.texto}>
               <Text style={regras.paragrafo}> 
                 Eu quero muito fazer isso dar certo. 

@@ -62,12 +62,12 @@ class Home extends Component {
             </View>
             <View style={home.botoesTermos}>
               <BotaoTransparente 
-                buttonStyle={{marginRight:20}}
-                onPress={() => this.props.navigation.navigate('TermoUso')}
-                text="Termos de Uso" />
-              <BotaoTransparente 
+                buttonStyle={{marginRight:50}}
                 onPress={() => this.props.navigation.navigate('TermoPrivacidade')}
                 text="Política de Privacidade" />
+              <BotaoTransparente 
+                onPress={() => this.props.navigation.navigate('TermoUso')}
+                text="Termos de Uso" />
             </View>        
           </View>
         </ImageBackground>

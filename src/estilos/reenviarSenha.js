@@ -17,15 +17,15 @@ const reenviarSenha = StyleSheet.create({
     width: 300    
   },
   botaoEnviarTexto: {
-    color:cor.amareloA, 
-    fontWeight:'bold'
+    color:cor.pagina, 
   },
   header: {
     alignSelf: 'flex-end'
   },
   texto: {
     color: cor.branco, 
-    marginBottom: 30,
+    fontFamily: 'palatino-linotype',
+    marginBottom: 100,
     marginLeft: 20, 
     marginRight: 20, 
     marginTop: 100,  

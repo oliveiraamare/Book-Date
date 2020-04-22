@@ -25,11 +25,12 @@ const login = StyleSheet.create({
     height: 47,
     justifyContent: 'center',   
     margin: 30,
-    width: 300 
+    width: 280 
   },  
   botaoLoginTexto: {
-    color: cor.amareloA, 
-    fontWeight:'bold'
+    color: cor.pagina,
+    fontFamily: 'palatino-linotype',
+    fontSize: 16
   },
   header: {
     alignSelf: 'flex-end'
@@ -52,14 +53,19 @@ const login = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20   
   },
+  textoEsqueceuLogin: {
+    color: cor.amarelo,
+    fontFamily: 'palatino-linotype'
+  },
   styleBotaoComTexto1: {
-    color: cor.branco, 
-    fontSize: 15, 
-    fontWeight: 'bold', 
+    color: cor.pagina, 
+    fontFamily: 'palatino-linotype-bold',
+    fontSize: 15,  
     marginRight: 10
   },
   styleBotaoComTexto2: {
-    color: '#FFCC00', 
+    color: cor.amarelo,
+    fontFamily: 'palatino-linotype',
     fontSize: 15
   }
 })
