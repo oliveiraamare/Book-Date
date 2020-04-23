@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 import cor from '../estilos/cores';
+import compartilhado from '../estilos/compartilhado';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 
@@ -18,14 +19,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: DIMENSION_WIDTH + 56
   },
-  botaoTexto: {
-    color: cor.amareloA, 
-    fontWeight:'bold'
-  },
   citacao: {
-    borderBottomColor: cor.cinza,
+    borderBottomColor: cor.pagina,
     borderBottomWidth: 1,
-    borderTopColor: cor.cinza,
+    borderTopColor: cor.pagina,
     borderTopWidth: 1,
     height: 65,
     marginTop: 10, 
@@ -48,18 +45,23 @@ const styles = StyleSheet.create({
     width: 90
   },
   tagItemSelecionado: {
-    backgroundColor: cor.amareloD,
+    backgroundColor: cor.creme,
     borderColor: cor.amarelo    
   },
   tagLabel: {
-    color: cor.branco
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily, 
+    fontSize: 14
   },
   tagLabelSelecionado: {
-    color: cor.branco
+    color: cor.branco,
+    fontFamily: compartilhado.fontePadrao.fontFamily,  
+    fontSize: 14
   },
   texto: {
     color: cor.amarelo,  
-    fontSize: 15 ,  
+    fontFamily: compartilhado.fontePadrao.fontFamily,  
+    fontSize: 17,  
     marginBottom: 10,
     marginTop: 20,
     paddingLeft: 10,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 import cor from '../../estilos/cores';
+import compartilhado from '../../estilos/compartilhado';
 
 class TextoMultilinha extends Component {
   render() {
@@ -15,8 +16,8 @@ class TextoMultilinha extends Component {
           autoCapitalize='none'
           style={[styles.textInput, inputStyle]}
           placeholder={placeHolder}
-          placeholderTextColor= {cor.branco}
-          selectionColor={cor.branco}
+          placeholderTextColor= {cor.pagina}
+          selectionColor={cor.pagina}
           multiline={multiline}
           maxLength={maxLength}
           numberOfLines={numberOfLines} 
@@ -30,7 +31,9 @@ class TextoMultilinha extends Component {
 const styles = StyleSheet.create({
   textInput: {   
     alignContent: 'center',
-    color: cor.branco,
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily,
+    fontSize: 16,
     height: 50,
   }
 });

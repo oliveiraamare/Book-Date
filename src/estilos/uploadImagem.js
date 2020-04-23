@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 import cor from '../estilos/cores';
+import compartilhado from './compartilhado';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 
@@ -23,23 +24,25 @@ const uploadImagem = StyleSheet.create({
     position: 'absolute',
     width: DIMENSION_WIDTH + 56
   },
-  botaoContinuarTexto: {
-    color: cor.amareloA, 
-    fontWeight:'bold'
-  },
   botaoComTexto: {
     alignSelf: 'center',
     flexDirection: 'row', 
     justifyContent: 'space-between',
     margin: 30
   },
+  botoesFoto: {
+    color: cor.creme
+  },
   header: {
     alignSelf: 'flex-end'
   },
   ouEntao: {
-    color:cor.branco, 
-    marginLeft: 10, 
-    marginRight:10
+    color: cor.pagina, 
+    fontFamily: compartilhado.fontePadrao.fontFamily,
+    fontSize: compartilhado.fonteBotao.fontSize,
+    marginTop: 2,
+    marginLeft: 13, 
+    marginRight:13
   },
   renderizandoUpload: {
     alignItems: 'center',

@@ -135,7 +135,7 @@ class Preferencias extends Component {
                 />
                 <TextoMultilinha
                   inputStyle={preferencias.citacao}
-                  placeHolder='*Se a sua vida fosse um livro, qual seria a sinopse?' 
+                  placeHolder='Se a sua vida fosse um livro, qual seria a sinopse?*' 
                   multiline={true}
                   maxLength={200}
                   numberOfLines={4}     
@@ -149,27 +149,27 @@ class Preferencias extends Component {
                   <Checkbox 
                     title='Aventura'  
                     checked={this.state.aventura}
-                    onPress={checked => this.setState({ aventura: !this.state.aventura })}                  
+                    onPress={() => this.setState({ aventura: !this.state.aventura })}                  
                   />
                   <Checkbox 
                     title='Prosa' 
                     checked={this.state.prosa}
-                    onPress={checked => this.setState({ prosa: !this.state.prosa })}                  
+                    onPress={() => this.setState({ prosa: !this.state.prosa })}                  
                   />
                 </View>
                 <View style={{flexDirection: 'row', marginBottom: 15}}>
                   <Checkbox 
                     title='Mistério'
                     checked={this.state.misterio}
-                    onPress={checked => this.setState({ misterio: !this.state.misterio })}                   
+                    onPress={() => this.setState({ misterio: !this.state.misterio })}                   
                   />
                   <Checkbox title='Conto de Fadas'
                     checked={this.state.contoFadas}
-                    onPress={checked => this.setState({ contoFadas: !this.state.contoFadas })}                  
+                    onPress={() => this.setState({ contoFadas: !this.state.contoFadas })}                  
                   />
                 </View>         
                 <Text style={preferencias.texto}>
-                  *Quais desses genêros literários você mais gosta? Escolha três tipos
+                  Quais desses genêros literários você mais gosta? Escolha três tipos*
                 </Text>
                 <ScrollView
                   horizontal
@@ -193,7 +193,7 @@ class Preferencias extends Component {
                   />
                 </ScrollView>  
                 <Text style={preferencias.texto}>
-                  *Quem você deseja encontrar?
+                  Quem você deseja encontrar?*
                 </Text> 
                 <View style={{alignItems:'center', marginBottom: 70}}>
                   <TagSelect
@@ -216,7 +216,6 @@ class Preferencias extends Component {
                   buttonStyle={preferencias.botao}
                   onPress={() => this.validacao()}
                   text="Continuar" 
-                  textStyle={preferencias.botaoTexto}
                 />
               </KeyboardAvoidingView>
             </ScrollView>

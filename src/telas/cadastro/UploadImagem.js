@@ -77,18 +77,19 @@ class UploadImagem extends Component {
               <BotaoTransparente 
                 onPress={this._pegarDaGaleria}
                 text="Escolher foto da galeria"
+                textStyle={uploadImagem.botoesFoto}
               />
               <Text style={uploadImagem.ouEntao}>ou então</Text>
               <BotaoTransparente 
                 onPress={this._tirarFoto} 
                 text="Tirar foto" 
+                textStyle={uploadImagem.botoesFoto}
               />
             </View>
             <BotaoTransparente 
               buttonStyle={uploadImagem.botaoContinuar}
               onPress={() => this.handleImagem()}
               text="Continuar" 
-              textStyle={uploadImagem.botaoContinuarTexto}
             />
           </View>
         </ImageBackground>
