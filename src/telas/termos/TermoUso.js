@@ -90,7 +90,6 @@ const styles = {
     alignItems: 'center',
     backgroundColor: cor.amarelo,
     borderColor: cor.amarelo,
-    borderRadius: 10,
     borderWidth: 1, 
     bottom: 0, 
     marginBottom: 5,
@@ -101,7 +100,6 @@ const styles = {
     alignItems: 'center',
     backgroundColor: cor.cinzaEscuro,
     borderColor: cor.cinzaEscuro,
-    borderRadius: 10,
     borderWidth: 1, 
     bottom: 0, 
     marginBottom: 5,
@@ -109,11 +107,12 @@ const styles = {
     padding: 10
   },
   paragrafo:{      
-    color: cor.branco,
-    fontSize: 13,
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily,  
+    fontSize: 14,
     marginTop: 5,  
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 15,
+    marginRight: 15,
     textAlign:'justify'     
   },
   scrollView: {
@@ -125,15 +124,17 @@ const styles = {
   textoBotao:{
     alignItems: 'center',
     alignSelf: 'center',
-    color: cor.branco,
-    fontSize: 15, 
-    justifyContent: 'center', 
+    color: cor.pagina,
+    fontFamily: compartilhado.fonteBotao.fontFamily,
+    fontSize: compartilhado.fonteBotao.fontSize,
+    justifyContent: 'center'
   },
   titulo: {
     alignSelf: 'center',      
-    color: cor.branco,
-    fontSize: 23,
-    marginTop: 20,
+    color: cor.amarelo,
+    fontFamily: compartilhado.fontePadrao.fontFamily,  
+    fontSize: 30,
+    marginTop: 20
   }
 }
 
