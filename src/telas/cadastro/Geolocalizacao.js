@@ -13,6 +13,7 @@ import { FraseTop } from '../../componentes/frase';
 
 import compartilhado from '../../estilos/compartilhado';
 import permissaoGeo from '../../estilos/permissaoGeo';
+import cor from '../../estilos/cores';
 class Geolocalizacao extends Component {
 
   componentDidMount() {
@@ -44,6 +45,7 @@ class Geolocalizacao extends Component {
             <View style={{margin:10, top:5}}>
               <Avatar.Icon 
                 size={200} 
+                color={cor.pagina}
                 icon="map-marker-radius"  
                 style={permissaoGeo.avatar}
               />
@@ -55,7 +57,6 @@ class Geolocalizacao extends Component {
               buttonStyle={permissaoGeo.botao}
               onPress={() =>  this.props.navigation.navigate('PermissaoGeo')}
               text="Bora lá" 
-              textStyle={permissaoGeo.botaoTexto}
             />
           </View>
         </ImageBackground>

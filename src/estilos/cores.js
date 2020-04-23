@@ -2,7 +2,8 @@ const cor = {
   amarelo: '#ffbf00',
   creme: '#F6C95C',
   pagina: '#f5f5dc',
-
+  pagina_transparente: 'rgba(245,245,220, 0.60)',
+  
 
   azulClaro: '#5AC8FA',
   azul: '#007AFF',

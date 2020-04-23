@@ -33,7 +33,7 @@ const NavegacaoSwitch = createSwitchNavigator(
         UploadImagem: { screen: UploadImagem }
     },
     {
-        initialRouteName: 'UploadImagem',
+        initialRouteName: 'Regras',
         headerMode: 'none'
     }
 )

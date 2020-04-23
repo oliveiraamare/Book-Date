@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 import cor from './cores';
+import compartilhado from './compartilhado';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 
@@ -22,12 +23,10 @@ const permissaoGeo = StyleSheet.create({
     position: 'absolute',
     width: DIMENSION_WIDTH + 56
   },
-  botaoTexto: {
-    color: cor.amareloA, 
-    fontWeight:'bold'
-  },
   texto: {
-    color:cor.amarelo, 
+    color: cor.creme, 
+    fontFamily: compartilhado.fontePadrao.fontFamily,  
+    fontSize: 16,  
     textAlign:'center'
   }
 })

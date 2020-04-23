@@ -56,10 +56,10 @@ class PermissaoGeo extends Component {
     };
 
     if (status == 'granted') {
-      setTimeout(() => {
+      /*setTimeout(() => {
         this.salvarGeo(),
         this.props.navigation.navigate('Regras');
-      }, 4000);
+      }, 4000);*/
     };
 
     let location = await Location.getCurrentPositionAsync({
@@ -120,7 +120,7 @@ class PermissaoGeo extends Component {
                 Estamos buscando a sua localização atual.
               </Text>  
               <PulseIndicator 
-                color={'rgba(255, 224, 102, 0.60)'}
+                color={cor.pagina_transparente}
                 size={120}
                 animating={true}
                 interaction={true}

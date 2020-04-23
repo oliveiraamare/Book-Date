@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 import cor from '../estilos/cores';
+import compartilhado from './compartilhado';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 
@@ -18,19 +19,14 @@ const regras = StyleSheet.create({
     position: 'absolute',
     width: DIMENSION_WIDTH + 56
   },
-  botaoTexto: {
-    color: cor.amareloA, 
-    fontWeight:'bold'
-  },
   header: {
     alignSelf: 'flex-end',
     fontSize: 21
   },
   paragrafo: {
-    color: cor.branco,
-    fontSize: 13,
-    fontWeight: 'bold',
-    //fontFamily: 'sans-serif-medium',
+    color: cor.pagina,
+    fontFamily: compartilhado.fonteAutor.fontFamily,
+    fontSize: 15,
     marginTop: 5,  
     marginLeft: 10,
     marginRight: 10,
@@ -38,9 +34,8 @@ const regras = StyleSheet.create({
   },
   subparagrafo: {
     color: cor.amarelo,
-    fontSize: 13,
-   // fontFamily: 'palatino-linotype',//'sans-serif-thin',
-    //fontWeight: 'bold',
+    fontFamily: compartilhado.fontePadrao.fontFamily,
+    fontSize: 14,
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10,
@@ -48,9 +43,7 @@ const regras = StyleSheet.create({
     textAlign:'justify' 
   },
   subtitleStyle: {
-    alignSelf: 'center', 
-    color: cor.amarelo,
-    fontSize: 14
+    alignSelf: 'center'
   },
 })
 
