@@ -1,12 +1,16 @@
 const cor = { 
   amarelo: '#ffbf00',
+  creme: '#F6C95C',
+  pagina: '#f5f5dc',
+
+
   azulClaro: '#5AC8FA',
   azul: '#007AFF',
   branco: '#FFFFFF',
   cinza: '#CCCCCC',
   cinzaEscuro: '#585958',
   laranja: '#FF9500',
-  pagina: '#f5f5dc',
+  
   preto: '#000000',
   pretoTransparente: 'rgba(0, 0, 0, 0.30)', 
   rosa: '#FF33CC',

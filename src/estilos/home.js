@@ -20,7 +20,7 @@ const home = StyleSheet.create({
     color: cor.pagina,
     flex: 1,
     fontFamily: compartilhado.fonteBookDate.fontFamily,
-    fontSize: 80,
+    fontSize: 90,
     position: 'absolute', 
     top: 60
   },
@@ -45,9 +45,14 @@ const home = StyleSheet.create({
     bottom: 0, 
     flexDirection: 'row',
     justifyContent: 'space-between',
-    left: 18,
+    left: 28,
     margin: 10, 
     position: 'absolute'
+  },
+  textoBotoesTermos: {
+    color: cor.amarelo, 
+    fontFamily: compartilhado.fontePadrao.fontFamily,
+    fontSize: 16,
   }
 })
 

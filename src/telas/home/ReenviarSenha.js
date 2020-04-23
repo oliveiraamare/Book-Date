@@ -78,7 +78,6 @@ class ReenviarSenha extends Component {
               buttonStyle={reenviarSenha.botaoEnviar}
               onPress={() => this.handleSenha()}
               text="Enviar" 
-              textStyle={reenviarSenha.botaoEnviarTexto}
             />      
           </View>
         </ImageBackground>

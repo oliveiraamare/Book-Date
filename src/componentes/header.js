@@ -34,11 +34,12 @@ export const Header = ({ headerStyle, onPress, style, title }) => (
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'transparent', 
-    borderBottomColor: cor.branco,
+    borderBottomColor: cor.pagina,
     borderBottomWidth: 0.18
   },
   appBarHeader: {
-    color: cor.branco, 
-    fontSize: 18
+    color: cor.pagina, 
+    fontFamily: compartilhado.fonteBotao.fontFamily,
+    fontSize: 20
   },
 })

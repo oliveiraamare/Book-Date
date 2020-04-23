@@ -24,15 +24,15 @@ export const Citacoes = ({ container, textoStyle, autorStyle }) => {
 const styles = StyleSheet.create({
   autor: {
     color: cor.amarelo, 
-    fontFamily: 'goudy-old-style-bold-italic',
-    fontSize: 16,
+    fontFamily: compartilhado.fonteAutor.fontFamily,
+    fontSize: 15,
     marginTop: 5,
     textAlign: 'center'
   },
   texto: {
     color: cor.pagina, 
-    fontFamily: compartilhado.fonteAutor.fontFamily,
-    fontSize: 17,
+    fontFamily: compartilhado.fonteCitacao.fontFamily,
+    fontSize: 16.7,
     textAlign: 'center'
   },
   frase: {

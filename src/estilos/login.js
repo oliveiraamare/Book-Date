@@ -19,7 +19,8 @@ const login = StyleSheet.create({
     paddingRight: 10
   },
   botaoLogin: {
-    alignItems: 'center',            
+    alignContent: 'center',
+    alignSelf:'center',
     borderColor: cor.amarelo,
     borderRadius: 100, 
     borderWidth: 1,
@@ -30,8 +31,8 @@ const login = StyleSheet.create({
   },  
   botaoLoginTexto: {
     color: cor.pagina,
-    fontFamily: compartilhado.fontePadrao.fontFamily,
-    fontSize: 16
+    fontFamily: compartilhado.fonteBotao.fontFamily,
+    fontSize: compartilhado.fonteBotao.fontSize
   },
   header: {
     alignSelf: 'flex-end'
@@ -47,7 +48,7 @@ const login = StyleSheet.create({
   textInput: {
     borderBottomWidth: 1,
     borderColor: 'transparent',
-    color: cor.branco,
+    color: cor.pagina,
     height: 50,
     marginBottom: 5, 
     marginTop: 5, 
@@ -56,18 +57,18 @@ const login = StyleSheet.create({
   },
   textoEsqueceuLogin: {
     color: cor.amarelo,
-    fontFamily: compartilhado.fontePadrao.fontFamily,
+    fontFamily: compartilhado.fontePadrao.fontFamily
   },
   styleBotaoComTexto1: {
     color: cor.pagina, 
-    fontFamily: 'palatino-linotype-bold',
-    fontSize: 15,  
+    fontFamily: compartilhado.fonteBotao.fontFamily,
+    fontSize: compartilhado.fonteBotao.fontSize,  
     marginRight: 10
   },
   styleBotaoComTexto2: {
     color: cor.amarelo,
-    fontFamily: compartilhado.fontePadrao.fontFamily,
-    fontSize: 15
+    fontFamily: compartilhado.fonteBotao.fontFamily,
+    fontSize: compartilhado.fonteBotao.fontSize
   }
 })
 

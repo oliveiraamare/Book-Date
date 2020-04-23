@@ -4,6 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import cor from '../estilos/cores';
 import compartilhado from '../estilos/compartilhado';
 compartilhado
+
 export const BotaoComTexto = ({ viewStyle, texto1Style, texto1, buttonStyle, onPress, texto2Style, texto2 }) => {
   return (
     <View style={[styles.view, viewStyle]}>
@@ -66,9 +67,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',       
     width: 220   
   },
-  botaoInterligadoTexto:
-  { 
-    color:cor.pagina,
+  botaoInterligadoTexto: { 
+    color: cor.pagina,
     fontFamily: compartilhado.fontePadrao.fontFamily,
     fontWeight:'bold'
   },
@@ -85,14 +85,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     color: cor.pagina,
-    fontFamily: compartilhado.fontePadrao.fontFamily,
-    fontSize: 16,    
+    fontFamily: compartilhado.fonteBotao.fontFamily,
+    fontSize: compartilhado.fonteBotao.fontSize,
     justifyContent: 'center'
   },
   textoTransparente: {
-    color: cor.amarelo, 
-    fontFamily: compartilhado.fontePadrao.fontFamily,
-    fontSize: 14, 
+    color: cor.pagina, 
+    fontFamily: compartilhado.fonteBotao.fontFamily,
+    fontSize: compartilhado.fonteBotao.fontSize,
     textAlign: 'center'
   },  
   viewStyle: {
@@ -105,5 +105,3 @@ const styles = StyleSheet.create({
     width: '100%'  
   }
 });
-
-export default BotaoTouchableOpacity;

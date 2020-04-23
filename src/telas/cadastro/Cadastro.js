@@ -23,7 +23,7 @@ import { AppBarHeader } from '../../componentes/header';
 import { FraseTop } from '../../componentes/frase';
 import TextoInput from '../../componentes/textInput/TextInput';
 import Calendario from '../../componentes/DatePicker';
-import { BotaoTransparente }from '../../componentes/botao';
+import { BotaoTouchableOpacity }from '../../componentes/botao';
 
 import cadastro from '../../estilos/cadastro';
 import compartilhado from '../../estilos/compartilhado';
@@ -79,7 +79,7 @@ class Cadastro extends Component {
           source={require('../../imagens/fundo.jpg')} 
           style={compartilhado.imagemBackground}
         >
-          <View style={compartilhado.imagemTransparente}>
+          <View style={compartilhado.imagemTransparente__externa}>
             <AppBarHeader 
               onPress={() => this.props.navigation.navigate('Home')} 
               title={"Cadastro"} 
@@ -87,86 +87,87 @@ class Cadastro extends Component {
             <ScrollView>
               <KeyboardAvoidingView behavior='padding'>
                 <FraseTop title={frase} subtitle={autor} />  
-                <Text style={cadastro.texto}>
-                  *Para começarmos, digite um e-mail e senha
-                </Text>
-                <TextoInput      
-                  inputStyle={cadastro.textInput}
-                  placeHolder='E-mail'
-                  value={this.state.email}
-                  onChangeText={email => this.setState({ email })}
-                />
-                <View>
+                <View style={{marginTop:30}}>
+                  <Text style={cadastro.texto}>
+                    Para começarmos, digite um e-mail e senha*
+                  </Text>
+                  <TextoInput      
+                    inputStyle={cadastro.textInput}
+                    placeHolder='E-mail'
+                    value={this.state.email}
+                    onChangeText={email => this.setState({ email })}
+                  />
+                  <View>
+                    <TextoInput
+                      inputStyle={cadastro.textInput}
+                      placeHolder='Senha'
+                      maxLength={15}
+                      secureTextEntry={this.state.esconderSenha}
+                      value={this.state.senha}
+                      onChangeText={senha => this.setState({ senha })}
+                    />     
+                    <TouchableOpacity 
+                      activeOpacity={0.8} style={cadastro.senha} 
+                      onPress={this.visibilidadeSenha}
+                    >
+                      { 
+                        this.state.esconderSenha 
+                        ?
+                          <MaterialCommunityIcons name='eye-off' color={cor.pagina} size={27} />
+                        :
+                          <MaterialCommunityIcons name='eye' color={cor.amarelo} size={27} />
+                      } 
+                    </TouchableOpacity>
+                  </View>               
+                  <Text style={cadastro.texto}>
+                    Fale um pouco sobre você*
+                  </Text>
                   <TextoInput
                     inputStyle={cadastro.textInput}
-                    placeHolder='Senha'
-                    maxLength={15}
-                    secureTextEntry={this.state.esconderSenha}
-                    value={this.state.senha}
-                    onChangeText={senha => this.setState({ senha })}
-                  />     
-                  <TouchableOpacity 
-                    activeOpacity={0.8} style={cadastro.senha} 
-                    onPress={this.visibilidadeSenha}
-                  >
-                    { 
-                      this.state.esconderSenha 
-                      ?
-                        <MaterialCommunityIcons name='eye-off' color={cor.branco} size={27} />
-                      :
-                        <MaterialCommunityIcons name='eye' color={cor.amarelo} size={27} />
-                    } 
-                  </TouchableOpacity>
-                </View>               
-                <Text style={cadastro.texto}>
-                  *Fale um pouco sobre você
-                </Text>
-                <TextoInput
-                  inputStyle={cadastro.textInput}
-                  placeHolder='Como se chama?' 
-                  maxLength={20}
-                  value={this.state.nome}
-                  onChangeText={nome => this.setState({ nome })}
-                />
-                <Calendario
-                  date={ this.state.data}
-                  onDateChange={data => this.setState({ data })}
-                  placeholder='Quando você nasceu?'
-                  dateInputStyle={cadastro.dateInput}
-                />     
-                <TextoInput
-                  inputStyle={cadastro.textInput}
-                  placeHolder='Qual é a sua cidade natal?'
-                  maxLength={20}
-                  value={this.state.cidade}
-                  onChangeText={cidade => this.setState({ cidade })}
-                />               
-                <Text style={cadastro.texto}>
-                  *Como se identifica?
-                </Text>
-                <View style={{alignItems:'center'}}>
-                  <TagSelect
-                    value={this.state.sx}
-                    data={this.state.sexo}
-                    max={1}
-                    ref={(sexo) => {
-                      this.sexo = sexo;
-                    }}
-                    onMaxError={() => {
-                      Alert.alert('Ops', 'Escolha somente uma opção');
-                    }}
-                    itemStyle={cadastro.tagItem}
-                    itemLabelStyle={cadastro.tagLabel}
-                    itemStyleSelected={cadastro.tagItemSelecionado}
-                    itemLabelStyleSelected={cadastro.tagLabelSelecionado}
+                    placeHolder='Como se chama?' 
+                    maxLength={20}
+                    value={this.state.nome}
+                    onChangeText={nome => this.setState({ nome })}
                   />
-                </View> 
-                <BotaoTransparente 
-                  buttonStyle={cadastro.botao}
-                  onPress={() => this.validacao()}
-                  text="Continuar" 
-                  textStyle={cadastro.botaoTexto}
-                />
+                  <Calendario
+                    date={this.state.data}
+                    onDateChange={data => this.setState({ data })}
+                    placeholder='Quando você nasceu?'
+                    dateInputStyle={cadastro.dateInput}
+                  />     
+                  <TextoInput
+                    inputStyle={cadastro.textInput}
+                    placeHolder='Qual é a sua cidade natal?'
+                    maxLength={20}
+                    value={this.state.cidade}
+                    onChangeText={cidade => this.setState({ cidade })}
+                  />               
+                  <Text style={cadastro.texto}>
+                    Como se identifica?*
+                  </Text>
+                  <View style={{alignItems:'center'}}>
+                    <TagSelect
+                      value={this.state.sx}
+                      data={this.state.sexo}
+                      max={1}
+                      ref={(sexo) => {
+                        this.sexo = sexo;
+                      }}
+                      onMaxError={() => {
+                        Alert.alert('Ops', 'Escolha somente uma opção');
+                      }}
+                      itemStyle={cadastro.tagItem}
+                      itemLabelStyle={cadastro.tagLabel}
+                      itemStyleSelected={cadastro.tagItemSelecionado}
+                      itemLabelStyleSelected={cadastro.tagLabelSelecionado}
+                    />
+                  </View> 
+                  <BotaoTouchableOpacity 
+                    buttonStyle={cadastro.botao}
+                    onPress={() => this.validacao()}
+                    text="Continuar" 
+                  />
+                </View>
               </KeyboardAvoidingView> 
             </ScrollView>
           </View>

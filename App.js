@@ -14,14 +14,6 @@ export default class App extends Component {
 
   async loadAssetsAsync() {
     await Font.loadAsync({
-      'palatino-linotype': require('./src/fontes/palatino-linotype.ttf'),
-      'palatino-linotype-bold-italic': require('./src/fontes/palatino-linotype-bold-italic.ttf'),
-      'palatino-linotype-bold': require('./src/fontes/palatino-linotype-bold.ttf'),
-      'palatino-linotype-italic': require('./src/fontes/palatino-linotype-italic.ttf'),
-      
-      
-      
-
       'adobe-garamond-pro-italic': require('./src/fontes/adobe-garamond-pro-italic.otf'),
       'adobe-garamond-pro': require('./src/fontes/adobe-garamond-pro.otf'),
       'adobe-garamond-pro-bold': require('./src/fontes/adobe-garamond-pro-bold.otf'),
@@ -37,7 +29,7 @@ export default class App extends Component {
       
       
       
-      'LymboDemo': require('./src/fontes/LymboDemo.ttf')   
+      'Mathildecastleland': require('./src/fontes/Mathildecastleland.ttf')   
     });;
 
     this.setState({ fontLoaded: true });

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   titulo:{
     color: cor.pagina,
     fontFamily: compartilhado.fonteCitacao.fontFamily,
-    fontSize: 17,
+    fontSize: 16,
     marginTop: 20,
     textAlign: "justify"
   },
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     color: cor.amarelo,
     fontFamily: compartilhado.fonteAutor.fontFamily,
-    fontSize: 15
+    fontSize: 14
   }
 });

@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
 import cor from '../estilos/cores';
+import compartilhado from './compartilhado';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 
@@ -18,14 +19,10 @@ const cadastro = StyleSheet.create({
     position: 'absolute',
     width: DIMENSION_WIDTH + 56
   },
-  botaoTexto: {
-    color: cor.amareloA, 
-    fontWeight:'bold'
-  },
   dateInput: {
     alignItems: 'flex-start',
     borderBottomWidth: 1, 
-    borderColor: cor.branco, 
+    borderColor: cor.pagina, 
     borderTopColor: 'transparent',
     borderLeftWidth: 0,
     borderRightWidth : 0,
@@ -34,7 +31,7 @@ const cadastro = StyleSheet.create({
     paddingLeft: 15
   },
   paragrafo:{      
-    color: cor.branco,
+    color: cor.pagina,
     fontSize: 13,
     marginTop: 20,  
     marginLeft: 10,
@@ -64,19 +61,23 @@ const cadastro = StyleSheet.create({
     width: 90
   },
   tagItemSelecionado: {
-    backgroundColor: cor.amareloD,
+    backgroundColor: cor.creme,
     borderColor: cor.amarelo
   },
   tagLabel: {
-    color: cor.branco
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily, 
+    fontSize: 14
   },
   tagLabelSelecionado: {
-    color: cor.branco
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily,  
+    fontSize: 14
   },
   textInput: {
     borderBottomWidth: 1,
     borderColor: 'transparent',
-    color: cor.branco,
+    color: cor.pagina,
     height: 50,
     marginBottom: 5, 
     marginTop: 5, 
@@ -84,8 +85,9 @@ const cadastro = StyleSheet.create({
     paddingRight: 20    
   },
   texto: {
-    color: cor.amarelo,  
-    fontSize: 15 ,  
+    color: cor.amarelo,
+    fontFamily: compartilhado.fontePadrao.fontFamily,  
+    fontSize: 17,  
     marginBottom: 10,
     marginTop: 20,
     paddingLeft: 10,

@@ -97,7 +97,7 @@ class Login extends Component {
                   { 
                     this.state.esconderSenha 
                     ?
-                      <MaterialCommunityIcons name='eye-off' color={cor.branco} size={27} />
+                      <MaterialCommunityIcons name='eye-off' color={cor.pagina} size={27} />
                     :
                       <MaterialCommunityIcons name='eye' color={cor.amarelo} size={27} />
                   } 

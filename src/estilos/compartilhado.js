@@ -21,21 +21,29 @@ const compartilhado = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.40)',
     flex: 1
   },
+  imagemTransparente__externa: {
+    backgroundColor: 'rgba(0, 0, 0, 0.55)',
+    flex: 1
+  },
   statusBar: {
     backgroundColor: cor.amarelo,
     height: Constants.statusBarHeight
   },
   fonteAutor: {
-    fontFamily: 'goudy-old-style-italic-bt'
+    fontFamily: 'goudy-old-style-bold-italic'
   },
   fonteBookDate: {
-    fontFamily:'LymboDemo'
+    fontFamily:'Mathildecastleland'
+  },
+  fonteBotao: {
+    fontFamily: 'goudy-old-style-bold-italic',
+    fontSize: 17
   },
   fonteCitacao: {
-    fontFamily: 'goudy-old-style-bold'
+    fontFamily: 'goudy-old-style-italic-bt'
   },
   fontePadrao: {
-    fontFamily: 'palatino-linotype'
+    fontFamily: 'goudy-old-style'
   } 
 })
 

@@ -16,16 +16,14 @@ const reenviarSenha = StyleSheet.create({
     position: 'absolute',
     width: 300    
   },
-  botaoEnviarTexto: {
-    color:cor.pagina, 
-  },
   header: {
     alignSelf: 'flex-end'
   },
   texto: {
-    color: cor.branco,  
+    color: cor.pagina,  
     fontFamily: compartilhado.fontePadrao.fontFamily,
-    marginBottom: 100,
+    fontSize: 17,
+    marginBottom: 70,
     marginLeft: 20, 
     marginRight: 20, 
     marginTop: 100,  
@@ -34,7 +32,7 @@ const reenviarSenha = StyleSheet.create({
   textoInput: {
     borderBottomWidth: 1,
     borderColor: 'transparent',
-    color: cor.branco,
+    color: cor.pagina,
     height: 50,
     marginBottom: 5, 
     marginTop: 5, 

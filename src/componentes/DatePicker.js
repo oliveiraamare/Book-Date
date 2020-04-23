@@ -5,13 +5,14 @@ import { View, StyleSheet } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
 import cor from '../estilos/cores'; 
+import compartilhado from '../estilos/compartilhado';
 export default class Calendario extends Component {
   render(){
     const { date, onDateChange, placeholder, format, dateInputStyle } = this.props
     return (
       <View style={styles.container}>
         <DatePicker
-          style={{width: 400 }}
+          style={{width: 400}}
           date={date}
           onDateChange={onDateChange}
           mode="date"
@@ -26,13 +27,15 @@ export default class Calendario extends Component {
           customStyles={{
             dateInput: dateInputStyle,
             dateText: {
-              color: cor.branco 
+              color: cor.pagina
             },
             dateTouchBody: {
              // backgroundColor:'green', 
             },
             placeholderText: {
-              color: cor.branco
+              color: cor.pagina,
+              fontFamily: compartilhado.fontePadrao.fontFamily,
+              fontSize: 16
             }
           }}
         />
@@ -44,6 +47,6 @@ const styles = StyleSheet.create ({
  container: {  
     alignSelf: 'center', 
     marginBottom: 10, 
-    marginTop: 5
+    marginTop: 5,
   }
 })

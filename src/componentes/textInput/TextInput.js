@@ -40,11 +40,11 @@ class TextoInput extends Component {
           onBlur={this.handleBlur}
           onFocus={this.handleFocus}
           placeholder={placeHolder}
-          placeholderTextColor= {cor.branco}
-          selectionColor={cor.branco}
+          placeholderTextColor= {cor.pagina}
+          selectionColor={cor.pagina}
           underlineColorAndroid=
           {
-            isFocused ? cor.amarelo : cor.branco
+            isFocused ? cor.amarelo : cor.pagina
           }
           multiline={multiline}
           maxLength={maxLength}
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   textInput: {   
     alignContent: 'center',
     borderWidth: 20,
-    color: cor.branco,
+    color: cor.pagina,
     fontFamily: compartilhado.fontePadrao.fontFamily,
     fontSize: 16,
     height: 50,
