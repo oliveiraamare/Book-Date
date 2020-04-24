@@ -230,7 +230,7 @@ class Perfil extends Component {
                 <ListItem
                   containerStyle={editarPerfil.listItem}
                   title="Editar meus top três"
-                  titleStyle={{color:cor.pagina}}
+                  titleStyle={editarPerfil.listItem__titulo}
                   rightElement={
                     <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
                   }
@@ -242,7 +242,7 @@ class Perfil extends Component {
                 <ListItem
                   containerStyle={editarPerfil.listItem}
                   title="Editar minhas preferências"
-                  titleStyle={{color:cor.pagina}}
+                  titleStyle={editarPerfil.listItem__titulo}
                   rightElement={
                     <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
                   }

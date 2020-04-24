@@ -22,6 +22,7 @@ import PerfilBooklover from '../telas/menuInterno/booklovers/PerfilBooklover';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
+import compartilhado from '../estilos/compartilhado';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,9 +32,9 @@ function HomeTabs({ navigation, route }) {
       initialRouteName="BookLovers"
       tabBarOptions={{
         //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
-        activeTintColor: cor.amarelo,
-        inactiveTintColor: cor.cinza,
-        labelStyle: { padding: 3 },
+        activeTintColor: cor.creme,
+        inactiveTintColor: cor.pagina,
+        labelStyle: {padding:3},
         style:{ 
           backgroundColor: cor.pretoTransparente, 
           bottom: 0, 
@@ -49,7 +50,7 @@ function HomeTabs({ navigation, route }) {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-heart" color={color} size={size} />
-          ),
+          )
         }}
       />
       <Tab.Screen 

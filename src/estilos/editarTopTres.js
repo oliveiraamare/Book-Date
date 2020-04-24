@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import cor from './cores';
+import compartilhado from "./compartilhado";
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
@@ -30,6 +31,7 @@ const editarTopTres = StyleSheet.create({
   },
   texto: {
     color: cor.amarelo,  
+    fontFamily: compartilhado.fontePadrao.fontFamily,
     fontSize: 15, 
     marginBottom: 5,
     marginTop: 10,

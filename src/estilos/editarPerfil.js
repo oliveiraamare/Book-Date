@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import cor from './cores';
+import compartilhado from "./compartilhado";
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
@@ -36,9 +37,13 @@ const editarPerfil = StyleSheet.create({
   listItem: {
     backgroundColor: 'transparent',
     borderBottomWidth: 1,
-    borderColor: cor.cinza, 
+    borderColor: cor.pagina, 
     borderTopWidth: 1,
     height: 50
+  },
+  listItem__titulo: {
+    color: cor.pagina, 
+    fontFamily: compartilhado.fontePadrao.fontFamily
   },
 	preferencias: {
 		height: 70
@@ -50,8 +55,7 @@ const editarPerfil = StyleSheet.create({
   tagItem: {
     alignItems: 'center',
     backgroundColor: 'transparent',
-    borderColor: cor.amareloA,    
-   // borderRadius: 100, 
+    borderColor: cor.pagina,    
     borderWidth: 1,
     justifyContent:'center',
     marginTop: 15, 
@@ -60,14 +64,16 @@ const editarPerfil = StyleSheet.create({
     width: 90
   },
   tagItemSelecionado: {
-    backgroundColor: cor.amareloD,
-    borderColor: cor.amareloA   
+    backgroundColor: cor.creme,
+    borderColor: cor.pagina   
   },
   tagLabel: {
-    color: cor.pagina
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily
   },
   tagLabelSelecionado: {
-    color: cor.pagina
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily
   },
   textInput: {    
     alignSelf: 'flex-start',
@@ -86,10 +92,9 @@ const editarPerfil = StyleSheet.create({
     width: DIMENSION_WIDTH - 40
   },
   multilinha: {
-    //backgroundColor: cor.pagina,
-    borderBottomColor: cor.cinza,
+    borderBottomColor: cor.pagina,
     borderBottomWidth: 1,
-    borderTopColor: cor.cinza,
+    borderTopColor: cor.pagina,
     borderTopWidth: 1,
     height: 50,
     marginBottom: 10,
@@ -98,6 +103,7 @@ const editarPerfil = StyleSheet.create({
   },
   texto: {
     color: cor.amarelo,  
+    fontFamily: compartilhado.fontePadrao.fontFamily,
     fontSize: 15, 
     marginBottom: 5,
     marginTop: 10,

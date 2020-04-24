@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import cor from './cores';
+import compartilhado from "./compartilhado";
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
@@ -32,8 +33,7 @@ const editarPreferencias = StyleSheet.create({
   tagItem: {
     alignItems: 'center',
     backgroundColor: 'transparent',
-    borderColor: cor.amareloA,    
-   // borderRadius: 100, 
+    borderColor: cor.creme,    
     borderWidth: 1,
     justifyContent:'center',
     marginTop: 15, 
@@ -42,17 +42,20 @@ const editarPreferencias = StyleSheet.create({
     width: 90
   },
   tagItemSelecionado: {
-    backgroundColor: cor.amareloD,
-    borderColor: cor.amareloA   
+    backgroundColor: cor.creme,
+    borderColor: cor.pagina   
   },
   tagLabel: {
-    color: cor.pagina
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily
   },
   tagLabelSelecionado: {
-    color: cor.pagina
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily
   },  
   texto: {
-    color: cor.amarelo,  
+    color: cor.amarelo, 
+    fontFamily: compartilhado.fontePadrao.fontFamily, 
     fontSize: 15, 
     marginBottom: 5,
     marginTop: 10,
