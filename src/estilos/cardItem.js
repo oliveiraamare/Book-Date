@@ -4,6 +4,7 @@ const Dimensions_WIDTH = Dimensions.get('window').width;
 const Dimensions_HEIGHT = Dimensions.get('screen').height !== Dimensions.get('window').height && StatusBar.currentHeight > 24 ? (Dimensions.get('window').height + 56) : Dimensions.get('window').height;
 
 import cor from './cores';
+import compartilhado from './compartilhado';
 
 const cardItem = StyleSheet.create({
 	containerGenero: {
@@ -28,23 +29,25 @@ const cardItem = StyleSheet.create({
 		position:'absolute'
 	},
 	genero: {
-		color: cor.amareloG, 
-		fontSize: 15,
-		fontWeight:'bold',
+		color: cor.amarelo, 
+		fontFamily: compartilhado.fonteAutor.fontFamily, 
+		fontWeight: '400',
+		fontSize: 16,
 		marginBottom: 10
   },
 	nome: {
-		color: cor.cinza,
+		color: cor.pagina,
+		fontFamily: compartilhado.fonteAutor.fontFamily,  
 		fontSize: 25,
-		fontWeight: 'bold',
 		marginLeft: 30,
 		marginBottom: 5,
 		textAlign: 'justify'
 	},
 	sinopse: {
 		alignItems: 'center',
-		color: cor.cinza,
-		fontSize: 15,
+		fontFamily: compartilhado.fonteAutor.fontFamily,  
+		color: cor.pagina,
+		fontSize: 16,
 		marginBottom: 5,
 		paddingHorizontal: 30,
 		textAlign: 'justify'

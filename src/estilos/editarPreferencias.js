@@ -20,7 +20,7 @@ const editarPreferencias = StyleSheet.create({
 	checkboxTexto: {
 		fontSize: 14, 
 		paddingLeft: 10,
-		color: cor.branco
+		color: cor.pagina
 	},
   info:{
     marginTop: 10
@@ -46,10 +46,10 @@ const editarPreferencias = StyleSheet.create({
     borderColor: cor.amareloA   
   },
   tagLabel: {
-    color: cor.branco
+    color: cor.pagina
   },
   tagLabelSelecionado: {
-    color: cor.branco
+    color: cor.pagina
   },  
   texto: {
     color: cor.amarelo,  

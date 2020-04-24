@@ -40,7 +40,7 @@ const conta = StyleSheet.create({
   textInput: {
     borderBottomWidth: 1,
     borderColor: 'transparent',
-    color: cor.branco,
+    color: cor.pagina,
     height: 50,
     marginBottom: 5, 
     marginTop: 20, 

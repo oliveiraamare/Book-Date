@@ -28,7 +28,7 @@ const termos = StyleSheet.create({
     padding: 10
   },
   paragrafo:{      
-    color: cor.branco,
+    color: cor.pagina,
     fontSize: 13,
     marginTop: 5,  
     marginLeft: 10,
@@ -44,13 +44,13 @@ const termos = StyleSheet.create({
   textoBotao:{
     alignItems: 'center',
     alignSelf: 'center',
-    color: cor.branco,
+    color: cor.pagina,
     fontSize: 15, 
     justifyContent: 'center', 
   },
   titulo: {
     alignSelf: 'center',      
-    color: cor.branco,
+    color: cor.pagina,
     fontSize: 23,
     marginTop: 20,
   }

@@ -20,7 +20,7 @@ const editarTopTres = StyleSheet.create({
     marginLeft: 0,
     borderBottomWidth: 1,
     borderColor: 'transparent',
-    color: cor.branco,
+    color: cor.pagina,
     height: 50,
     marginBottom: 5, 
     marginTop: 5, 

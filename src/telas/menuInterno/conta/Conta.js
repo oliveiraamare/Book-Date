@@ -105,7 +105,7 @@ export default function Conta() {
             <ListItem
               containerStyle={conta.listItem}
               title="Meu Perfil"
-              titleStyle={{color:cor.branco}}
+              titleStyle={{color:cor.pagina}}
               leftIcon={
                 <MaterialCommunityIcons name="account-edit" color={cor.amarelo} size={20} />
               }
@@ -117,7 +117,7 @@ export default function Conta() {
             <ListItem
               containerStyle={conta.listItem}
               title="Termos de Privacidade"
-              titleStyle={{color:cor.branco}}
+              titleStyle={{color:cor.pagina}}
               leftIcon={
                 <MaterialCommunityIcons name="view-headline" color={cor.amarelo} size={20} />
               } 
@@ -129,7 +129,7 @@ export default function Conta() {
             <ListItem
               containerStyle={conta.listItem}
               title="Termos de Uso"
-              titleStyle={{color:cor.branco}}
+              titleStyle={{color:cor.pagina}}
               leftIcon={
                 <MaterialCommunityIcons name="view-headline" color={cor.amarelo} size={20} />
               } 
@@ -141,7 +141,7 @@ export default function Conta() {
             <ListItem
               containerStyle={conta.listItem}
               title="Sobre Nós"
-              titleStyle={{color:cor.branco}}
+              titleStyle={{color:cor.pagina}}
               leftIcon={
                 <MaterialCommunityIcons name="face-agent" color={cor.amarelo} size={20} />
               } 
@@ -153,7 +153,7 @@ export default function Conta() {
             <ListItem
               containerStyle={conta.listItem}
               title="Sair"
-              titleStyle={{color:cor.branco}}
+              titleStyle={{color:cor.pagina}}
               leftIcon={
                 <MaterialCommunityIcons name="account-arrow-right-outline" color={cor.amarelo} size={20} />
               } 

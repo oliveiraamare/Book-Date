@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import cor from './cores';
+import compartilhado from "./compartilhado";
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
@@ -7,7 +8,8 @@ const DIMENSION_HEIGHT = Dimensions.get('window').height;
 const perfilMatch = StyleSheet.create({
 	botao: {
 		alignSelf: 'center',    
-		backgroundColor: cor.pretoTransparente, borderRadius: 5,
+		backgroundColor: cor.pretoTransparente, 
+		borderRadius: 5,
 		bottom: 0,
 		height: 47,
 		justifyContent: 'center',   
@@ -30,10 +32,11 @@ const perfilMatch = StyleSheet.create({
 	checkboxTexto: {
 		fontSize: 14, 
 		paddingLeft: 10,
-		color: cor.branco
+		color: cor.pagina
 	},
 	citacao: {
-		color: cor.amareloA,
+		color: cor.creme,
+		fontFamily: compartilhado.fonteAutor.fontFamily,
 		fontSize: 16,
 		marginBottom: 10,
 		paddingBottom: 5,
@@ -60,15 +63,15 @@ const perfilMatch = StyleSheet.create({
 		marginTop: -415
 	},
 	descricaoIdadeCidade: {
-		color: cor.cinza,
-		fontSize: 13,
-		fontWeight: 'bold',
+		color: cor.pagina,
+		fontFamily: compartilhado.fontePadrao.fontFamily, 
+		fontSize: 14,
 		paddingBottom: 10,
 		textAlign: 'center'
 	},
 	icone: { 
 		alignSelf:'center',
-		color: cor.branco,      
+		color: cor.pagina,      
 		backgroundColor: cor.amarelo,
 		borderRadius: 20,
 		fontWeight: 'bold',
@@ -95,15 +98,16 @@ const perfilMatch = StyleSheet.create({
 	},
 	nome: {
 		alignSelf:'center',
-		color: cor.branco,
-		fontWeight: 'bold',
+		color: cor.pagina,
+		fontFamily: compartilhado.fonteAutor.fontFamily,
+		fontSize: 17,  
 		textAlign: 'center'
 	},
 	perguntas: {
 		alignSelf:'flex-start',
-		color: cor.branco,
-		fontSize: 13, 
-		fontWeight: 'bold',
+		color: cor.pagina,
+		fontFamily: compartilhado.fonteAutor.fontFamily,
+		fontSize: 15, 
 		marginTop: 10,
 		paddingBottom: 5,
 		paddingLeft: 5,
@@ -117,7 +121,7 @@ const perfilMatch = StyleSheet.create({
 	},
 	preferenciasLiterarias: {
 		alignSelf:'flex-start', 
-		color: cor.branco,
+		color: cor.pagina,
 		flex: 1, 
 		fontSize: 13,
 		paddingBottom: 5,   
@@ -129,17 +133,18 @@ const perfilMatch = StyleSheet.create({
 	},
 	preferenciasLiterariasResposta: {
 		alignSelf:'flex-start', 
-		color: cor.branco,
-		fontSize: 13,
-		fontWeight: 'bold',
+		color: cor.pagina,
+		fontFamily: compartilhado.fonteAutor.fontFamily,
+		fontSize: 14,
 		paddingLeft: 5,
 		paddingRight: 5,
 		paddingTop: 8, 
     textAlign: 'justify'
 	},
 	respostas: {
-		color: cor.amareloA,
-		fontSize: 12,
+		color: cor.creme,
+		fontFamily: compartilhado.fontePadrao.fontFamily,
+		fontSize: 14,
 		paddingBottom: 5,
 		paddingHorizontal: 5,
 		paddingLeft: 5,

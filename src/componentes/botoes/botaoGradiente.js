@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   buttonText: {
-    color: cor.branco,
+    color: cor.pagina,
     marginLeft: 1,
     marginRight: 1,
     padding: 15,

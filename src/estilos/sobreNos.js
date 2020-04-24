@@ -4,7 +4,7 @@ import cor from './cores'
 
 const sobreNos = StyleSheet.create({
   paragrafo:{      
-    color: cor.branco,
+    color: cor.pagina,
     fontSize: 13,
     marginTop: 20,  
     marginLeft: 10,

@@ -28,7 +28,7 @@ const Tab = createBottomTabNavigator();
 function HomeTabs({ navigation, route }) {
   return (
     <Tab.Navigator
-      initialRouteName="Loading"
+      initialRouteName="Booklovers"
       tabBarOptions={{
         //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
         activeTintColor: cor.amarelo,

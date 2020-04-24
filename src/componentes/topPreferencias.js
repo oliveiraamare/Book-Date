@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import TextoInput from '../componentes/textInput/TextInput';
 
 import cor from '../estilos/cores';
+import compartilhado from '../estilos/compartilhado';
 
 export const TopPreferencias = ({ 
   nomeIcone, inputStyle, placeHolder, value, 
@@ -76,13 +77,14 @@ const styles = StyleSheet.create({
   textInput: {   
     alignContent: 'center',
     borderWidth: 20,
-    color: cor.branco,
+    color: cor.pagina,
     height: 50,
     margin: 15
   },
   opcao: {
-    color: cor.amareloA,
-		fontSize: 12,
+    color: cor.pagina,
+    fontFamily: compartilhado.fontePadrao.fontFamily,
+		fontSize: 14,
 		paddingBottom: 5,
 		paddingHorizontal: 5,
 		paddingLeft: 5,

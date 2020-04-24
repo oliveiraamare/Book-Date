@@ -112,10 +112,8 @@ class Perfil extends Component {
                           disabled={true}
                           title='Aventura'
                           checkedIcon='user-circle' 
-                          uncheckedIcon='circle-o'
-                          uncheckedColor={cor.amarelo}
                           checked={true}
-                          checkedColor={cor.amarelo}
+                          checkedColor={cor.creme}
                           size={20}
                           containerStyle={perfil.checkbox}
                           textStyle={perfil.checkboxTexto}
@@ -128,10 +126,8 @@ class Perfil extends Component {
                           disabled={true}
                           title='Prosa'
                           checkedIcon='user-circle' 
-                          uncheckedIcon='circle-o'
-                          uncheckedColor={cor.amarelo}
                           checked={true}
-                          checkedColor={cor.amarelo}
+                          checkedColor={cor.creme}
                           size={20}
                           containerStyle={perfil.checkbox}
                           textStyle={perfil.checkboxTexto}
@@ -144,10 +140,8 @@ class Perfil extends Component {
                           disabled={true}
                           title='Misterio'
                           checkedIcon='user-circle' 
-                          uncheckedIcon='circle-o'
-                          uncheckedColor={cor.amarelo}
                           checked={true}
-                          checkedColor={cor.amarelo}
+                          checkedColor={cor.creme}
                           size={20}
                           containerStyle={perfil.checkbox}
                           textStyle={perfil.checkboxTexto}
@@ -160,10 +154,8 @@ class Perfil extends Component {
                           disabled={true}
                           title='Conto de Fadas'
                           checkedIcon='user-circle' 
-                          uncheckedIcon='circle-o'
-                          uncheckedColor={cor.amarelo}
                           checked={true}
-                          checkedColor={cor.amarelo}
+                          checkedColor={cor.creme}
                           size={20}
                           containerStyle={perfil.checkbox}
                           textStyle={perfil.checkboxTexto}

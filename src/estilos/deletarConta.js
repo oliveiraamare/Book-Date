@@ -12,14 +12,14 @@ const deletarConta = StyleSheet.create({
     alignSelf: 'flex-end', 
   },
   paragrafo: {
-    color: cor.branco, 
+    color: cor.pagina, 
     marginBottom: 10,
     marginLeft: 17,
     marginRight: 15,  
     textAlign: 'center'
   },
   paragrafoPrincipal: {
-    color: cor.branco, 
+    color: cor.pagina, 
     marginBottom: 22,
     marginTop: 30,
     textAlign:'center'

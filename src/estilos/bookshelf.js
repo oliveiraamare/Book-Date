@@ -21,7 +21,7 @@ const bookshelf = StyleSheet.create({
     width: DIMENSION_WIDTH
   },
   paragrafo: {
-    color: cor.branco,
+    color: cor.pagina,
     fontSize: 16, 
     margin: 10, 
     textAlign: 'center'

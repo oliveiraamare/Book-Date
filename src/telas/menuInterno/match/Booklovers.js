@@ -13,7 +13,7 @@ import CardItem from '../../../componentes/CardItem';
 
 import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
-import match from '../../../estilos/match';
+import booklovers from '../../../estilos/booklovers';
 
 import { collection, usuarioUid } from '../../../firebase/acoes';
 import { localizacao } from '../../../componentes/localizacao';
@@ -33,7 +33,7 @@ export default function Booklovers() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    refresh(usuarioUid());
+    //refresh(usuarioUid());
     const estante_de_usuarios = firestore.onSnapshot(snapshot => {
       const usuarios_proximos = Object.assign([], snapshot.data());
       setDados_match(usuarios_proximos);
@@ -82,10 +82,10 @@ export default function Booklovers() {
         <View style={compartilhado.statusBar}/>
         <ImageBackground
           source={require('../../../imagens/fundoInterno.jpg')} 
-          style={match.imagem}
+          style={booklovers.imagem}
         >
           <DotIndicator  
-            color={cor.amarelo}
+            color={cor.creme}
             count={5}
             size={20}
             animating={true}
@@ -103,18 +103,18 @@ export default function Booklovers() {
           <View style={compartilhado.statusBar}/>
           <ImageBackground
             source={require('../../../imagens/fundoInterno.jpg')} 
-            style={match.imagem}
+            style={booklovers.imagem}
           >
             <FraseTop 
              titleStyle={{fontSize:15}} 
               title={frase} subtitleStyle={{alignSelf:'center'}} 
               subtitle={autor} 
             />   
-            <View style={match.containerParagrafo}>
-              <Text style={match.paragrafo}>
+            <View style={booklovers.containerParagrafo}>
+              <Text style={booklovers.paragrafo}>
                 Aqui aparecerão os booklovers que estão mais próximos da sua localização atual. 
               </Text>
-              <Text style={match.texto}>
+              <Text style={booklovers.texto}>
                 Que tal dar uma chance a eles?
               </Text>
             </View>
@@ -129,16 +129,16 @@ export default function Booklovers() {
           <View style={compartilhado.statusBar}/>
           <ImageBackground
             source={require('../../../imagens/fundoInterno.jpg')} 
-            style={match.imagem}
+            style={booklovers.imagem}
           >
             <FraseTop 
               titleStyle={{fontSize:15}} title={thats_all}
             />   
-            <View style={match.containerSwipedAll}>
-              <Text style={match.paragrafo}>
+            <View style={booklovers.containerSwipedAll}>
+              <Text style={booklovers.paragrafo}>
                 Enquanto estamos buscando novos booklovers
               </Text>
-              <Text style={match.texto}>
+              <Text style={booklovers.texto}>
                 Que tal dar uma passada no bookshelf?
               </Text>
             </View>
@@ -171,12 +171,12 @@ export default function Booklovers() {
                 <TouchableHighlight onPress={() => navigation.navigate('PerfilMatch', { item })}>
                   <ImageBackground
                     source={require('../../../imagens/match.jpg')}
-                    style={match.background}
+                    style={booklovers.background}
                   >  
                     <View> 
                       <ImageBackground
                         source={{uri:item.imagem}}
-                        style={match.imagem}
+                        style={booklovers.imagem}
                       >    
                         <CardItem
                           nome={item.nome}

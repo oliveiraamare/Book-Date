@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   tagLabelSelecionado: {
-    color: cor.branco,
+    color: cor.pagina,
     fontFamily: compartilhado.fontePadrao.fontFamily,  
     fontSize: 14
   },

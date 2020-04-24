@@ -20,11 +20,11 @@ export default class Mensagem extends Component {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'transparent', 
-    borderBottomColor: cor.branco,
+    borderBottomColor: cor.pagina,
     borderBottomWidth: 0.18
   },
   appBarHeader: {
-    color: cor.branco, 
+    color: cor.pagina, 
     fontSize: 18
   },
 })

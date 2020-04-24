@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import cor from './cores';
+import compartilhado from "./compartilhado";
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
@@ -17,7 +18,7 @@ const perfil = StyleSheet.create({
 	},
 	botaoEditar: {
 		alignSelf:'center',
-		color: cor.branco,      
+		color: cor.pagina,      
 		backgroundColor: cor.amarelo,
 		borderRadius: 20,
 		fontWeight: 'bold',
@@ -39,13 +40,15 @@ const perfil = StyleSheet.create({
 		width: DIMENSION_WIDTH - 25 
 	},
 	checkboxTexto: {
-		fontSize: 14, 
+		fontSize: 13, 
 		paddingLeft: 10,
-		color: cor.branco
+		color: cor.pagina
 	},
 	citacao: {
-		color: cor.amareloA,
+		color: cor.creme,
+		fontFamily: compartilhado.fonteAutor.fontFamily,
 		fontSize: 16,
+		fontWeight: '400',
 		marginBottom: 10,
 		paddingBottom: 5,
 		paddingTop: 5,
@@ -71,14 +74,14 @@ const perfil = StyleSheet.create({
 		marginTop: -415
 	},
 	descricaoIdadeCidade: {
-		color: cor.cinza,
-		fontSize: 13,
-		fontWeight: 'bold',
+		color: cor.pagina,
+		fontFamily: compartilhado.fonteAutor.fontFamily,
+		fontSize: 14,
 		paddingBottom: 10,
 		textAlign: 'center'
 	},
 	iconeBotao: { 
-		color: cor.branco,
+		color: cor.pagina,
 		fontSize: 20 
 	 },
 	 imagemFrame: {
@@ -98,9 +101,9 @@ const perfil = StyleSheet.create({
 	},
 	perguntas: {
 		alignSelf:'flex-start',
-		color: cor.branco,
-		fontSize: 13, 
-		fontWeight: 'bold',
+		color: cor.pagina,
+		fontFamily: compartilhado.fonteAutor.fontFamily,
+		fontSize: 15, 
 		marginTop: 10,
 		paddingBottom: 5,
 		paddingLeft: 5,
@@ -114,7 +117,7 @@ const perfil = StyleSheet.create({
 	},
 	preferenciasLiterarias: {
 		alignSelf:'flex-start', 
-		color: cor.branco,
+		color: cor.pagina,
 		flex: 1, 
 		fontSize: 13,
 		paddingBottom: 5,   
@@ -125,17 +128,18 @@ const perfil = StyleSheet.create({
 	},
 	preferenciasLiterariasResposta: {
 		alignSelf:'flex-start', 
-		color: cor.branco,
-		fontSize: 13,
-		fontWeight: 'bold',
+		color: cor.pagina,
+		fontFamily: compartilhado.fonteAutor.fontFamily,
+		fontSize: 14,
 		paddingLeft: 5,
 		paddingRight: 5,
 		paddingTop: 8, 
     textAlign: 'justify'
 	},
 	respostas: {
-		color: cor.amareloA,
-		fontSize: 12,
+		color: cor.creme,
+		fontFamily: compartilhado.fontePadrao.fontFamily,
+		fontSize: 14,
 		paddingBottom: 5,
 		paddingHorizontal: 5,
 		paddingLeft: 5,
@@ -148,7 +152,7 @@ const perfil = StyleSheet.create({
 		height: DIMENSION_HEIGHT +150,
 	},
 	textoBotao: {
-		color: cor.branco,
+		color: cor.pagina,
 		fontSize: 15,
 		paddingLeft: 5
 	},	

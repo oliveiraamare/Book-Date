@@ -64,10 +64,10 @@ const editarPerfil = StyleSheet.create({
     borderColor: cor.amareloA   
   },
   tagLabel: {
-    color: cor.branco
+    color: cor.pagina
   },
   tagLabelSelecionado: {
-    color: cor.branco
+    color: cor.pagina
   },
   textInput: {    
     alignSelf: 'flex-start',
@@ -77,7 +77,7 @@ const editarPerfil = StyleSheet.create({
     marginLeft: 0,
     borderBottomWidth: 1,
     borderColor: 'transparent',
-    color: cor.branco,
+    color: cor.pagina,
     height: 50,
     marginBottom: 5, 
     marginTop: 5, 
@@ -86,7 +86,7 @@ const editarPerfil = StyleSheet.create({
     width: DIMENSION_WIDTH - 40
   },
   multilinha: {
-    //backgroundColor: cor.branco,
+    //backgroundColor: cor.pagina,
     borderBottomColor: cor.cinza,
     borderBottomWidth: 1,
     borderTopColor: cor.cinza,

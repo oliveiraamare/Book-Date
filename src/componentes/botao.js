@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   botaoTouchableOpacity: {
     alignItems: 'center',
     backgroundColor: 'transparent',
-    borderColor: cor.branco,
+    borderColor: cor.pagina,
     borderRadius: 10,
     borderWidth: 1,
     paddingVertical: 5,      
