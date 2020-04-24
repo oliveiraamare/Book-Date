@@ -1,12 +1,12 @@
 //https://github.com/stevenpersia/tinder-react-native
 //https://www.npmjs.com/package/react-native-card-stack-swiper
 //https://stackoverflow.com/questions/47547465/how-to-render-one-react-native-component-after-another-component-had-rendered
-import React, { useEffect, useState, Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageBackground, Text, TouchableHighlight, View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { DotIndicator } from 'react-native-indicators';
 import { useNavigation } from '@react-navigation/native';
-const axios = require('axios').default;
+const axios = require('axios');
 
 import { FraseTop } from '../../../componentes/frase';
 import CardItem from '../../../componentes/CardItem';
@@ -168,7 +168,7 @@ export default function Booklovers() {
                 onSwipedLeft={() => swipedLeft(item)}
                 onSwipedRight={() => swipedRight(item)}
               >
-                <TouchableHighlight onPress={() => navigation.navigate('PerfilMatch', { item })}>
+                <TouchableHighlight onPress={() => navigation.navigate('PerfilBooklover', { item })}>
                   <ImageBackground
                     source={require('../../../imagens/match.jpg')}
                     style={booklovers.background}

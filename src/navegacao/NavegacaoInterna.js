@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import cor from '../estilos/cores';
 
 import Conta from '../telas/menuInterno/conta/Conta';
-import Booklovers from '../telas/menuInterno/match/Booklovers';
+import BookLovers from '../telas/menuInterno/booklovers/Booklovers'
 import Mensagem from '../telas/menuInterno/mensagem/Mensagem';
 import BookShelf from '../telas/menuInterno/BookShelf';
 
@@ -18,7 +18,7 @@ import EditarPreferencias from '../telas/menuInterno/conta/perfil/edicaoPerfil/E
 import EditarTopTres from '../telas/menuInterno/conta/perfil/edicaoPerfil/EditarTopTres';
 import DeletarConta from '../telas/menuInterno/conta/DeletarConta';
 import Perfil from '../telas/menuInterno/conta/perfil/Perfil';
-import PerfilMatch from '../telas/menuInterno/match/PerfilMatch';
+import PerfilBooklover from '../telas/menuInterno/booklovers/PerfilBooklover';
 import SobreNos from '../telas/menuInterno/conta/SobreNos';
 import TermoPrivacidade from '../telas/menuInterno/conta/termos/TermoPrivacidade';
 import TermoUso from '../telas/menuInterno/conta/termos/TermoUso';
@@ -28,7 +28,7 @@ const Tab = createBottomTabNavigator();
 function HomeTabs({ navigation, route }) {
   return (
     <Tab.Navigator
-      initialRouteName="Booklovers"
+      initialRouteName="BookLovers"
       tabBarOptions={{
         //https://reactnavigation.org/docs/en/bottom-tab-navigator.html#tabbaroptions
         activeTintColor: cor.amarelo,
@@ -45,7 +45,7 @@ function HomeTabs({ navigation, route }) {
       }}  
     >
       <Tab.Screen
-        name="BookLovers" component={Booklovers} 
+        name="BookLovers" component={BookLovers} 
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-heart" color={color} size={size} />
@@ -93,7 +93,7 @@ export default function NavegacaoInterna() {
         <Stack.Screen name="EditarTopTres" component={EditarTopTres} />
         <Stack.Screen name="DeletarConta" component={DeletarConta} />
         <Stack.Screen name="Perfil" component={Perfil} />
-        <Stack.Screen name="PerfilMatch" component={PerfilMatch}/>
+        <Stack.Screen name="PerfilBooklover" component={PerfilBooklover}/>
         <Stack.Screen name="SobreNos" component={SobreNos} />
         <Stack.Screen name="TermoPrivacidade" component={TermoPrivacidade} />
         <Stack.Screen name="TermoUso" component={TermoUso} />        

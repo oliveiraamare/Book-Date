@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Preferencias } from '../../../componentes/topPreferencias';
 
-import perfilMatch from '../../../estilos/perfilMatch';
+import perfilBooklover from '../../../estilos/perfilBooklover';
 import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
 
@@ -63,40 +63,40 @@ class Perfil extends Component {
       <View style={compartilhado.container}> 
         <View style={compartilhado.statusBar}/>
         <ImageBackground style={compartilhado.imagemBackground}> 
-          <ScrollView style={perfilMatch.scrollView}>        
+          <ScrollView style={perfilBooklover.scrollView}>        
             <Image
               source={require('../../../imagens/perfil.jpg')} 
-              style={perfilMatch.imagemFrame}
+              style={perfilBooklover.imagemFrame}
             /> 
 
             {
               this.state.dados.imagem == null
               ? <Image
                   source={require('../../../imagens/match.jpg')}
-                  style={perfilMatch.imagemPerfil}
+                  style={perfilBooklover.imagemPerfil}
                 />    
               : <Image
                   source={{uri:this.state.dados.imagem}}
-                  style={perfilMatch.imagemPerfil}
+                  style={perfilBooklover.imagemPerfil}
                 />       
             }     
 
-            <View style={perfilMatch.containerInfo}>
+            <View style={perfilBooklover.containerInfo}>
 
-              <View style={perfilMatch.containerNome}>
-                <Text style={perfilMatch.nome}>
+              <View style={perfilBooklover.containerNome}>
+                <Text style={perfilBooklover.nome}>
                   {this.state.dados.nome}
                 </Text>
               </View>
 
-              <Text style={perfilMatch.descricaoIdadeCidade}>
+              <Text style={perfilBooklover.descricaoIdadeCidade}>
                 {idade} anos, {this.state.dados.cidade}
               </Text> 
 
               {
                 this.state.preferencias.citacao == 'não informado' ? 
                   null
-                : <Text style={perfilMatch.citacao}>
+                : <Text style={perfilBooklover.citacao}>
                     "{this.state.preferencias.citacao}"
                   </Text>   
               }  
@@ -107,11 +107,11 @@ class Perfil extends Component {
                   this.state.preferencias.misterio == false && this.state.preferencias.prosa == false             
                 ) ? null :   
                   
-                <View style={perfilMatch.preferencias}>
-                  <Text style={perfilMatch.perguntas}>
+                <View style={perfilBooklover.preferencias}>
+                  <Text style={perfilBooklover.perguntas}>
                     O que estais a buscar?
                   </Text>
-                  <View style={perfilMatch.checkboxContainer}>
+                  <View style={perfilBooklover.checkboxContainer}>
                     {
                       this.state.preferencias.aventura == false ? 
                         null
@@ -124,8 +124,8 @@ class Perfil extends Component {
                           checked={true}
                           checkedColor={cor.amarelo}
                           size={20}
-                          containerStyle={perfilMatch.checkbox}
-                          textStyle={perfilMatch.checkboxTexto}
+                          containerStyle={perfilBooklover.checkbox}
+                          textStyle={perfilBooklover.checkboxTexto}
                         /> 
                     }
                     {
@@ -140,8 +140,8 @@ class Perfil extends Component {
                           checked={true}
                           checkedColor={cor.amarelo}
                           size={20}
-                          containerStyle={perfilMatch.checkbox}
-                          textStyle={perfilMatch.checkboxTexto}
+                          containerStyle={perfilBooklover.checkbox}
+                          textStyle={perfilBooklover.checkboxTexto}
                         /> 
                     }
                     {
@@ -156,8 +156,8 @@ class Perfil extends Component {
                           checked={true}
                           checkedColor={cor.amarelo}
                           size={20}
-                          containerStyle={perfilMatch.checkbox}
-                          textStyle={perfilMatch.checkboxTexto}
+                          containerStyle={perfilBooklover.checkbox}
+                          textStyle={perfilBooklover.checkboxTexto}
                         /> 
                     }
                     {
@@ -172,18 +172,18 @@ class Perfil extends Component {
                           checked={true}
                           checkedColor={cor.amarelo}
                           size={20}
-                          containerStyle={perfilMatch.checkbox}
-                          textStyle={perfilMatch.checkboxTexto}
+                          containerStyle={perfilBooklover.checkbox}
+                          textStyle={perfilBooklover.checkboxTexto}
                         /> 
                     }
                   </View>
                 </View>
               }
 
-              <Text style={perfilMatch.perguntas}>
+              <Text style={perfilBooklover.perguntas}>
                 Se a sua vida fosse um livro, qual seria a sinopse?
               </Text>
-              <Text style={perfilMatch.respostas}>
+              <Text style={perfilBooklover.respostas}>
                 {this.state.preferencias.sinopse}
               </Text> 
 
@@ -191,17 +191,17 @@ class Perfil extends Component {
                 this.state.preferencias.singularidade == 'não informado' ? 
                   null
                 : <View>
-                    <Text style={perfilMatch.perguntas}>
+                    <Text style={perfilBooklover.perguntas}>
                       Peculiaridades
                     </Text>
-                    <Text style={perfilMatch.respostas}>
+                    <Text style={perfilBooklover.respostas}>
                       {this.state.preferencias.singularidade}
                     </Text>  
                   </View>
               }
 
-              <View style={perfilMatch.preferenciasLiterarias}>
-                <Text style={perfilMatch.perguntas}>
+              <View style={perfilBooklover.preferenciasLiterarias}>
+                <Text style={perfilBooklover.perguntas}>
                   Top preferências literárias
                 </Text>
 
@@ -216,7 +216,7 @@ class Perfil extends Component {
                       this.state.autor[2] == 'não informado' ? null : this.state.autor[2]
                     ),                    
                     <Preferencias 
-                      tituloStyle={perfilMatch.preferenciasLiterariasResposta}
+                      tituloStyle={perfilBooklover.preferenciasLiterariasResposta}
                       titulo="Autor"
                       opcao1={um}
                       opcao2={dois}
@@ -225,7 +225,7 @@ class Perfil extends Component {
                 }
 
                 <Preferencias 
-                  tituloStyle={perfilMatch.preferenciasLiterariasResposta}
+                  tituloStyle={perfilBooklover.preferenciasLiterariasResposta}
                   titulo="Gênero"
                   opcao1={this.state.generoLiterario[0]}
                   opcao2={this.state.generoLiterario[1]}
@@ -242,7 +242,7 @@ class Perfil extends Component {
                       this.state.livro[2] == 'não informado' ? null : this.state.livro[2]
                     ),    
                     <Preferencias 
-                      tituloStyle={perfilMatch.preferenciasLiterariasResposta}
+                      tituloStyle={perfilBooklover.preferenciasLiterariasResposta}
                       titulo="Livro"
                       opcao1={um}
                       opcao2={dois}
@@ -252,13 +252,13 @@ class Perfil extends Component {
               </View>   
               <TouchableHighlight 
                 onPress={() => navigation.navigate('Mensagem')} 
-                style={perfilMatch.botao}
+                style={perfilBooklover.botao}
               >
                 <Icon.Button
                   name='comments'
                   backgroundColor='transparent'
                   onPress={() => this.props.navigation.navigate('Mensagem')}
-                  style={perfilMatch.icone}
+                  style={perfilBooklover.icone}
                 >
                   Conversar
                 </Icon.Button>

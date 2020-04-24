@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import cor from '../../estilos/cores'
+import compartilhado from '../../estilos/compartilhado';
 
 class BotaoTransparente extends Component {
 	render() {
@@ -26,7 +27,8 @@ class BotaoTransparente extends Component {
 const styles = StyleSheet.create({
   textStyle: {
     color: cor.amarelo, 
-    fontSize: 15, 
+    fontFamily: compartilhado.fonteBotao.fontFamily,  
+    fontSize: 17, 
     textAlign: 'center'
   },  
   botaoTransparente: {

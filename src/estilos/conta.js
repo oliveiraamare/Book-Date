@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import cor from '../estilos/cores';
+import compartilhado from './compartilhado';
 
 const conta = StyleSheet.create({
   autor: {
@@ -25,8 +26,18 @@ const conta = StyleSheet.create({
     borderBottomStartRadius: 50, 
     borderBottomEndRadius: 25, 
     borderBottomWidth: 0.3,
-    borderColor: cor.cinza, 
+    borderColor: cor.pagina, 
     height: 55
+  },
+  listItem__titulo: {
+    color: cor.pagina, 
+    fontFamily: compartilhado.fontePadrao.fontFamily
+  },
+  nome: {
+    color: cor.creme, 
+    fontFamily: compartilhado.fontePadrao.fontFamily,  
+    fontSize: 20, 
+    textAlign: "justify"
   },
   texto: {
     color: cor.amarelo,  

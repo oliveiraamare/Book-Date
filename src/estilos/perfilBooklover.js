@@ -5,7 +5,7 @@ import compartilhado from "./compartilhado";
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
 
-const perfilMatch = StyleSheet.create({
+export default perfilBooklover = StyleSheet.create({
 	botao: {
 		alignSelf: 'center',    
 		backgroundColor: cor.pretoTransparente, 
@@ -157,5 +157,3 @@ const perfilMatch = StyleSheet.create({
 		height: DIMENSION_HEIGHT +150,
 	}
 });
-	
-export default perfilMatch;

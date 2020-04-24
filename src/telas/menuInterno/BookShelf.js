@@ -62,7 +62,7 @@ export default function Bookshelf() {
           style={bookshelf.imagem}
         >
           <DotIndicator  
-            color={cor.amarelo}
+            color={cor.creme}
             count={5}
             size={20}
             animating={true}
@@ -115,7 +115,7 @@ export default function Bookshelf() {
                 onSwipedLeft={() => null}
                 onSwipedRight={() => swipedRight(item)}
               >
-                <TouchableHighlight onPress={() => navigation.navigate('PerfilMatch', { item })}>
+                <TouchableHighlight onPress={() => navigation.navigate('PerfilBooklover', { item })}>
                   <ImageBackground
                     source={require('../../imagens/match.jpg')}
                     style={bookshelf.background}

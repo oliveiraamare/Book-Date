@@ -93,7 +93,7 @@ export default function Conta() {
                         />
                     }
                   <View style={conta.viewTexto}>
-                    <Text style={{color: cor.amarelo, fontSize: 20, textAlign: "justify"}}>
+                    <Text style={conta.nome}>
                       {usuario_logado.nome}
                     </Text>
                   </View>
@@ -105,60 +105,60 @@ export default function Conta() {
             <ListItem
               containerStyle={conta.listItem}
               title="Meu Perfil"
-              titleStyle={{color:cor.pagina}}
+              titleStyle={conta.listItem__titulo}
               leftIcon={
-                <MaterialCommunityIcons name="account-edit" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="account-edit" color={cor.creme} size={20} />
               }
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.creme} size={20} />
               }
               onPress={() => navigation.navigate('Perfil') }
             />
             <ListItem
               containerStyle={conta.listItem}
               title="Termos de Privacidade"
-              titleStyle={{color:cor.pagina}}
+              titleStyle={conta.listItem__titulo}
               leftIcon={
-                <MaterialCommunityIcons name="view-headline" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="view-headline" color={cor.creme} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.creme} size={20} />
               }
               onPress={() => navigation.navigate('TermoPrivacidade')}                  
             />
             <ListItem
               containerStyle={conta.listItem}
               title="Termos de Uso"
-              titleStyle={{color:cor.pagina}}
+              titleStyle={conta.listItem__titulo}
               leftIcon={
-                <MaterialCommunityIcons name="view-headline" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="view-headline" color={cor.creme} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.creme} size={20} />
               }
               onPress={() => navigation.navigate('TermoUso')}                  
             />
             <ListItem
               containerStyle={conta.listItem}
               title="Sobre Nós"
-              titleStyle={{color:cor.pagina}}
+              titleStyle={conta.listItem__titulo}
               leftIcon={
-                <MaterialCommunityIcons name="face-agent" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="face-agent" color={cor.creme} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.creme} size={20} />
               }
               onPress={() => navigation.navigate('SobreNos')}   
             />
             <ListItem
               containerStyle={conta.listItem}
               title="Sair"
-              titleStyle={{color:cor.pagina}}
+              titleStyle={conta.listItem__titulo}
               leftIcon={
-                <MaterialCommunityIcons name="account-arrow-right-outline" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="account-arrow-right-outline" color={cor.creme} size={20} />
               } 
               rightElement={
-                <MaterialCommunityIcons name="chevron-right" color={cor.amarelo} size={20} />
+                <MaterialCommunityIcons name="chevron-right" color={cor.creme} size={20} />
               }
               onPress={() => sair_popup()} 
             />
