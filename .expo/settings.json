@@ -1,8 +1,8 @@
 {
   "urlRandomness": "c8-7rr",
-  "hostType": "tunnel",
+  "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "https": true
+  "https": false
 }
