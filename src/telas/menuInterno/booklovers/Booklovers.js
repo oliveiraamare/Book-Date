@@ -33,7 +33,7 @@ export default function Booklovers() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    //refresh(usuarioUid());
+    refresh(usuarioUid());
     const estante_de_usuarios = firestore.onSnapshot(snapshot => {
       const usuarios_proximos = Object.assign([], snapshot.data());
       setDados_match(usuarios_proximos);

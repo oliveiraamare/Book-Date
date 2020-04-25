@@ -334,7 +334,7 @@ async function usuarios_swiped(usuarios_proximos, uid) {
         const usuarios_swiped = Object.assign([], snapshot.data());
         return compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, uid)
       } else {
-        return false;
+        return console.log('Não existem usuarios na estante');
       }
     })
     .catch(error => { console.log('Não foi possível retornar os usuarios_swiped. ', error.message)})
@@ -351,8 +351,9 @@ async function compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, ui
 }
 
 async function refresh_usuarios_proximos(usuarios_existentes, uid) {
+  const usuarios_novos = Object.assign({}, usuarios_existentes);
   return firestore.collection('usuarios').doc(uid)
-    .collection('usuarios_proximos').doc(uid).set(usuarios_existentes)
+    .collection('usuarios_proximos').doc(uid).set(usuarios_novos)
     .then(() => console.log('Refresh feito na collection usuarios_proximos.'))
     .catch(error => { console.log('Erro ao fazer refresh do usuarios_proximos. ', error.message)})
 }
