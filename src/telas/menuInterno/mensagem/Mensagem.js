@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import { ImageBackground, View , StyleSheet} from 'react-native';
-//import {GiftedChat} from 'react-native-gifted-chat;'
+import { GiftedChat } from 'react-native-gifted-chat';
 
 
 class Mensagem extends Component {

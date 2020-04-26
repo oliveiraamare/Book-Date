@@ -14,6 +14,7 @@ import cor from '../../estilos/cores';
 import bookshelf from '../../estilos/bookshelf';
 
 import { collection, usuarioUid } from '../../firebase/acoes';
+import { swiped_left, swiped_right } from '../../acoes/acoes_para_swiped';
 
 const frase='"Julgue pela capa e perca uma grande história."';
 const autor='Autor Desconhecido';
@@ -38,6 +39,7 @@ export default function Bookshelf() {
 
   const swipedRight = (item) => {
     swiped(item.uid);
+    swiped_right(item)
     navigation.navigate('Mensagem');
   }  
 

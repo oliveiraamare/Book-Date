@@ -2,7 +2,12 @@
 //https://www.npmjs.com/package/react-native-card-stack-swiper
 //https://stackoverflow.com/questions/47547465/how-to-render-one-react-native-component-after-another-component-had-rendered
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, Text, TouchableHighlight, View } from 'react-native';
+import { 
+  ImageBackground, 
+  Text, 
+  TouchableHighlight, 
+  View 
+} from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { DotIndicator } from 'react-native-indicators';
 import { useNavigation } from '@react-navigation/native';
@@ -10,13 +15,14 @@ const axios = require('axios');
 
 import { FraseTop } from '../../../componentes/frase';
 import CardItem from '../../../componentes/CardItem';
+import { localizacao } from '../../../componentes/localizacao';
 
 import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
 import booklovers from '../../../estilos/booklovers';
 
 import { collection, usuarioUid } from '../../../firebase/acoes';
-import { localizacao } from '../../../componentes/localizacao';
+import { swiped_left, swiped_right } from '../../../acoes/acoes_para_swiped';
 
 export default function Booklovers() {
 
@@ -24,8 +30,6 @@ export default function Booklovers() {
   
   const firestore = collection('usuarios').doc(usuarioUid()).collection('usuarios_proximos').doc(usuarioUid());
 
-  var salvar_estante =  [];
-  var salvar_listagem_usuarios = [];
   const frase ='"Julgue pela capa e perca uma grande história."';
   const autor ='Autor Desconhecido';
   const thats_all = '"That\'s all folks!"';
@@ -46,27 +50,11 @@ export default function Booklovers() {
     }      
   }, []);   
 
-  const swipedLeft = (item) => {
-    swiped(item);
-    salvar_estante.push(item);  
-    const usuarios_na_estante = Object.assign({}, salvar_estante);
-    collection('usuarios').doc(usuarioUid())
-      .collection('estante').doc(usuarioUid())
-      .set(usuarios_na_estante, {merge: true});
-  }   
-
   const swipedRight = (item) => {
-    swiped(item);
+    swiped_right(item);
+    navigation.navigate('Mensagem', { item })
   }  
   
-  const swiped = (item) => {
-    salvar_listagem_usuarios.push(item);  
-    const usuarios_manipulados = Object.assign({}, salvar_listagem_usuarios);
-    collection('usuarios').doc(usuarioUid())
-      .collection('usuarios_swiped').doc(usuarioUid())
-      .set(usuarios_manipulados);
-  }
-
   const refresh = (uid) => {
     axios.post('https://us-central1-bookdate-app.cloudfunctions.net/refresh_usuarios_proximos', {
       data: { uid: uid }
@@ -74,7 +62,6 @@ export default function Booklovers() {
     .then(data => { console.log(data.status) })
     .catch(error => { console.log(error.message) });
   }  
-
 
   if(!dados_match) {
     return (
@@ -165,7 +152,7 @@ export default function Booklovers() {
             dados_match.map((item, index) => (
               <Card 
                 key={index}
-                onSwipedLeft={() => swipedLeft(item)}
+                onSwipedLeft={() => swiped_left(item)}
                 onSwipedRight={() => swipedRight(item)}
               >
                 <TouchableHighlight onPress={() => navigation.navigate('PerfilBooklover', { item })}>

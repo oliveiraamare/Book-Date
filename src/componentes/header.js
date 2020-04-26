@@ -25,9 +25,18 @@ export const AppBarHeader = ({ headerStyle, onPress, style, title }) => (
   </View>
 )
 
-export const Header = ({ headerStyle, onPress, style, title }) => (
-  <View style={compartilhado.container}>
+export const BarHeader = ({ headerStyle, style, title }) => (
+  <View>
     <View style={compartilhado.statusBar} />
+    <Appbar style={[ styles.header, headerStyle ]}> 
+      <Appbar.Content
+        title={
+          <Text style={[ styles.appBarHeader, style ]}>
+            {title}
+          </Text>
+        }
+      />
+    </Appbar>  
   </View>
 )
 

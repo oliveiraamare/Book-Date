@@ -198,5 +198,13 @@
   {
     "autor": "William Shakespeare",
     "texto": "\"Seja como for o que penses, creio que é melhor dizê-lo com boas palavras.\""
+  },
+  {
+    "autor": "Paulo Coelho",
+    "texto": "\"As mais belas frases de amor são ditas no silêncio de um olhar.\""
+  },
+  {
+    "autor": "Carlos Drummond de Andrade",
+    "texto": "\"Ser feliz sem motivo é a mais autêntica forma de felicidade.\""
   }  
 ]
