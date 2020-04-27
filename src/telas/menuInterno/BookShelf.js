@@ -1,6 +1,12 @@
 //https://stackoverflow.com/questions/10024866/remove-object-from-array-using-javascript
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, View, Text, TouchableHighlight } from 'react-native';
+import { 
+  AsyncStorage,
+  ImageBackground, 
+  View, 
+  Text, 
+  TouchableHighlight 
+} from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { DotIndicator } from 'react-native-indicators';
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +20,7 @@ import cor from '../../estilos/cores';
 import bookshelf from '../../estilos/bookshelf';
 
 import { collection, usuarioUid } from '../../firebase/acoes';
-import { swiped_left, swiped_right } from '../../acoes/acoes_para_swiped';
+import { swiped_right } from '../../acoes/acoes_para_swiped';
 
 const frase='"Julgue pela capa e perca uma grande história."';
 const autor='Autor Desconhecido';
@@ -37,10 +43,22 @@ export default function Bookshelf() {
     }  
   }, []);
 
-  const swipedRight = (item) => {
-    swiped(item.uid);
-    swiped_right(item)
-    navigation.navigate('Mensagem');
+  const swipedRight = async(match) => {
+    swiped(match.uid);
+    swiped_right(match)
+    var criador = await AsyncStorage.getItem('usuarioLogado');
+    criador = JSON.parse(criador);
+    var uid = criador.uid + '_' + match.uid;
+    var item = {
+      nome: match.nome, 
+      imagem: match.imagem, 
+      uid: match.uid,
+      id_mensagem: uid,
+      logado_uid: criador.uid,
+      logado_nome: criador.nome,
+      logado_imagem: criador.imagem
+    }
+    navigation.navigate('Mensagem', { item })
   }  
 
   const swiped = (match_uid) => {

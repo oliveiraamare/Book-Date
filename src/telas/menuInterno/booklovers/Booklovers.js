@@ -3,6 +3,7 @@
 //https://stackoverflow.com/questions/47547465/how-to-render-one-react-native-component-after-another-component-had-rendered
 import React, { useEffect, useState } from 'react';
 import { 
+  AsyncStorage,
   ImageBackground, 
   Text, 
   TouchableHighlight, 
@@ -21,7 +22,6 @@ import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
 import booklovers from '../../../estilos/booklovers';
 
-import recuperar_mensagem from '../../../acoes/recuperar_dados_mensagem';
 import { collection, usuarioUid } from '../../../firebase/acoes';
 import { swiped_left, swiped_right } from '../../../acoes/acoes_para_swiped';
 
@@ -47,14 +47,25 @@ export default function Booklovers() {
 
     return () => {
       estante_de_usuarios();
-      //localizacao();
+      localizacao();
     }      
   }, []);   
 
-  const swipedRight = (item) => {
-    swiped_right(item);
-   // recuperar_mensagem();
-    //navigation.navigate('Mensagem', { item })
+  const swipedRight = async(match) => {
+    swiped_right(match);  
+    var criador = await AsyncStorage.getItem('usuarioLogado');
+    criador = JSON.parse(criador);
+    var uid = criador.uid + '_' + match.uid;
+    var item = {
+      nome: match.nome, 
+      imagem: match.imagem, 
+      uid: match.uid,
+      id_mensagem: uid,
+      logado_uid: criador.uid,
+      logado_nome: criador.nome,
+      logado_imagem: criador.imagem
+    }
+    navigation.navigate('Mensagem', { item })
   }  
   
   const refresh = (uid) => {
