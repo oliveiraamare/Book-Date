@@ -43,7 +43,7 @@ export default function Booklovers() {
       const usuarios_proximos = Object.assign([], snapshot.data());
       setDados_match(usuarios_proximos);
     });
-    //localizacao();
+    localizacao();
 
     return () => {
       estante_de_usuarios();

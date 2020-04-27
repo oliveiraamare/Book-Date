@@ -249,20 +249,7 @@ class Perfil extends Component {
                       opcao3={tres}
                     /> 
                 }
-              </View>   
-              <TouchableHighlight 
-                onPress={() => navigation.navigate('Mensagem')} 
-                style={perfilBooklover.botao}
-              >
-                <Icon.Button
-                  name='comments'
-                  backgroundColor='transparent'
-                  onPress={() => this.props.navigation.navigate('Mensagem')}
-                  style={perfilBooklover.icone}
-                >
-                  Conversar
-                </Icon.Button>
-              </TouchableHighlight>                
+              </View>           
             </View>                                           
           </ScrollView>
         </ImageBackground>

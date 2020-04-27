@@ -128,7 +128,6 @@ export default perfilBooklover = StyleSheet.create({
 		paddingLeft: 5,
 		paddingRight: 5,
 		paddingTop: 8,
-		marginBottom: 65,
     textAlign: 'justify'
 	},
 	preferenciasLiterariasResposta: {

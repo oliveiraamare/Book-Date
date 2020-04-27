@@ -36,21 +36,24 @@ export async function localizacao() {
 async function verifica_localizacao(latitude_nova, longitude_nova) {
   var usuario_logado = await AsyncStorage.getItem('usuarioLogado');
   usuario_logado = JSON.parse(usuario_logado);
-  var lastUpdated = usuario_logado.lastUpdated;
-  var latitude_antiga = usuario_logado.localizacao.U;
-  var longitude_antiga = usuario_logado.localizacao.k;
+  var uid = usuarioUid();
+  if(usuario_logado){
+    var lastUpdated = usuario_logado.lastUpdated;
+    var latitude_antiga = usuario_logado.localizacao.U;
+    var longitude_antiga = usuario_logado.localizacao.k;
 
-  var agora = new Date().getTime(); 
+    var agora = new Date().getTime(); 
 
-  if(lastUpdated < agora - (240*1000)) {
-    if((latitude_nova != latitude_antiga) || (longitude_nova != longitude_antiga)) {
-      const localizacao = new firebase.firestore.GeoPoint(latitude_nova, longitude_nova);
-      collection('usuarios').doc(usuarioUid())
-        .set({ 
-          localizacao,
-          lastUpdated: agora 
-        }, { merge: true });
-      usuario_logado_dados();
+    if(lastUpdated < agora - (240*1000)) {
+      if((latitude_nova != latitude_antiga) || (longitude_nova != longitude_antiga)) {
+        const localizacao = new firebase.firestore.GeoPoint(latitude_nova, longitude_nova);
+        collection('usuarios').doc(uid)
+          .set({ 
+            localizacao,
+            lastUpdated: agora 
+          }, { merge: true });
+        usuario_logado_dados();
+      }
     }
   }
 }
