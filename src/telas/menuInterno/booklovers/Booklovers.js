@@ -21,6 +21,7 @@ import compartilhado from '../../../estilos/compartilhado';
 import cor from '../../../estilos/cores';
 import booklovers from '../../../estilos/booklovers';
 
+import recuperar_mensagem from '../../../acoes/recuperar_dados_mensagem';
 import { collection, usuarioUid } from '../../../firebase/acoes';
 import { swiped_left, swiped_right } from '../../../acoes/acoes_para_swiped';
 
@@ -52,7 +53,8 @@ export default function Booklovers() {
 
   const swipedRight = (item) => {
     swiped_right(item);
-    navigation.navigate('Mensagem', { item })
+   // recuperar_mensagem();
+    //navigation.navigate('Mensagem', { item })
   }  
   
   const refresh = (uid) => {

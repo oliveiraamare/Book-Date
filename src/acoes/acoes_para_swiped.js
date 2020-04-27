@@ -27,7 +27,9 @@ const swiped_left = (item) => {
 const swiped_right = async(item) => {
   var criador = await AsyncStorage.getItem('usuarioLogado');
   criador = JSON.parse(criador);
+
   swiped(item);
+  var uid = criador.uid + '_' + item.uid;
   var enviar_mensagem = {
     criador: {
       criador_uid: criador.uid,
@@ -43,9 +45,10 @@ const swiped_right = async(item) => {
       criador.uid,
       item.uid
     ],
+    id_mensagem: uid,
     ultima_interacao: firebase.firestore.FieldValue.serverTimestamp(),
   }
-  collection('mensagem').doc().set(enviar_mensagem, { merge: true })
+  collection('mensagem').doc(uid).set(enviar_mensagem, { merge: true })
     .then(() => console.log('As informações foram salvas na collection mensagem.'))
     .catch(error => console.log('Não foi possível adicionar as informações na collection mensagem. ', error.message))
 }  

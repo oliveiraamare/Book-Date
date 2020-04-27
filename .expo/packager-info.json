@@ -1,10 +1,10 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 4848,
+  "packagerPid": 5168,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://gp-vaf.oliveiraamare.bookdate.exp.direct",
   "packagerNgrokUrl": "https://packager.gp-vaf.oliveiraamare.bookdate.exp.direct",
-  "ngrokPid": 14764,
+  "ngrokPid": 6848,
   "webpackServerPort": null
 }

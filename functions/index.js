@@ -149,7 +149,7 @@ exports.update_usuarios_proximos = functions.firestore
     const usuario_modificado = change.after.data();
     const usuario_sem_modificacao = change.before.data();
 
-    const houve_modificacao_latidude = (
+    const houve_modificacao_latitude = (
       usuario_sem_modificacao.localizacao.latitude !== usuario_modificado.localizacao.latitude ? true : false
     );
   
@@ -161,7 +161,7 @@ exports.update_usuarios_proximos = functions.firestore
       return buscar_usuarios(usuario_modificado)
     } 
 
-    if ( houve_modificacao_latidude || houve_modificacao_longitude ) {
+    if ( houve_modificacao_latitude || houve_modificacao_longitude ) {
       return buscar_usuarios(usuario_modificado)
     }
     return true

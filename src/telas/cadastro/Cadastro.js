@@ -224,7 +224,7 @@ class Cadastro extends Component {
   }
 
   email() {
-    const email_pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const email_pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})*/;
     if (!email_pattern.test(this.state.email)) {
       Alert.alert('Ops', 'Digite um e-mail válido!');
       return false

@@ -22,12 +22,12 @@ export default function Booklovers() {
   
   const usuario_logado_uid = usuarioUid();
 
-  const criador_uid = collection('mensagem').where('id_conversa', 'array-contains',usuario_logado_uid);
+  const recupera_mensagem = collection('mensagem').where('id_conversa', 'array-contains',usuario_logado_uid).orderBy('ultima_interacao', 'desc');
  
   const navigation = useNavigation();
 
   useEffect(() => {   
-    const criador_mensagem =  criador_uid.onSnapshot(querySnapshot => {
+    const criador_mensagem =  recupera_mensagem.onSnapshot(querySnapshot => {
       var dados_match =  [];
       querySnapshot.forEach(doc => {
         var dados = doc.data();
@@ -35,13 +35,21 @@ export default function Booklovers() {
           dados_match.push({
             nome: dados.participante.participante_nome, 
             imagem: dados.participante.participante_imagem, 
-            uid: dados.participante.participante_uid
+            uid: dados.participante.participante_uid,
+            id_mensagem: dados.id_mensagem,
+            logado_uid: dados.criador.criador_uid,
+            logado_nome: dados.criador.criador_nome,
+            logado_imagem: dados.criador.criador_imagem
           }); 
         } else if ( dados.participante.participante_uid == usuario_logado_uid ){
           dados_match.push({
             nome: dados.criador.criador_nome, 
             imagem: dados.criador.criador_imagem, 
-            uid: dados.criador.criador_uid
+            uid: dados.criador.criador_uid,
+            id_mensagem: dados.id_mensagem,
+            logado_uid: dados.participante.participante_uid,
+            logado_nome: dados.participante.participante_nome,
+            logado_imagem: dados.participante.participante_imagem
           }); 
         }
       });
