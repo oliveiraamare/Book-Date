@@ -81,8 +81,7 @@ class Preferencias extends Component {
   }
 
   sinopse() {
-    const sinopse_pattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-    if (!sinopse_pattern.test(this.state.sinopse)) {
+    if ((this.state.sinopse).length == 0 || (this.state.sinopse).trim().length == 0) {
       Alert.alert('Ops', 'Nos diga a sinopse da sua vida!');
       return false
     } else {
@@ -116,6 +115,7 @@ class Preferencias extends Component {
                   Fale um pouco sobre as suas peculiaridades
                 </Text>
                 <TextoMultilinha
+                  autoCapitalize='sentences'
                   inputStyle={preferencias.citacao}
                   placeHolder='Qual a sua citação favorita?'   
                   multiline={true}
@@ -125,6 +125,7 @@ class Preferencias extends Component {
                   onChangeText={citacao => this.setState({ citacao })}
                 />
                 <TextoMultilinha
+                  autoCapitalize='sentences'
                   inputStyle={preferencias.citacao}
                   placeHolder='Quais são as suas singularidades?' 
                   multiline={true}
@@ -134,6 +135,7 @@ class Preferencias extends Component {
                   onChangeText={singularidade => this.setState({ singularidade })}
                 />
                 <TextoMultilinha
+                  autoCapitalize='sentences'
                   inputStyle={preferencias.citacao}
                   placeHolder='Se a sua vida fosse um livro, qual seria a sinopse?*' 
                   multiline={true}

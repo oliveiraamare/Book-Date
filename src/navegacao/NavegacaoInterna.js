@@ -62,7 +62,7 @@ function HomeTabs({ navigation, route }) {
           }}
       />
       <Tab.Screen 
-        name="Lista" component={Lista} 
+        name="Mensagem" component={Lista} 
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="forum-outline" color={color} size={size} />

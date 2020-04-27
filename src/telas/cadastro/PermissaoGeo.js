@@ -56,10 +56,10 @@ class PermissaoGeo extends Component {
     };
 
     if (status == 'granted') {
-      /*setTimeout(() => {
+      setTimeout(() => {
         this.salvarGeo(),
         this.props.navigation.navigate('Regras');
-      }, 4000);*/
+      }, 4000);
     };
 
     let location = await Location.getCurrentPositionAsync({

@@ -123,6 +123,7 @@ class Cadastro extends Component {
                     Fale um pouco sobre você*
                   </Text>
                   <TextoInput
+                    autoCapitalize='sentences'
                     inputStyle={cadastro.textInput}
                     placeHolder='Como se chama?' 
                     maxLength={20}
@@ -136,6 +137,7 @@ class Cadastro extends Component {
                     dateInputStyle={cadastro.dateInput}
                   />     
                   <TextoInput
+                    autoCapitalize='sentences'
                     inputStyle={cadastro.textInput}
                     placeHolder='Qual é a sua cidade natal?'
                     maxLength={20}
