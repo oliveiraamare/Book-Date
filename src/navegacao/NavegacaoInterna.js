@@ -93,7 +93,7 @@ export default function NavegacaoInterna() {
         <Stack.Screen name="EditarPreferencias" component={EditarPreferencias} />
         <Stack.Screen name="EditarTopTres" component={EditarTopTres} />
         <Stack.Screen name="DeletarConta" component={DeletarConta} />
-        <Stack.Screen name="Mensagem" component={Mensagem} />
+        <Stack.Screen name="Chat" component={Mensagem} />
         <Stack.Screen name="Perfil" component={Perfil} />
         <Stack.Screen name="PerfilBooklover" component={PerfilBooklover}/>
         <Stack.Screen name="SobreNos" component={SobreNos} />

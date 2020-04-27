@@ -111,7 +111,7 @@ export default function Booklovers() {
                   leftAvatar={{ source: { uri: item.imagem }, size: 60 }}
                   title={item.nome}
                   titleStyle={lista.nome}
-                  onPress={() => navigation.navigate('Mensagem', { item })}
+                  onPress={() => navigation.navigate('Chat', { item })}
                   bottomDivider
                   chevron
                   containerStyle={lista.listItem}

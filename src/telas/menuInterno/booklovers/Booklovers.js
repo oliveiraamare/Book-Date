@@ -65,7 +65,7 @@ export default function Booklovers() {
       logado_nome: criador.nome,
       logado_imagem: criador.imagem
     }
-    navigation.navigate('Mensagem', { item })
+    navigation.navigate('Chat', { item })
   }  
   
   const refresh = (uid) => {

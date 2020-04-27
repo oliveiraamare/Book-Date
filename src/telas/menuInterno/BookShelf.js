@@ -58,7 +58,7 @@ export default function Bookshelf() {
       logado_nome: criador.nome,
       logado_imagem: criador.imagem
     }
-    navigation.navigate('Mensagem', { item })
+    navigation.navigate('Chat', { item })
   }  
 
   const swiped = (match_uid) => {
