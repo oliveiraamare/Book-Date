@@ -36,8 +36,8 @@ export async function localizacao() {
 async function verifica_localizacao(latitude_nova, longitude_nova) {
   var usuario_logado = await AsyncStorage.getItem('usuarioLogado');
   usuario_logado = JSON.parse(usuario_logado);
-  var uid = usuarioUid();
-  if(usuario_logado){
+  if(usuario_logado && usuarioUid()){
+    var uid = usuarioUid();
     var lastUpdated = usuario_logado.lastUpdated;
     var latitude_antiga = usuario_logado.localizacao.U;
     var longitude_antiga = usuario_logado.localizacao.k;

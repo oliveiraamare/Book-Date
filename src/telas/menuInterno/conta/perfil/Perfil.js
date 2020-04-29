@@ -48,7 +48,7 @@ class Perfil extends Component {
     return (    
       <View style={compartilhado.container}> 
         <View style={compartilhado.statusBar}/>
-        <ImageBackground style={compartilhado.imagemBackground}> 
+        <ImageBackground style={[compartilhado.imagemBackground, compartilhado.imagemTransparente]}> 
           <ScrollView style={perfil.scrollView}>        
             <Image
               source={require('../../../../imagens/perfil.jpg')} 

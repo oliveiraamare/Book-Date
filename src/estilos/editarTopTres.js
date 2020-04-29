@@ -1,17 +1,16 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StatusBar, StyleSheet } from "react-native";
 import cor from './cores';
 import compartilhado from "./compartilhado";
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
-const DIMENSION_HEIGHT = Dimensions.get('window').height;
+const DIMENSION_HEIGHT = Dimensions.get('screen').height !== Dimensions.get('window').height && StatusBar.currentHeight > 24 ? (Dimensions.get('window').height + 56) : Dimensions.get('window').height;
 
 const editarTopTres = StyleSheet.create({
   info:{
     marginTop: 10
   },
 	scrollView: { 
-		marginHorizontal: 0 ,
-		height: DIMENSION_HEIGHT +150,
+		height: DIMENSION_HEIGHT
   },
   textInput: {    
     alignSelf: 'flex-start',

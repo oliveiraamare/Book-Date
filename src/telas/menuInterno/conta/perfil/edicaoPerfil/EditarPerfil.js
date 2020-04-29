@@ -73,10 +73,7 @@ class Perfil extends Component {
   render() {
     return (    
       <View style={compartilhado.container}>  
-        <ImageBackground 
-          source={require('../../../../../imagens/editarPerfil.jpg')}
-          style={compartilhado.imagemBackground}
-        > 
+        <View style={compartilhado.imagemTransparente}> 
           <AppBarHeader 
             onPress={() => 
               this.handleUpdate()
@@ -251,7 +248,7 @@ class Perfil extends Component {
               </View>
             </KeyboardAvoidingView>
           </ScrollView>
-        </ImageBackground>
+        </View>
       </View>
     );
   }

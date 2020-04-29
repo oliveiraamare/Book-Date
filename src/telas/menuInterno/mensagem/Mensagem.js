@@ -101,7 +101,7 @@ export default function Mensagem() {
         style={compartilhado.imagemBackground}
       >
         <AppBarHeader 
-          onPress={() => navigation.navigate('Lista')} 
+          onPress={() => navigation.navigate('Mensagem')} 
           title={item.nome} 
         />   
         <KeyboardAvoidingView behavior='height' style={{flex:1}}>

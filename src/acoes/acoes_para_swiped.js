@@ -12,7 +12,7 @@ const swiped = (item) => {
   const usuarios_manipulados = Object.assign({}, salvar_listagem_usuarios);
   collection('usuarios').doc(usuarioUid())
     .collection('usuarios_swiped').doc(usuarioUid())
-    .set(usuarios_manipulados);
+    .set(usuarios_manipulados, {merge: true});
 }
 
 const swiped_left = (item) => {
@@ -29,7 +29,18 @@ const swiped_right = async(item) => {
   criador = JSON.parse(criador);
 
   swiped(item);
+  
   var uid = criador.uid + '_' + item.uid;
+  var verifica_existente = item.uid + '_' + criador.uid;
+
+  collection('mensagem').doc(verifica_existente).get().then(snapshot => {
+    if (!snapshot.exists) {
+      salvar_mensagem(criador, item, uid)
+    }
+  })
+}  
+
+const salvar_mensagem = (criador, item, uid) => {
   var enviar_mensagem = {
     criador: {
       criador_uid: criador.uid,
@@ -51,7 +62,7 @@ const swiped_right = async(item) => {
   collection('mensagem').doc(uid).set(enviar_mensagem, { merge: true })
     .then(() => console.log('As informações foram salvas na collection mensagem.'))
     .catch(error => console.log('Não foi possível adicionar as informações na collection mensagem. ', error.message))
-}  
+}
 
 export {
   swiped_left, swiped_right

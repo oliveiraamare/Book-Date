@@ -36,7 +36,7 @@ export default function Booklovers() {
   const thats_all = '"That\'s all folks!"';
 
   const navigation = useNavigation();
-
+ 
   useEffect(() => {
     refresh(usuarioUid());
     const estante_de_usuarios = firestore.onSnapshot(snapshot => {
@@ -56,16 +56,32 @@ export default function Booklovers() {
     var criador = await AsyncStorage.getItem('usuarioLogado');
     criador = JSON.parse(criador);
     var uid = criador.uid + '_' + match.uid;
-    var item = {
-      nome: match.nome, 
-      imagem: match.imagem, 
-      uid: match.uid,
-      id_mensagem: uid,
-      logado_uid: criador.uid,
-      logado_nome: criador.nome,
-      logado_imagem: criador.imagem
-    }
-    navigation.navigate('Chat', { item })
+    var verifica_existente = match.uid + '_' + criador.uid;
+
+    collection('mensagem').doc(verifica_existente).get().then(snapshot => {
+      if (!snapshot.exists) {
+        var item = {
+          nome: match.nome, 
+          imagem: match.imagem, 
+          uid: match.uid,
+          id_mensagem: uid,
+          logado_uid: criador.uid,
+          logado_nome: criador.nome,
+          logado_imagem: criador.imagem
+        }
+      } else {
+        var item = {
+          nome: match.nome, 
+          imagem: match.imagem, 
+          uid: match.uid,
+          id_mensagem: verifica_existente,
+          logado_uid: criador.uid,
+          logado_nome: criador.nome,
+          logado_imagem: criador.imagem
+        }
+      }
+      navigation.navigate('Chat', { item });
+    })    
   }  
   
   const refresh = (uid) => {

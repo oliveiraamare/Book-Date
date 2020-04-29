@@ -45,25 +45,16 @@ class EditarTopTres extends Component {
   render() {
     return (    
       <View style={compartilhado.container}>  
-        <ImageBackground 
-          source={require('../../../../../imagens/editarPerfil.jpg')}
-          style={compartilhado.imagemBackground}
-        > 
+        <View style={compartilhado.imagemTransparente}> 
           <AppBarHeader 
-            onPress={() => 
-              this.handleUpdate()
-            } 
+            onPress={() => this.handleUpdate()} 
             title={"Editar Top Três"} 
           />        
           <RootToaster 
             defaultDuration={2000} defaultColor={cor.amarelo} 
           />        
-          <ScrollView style={editarTopTres.scrollView}>  
-            <KeyboardAvoidingView 
-              style={{justifyContent: "flex-end", flex: 1 }} 
-              behavior='padding' 
-              enabled 
-            >    
+          <KeyboardAvoidingView behavior='height' style={{flex:1}}> 
+            <ScrollView style={editarTopTres.scrollView}>  
               <View style={editarTopTres.info}>
                 <Text style={editarTopTres.texto}>Meu top 3 de autores</Text>   
                 <TopPreferencias
@@ -89,7 +80,6 @@ class EditarTopTres extends Component {
                 <TopPreferencias
                   nomeIcone={'numeric-1'} 
                   inputStyle={editarTopTres.textInput}
-                  maxLength={20}
                   value={this.state.genero0}
                   onChangeText={genero0 => this.setState({ genero0 })}
                 />
@@ -109,7 +99,6 @@ class EditarTopTres extends Component {
                 <TopPreferencias
                   nomeIcone={'numeric-1'} 
                   inputStyle={editarTopTres.textInput}
-                  maxLength={20}
                   value={this.state.livro0}
                   onChangeText={livro0 => this.setState({ livro0 })}
                 />
@@ -126,9 +115,10 @@ class EditarTopTres extends Component {
                   onChangeText={livro2 => this.setState({ livro2 })}
                 />
               </View>
-            </KeyboardAvoidingView>
           </ScrollView>
-        </ImageBackground>
+          </KeyboardAvoidingView>
+
+        </View>
       </View>
     );
   }

@@ -332,7 +332,7 @@ async function usuarios_swiped(usuarios_proximos, uid) {
     .then(snapshot => {
       if (snapshot.exists) {
         const usuarios_swiped = Object.assign([], snapshot.data());
-        return compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, uid)
+        return compara_proximos_e_manipulados(usuarios_proximos, usuarios_swiped, uid)
       } else {
         return console.log('Não existem usuarios na estante');
       }
@@ -340,7 +340,7 @@ async function usuarios_swiped(usuarios_proximos, uid) {
     .catch(error => { console.log('Não foi possível retornar os usuarios_swiped. ', error.message)})
 }
 
-async function compara_proximos_e_estante(usuarios_proximos, usuarios_swiped, uid) {
+async function compara_proximos_e_manipulados(usuarios_proximos, usuarios_swiped, uid) {
   //Find values that are in result2 but not in result1
   const usuarios_existentes = usuarios_proximos.filter(novo => {
     return !usuarios_swiped.some(existente => {
