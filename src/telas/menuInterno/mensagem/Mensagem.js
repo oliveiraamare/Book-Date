@@ -115,7 +115,6 @@ export default function Mensagem() {
               name: item.logado_nome,
               avatar: item.logado_imagem
             }}
-            onPressAvatar={messages => onSend(messages)}
             timeTextStyle={{left:{color:'green'},right:{color:'red'}}}
           />
        </KeyboardAvoidingView>   

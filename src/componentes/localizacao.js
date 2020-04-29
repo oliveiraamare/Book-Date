@@ -5,7 +5,7 @@ import * as Location from 'expo-location';
 import  * as firebase from 'firebase';
 import '@firebase/firestore';
 
-import { collection, usuarioUid } from '../firebase/acoes';
+import { collection } from '../firebase/acoes';
 import { usuario_logado_dados } from '../acoes/dados_usuario_logado';
 
 const book_date = 'background-location-task';
@@ -36,8 +36,8 @@ export async function localizacao() {
 async function verifica_localizacao(latitude_nova, longitude_nova) {
   var usuario_logado = await AsyncStorage.getItem('usuarioLogado');
   usuario_logado = JSON.parse(usuario_logado);
-  if(usuario_logado && usuarioUid()){
-    var uid = usuarioUid();
+  if(usuario_logado){
+    var uid = usuario_logado.uid;
     var lastUpdated = usuario_logado.lastUpdated;
     var latitude_antiga = usuario_logado.localizacao.U;
     var longitude_antiga = usuario_logado.localizacao.k;
