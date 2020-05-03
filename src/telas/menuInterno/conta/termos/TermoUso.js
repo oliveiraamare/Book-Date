@@ -32,30 +32,72 @@ class TermoUso extends Component {
             title={"Termos de Uso"} 
           />
           <ScrollView style={termos.scrollView}>
-            <Text style={termos.paragrafo}>
-              Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
-            </Text>
-            <Text style={termos.paragrafo}>
-              The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
-            </Text>
-            <Text style={termos.paragrafo}>
-              {'\u2022'} The content of the pages of this website is for your general information and use only. It is subject to change without notice.
-            </Text>
-            <Text style={termos.paragrafo}>
-              {'\u2022'} This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
-            </Text>
-            <Text style={termos.paragrafo}>
-              {'\u2022'} Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
-            </Text>
-            <Text style={termos.paragrafo}>
-              {'\u2022'} Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
-            </Text>
-            <Text style={termos.paragrafo}>
-              {'\u2022'} Your use of this website and any dispute arising out of such use of the website is subject to the laws of England, Northern Ireland, Scotland and Wales.
-            </Text>
-            <Text style={termos.paragrafo}>
-              The use of this website is subject to the following terms of use
-            </Text>
+          <Text style={termos.paragrafo}>
+               Bem vindx ao nossx aplicativo Book Date. 
+              </Text>
+              <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+                Ao utilizar nosso aplicativo você concorda em se vincular com o nossx Termo e Politica de Privacidade. Caso não concorde com os termos deste contrato, não utilize este serviço. Este contrato pode ser alterado conforme a atualização do aplicativo e sua versão mais recente pode ser encontrada na Conta do aplicativo. 
+              </Text>
+              <Text style={termos.paragrafo}>
+                Abaixo algumas informações sobre sua conta:
+              </Text>
+              <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+                {'\u2022'} Sua idade mínima para criar uma conta deve ser de 18 anos. Com isso, prezamos com sua honestidade na hora de criar sua conta.
+              </Text>
+              <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+                {'\u2022'} Caso faça a conta, você nos autoriza a acessar informações do seu perfil.
+              </Text>
+              <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+                {'\u2022'} Sobre sua foto de perfil, aconselhamos utilizar foto apenas sua. Qualquer foto de carater pornográfico e/ou que viole a regra de idade minima será excluída do app.
+              </Text>
+              <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+                {'\u2022'} É de responsabilidade SUA manter seus dados de login e senha de forma sigilosa para se conectar ao Book Date e também pelas atividades dentro do mesmo.
+              </Text>
+              <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+                {'\u2022'} O usuário tem plena responsabilidade pela verificação da identidade das pessoas com quem ele marca encontros reais com pessoas fora do aplicativo. o Book Date NÃO se responsabiliza de maneira alguma com qualquer incidente que venha ocorrer fora do mesmo.
+              </Text>
+              <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+                {'\u2022'} Nós da equipe temos o total direito de excluir sua conta caso você viole alguma de nossas regras de uso. 
+              </Text>
+              <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+				        Caso você, membro do aplicativo Book Date, veja a violação de alguma dessas regras favor entrar em contato pelo e-mail bookdate.app@gmail.com	
+              </Text>
+			        <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+			        	Agradecemos a compreensão de todos. Divirta-se.
+              </Text>
+			      <Text style={termos.paragrafo}>
+                
+              </Text>
+              <Text style={termos.paragrafo}>
+				      Equipe Book Date.
+              </Text>
           </ScrollView>
         </ImageBackground>
       </View>

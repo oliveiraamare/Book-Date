@@ -20,7 +20,7 @@ export default lista = StyleSheet.create({
     borderBottomWidth: 0.18
   },
   listItem: {
-    backgroundColor: cor.roxo
+    backgroundColor: cor.creme
   },
   nome: {
     fontFamily:compartilhado.fontePadrao.fontFamily,

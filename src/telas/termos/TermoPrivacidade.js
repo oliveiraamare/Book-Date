@@ -38,28 +38,71 @@ class TermoPrivacidade extends Component {
             }}
             >
               <Text style={styles.paragrafo}>
-                Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+              Política de privacidade para Book Date.
               </Text>
               <Text style={styles.paragrafo}>
-                The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+				
+               </Text>
+              <Text style={styles.paragrafo}>
+                Todas as suas informações pessoais recolhidas, serão usadas para o ajudar a tornar a sua visita no nosso site o mais produtiva e agradável possível.  
+              </Text>
+			         <Text style={styles.paragrafo}>
+               A garantia da confidencialidade dos dados pessoais dos utilizadores do nosso site é importante para o Book Date.
+
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+                Abaixo algumas informações sobre seus direitos como usuários e os dados que serão coletados.
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+				
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+                {'\u2022'} Seus dados serão coletados de forma transparente e leal apenas para finalidades determinadas e legitimas às necessidades do objetivo para quais eles será utilizados.
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+				
+               </Text>
+              <Text style={styles.paragrafo}>
+                {'\u2022'} Caso faça a conta, você nos autoriza a acessar informações do seu perfil.
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} Your use of this website and any dispute arising out of such use of the website is subject to the laws of England, Northern Ireland, Scotland and Wales.
+				
               </Text>
               <Text style={styles.paragrafo}>
-                The use of this website is subject to the following terms of use
+                {'\u2022'} Para seu funcionamento, o Book Date precisará ter acesso a algumas funcionalidades do seu celular. Sem as permissões abaixo o aplicativo pode não funcionar de forma correta.
+              </Text>
+              <Text style={styles.paragrafo}>
+				
+              </Text>
+              <Text style={styles.paragrafo}>
+						{'\u2022'} Câmera: com essa permissão o usuário poderá tirar foto para por em seu perfil.
+              </Text>
+              <Text style={styles.paragrafo}>
+				
+            </Text>
+			      <Text style={styles.paragrafo}>
+						{'\u2022'} Album: caso não queira tirar foto, com essa permissão o usuário poderá escolher uma foto de seu album para o perfil.
+              </Text>
+              <Text style={styles.paragrafo}>
+				
+              </Text>
+              <Text style={styles.paragrafo}>
+						{'\u2022'} GPS: tendo em vista que a função principal do Book Date é buscar pessoas atraves de sua localização, essa permissão nos dá o direito de saber sua localização atual para realizar um busca de pessoas próximas ao mesmo.
+              </Text>
+              <Text style={styles.paragrafo}>
+				
+              </Text>
+              <Text style={styles.paragrafo}>
+				        O Book Date informa que nunca iremos solicitar sua senha pessoal e que, caso queira exluir sua conta, estaremos excluindo todos os seus dados de nosso sistema.
+              </Text>
+              <Text style={styles.paragrafo}>
+                Agradecemos pelo uso do nosso app e que qualquer dúvida, reclamação ou sugestões entre em contato com e-mail bookdate.app@gmail.com
+              </Text>
+			        <Text style={styles.paragrafo}>
+				
+              </Text>
+			   <Text style={styles.paragrafo}>
+				Equipe Book Date.
               </Text>
             </ScrollView>
             <TouchableOpacity 
