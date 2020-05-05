@@ -3,7 +3,7 @@ const cor = {
   creme: '#F6C95C',
   cinza: '#CCCCCC',
   cinzaEscuro: '#585958',
-  laranja: ' #FAAC58', //#FF9500
+  laranja: '#ff9500',
   pagina: '#f5f5dc',
   pagina_transparente: 'rgba(245,245,220, 0.60)',
   preto: '#000000',

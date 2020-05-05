@@ -156,12 +156,20 @@
     "texto": "\"Um grande amor vale anos de espera.\""
   },
   {
+    "autor": "A Cabana",
+    "texto": "\"Crescer significa mudar e mudar envolve riscos, uma passagem do conhecido para o desconhecido.\""
+  },
+  {
     "autor": "A Coroa",
     "texto": "\"Às vezes, se apaixonar é a atitude mais corajosa que alguém pode ter.\""
   },
   {
     "autor": "Crônica de uma morte anunciada",
     "texto": "\"Também o amor se aprende.\""
+  },
+  {
+    "autor": "A Cabana",
+    "texto": "\"O amor não força nada, ao contrário, ele abre os caminhos.\""
   },
   {
     "autor": "Fernando Pessoa",
@@ -202,6 +210,10 @@
   {
     "autor": "Paulo Coelho",
     "texto": "\"As mais belas frases de amor são ditas no silêncio de um olhar.\""
+  },
+  {
+    "autor": "Dom Casmurro",
+    "texto": "\"Mas a saudade é isso mesmo; é o passar e repassar das memórias antigas.\""
   },
   {
     "autor": "Carlos Drummond de Andrade",

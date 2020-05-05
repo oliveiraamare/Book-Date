@@ -40,7 +40,7 @@ class SobreNos extends Component {
                 Esperamos que todxs os usuários gostem do Book Date assim como nós e o usem com muito amor. 
               </Text>
 			      <Text style={sobreNos.paragrafo}>
-                Um agradecimento especial ao nosso orientador Antonio Bezzera que apoiou nossa loucura e nos ajudou no andamento do projeto.
+                Um agradecimento especial a nossas familias que nos apoiou durante toda nossa vida acadêmica. 
               </Text>
 			       <Text style={sobreNos.paragrafo}>
                 Equipe Book Date.
