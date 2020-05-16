@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "BookDate",
+    "name": "Book Date",
     "slug": "BookDate",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -20,6 +20,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Aplicativo sendo desenvolvido, não compartilhem por enquanto."
+    "description": "Aplicativo de relacionamento, não somente do tipo amoroso, baseado em livros e literatura. Ele busca pessoas próximas ao usuário logado, mostrando a este o perfil e as preferências literárias dos outros usuários como forma de incentivar a troca de mensagens e gostos. É uma forma de aproximar os bibliófilos sem ter que esperar a próxima edição da Bienal do Livro.\n"
   }
 }

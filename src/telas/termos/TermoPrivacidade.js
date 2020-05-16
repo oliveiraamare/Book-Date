@@ -25,84 +25,53 @@ class TermoPrivacidade extends Component {
           style={compartilhado.imagemBackground}
         >
           <View style={compartilhado.imagemTransparente}>
-            <Text style={styles.titulo}>
-            Políticas de Privacidade
-            </Text>            
+            <Text style={styles.titulo}>Políticas de Privacidade</Text>            
             <ScrollView 
-            style={styles.scrollView}
-            onScroll={({nativeEvent}) => {
-              if (scrollPertoDoBotao(nativeEvent)) {
-                this.setState({
-                  accepted: true
-                })}
-            }}
+              style={styles.scrollView}
+              onScroll={({nativeEvent}) => {
+                if (scrollPertoDoBotao(nativeEvent)) {
+                  this.setState({ accepted: true })}
+              }}
             >
               <Text style={styles.paragrafo}>
-              Política de privacidade para Book Date.
+                {"\n"}Todas as suas informações pessoais recolhidas, serão usadas para o ajudar a tornar 
+                a sua visita no nosso site o mais produtiva e agradável possível.  {"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-				
-               </Text>
-              <Text style={styles.paragrafo}>
-                Todas as suas informações pessoais recolhidas, serão usadas para o ajudar a tornar a sua visita no nosso site o mais produtiva e agradável possível.  
-              </Text>
-			         <Text style={styles.paragrafo}>
-               A garantia da confidencialidade dos dados pessoais dos utilizadores do nosso site é importante para o Book Date.
-
+                A garantia da confidencialidade dos dados pessoais dos utilizadores do nosso site é importante para o Book Date.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                Abaixo algumas informações sobre seus direitos como usuários e os dados que serão coletados.
+                Abaixo algumas informações sobre seus direitos como usuários e os dados que serão coletados.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-				
+                {'\u2022'} Seus dados serão coletados de forma transparente e leal apenas para finalidades determinadas 
+                e legitimas às necessidades do objetivo para quais eles será utilizados.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} Seus dados serão coletados de forma transparente e leal apenas para finalidades determinadas e legitimas às necessidades do objetivo para quais eles será utilizados.
+                {'\u2022'} Caso faça a conta, você nos autoriza a acessar informações do seu perfil.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-				
-               </Text>
-              <Text style={styles.paragrafo}>
-                {'\u2022'} Caso faça a conta, você nos autoriza a acessar informações do seu perfil.
+                {'\u2022'} Para seu funcionamento, o Book Date precisará ter acesso a algumas funcionalidades do seu celular. 
+                Sem as permissões abaixo o aplicativo pode não funcionar de forma correta.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-				
+                {'\u2022'} Câmera: com essa permissão o usuário poderá tirar foto para por em seu perfil.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} Para seu funcionamento, o Book Date precisará ter acesso a algumas funcionalidades do seu celular. Sem as permissões abaixo o aplicativo pode não funcionar de forma correta.
+                {'\u2022'} Album: caso não queira tirar foto, com essa permissão o usuário poderá escolher uma foto de seu album para o perfil.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-				
+                {'\u2022'} GPS: tendo em vista que a função principal do Book Date é buscar pessoas atraves de sua localização, 
+                essa permissão nos dá o direito de saber sua localização atual para realizar um busca de pessoas próximas ao mesmo.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-						{'\u2022'} Câmera: com essa permissão o usuário poderá tirar foto para por em seu perfil.
+                O Book Date informa que nunca iremos solicitar sua senha pessoal e que, caso queira exluir sua conta, estaremos excluindo todos os seus dados de nosso sistema.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-				
-            </Text>
-			      <Text style={styles.paragrafo}>
-						{'\u2022'} Album: caso não queira tirar foto, com essa permissão o usuário poderá escolher uma foto de seu album para o perfil.
+                Agradecemos pelo uso do nosso app e que qualquer dúvida, reclamação ou sugestões entre em contato com e-mail bookdate.app@gmail.com{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-				
-              </Text>
-              <Text style={styles.paragrafo}>
-						{'\u2022'} GPS: tendo em vista que a função principal do Book Date é buscar pessoas atraves de sua localização, essa permissão nos dá o direito de saber sua localização atual para realizar um busca de pessoas próximas ao mesmo.
-              </Text>
-              <Text style={styles.paragrafo}>
-				
-              </Text>
-              <Text style={styles.paragrafo}>
-				        O Book Date informa que nunca iremos solicitar sua senha pessoal e que, caso queira exluir sua conta, estaremos excluindo todos os seus dados de nosso sistema.
-              </Text>
-              <Text style={styles.paragrafo}>
-                Agradecemos pelo uso do nosso app e que qualquer dúvida, reclamação ou sugestões entre em contato com e-mail bookdate.app@gmail.com
-              </Text>
-			        <Text style={styles.paragrafo}>
-				
-              </Text>
-			   <Text style={styles.paragrafo}>
-				Equipe Book Date.
+                Equipe Book Date.
               </Text>
             </ScrollView>
             <TouchableOpacity 

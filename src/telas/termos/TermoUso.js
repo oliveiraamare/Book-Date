@@ -25,83 +25,55 @@ class TermoUso extends Component {
           style={compartilhado.imagemBackground}
         >
           <View style={compartilhado.imagemTransparente}>
-            <Text style={styles.titulo}>
-              Termos de Uso
-            </Text>            
+            <Text style={styles.titulo}>Termos de Uso</Text>            
             <ScrollView 
-            style={styles.scrollView}
-            onScroll={({nativeEvent}) => {
-              if (scrollPertoDoBotao(nativeEvent)) {
-                this.setState({
-                  accepted: true
-                })}
-            }}
+              style={styles.scrollView}
+              onScroll={({nativeEvent}) => {
+                if (scrollPertoDoBotao(nativeEvent)) {
+                  this.setState({ accepted: true })}
+              }}
             >
-			         <Text style={styles.paragrafo}>
-               Bem vindx ao nossx aplicativo Book Date. 
+              <Text style={styles.paragrafo}>
+                {"\n"}Bem vindx ao nossx aplicativo Book Date. {"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                
+                Ao utilizar nosso aplicativo você concorda em se vincular com o nossx Termo e Politica de Privacidade. 
+                Caso não concorde com os termos deste contrato, não utilize este serviço. 
+                Este contrato pode ser alterado conforme a atualização do aplicativo e sua versão mais recente pode ser encontrada na Conta do aplicativo. {"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                Ao utilizar nosso aplicativo você concorda em se vincular com o nossx Termo e Politica de Privacidade. Caso não concorde com os termos deste contrato, não utilize este serviço. Este contrato pode ser alterado conforme a atualização do aplicativo e sua versão mais recente pode ser encontrada na Conta do aplicativo. 
+                Abaixo algumas informações sobre sua conta: {"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                Abaixo algumas informações sobre sua conta:
+                {'\u2022'} Sua idade mínima para criar uma conta deve ser de 18 anos. 
+                Com isso, prezamos com sua honestidade na hora de criar sua conta.
               </Text>
               <Text style={styles.paragrafo}>
-                
+                {'\u2022'} Caso faça a conta, você nos autoriza a acessar informações do seu perfil. {"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} Sua idade mínima para criar uma conta deve ser de 18 anos. Com isso, prezamos com sua honestidade na hora de criar sua conta.
+                {'\u2022'} Sobre sua foto de perfil, aconselhamos utilizar foto apenas sua. 
+                Qualquer foto de carater pornográfico e/ou que viole a regra de idade minima será excluída do app.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                
+                {'\u2022'} É de responsabilidade SUA manter seus dados de login e senha de forma sigilosa 
+                para se conectar ao Book Date e também pelas atividades dentro do mesmo. {"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} Caso faça a conta, você nos autoriza a acessar informações do seu perfil.
+                {'\u2022'} O usuário tem plena responsabilidade pela verificação da identidade das pessoas com quem ele marca encontros reais com pessoas fora do aplicativo. 
+                o Book Date NÃO se responsabiliza de maneira alguma com qualquer incidente que venha ocorrer fora do mesmo.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                
+                {'\u2022'} Nós da equipe temos o total direito de excluir sua conta caso você viole alguma de nossas regras de uso. {"\n"}
+              </Text> 
+              <Text style={styles.paragrafo}>
+                Caso você, membro do aplicativo Book Date, veja a violação de alguma dessas regras favor entrar em contato pelo e-mail bookdate.app@gmail.com	{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                {'\u2022'} Sobre sua foto de perfil, aconselhamos utilizar foto apenas sua. Qualquer foto de carater pornográfico e/ou que viole a regra de idade minima será excluída do app.
+                Agradecemos a compreensão de todos. Divirta-se.{"\n"}
               </Text>
               <Text style={styles.paragrafo}>
-                
-              </Text>
-              <Text style={styles.paragrafo}>
-                {'\u2022'} É de responsabilidade SUA manter seus dados de login e senha de forma sigilosa para se conectar ao Book Date e também pelas atividades dentro do mesmo.
-              </Text>
-              <Text style={styles.paragrafo}>
-                
-              </Text>
-              <Text style={styles.paragrafo}>
-                {'\u2022'} O usuário tem plena responsabilidade pela verificação da identidade das pessoas com quem ele marca encontros reais com pessoas fora do aplicativo. o Book Date NÃO se responsabiliza de maneira alguma com qualquer incidente que venha ocorrer fora do mesmo.
-              </Text>
-              <Text style={styles.paragrafo}>
-                
-              </Text>
-              <Text style={styles.paragrafo}>
-                {'\u2022'} Nós da equipe temos o total direito de excluir sua conta caso você viole alguma de nossas regras de uso. 
-              </Text>
-              <Text style={styles.paragrafo}>
-                
-              </Text>
-              <Text style={styles.paragrafo}>
-				        Caso você, membro do aplicativo Book Date, veja a violação de alguma dessas regras favor entrar em contato pelo e-mail bookdate.app@gmail.com	
-              </Text>
-			        <Text style={styles.paragrafo}>
-                
-              </Text>
-              <Text style={styles.paragrafo}>
-			        	Agradecemos a compreensão de todos. Divirta-se.
-              </Text>
-			      <Text style={styles.paragrafo}>
-                
-              </Text>
-              <Text style={styles.paragrafo}>
-				      Equipe Book Date.
+              Equipe Book Date.
               </Text>
             </ScrollView>
             <TouchableOpacity 
