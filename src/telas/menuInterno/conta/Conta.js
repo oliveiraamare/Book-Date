@@ -21,6 +21,7 @@ import cor from '../../../estilos/cores';
 
 import { collection, usuarioUid } from '../../../firebase/acoes';
 import Firebase from '../../../firebase/Firebase';
+import { remove_dados_async } from '../../../acoes/dados_usuario_logado';
 
 export default function Conta() {
 
@@ -53,7 +54,8 @@ export default function Conta() {
   const book_date = 'background-location-task';
 
   const sair = async() => {
-    Firebase.auth().signOut();    
+    remove_dados_async();
+    Firebase.auth().signOut(); 
     Location.stopLocationUpdatesAsync(book_date);
   }
 
@@ -116,7 +118,7 @@ export default function Conta() {
             />
             <ListItem
               containerStyle={conta.listItem}
-              title="Termos de Privacidade"
+              title="Políticas de Privacidade"
               titleStyle={conta.listItem__titulo}
               leftIcon={
                 <MaterialCommunityIcons name="view-headline" color={cor.creme} size={20} />

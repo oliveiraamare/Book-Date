@@ -48,7 +48,8 @@ class ReenviarSenha extends Component {
         alert('E-mail enviado com sucesso! Por favor verifique sua caixa de entrada e/ou spam!'),
         this.props.navigation.navigate('Login')
       )
-      .catch(error => alert(error));
+      .catch(error => console.log(error));
+     
   }
     
   render() {

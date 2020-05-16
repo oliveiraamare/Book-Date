@@ -12,7 +12,6 @@ import {
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import { DotIndicator } from 'react-native-indicators';
 import { useNavigation } from '@react-navigation/native';
-const axios = require('axios');
 
 import { FraseTop } from '../../../componentes/frase';
 import CardItem from '../../../componentes/CardItem';
@@ -38,7 +37,6 @@ export default function Booklovers() {
   const navigation = useNavigation();
  
   useEffect(() => {
-    refresh(usuarioUid());
     const estante_de_usuarios = firestore.onSnapshot(snapshot => {
       const usuarios_proximos = Object.assign([], snapshot.data());
       setDados_match(usuarios_proximos);
@@ -55,6 +53,7 @@ export default function Booklovers() {
     swiped_right(match);  
     var criador = await AsyncStorage.getItem('usuarioLogado');
     criador = JSON.parse(criador);
+
     var uid = criador.uid + '_' + match.uid;
     var verifica_existente = match.uid + '_' + criador.uid;
 
@@ -84,14 +83,6 @@ export default function Booklovers() {
     })    
   }  
   
-  const refresh = (uid) => {
-    axios.post('https://us-central1-bookdate-app.cloudfunctions.net/refresh_usuarios_proximos', {
-      data: { uid: uid }
-    })
-    .then(data => { console.log(data.status) })
-    .catch(error => { console.log(error.message) });
-  }  
-
   if(!dados_match) {
     return (
       <View style={compartilhado.container}>   

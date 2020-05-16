@@ -17,7 +17,7 @@ export default class App extends Component {
       'goudy-old-style': require('./src/fontes/goudy-old-style.ttf'),      
       'goudy-old-style-bold-italic': require('./src/fontes/goudy-old-style-bold-italic.ttf'),
       'goudy-old-style-italic-bt': require('./src/fontes/goudy-old-style-italic-bt.ttf'), 
-      'Mathildecastleland': require('./src/fontes/Mathildecastleland.ttf')   
+      'Old_Script': require('./src/fontes/Old_Script.ttf')
     });;
 
     this.setState({ fontLoaded: true });

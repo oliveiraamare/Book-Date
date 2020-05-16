@@ -45,14 +45,6 @@ function HomeTabs({ navigation, route }) {
         }
       }}  
     >
-      <Tab.Screen
-        name="BookLovers" component={BookLovers} 
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-heart" color={color} size={size} />
-          )
-        }}
-      />
       <Tab.Screen 
         name="BookShelf" component={BookShelf} 
         options={{
@@ -60,6 +52,14 @@ function HomeTabs({ navigation, route }) {
               <MaterialCommunityIcons name="library-shelves" color={color} size={size} />
             )
           }}
+      />
+      <Tab.Screen
+        name="BookLovers" component={BookLovers} 
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-heart" color={color} size={size} />
+          )
+        }}
       />
       <Tab.Screen 
         name="Mensagem" component={Lista} 

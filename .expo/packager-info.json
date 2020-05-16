@@ -1,10 +1,10 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 11932,
+  "packagerPid": 1052,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://sn-s8j.thellen.bookdate.exp.direct",
-  "packagerNgrokUrl": "https://packager.sn-s8j.thellen.bookdate.exp.direct",
-  "ngrokPid": 6296,
+  "expoServerNgrokUrl": "https://sn-s8j.oliveiraamare.bookdate.exp.direct",
+  "packagerNgrokUrl": "https://packager.sn-s8j.oliveiraamare.bookdate.exp.direct",
+  "ngrokPid": 13348,
   "webpackServerPort": null
 }

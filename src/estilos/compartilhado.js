@@ -33,7 +33,7 @@ const compartilhado = StyleSheet.create({
     fontFamily: 'goudy-old-style-bold-italic'
   },
   fonteBookDate: {
-    fontFamily:'Mathildecastleland'
+    fontFamily:'Old_Script'
   },
   fonteBotao: {
     fontFamily: 'goudy-old-style-bold-italic',

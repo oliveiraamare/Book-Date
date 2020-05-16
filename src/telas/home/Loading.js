@@ -12,6 +12,8 @@ import cor from '../../estilos/cores';
 import compartilhado from '../../estilos/compartilhado';
 
 import { usuario_logado_dados } from '../../acoes/dados_usuario_logado';
+import { usuarioUid } from '../../firebase/acoes';
+const axios = require('axios');
 
 class Loading extends Component {
 
@@ -26,9 +28,18 @@ class Loading extends Component {
   }
 
   usuario_autenticado() {
+    this.refresh(usuarioUid());
     usuario_logado_dados();
     this.props.navigation.navigate('NavegacaoInterna');
   }
+
+  refresh(uid) {
+    axios.post('https://us-central1-bookdate-app.cloudfunctions.net/refresh_usuarios_proximos', {
+      data: { uid: uid }
+    })
+    .then(data => { console.log(data.status) })
+    .catch(error => { console.log(error.message) });
+  }  
   
   render() {
     return (      

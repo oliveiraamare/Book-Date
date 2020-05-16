@@ -1,6 +1,6 @@
 {
   "urlRandomness": "sn-s8j",
-  "hostType": "lan",
+  "hostType": "tunnel",
   "lanType": "ip",
   "dev": true,
   "minify": false,

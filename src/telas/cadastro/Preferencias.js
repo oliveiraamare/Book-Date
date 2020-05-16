@@ -104,7 +104,7 @@ class Preferencias extends Component {
           <View style={compartilhado.imagemTransparente}>
             <AppBarHeader 
               onPress={() => this.props.navigation.navigate('Cadastro')} 
-              title={"Peculiariedades"} 
+              title={"Peculiaridades"} 
             />  
             <ScrollView>
               <KeyboardAvoidingView behavior='padding'>

@@ -242,8 +242,7 @@ class Cadastro extends Component {
   }
 
   nome() {
-    const nome_pattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-    if (!nome_pattern.test(this.state.nome)) {
+    if (this.state.nome.trim() == '') {
       Alert.alert('Ops', 'Faltou inserir seu nome!');
       return false
     } else { return true }

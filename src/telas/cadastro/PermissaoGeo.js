@@ -30,11 +30,6 @@ class PermissaoGeo extends Component {
   componentDidMount() {
     this.getLocationAsync();
     this.getAndLoadDados();
-    BackHandler.addEventListener('hardwareBackPress', this.onBack);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.onBack);
   }
 
   onBack = () => {

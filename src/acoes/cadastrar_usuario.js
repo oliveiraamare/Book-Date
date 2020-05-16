@@ -8,12 +8,13 @@ import '@firebase/firestore';
 import { push_expo } from '../componentes/pushExpo';
 
 import { usuarioUid, collection, storage } from '../firebase/acoes';
+import { usuario_logado_dados } from './dados_usuario_logado';
 
 const handle_signup = (email, senha, usuario, lat, long, imagem) => {
   Firebase.auth()
     .createUserWithEmailAndPassword(email, senha)
     .then(() => salvar_usuario(usuario, lat, long, imagem))
-    .catch(error => alert('erro no handleSignUp: ', error.message))
+    .catch(error => console.log('erro no handleSignUp: ', error.message))
 }
 
 const salvar_usuario = (usuario, lat, long, imagem) => {
@@ -24,10 +25,10 @@ const salvar_usuario = (usuario, lat, long, imagem) => {
       salvar_geolocalizacao(uid, lat, long);
       upload_imagem(uid, imagem);
       recupera_token_expo();
-      remove_dados_async();
-      push_expo();
+     usuario_logado_dados();
+     push_expo();
     })
-    .catch(error => { alert('erro no salvar_usuario: ', error.message) })
+    .catch(error => { console.log('erro no salvar_usuario: ', error.message) })
 }
 
 //salva o uid do usuário
@@ -61,7 +62,7 @@ const upload_imagem = async(uid, imagem) => {
     .then(()=>{
       return inserir_URL_firestore(uid, downloadURL),
       console.log('upload feito da imagem')
-    }).catch(error => { alert('Erro ao fazer upload da imagem: '+ error.message) });
+    }).catch(error => { console.log('Erro ao fazer upload da imagem: '+ error.message) });
 
   } else { return null }
 }
@@ -102,16 +103,7 @@ const salva_token_expo = (token) => {
     })
 }
 
-const remove_dados_async = async() => {
-  try {
-    await AsyncStorage.clear();
-    console.log('Storage do cadastro limpo com sucesso!');
-  } catch (error) {
-    console.log('Falha ao limpar o Storage do cadastro.', error.message);
-  }
-}
-
 export {
-  handle_signup, salvar_usuario, salvar_geolocalizacao, upload_imagem, 
-  inserir_URL_firestore, recupera_token_expo, remove_dados_async
+  handle_signup, salvar_usuario, salvar_geolocalizacao, 
+  upload_imagem, inserir_URL_firestore, recupera_token_expo
 }
