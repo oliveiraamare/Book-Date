@@ -3,26 +3,42 @@ import  * as firebase from 'firebase';
 import '@firebase/firestore';
 
 import { collection, usuarioUid } from '../firebase/acoes';
-
-var salvar_listagem_usuarios = [];
-var salvar_estante =  [];
-  
+ 
 const swiped = (item) => {
-  salvar_listagem_usuarios.push(item);  
-  const usuarios_manipulados = Object.assign({}, salvar_listagem_usuarios);
+  collection('usuarios').doc(usuarioUid())
+    .collection('usuarios_swiped').doc(usuarioUid()).get()
+    .then(snap => {
+      const usuarios_swiped = Object.assign([], snap.data());
+      usuarios_swiped.push(item);
+      const novos_usuarios = Object.assign({}, usuarios_swiped);
+      salvar_novo_usuarios_swiped(novos_usuarios)
+    })
+}
+
+const salvar_novo_usuarios_swiped = (novos_usuarios) => {
+  console.log('cheguei')
   collection('usuarios').doc(usuarioUid())
     .collection('usuarios_swiped').doc(usuarioUid())
-    .set(usuarios_manipulados, {merge: true});
+    .set(novos_usuarios);
 }
 
 const swiped_left = (item) => {
   swiped(item);
-  salvar_estante.push(item);  
-  const usuarios_na_estante = Object.assign({}, salvar_estante);
+  collection('usuarios').doc(usuarioUid())
+    .collection('estante').doc(usuarioUid()).get()
+    .then(snap => {
+      const estante = Object.assign([], snap.data());
+      estante.push(item);
+      const novos_usuarios = Object.assign({}, estante);
+      salvar_nova_estante(novos_usuarios);
+  })
+}   
+
+const salvar_nova_estante = (novos_usuarios) => {
   collection('usuarios').doc(usuarioUid())
     .collection('estante').doc(usuarioUid())
-    .set(usuarios_na_estante, {merge: true});
-}   
+    .set(novos_usuarios);
+}
 
 const swiped_right = async(item) => {
   var criador = await AsyncStorage.getItem('usuarioLogado');
