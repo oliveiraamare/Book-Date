@@ -15,3 +15,8 @@ Como disse C. S. Lewis:
 Este projeto é pessoal e contém seu código aberto. Não deve ser comercializao e para sua reprodução devem ser citadas as suas fontes.
 
 ... Link para o projeto: https://expo.io/@oliveiraamare
+
+Gif com as principais telas:
+
+<img src="https://github.com/bookdate/bookdate/blob/master/Imagens%20do%20Book%20Date/Gif.gif"
+  height="550">
